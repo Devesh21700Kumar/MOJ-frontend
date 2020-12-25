@@ -46,10 +46,7 @@ Follow these steps to run the app on your local machine:
 # go into app's directory:
 $ cd myproject
 
-# start the backed server
-$ node server
-
-## in a new terminal, start the react app
+## in a terminal, start the react app
 $ npm run start
 
 ```
