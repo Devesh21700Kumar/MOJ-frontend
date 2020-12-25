@@ -6,20 +6,13 @@ import {
   Switch,
   Link,
 } from 'react-router-dom';
+import CoreDashboard from './components/core/CoreDashboard';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <Router>
-        <Switch>
-          {/*<Route exact path="/" component={Welcome1} />
-          <Route exact path="/home" component={Personal} />
-          <Route exact path="/admin" component={AdminCards} />
-          <Route exact path="/core" component={CoreDashboard} />
-          <Route exact path="/personal" component={Personal} /> */}
-        </Switch>
-      </Router>
+      <CoreDashboard />
     </div>
   );
 }
