@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 //import '../navbar/navbar.css';
 import '../personal/personal.css';
+import PersonalCards from '../personal/personalcards';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -208,33 +209,10 @@ export default function Personal({ name, bitsId }, props) {
           <Box textAlign="center">
             <Typography className={classes.hot1}>Messages</Typography>
           </Box>
-          {/*Container to show all messages*/}
+          {/*Container to show all messages   */}
           <div className="terov1">
             {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
-              <Grid container direction={'column'}>
-                <Container className={classes.margi} id="cross">
-                  <Grid container direction={'row'} className={classes.krait}>
-                    <Grid item xs className={classes.Gin}>
-                      <IconButton>{text}</IconButton>
-                    </Grid>
-                    <Grid
-                      item
-                      xs
-                      alignContent="flex-end"
-                      className={classes.Gi}
-                    ></Grid>
-                    <Grid item xs lg={2} className={classes.Gin1}>
-                      <Typography variant="h6" edge="start">
-                        <b key="index">
-                          <p className={classes.date}>
-                            28th Dec 2020, 2:31 a.m.
-                          </p>
-                        </b>
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Container>
-              </Grid>
+              <PersonalCards text={text} index={index} />
             ))}
           </div>
           <div className="ter">
