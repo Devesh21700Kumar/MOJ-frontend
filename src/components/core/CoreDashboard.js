@@ -59,6 +59,41 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '25px',
     display: 'flex',
   },
+  backToTopZoom: {
+    left: '47%',
+    position: 'absolute',
+    marginTop: '10px',
+  },
+  backToTopIcon: {
+    marginBottom: '5px',
+    padding: '0',
+  },
+  '@media (max-width: 1000px)': {
+    paginatorFragment: {
+      paddingRight: 0,
+      textAlign: 'center',
+    },
+  },
+  '@media (max-width: 860px)': {
+    paginatorButton: {
+      padding: '12px 0',
+    },
+  },
+  '@media (max-width: 620px)': {
+    paginatorText: {
+      fontSize: '12px',
+      padding: '5px 0',
+    },
+    paginatorButton: {
+      padding: '12px 0',
+    },
+    paginatorFragment: {
+      left: '65%',
+    },
+    backToTopZoom: {
+      left: '30%',
+    },
+  },
 }));
 
 const Dashboard = (messages, props) => {
@@ -99,7 +134,7 @@ const Dashboard = (messages, props) => {
     };
 
     return (
-      <Zoom in={trigger} style={{ left: '47%', position: 'absolute' }}>
+      <Zoom in={trigger} className={classes.backToTopZoom}>
         <div onClick={handleClick} role="presentation" className={classes.root}>
           {children}
         </div>
@@ -109,15 +144,15 @@ const Dashboard = (messages, props) => {
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
-        <IconButton>
+        <IconButton className={classes.paginatorButton}>
           <ChevronLeftRounded onClick={() => handleChangePage(false)} />
         </IconButton>
-        <p>
+        <p className={classes.paginatorText}>
           {msgPage * 10 + 1} -
           {(msgPage + 1) * 10 > msgs.length ? msgs.length : msgPage * 10 + 10}{' '}
           of {msgs.length}
         </p>
-        <IconButton>
+        <IconButton className={classes.paginatorButton}>
           <ChevronRightRounded onClick={() => handleChangePage(true)} />
         </IconButton>
       </div>
@@ -143,7 +178,9 @@ const Dashboard = (messages, props) => {
       <div className={classes.backToTop}>
         <ScrollTop>
           <a style={{ textDecoration: 'none' }}>Back to Top</a>
-          <ArrowUpwardRounded />
+          <IconButton className={classes.backToTopIcon}>
+            <ArrowUpwardRounded />
+          </IconButton>
         </ScrollTop>
         <Paginator className={classes.bottomPaginator} />
       </div>
