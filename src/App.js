@@ -7,12 +7,13 @@ import {
   Link,
 } from 'react-router-dom';
 import CoreDashboard from './components/core/CoreDashboard';
+import Personal from './personal/personal';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <CoreDashboard />
+      <Personal />
     </div>
   );
 }

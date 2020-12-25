@@ -1,0 +1,440 @@
+.crux1{
+    position: absolute;
+    height: 10vh;
+    width: 100%;
+}
+#color1{
+    background: #FFFDE8; 
+    padding-top: 0px;
+    position: absolute;
+    margin-top: 65px;
+    height:89vmin;
+    width:100%;
+    border-radius: 20px 20px 0px 0px;
+    border-bottom: 22px #EF4646 solid;
+}
+.set1{
+    position: relative;
+    height:100vh;
+    width:100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color:#FFFDE8;
+  }
+.terov1{
+    width: 100%;
+    background: #FFFDE8; 
+    margin-top: 1.2vh;
+    height:99vh;
+    overflow-y: scroll;   
+}
+ .clue{
+     position: relative;
+     background-color: #EF4646;
+ }
+.c1{
+    margin-top: 2vh;
+    padding:2.2vw;
+}
+.hexad{
+    margin-top:2vh;
+    height: 2vh;
+    width:100vw;
+} 
+.hexad1{
+    height: 2vh;
+    width:100vw;
+    color: #EF4646;
+} 
+.fix{
+    height: 12vh;
+    background: #FFFDE8; 
+} 
+
+@media only screen and (min-width: 120px) and (max-width: 1940px){
+    #cross{
+        transform: scale(0.90); 
+    }
+    #kraus{
+        transform: scale(0.80);  
+    }
+}
+.terov1::-webkit-scrollbar {
+    width: 3vw;
+  }
+
+.terov1::-webkit-scrollbar-track {
+    display: none;
+    max-height: 2vh;
+  }  
+
+.terov1::-webkit-scrollbar-thumb {
+    background:#EF4646;
+    height: 2vh;
+    border-radius: 9vw;
+    border: 1vw #FFFDE8 solid;
+  } 
+.terov1::-webkit-scrollbar-button {
+    width: 29vw; 
+  }
+.ter{
+    margin-left:87vw;
+    background-color:#FFFDE8;
+}
+@media only screen and (min-width: 1410px){
+    .ter{
+        position: -webkit-sticky;
+        position:sticky;
+        margin-left:83vw;
+    }
+}   
+@media only screen and (min-width: 1590px){
+    .ter{
+        position: -webkit-sticky;
+        position:sticky;
+        margin-left:80vw;
+    }
+} 
+
+.margi1{
+    transform: scale(1.04,1.29);
+    border-radius: 10px;
+    width: 100%;
+    padding-bottom: 2vh;
+}
+
+.tetris{
+    background: #EF4646;
+}
+
+.margi{
+        transform: scale(1.04,1.29);
+        border-radius: 10px;
+        width: 100%;
+}
+
+.mark{
+    margin-bottom: 10px;
+}
+
+.color{
+    background: #FFFDE8; 
+    padding-top: 0px;
+    position: absolute;
+    margin-top:69px ;
+    border-radius: 20px 20px 0px 0px;
+    width: 100%;
+}
+
+
+
+.rad{
+    margin-top: 23px;
+    border-radius: 10px;
+    transform: scale(1.25);
+}
+.rad1{
+    margin-top: 23px;
+    border-radius: 10px;
+    transform: scale(1.25);
+}
+
+.crux{
+    position: absolute;
+    height: 300px;
+    width: 100%;
+}
+
+.terov{
+    position: absolute;
+    width: 100%;
+    background: #FFFDE8; 
+    height:457px;
+    overflow: scroll;
+    margin-top: 62px;
+}
+
+
+
+/* width */
+.terov::-webkit-scrollbar {
+    width: 60px;
+  }
+
+.terov::-webkit-scrollbar-track {
+    display: none;
+  }  
+
+.terov::-webkit-scrollbar-thumb {
+    background:#EF4646;
+    height: 150px;
+    border-radius: 30px;
+    border: 25px #FFFDE8 solid;
+  }  
+
+
+.terova{
+    position: fixed;
+    margin-top: 29.25em;
+    width: 100%;
+    background: #FFFDE8; 
+    height: 200px;
+}
+
+.scale{
+    width: 100%;
+    transform: scaleY(1.1);
+}
+
+.scale1{
+    width: 100%;
+}
+.chez{
+    position: absolute;
+    width:100%;
+    background-color:#FFFDE8;
+}
+.check{
+    background-color:#FFFDE8;
+    width: 100%;
+    height: 50px;
+}
+
+.tera{
+    transform: scale(3.1);
+}
+
+@media only screen and (max-width: 1000px) {
+    .check{
+        background-color:#FFFDE8;
+        width: 100%;
+        height: 170px;
+    }
+
+   .terova {
+    position: fixed;
+    margin-top: 31.7em;
+    width: 100%;
+    background: #FFFDE8; 
+    height: 300px;
+    }
+
+  }
+
+  /*@media only screen and (max-width: 1515px) and (min-width: 1110px) {
+
+    .crux {
+        position: absolute;
+        height: 300px;
+        width: 100%;
+        margin-top: 76px;
+    }
+
+     .color{
+        background: #FFFDE8; 
+        padding-top: 0px;
+        position: absolute;
+        margin-top:150px ;
+        border-radius: 20px 20px 0px 0px;
+        width: 100%;
+    }
+
+    .terova {
+        position: fixed;
+        margin-top: 16.5em;
+        width: 100%;
+        background: #FFFDE8; 
+        height: 300px;
+    }
+    .check{
+        background-color:#FFFDE8;
+        width: 100%;
+        height: 170px;
+    }
+
+}*/
+
+   @media only screen and (max-width: 550px) {
+    .crux {
+        position: absolute;
+        height: 300px;
+        width: 100%;
+        margin-top: 45px;
+     }
+     .color{
+        background: #FFFDE8; 
+        padding-top: 0px;
+        position: absolute;
+        margin-top:120px ;
+        border-radius: 20px 20px 0px 0px;
+        width: 100%;
+    }
+    .check{
+        background-color:#FFFDE8;
+        width: 100%;
+        height: 50px; 
+    }
+    .terova {
+        position: fixed;
+        margin-top: 24.7em;
+        width: 100%;
+        background: #FFFDE8; 
+        height: 300px;
+    }
+    .chez{
+        position: absolute;
+        width:100%;
+        background-color:#FFFDE8;
+        margin-top: -1.0rem;
+    }
+    .terov{
+        position: absolute;
+        width: 100%;
+        background-color: #FFFDE8;
+        height: 384px;
+        overflow: scroll;
+        margin-top:5rem;
+    }
+
+}
+
+   @media only screen and (max-width: 1110px)  and (min-width: 550px){
+    .crux {
+        position: absolute;
+        height: 300px;
+        width: 100%;
+        margin-top: 36px;
+     }
+     .color{
+        background: #FFFDE8; 
+        padding-top: 0px;
+        position: absolute;
+        margin-top:106px ;
+        border-radius: 20px 20px 0px 0px;
+        width: 100%;
+    }
+
+    .terov{
+        position: absolute;
+        width: 100%;
+        background: #FFFDE8; 
+        height:390px;
+        overflow: scroll;
+        margin-top: 62px;
+    }
+    .terova {
+        position: absolute;
+        margin-top: 26.5em;
+        width: 100%;
+        background: #FFFDE8; 
+        height: 290px;
+    }
+
+    .check{
+        background-color:#FFFDE8;
+        width: 100%;
+        height:2px;
+        margin-top: 38px;
+    }
+
+
+}
+
+@media only screen and (max-height: 800px) and (min-height: 700px) and (max-width: 1850px) and (min-width: 1110px){
+    .crux {
+        position: absolute;
+        height: 300px;
+        width: 100%;
+        margin-top: 0.005rem;
+    }
+
+     .color{
+        background: #FFFDE8; 
+        padding-top: 0px;
+        position: absolute;
+        margin-top:75px ;
+        border-radius: 20px 20px 0px 0px;
+        width: 100%;
+    }
+
+    .terova {
+        position: absolute;
+        margin-top: 26.5em;
+        width: 100%;
+        background: #FFFDE8; 
+        height: 100px;
+    }
+    .check{
+        background-color:#FFFDE8;
+        width: 100%;
+        height: 10px;
+    }
+    .terov{
+        position: absolute;
+        width: 100%;
+        background-color: #FFFDE8;
+        height: 384px;
+        overflow: scroll;
+        margin-top: 67px;
+    }
+}
+@media only screen and (max-height: 600px) and (min-height: 500px){
+    .terova {
+        position: absolute;
+        margin-top: 16.5em;
+        width: 100%;
+        background: #FFFDE8; 
+        height: 300px;
+    }
+}
+
+
+.a_head{
+    transform: scale(0.6);
+}   
+
+
+a:link {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.92rem;
+    text-decoration: none;
+}
+  
+.sorrow{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    position: relative;
+}
+
+.sorrow1{
+    position: absolute;
+    margin-left: -2rem;
+}
+.sorrow2{
+    position: absolute;
+    margin-top: -0.2rem;
+    margin-left: 1.6rem;
+}
+
+#mag{
+    transform: scale(2);
+}
+
+
+@media only screen and (min-width: 600px) and (max-width: 720px){
+    .tera{
+        transform: scale(2.5);
+        margin-top: -1.3rem;
+    }
+}
+@media only screen and (min-width: 120px) and (max-width: 619px){
+    .tera{
+        transform: scale(2.5);
+        margin-top: -1.5rem;
+        margin-left: -1.5rem;
+    }
+}
+
