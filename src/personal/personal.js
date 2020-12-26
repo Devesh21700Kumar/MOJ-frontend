@@ -1,6 +1,5 @@
 import { React, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 //import Navbar from '../navbar/navbar';
@@ -8,31 +7,10 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-//import '../navbar/navbar.css';
 import '../personal/personal.css';
 import PersonalCards from '../personal/personalcards';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  title: {
-    textAlign: 'center',
-  },
-  menuButton: {
-    marginLeft: theme.spacing(2),
-    marginTop: theme.spacing(0.5),
-    float: 'right',
-    width: '2rem',
-    height: '2rem',
-  },
-  auto: {},
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
   margin: {
     borderBottom: '3px solid green',
   },
