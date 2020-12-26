@@ -25,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '10px',
   },
   cardContent: {
-    padding: '5px',
     margin: 0,
     overflow: 'hidden',
     fontFamily: 'Raleway, sans-serif',
     fontSize: '17px',
     fontWeight: '400',
+    transition: 'all 2s',
   },
   cardFooter: {
     display: 'flex',
@@ -47,11 +47,25 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: '5px 10px',
   },
+  viewMore: {
+    lineClamp: 3,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    boxOrient: 'vertical',
+    display: '-webkit-box',
+    transition: 'all 2s',
+  },
   anchorClass: {
     textDecoration: 'none',
     '&:link': {
       fontSize: '17px',
     },
+    transition: 'all 2s',
+  },
+  link: {
+    background: 'none',
+    border: 'none',
+    outline: 'none',
   },
 }));
 
@@ -61,6 +75,7 @@ const MessageCard = ({ rollNumber, message, date }) => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
   const [status, setStatus] = useState('');
+  const [fullView, setFullView] = useState(false);
   // click handlers
   const handleClick = (msg) => {
     setOpen(true);
@@ -74,6 +89,9 @@ const MessageCard = ({ rollNumber, message, date }) => {
     if (status === 'accepted') return '7px solid #00CF53';
     else if (status === 'rejected') return '7px solid #EF4646';
     else return;
+  };
+  const viewMore = () => {
+    setFullView(!fullView);
   };
   // button react fragment
   const buttons = (
@@ -117,16 +135,18 @@ const MessageCard = ({ rollNumber, message, date }) => {
         }}
       />
       <div>
-        <ShowMoreText
-          lines={3}
-          more="View more"
-          less="View less"
-          expanded={false}
-          anchorClass={classes.anchorClass}
-          className={classes.cardContent}
-        >
-          <p>{message}</p>
-        </ShowMoreText>
+        <CardContent style={{ transitionDuration: '2s' }}>
+          <p
+            className={`${classes.cardContent} ${
+              fullView ? '' : classes.viewMore
+            }`}
+          >
+            {message}
+          </p>
+          <button className={classes.link} onClick={viewMore}>
+            {fullView ? 'View less' : 'View more'}
+          </button>
+        </CardContent>
         <div className={classes.cardFooter}>
           <p className={classes.date}>{date}</p>
           <CardActions disableSpacing>{buttons}</CardActions>
@@ -135,6 +155,7 @@ const MessageCard = ({ rollNumber, message, date }) => {
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={open}
+        autoHideDuration={1000}
         onClose={() => setTimeout(handleClose, 1000)}
         message={text}
         key={text}
