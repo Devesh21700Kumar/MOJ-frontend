@@ -7,7 +7,7 @@ import {
   Link,
 } from 'react-router-dom';
 import CoreDashboard from './components/core/CoreDashboard';
-import Personal from './personal/personal';
+import Personal from './components/personal/personal';
 import './App.css';
 import AdminDashboard from './components/admin/AdminDashboard';
 
