@@ -111,6 +111,10 @@ const useStyles = makeStyles((theme) => ({
       position: 'relative',
       left: '15%',
     },
+    backToTopZoom: {
+      position: 'relative',
+      left: '10%',
+    },
   },
 }));
 
