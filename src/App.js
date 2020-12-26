@@ -9,12 +9,17 @@ import {
 import CoreDashboard from './components/core/CoreDashboard';
 import Personal from './personal/personal';
 import './App.css';
+import AdminDashboard from './components/admin/AdminDashboard';
 
 function App() {
   return (
-    <div>
-      <Personal />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Personal} />
+        <Route exact path="/core" component={CoreDashboard} />
+        <Route exact path="/admin" component={AdminDashboard} />
+      </Switch>
+    </Router>
   );
 }
 
