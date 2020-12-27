@@ -15,6 +15,7 @@ export default class ReadMessagePopup extends React.Component {
     super(props);
     this.state = {
       currentPosition: props.startFrom,
+      enabled: props.enabled,
     };
   }
   nextMessage = () => {
@@ -22,7 +23,6 @@ export default class ReadMessagePopup extends React.Component {
     if (this.state.currentPosition == this.props.messageArray.length - 1)
       newPosition = 0;
     else newPosition = this.state.currentPosition + 1;
-    console.log('newPosition: ', newPosition);
     this.setState({
       currentPosition: newPosition,
     });
@@ -32,35 +32,41 @@ export default class ReadMessagePopup extends React.Component {
     if (this.state.currentPosition == 0)
       newPosition = this.props.messageArray.length - 1;
     else newPosition = this.state.currentPosition - 1;
-    console.log('newPosition: ', newPosition);
     this.setState({
       currentPosition: newPosition,
     });
   };
+  hideMe = () => {
+    this.setState({
+      enabled: false,
+    });
+  };
 
   render() {
-    return (
-      <div className="letterpopup-classes-root">
-        <div className="letterpopup-classes-cross" />
-        <Paper elevation={0} className="letterpopup-classes-message">
-          <div className="letterpopup-classes-dateTime">
-            {this.props.messageArray[this.state.currentPosition][1]}
-          </div>
-          <div className="letterpopup-classes-messageBoxesWrapper">
-            <div className="letterpopup-classes-messageBody">
-              {this.props.messageArray[this.state.currentPosition][0]}
+    if (this.state.enabled)
+      return (
+        <div className="letterpopup-classes-root">
+          <div className="letterpopup-classes-cross" onClick={this.hideMe} />
+          <Paper elevation={0} className="letterpopup-classes-message">
+            <div className="letterpopup-classes-dateTime">
+              {this.props.messageArray[this.state.currentPosition][1]}
             </div>
-          </div>
-        </Paper>
-        <div
-          className="letterpopup-classes-left-arrow"
-          onClick={this.prevMessage}
-        />
-        <div
-          className="letterpopup-classes-right-arrow"
-          onClick={this.nextMessage}
-        />
-      </div>
-    );
+            <div className="letterpopup-classes-messageBoxesWrapper">
+              <div className="letterpopup-classes-messageBody">
+                {this.props.messageArray[this.state.currentPosition][0]}
+              </div>
+            </div>
+          </Paper>
+          <div
+            className="letterpopup-classes-left-arrow"
+            onClick={this.prevMessage}
+          />
+          <div
+            className="letterpopup-classes-right-arrow"
+            onClick={this.nextMessage}
+          />
+        </div>
+      );
+    else return <div />;
   }
 }
