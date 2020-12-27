@@ -3,11 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Login from '../login/login';
 import Box from '@material-ui/core/Box';
 
-console.log(screen.width);
-console.log(screen.height);
-const height = screen.height;
-const width = screen.width;
-
 const useStyles = makeStyles((theme) => ({
   main: {
     position: 'relative',
@@ -32,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Raleway',
     fontStyle: 'normal',
     fontWeight: 'bold',
-    fontSize: '2rem',
+    fontSize: '2em',
     textAlign: 'center',
     color: '#FFFDE8',
   },
@@ -52,31 +47,87 @@ const useStyles = makeStyles((theme) => ({
   summary: {
     position: 'absolute',
     fontFamily: 'Raleway',
-    top: '2rem',
-    right: '1rem',
+    top: '2em',
+    right: '1em',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '1.5rem',
+    fontSize: '1.5em',
     textAlign: 'right',
     color: '#000000',
   },
 
   loginBox: {
     position: 'absolute',
-    width: '20rem',
-    right: '10vh',
-    height: '10vh',
+    width: '75%',
+    right: '10%',
+    height: '10%',
     bottom: '10vh',
     fontFamily: 'Raleway',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '1.5rem',
+    fontSize: '1.5em',
     textDecorationLine: 'none',
     background: '#FFFFFF',
     border: '0.05px solid #000000',
     boxSizing: 'border-box',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: '10px',
+  },
+  '@media (max-width: 1000px)': {
+    loginBox: {
+      fontSize: '1.25em',
+    },
+    summary: {
+      fontSize: '1.25em',
+    },
+    message: {
+      fontSize: '1.25em',
+    },
+  },
+  '@media (max-width: 860px)': {
+    loginBox: {
+      fontSize: '1em',
+    },
+    summary: {
+      fontSize: '1em',
+    },
+  },
+  '@media (max-width: 620px)': {
+    loginBox: {
+      fontSize: '1em',
+    },
+    summary: {
+      fontSize: '0.75em',
+    },
+  },
+  '@media (max-width: 470px)': {
+    mid: {
+      bottom: '70vh',
+      left: '30vw',
+    },
+    loginBox: {
+      fontSize: '1.5em',
+      height: '15%',
+    },
+    summary: {
+      fontSize: '1em',
+      textAlign: 'center',
+      right: '0',
+      margin: '1em',
+    },
+    sidepane: {
+      height: '50vh',
+      width: '100vw',
+      top: '50vh',
+      right: 'auto',
+      textAlign: 'center',
+      borderRadius: '20px 20px 0px 0px',
+    },
+    message: {
+      top: '40vh',
+      left: '20vw',
+      fontSize: '2em',
+    },
   },
 }));
 
@@ -104,10 +155,9 @@ export default function Welcome1() {
           </div>
           <div className={classes.loginBox} id="loginBox">
             <Box display="flex">
-              <Box paddingLeft="1rem" paddingTop="0.5rem">
+              <Box paddingLeft="1em" paddingTop="0.5em">
                 <svg
-                  width="40"
-                  height="40"
+                  height="5vh"
                   viewBox="0 0 40 40"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +180,7 @@ export default function Welcome1() {
                   />
                 </svg>
               </Box>
-              <Box paddingLeft="1rem" paddingTop="1rem">
+              <Box paddingLeft="0.5em" paddingTop="0.5em">
                 <Login />
               </Box>
             </Box>
