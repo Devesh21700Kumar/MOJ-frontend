@@ -83,7 +83,9 @@ export default function PersonalCards({ text, index }) {
               <b key="index">
                 <p className={classes.date}>
                   {screen.width >= 591
-                    ? screen.width >= 680?date[0].slice(0, 24):date[0].slice(0, 19)
+                    ? screen.width >= 680
+                      ? date[0].slice(0, 24)
+                      : date[0].slice(0, 19)
                     : date[0].slice(0, 9)}
                 </p>
               </b>

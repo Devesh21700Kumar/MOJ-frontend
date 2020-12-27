@@ -571,4 +571,3 @@ const message_data = [
 ];
 
 export default message_data;
-
