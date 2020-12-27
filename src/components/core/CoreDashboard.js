@@ -12,18 +12,28 @@ import Zoom from '@material-ui/core/Zoom';
 import {
   ChevronRightRounded,
   ChevronLeftRounded,
-  ArrowUpwardRounded,
+  KeyboardArrowUpRounded,
 } from '@material-ui/icons';
 import MessageCard from './MessageCard';
 
 const useStyles = makeStyles((theme) => ({
+  '@global': {
+    '*::-webkit-scrollbar': {
+      width: '10px',
+    },
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: '#EF4646',
+      borderRadius: '10px',
+    },
+  },
   root: {
     backgroundColor: '#FFFDE8',
     overflow: 'hidden',
+    borderBottom: '25px solid #EF4646',
   },
   pageBar: {
     backgroundColor: '#EF4646',
-    padding: '20px 0 0 100px',
+    padding: '20px 0 0 10%',
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -68,8 +78,7 @@ const useStyles = makeStyles((theme) => ({
     left: '47%',
   },
   backToTopIcon: {
-    marginBottom: '5px',
-    padding: '0',
+    padding: '0 0 0 2px',
   },
   '@media (max-width: 1000px)': {
     paginatorFragment: {
@@ -178,7 +187,7 @@ const Dashboard = (messages, props) => {
         <div className={classes.backToTopZoom}>
           <p>Back to top</p>
           <IconButton className={classes.backToTopIcon}>
-            <ArrowUpwardRounded onClick={scrollTop} />
+            <KeyboardArrowUpRounded onClick={scrollTop} />
           </IconButton>
         </div>
         <Paginator className={classes.bottomPaginator} />
