@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -26,24 +24,22 @@ export default class ReadMessagePopup extends React.Component {
     let newPosition;
     if (this.state.currentPosition == this.props.messageArray.length - 1)
       newPosition = 0;
-    else
-      newPosition = this.state.currentPosition + 1;
+    else newPosition = this.state.currentPosition + 1;
     console.log('newPosition: ', newPosition);
     this.setState({
       currentPosition: newPosition,
     });
-  }
+  };
   prevMessage = () => {
     let newPosition;
     if (this.state.currentPosition == 0)
       newPosition = this.props.messageArray.length - 1;
-    else
-      newPosition = this.state.currentPosition - 1;
+    else newPosition = this.state.currentPosition - 1;
     console.log('newPosition: ', newPosition);
     this.setState({
       currentPosition: newPosition,
     });
-  }
+  };
 
   render() {
     return (
