@@ -58,7 +58,7 @@ export default function SendMessagePopup(props) {
             </div>
           </div>
           <div className="letterpopup-classes-sendButton">
-            <Button variant="outlined" type="submit">
+            <Button variant="contained" className='rejectButton' textTransform='none' type="submit">
               Send
             </Button>
           </div>

@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import Welcome from './components/welcome/welcome';
 import CoreDashboard from './components/core/CoreDashboard';
-import Personal from './personal/personal';
+import Personal from './components/personal/personal';
 import SendMessagePopup from './components/letterpopup/SendMessagePopup';
 import ReadMessagePopup from './components/letterpopup/ReadMessagePopup';
 import './App.css';
@@ -22,6 +22,7 @@ function App() {
         <Route exact path="/home" component={Personal} />
         <Route exact path="/core" component={CoreDashboard} />
         <Route exact path="/admin" component={AdminDashboard} />
+        <Route exact path="/send" component={SendMessagePopup} />
       </Switch>
     </Router>
   );
