@@ -64,13 +64,28 @@ const useStyles = makeStyles((theme) => ({
     color: '#EF4646',
     fontFamily: 'Oxygen',
     fontWeight: 'bold',
-    fontSize: '4.3vmin',
+    fontSize: '3.3vmax',
   },
   hot1: {
     fontFamily: 'Oxygen',
-    height: '3vh',
     fontWeight: 'bold',
-    fontSize: '3.1vmin',
+    fontSize: '2.8vmax',
+  },
+  '@media(min-width: 560px)': {
+    hot: {
+      fontSize: '34px',
+    },
+    hot1: {
+      fontSize: '28px',
+    },
+  },
+  '@media(max-width: 520px)': {
+    hot: {
+      fontSize: '20px',
+    },
+    hot1: {
+      fontSize: '16px',
+    },
   },
 }));
 
@@ -138,8 +153,8 @@ export default function Personal({ name, bitsId }, props) {
     <Fragment>
       {/*<Navbar/>*/}
       <div className="set1">
-        <div className="crux1">
-          <Box display="flex" bgcolor="#EF4646">
+        <div>
+          <Box className="crux1" display="flex" bgcolor="#EF4646">
             <Box width="10%"></Box>
             <Box
               p={0.8}
@@ -151,7 +166,7 @@ export default function Personal({ name, bitsId }, props) {
               <Button
                 onClick={boxClick}
                 style={{ fontWeight: '200', textTransform: 'none' }}
-                size="large"
+                size="small"
                 className="margi1"
               >
                 <b> Inbox</b>
@@ -164,12 +179,11 @@ export default function Personal({ name, bitsId }, props) {
               width="20%"
               className="rad1"
               textAlign="center"
-              flexShrink={1}
             >
               <Button
                 onClick={boxClick1}
                 style={{ fontWeight: '200', textTransform: 'none' }}
-                size="large"
+                size="small"
                 className="margi1"
               >
                 <b>Sent</b>
@@ -181,11 +195,14 @@ export default function Personal({ name, bitsId }, props) {
 
         {/*Welcome message and heading*/}
         <div id="color1">
-          <Box className="c1">
-            <Typography className={classes.hot}>Welcome Nipun </Typography>
-          </Box>
-          <Box textAlign="center">
-            <Typography className={classes.hot1}>Messages</Typography>
+          <Box display="flex" className="cA">
+            <Box width="35%" className="c1">
+              <Typography className={classes.hot}>Welcome Nipun </Typography>
+            </Box>
+
+            <Box width="15%" textAlign="center" className="c2">
+              <Typography className={classes.hot1}>Messages</Typography>
+            </Box>
           </Box>
           {/*Container to show all messages   */}
           <div className="terov1">
@@ -193,66 +210,66 @@ export default function Personal({ name, bitsId }, props) {
               <PersonalCards text={text} index={index} />
             ))}
           </div>
-          <div className="ter">
-            <IconButton style={{ color: '#EF4646' }}>
-              <AddCircleIcon className="tera" />
-            </IconButton>
-          </div>
-          <div className="hexad">
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              display="flex"
-              alignItems="center"
-            >
-              <Grid item marginLeft="21vw" marginTop="9px" textAlign="center">
-                <svg
-                  onClick={hc1}
-                  width="48"
-                  height="23"
-                  viewBox="0 0 48 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
-                    fill={x1}
-                  />
-                </svg>
-              </Grid>
-              <Grid item textAlign="center">
-                <Button
-                  style={{
-                    fontWeight: '700',
-                    textTransform: 'none',
-                    fontFamily: 'Oxygen',
-                    fontSize: '2.2vh',
-                    margin: '1vw',
-                  }}
-                >
-                  Showing {i}-{i < 26 ? i + 15 : i + 10} of {det.length}
-                </Button>
-              </Grid>
-              <Grid item textAlign="center" marginTop="9px">
-                <svg
-                  onClick={hc2}
-                  width="48"
-                  height="23"
-                  viewGrid="0 0 48 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
-                    fill={x2}
-                  />
-                </svg>
-              </Grid>
-            </Grid>
-          </div>
-          <div className="hexad1"></div>
         </div>
+        <div className="ter">
+          <IconButton style={{ color: '#EF4646' }}>
+            <AddCircleIcon className="tera" />
+          </IconButton>
+        </div>
+        <div className="hexad">
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            display="flex"
+            alignItems="center"
+          >
+            <Grid item marginLeft="21vw" textAlign="center">
+              <svg
+                onClick={hc1}
+                width="48"
+                height="23"
+                viewBox="0 0 48 23"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
+                  fill={x1}
+                />
+              </svg>
+            </Grid>
+            <Grid item textAlign="center">
+              <Button
+                style={{
+                  fontWeight: '700',
+                  textTransform: 'none',
+                  fontFamily: 'Oxygen',
+                  fontSize: '2.2vh',
+                  margin: '1vw',
+                }}
+              >
+                Showing {i}-{i < 26 ? i + 15 : i + 10} of {det.length}
+              </Button>
+            </Grid>
+            <Grid item textAlign="center">
+              <svg
+                onClick={hc2}
+                width="48"
+                height="23"
+                viewGrid="0 0 48 23"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
+                  fill={x2}
+                />
+              </svg>
+            </Grid>
+          </Grid>
+        </div>
+        <div className="hexad1"></div>
       </div>
     </Fragment>
   );

@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import './personal.css';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,20 +13,23 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '18px',
     marginLeft: 'auto',
     marginRight: 'auto',
+    height: '7vh',
   },
   Gin: {
-    marginTop: '12px',
+    padding: '0 0px 0px 0px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    flex: 1,
+    flex: 1.1,
+    marginTop: '0.87vh',
   },
   Gin1: {
-    marginTop: '12px',
+    padding: '0 0px 0px 0px',
     marginRight: '2rem',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     float: 'right',
-    flex: 1,
+    flex: 1.1,
+    marginTop: '0.77vh',
   },
 
   Gi: {
@@ -41,22 +43,47 @@ const useStyles = makeStyles((theme) => ({
   krait: {
     marginLeft: '7px',
   },
+  '@media(max-height: 680px)': {
+    Gin: {
+      fontSize: '20px',
+      marginTop: '0.32vh',
+    },
+    Gin1: {
+      marginTop: '0.18vh',
+    },
+  },
+  '@media(max-height: 568px)': {
+    Gin: {
+      fontSize: '20px',
+      marginTop: '0.12vh',
+    },
+    Gin1: {
+      marginTop: '0.08vh',
+    },
+  },
 }));
 
 export default function PersonalCards({ text, index }) {
   const classes = useStyles();
+  const date = ['28th Dec 2020, 2:31 a.m.', '28th Dec 2020, 2:31 a.m.'];
   return (
-    <Grid container direction={'column'}>
+    <Grid container irection={'column'}>
       <Container className={classes.margi} id="cross">
         <Grid container direction={'row'} className={classes.krait}>
           <Grid item xs className={classes.Gin}>
-            <IconButton>{text}</IconButton>
+            <p className={classes.date}>
+              {screen.width >= 591 ? text.slice(0, 15) : text.slice(0, 10)}
+            </p>
           </Grid>
           <Grid item xs alignContent="flex-end" className={classes.Gi}></Grid>
           <Grid item xs lg={2} className={classes.Gin1}>
             <Typography variant="h6" edge="start">
               <b key="index">
-                <p className={classes.date}>28th Dec 2020, 2:31 a.m.</p>
+                <p className={classes.date}>
+                  {screen.width >= 591
+                    ? date[0].slice(0, 19)
+                    : date[0].slice(0, 9)}
+                </p>
               </b>
             </Typography>
           </Grid>
