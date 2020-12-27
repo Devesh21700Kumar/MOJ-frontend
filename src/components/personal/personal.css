@@ -69,42 +69,11 @@
         transform: scale(0.80);  
     }
 }
-/*@media only screen and (min-width: 1410px){
-    .ter{
-        position: -webkit-sticky;
-        position:fixed;
-        margin-left:83vw;
-    }
-}   
-@media only screen and (min-width: 1590px){
-    .ter{
-        position: -webkit-sticky;
-        position:sticky;
-        margin-left:80vw;
-    }
-} 
-.terov1::-webkit-scrollbar {
-    width: 3vw;
-  }
 
-.terov1::-webkit-scrollbar-track {
-    display: none;
-    max-height: 2vh;
-  }  
-
-.terov1::-webkit-scrollbar-thumb {
-    background:#EF4646;
-    height: 2vh;
-    border-radius: 9vw;
-    border: 1vw #FFFDE8 solid;
-  } 
-.terov1::-webkit-scrollbar-button {
-    width: 29vw; 
-  }*/
 .ter{
     position:fixed;
     margin-left:87vw;
-    margin-top: 55vh;
+    margin-top: 75vh;
 }
 
 
@@ -112,8 +81,7 @@
     transform: scale(1.04,1.29);
     border-radius: 10px;
     width: 100%;
-    padding-bottom: 3vh;
-    
+    padding-bottom: 3vh; 
 }
 
 .tetris{
@@ -129,16 +97,6 @@
 .mark{
     margin-bottom: 10px;
 }
-
-.color{
-    background: #FFFDE8; 
-    padding-top: 0px;
-    position: absolute;
-    margin-top:69px ;
-    border-radius: 20px 20px 0px 0px;
-    width: 100%;
-}
-
 
 
 .rad{
@@ -183,23 +141,44 @@
         margin-left: 91vw;
     }
 }
-@media only screen and (min-width: 1479px) and (max-width: 1800px){
+@media only screen and (min-width: 1479px) and (max-width: 1556px){
 
     .ter{
         margin-left: 86vw;
     }
 }
 @media only screen and (min-width: 1556px) and (max-width: 1800px){
-
     .ter{
         margin-left: 83vw;
     }
 }
 
 
-  @media only screen and (min-width: 801px){
+  @media only screen and (min-width: 760px){
     .set1::-webkit-scrollbar {
         width: 10px;
+        border-radius: 30px;
+      }
+      
+      /* Track */
+      .set1::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 30px;
+      }
+      
+      /* Handle */
+      .set1::-webkit-scrollbar-thumb {
+        background: #EF4646;
+      }
+      
+      /* Handle on hover */
+      .set1::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+}
+@media only screen and (max-width: 759px){
+    .set1::-webkit-scrollbar {
+        width: 4px;
       }
       
       /* Track */
@@ -211,7 +190,27 @@
       /* Handle */
       .set1::-webkit-scrollbar-thumb {
         background: #EF4646;
+      }
+      
+      /* Handle on hover */
+      .set1::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+}
+@media only screen and (max-width: 390px){
+    .set1::-webkit-scrollbar {
+        width:2.5px;
+      }
+      
+      /* Track */
+      .set1::-webkit-scrollbar-track {
+        background: #f1f1f1;
         border-radius: 10px;
+      }
+      
+      /* Handle */
+      .set1::-webkit-scrollbar-thumb {
+        background: #EF4646;
       }
       
       /* Handle on hover */
@@ -222,10 +221,20 @@
 @media only screen and (min-height: 580px) and (max-height: 680px){
 .hexad{
     margin-top: 150.5vh;
-} 
+    } 
 }
 @media only screen and (max-height: 580px){
     .hexad{
         margin-top: 152.5vh;
     } 
+}
+@media only screen and (max-width: 510px){
+    #color1{
+        margin-top: 47px;
     }
+}    
+@media only screen and (max-width: 380px){
+    #color1{
+        margin-top: 45px;
+    }
+}  

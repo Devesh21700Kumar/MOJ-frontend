@@ -1,6 +1,7 @@
 import { React, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import './personal.css';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     height: '7vh',
+    boxShadow: ' 10px 10px 5px grey',
   },
   Gin: {
     padding: '0 0px 0px 0px',
@@ -68,7 +70,7 @@ export default function PersonalCards({ text, index }) {
   const date = ['28th Dec 2020, 2:31 a.m.', '28th Dec 2020, 2:31 a.m.'];
   return (
     <Grid container irection={'column'}>
-      <Container className={classes.margi} id="cross">
+      <Container className={classes.margi} id="cross" raised={true}>
         <Grid container direction={'row'} className={classes.krait}>
           <Grid item xs className={classes.Gin}>
             <p className={classes.date}>
@@ -81,7 +83,7 @@ export default function PersonalCards({ text, index }) {
               <b key="index">
                 <p className={classes.date}>
                   {screen.width >= 591
-                    ? date[0].slice(0, 19)
+                    ? screen.width >= 680?date[0].slice(0, 24):date[0].slice(0, 19)
                     : date[0].slice(0, 9)}
                 </p>
               </b>
