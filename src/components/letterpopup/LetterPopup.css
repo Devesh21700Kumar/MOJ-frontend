@@ -24,6 +24,8 @@
 
   background-image: url('./../../imageassets/closecross.svg');
   background-size: contain;
+
+  cursor: pointer;
 }
 
 .letterpopup-classes-message {
@@ -180,4 +182,12 @@
     width: 12vw;
     font-size: 2.5vw;
   }
+}
+
+/*/////////////////////////////////////////////*/
+/* Specific Modifications for ReadMessagePopup */
+/*/////////////////////////////////////////////*/
+
+.letterpopup-classes-root.letterpopup-classes-disabled {
+  visibility: hidden;
 }
