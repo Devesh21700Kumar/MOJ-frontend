@@ -25,12 +25,12 @@ function App() {
     //   </Switch>
     // </Router>
     <div>
-      {/* <SendMessagePopup
+      <SendMessagePopup
         submitFunction={(a, b) => {
           console.log(a, b);
         }}
-      /> */}
-      <ReadMessagePopup
+      />
+      {/* <ReadMessagePopup
         messageArray={[
           [
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam massa ipsum, ullamcorper quis turpis ut, sodales congue metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at eros lacus. In hac habitasse platea dictumst. Donec aliquet sem eget urna ullamcorper scelerisque. Nulla nec luctus nunc. Nam sit amet condimentum nisl. Phasellus bibendum ac turpis facilisis aliquam. Proin dapibus auctor ante a mollis. Pellentesque blandit lorem non sem aliquet venenatis.',
@@ -47,7 +47,7 @@ function App() {
         ]}
         startFrom={0}
         enabled={true}
-      />
+      /> */}
     </div>
   );
 }
