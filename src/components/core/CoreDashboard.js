@@ -19,10 +19,11 @@ import MessageCard from './MessageCard';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#FFFDE8',
+    overflow: 'hidden',
   },
   pageBar: {
     backgroundColor: '#EF4646',
-    padding: '20px 0 0 50px',
+    padding: '20px 0 0 100px',
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -58,6 +59,62 @@ const useStyles = makeStyles((theme) => ({
   backToTop: {
     marginTop: '25px',
     display: 'flex',
+    height: '50px',
+    backgroundColor: '#FFFDE8',
+  },
+  backToTopZoom: {
+    display: 'flex',
+    position: 'absolute',
+    left: '47%',
+  },
+  backToTopIcon: {
+    marginBottom: '5px',
+    padding: '0',
+  },
+  '@media (max-width: 1000px)': {
+    paginatorFragment: {
+      paddingRight: 0,
+      textAlign: 'center',
+    },
+  },
+  '@media (max-width: 860px)': {
+    paginatorButton: {
+      padding: '12px 0',
+    },
+  },
+  '@media (max-width: 620px)': {
+    paginatorText: {
+      fontSize: '12px',
+      padding: '5px 0',
+    },
+    paginatorButton: {
+      padding: '12px 0',
+    },
+    paginatorFragment: {
+      left: '65%',
+    },
+    backToTopZoom: {
+      left: '30%',
+    },
+  },
+  '@media (max-width: 470px)': {
+    pageBar: {
+      display: 'block',
+      padding: '20px 0 0 10px',
+      justifyContent: 'flex-start',
+    },
+    paginatorFragment: {
+      position: 'relative',
+      left: '30%',
+    },
+    tabBox: {
+      position: 'relative',
+      left: '15%',
+    },
+    backToTopZoom: {
+      position: 'relative',
+      left: '10%',
+    },
   },
 }));
 
@@ -80,44 +137,21 @@ const Dashboard = (messages, props) => {
       }
     }
   };
-  function ScrollTop(props) {
-    const { children, window } = props;
-    const classes = useStyles();
-    const trigger = useScrollTrigger({
-      target: window ? window() : undefined,
-      disableHysteresis: true,
-      threshold: 100,
-    });
-
-    const handleClick = (event) => {
-      const anchor = (event.target.ownerDocument || document).querySelector(
-        '#back-to-top-anchor'
-      );
-      if (anchor) {
-        anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    };
-
-    return (
-      <Zoom in={trigger} style={{ left: '47%', position: 'absolute' }}>
-        <div onClick={handleClick} role="presentation" className={classes.root}>
-          {children}
-        </div>
-      </Zoom>
-    );
-  }
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
-        <IconButton>
+        <IconButton className={classes.paginatorButton}>
           <ChevronLeftRounded onClick={() => handleChangePage(false)} />
         </IconButton>
-        <p>
+        <p className={classes.paginatorText}>
           {msgPage * 10 + 1} -
           {(msgPage + 1) * 10 > msgs.length ? msgs.length : msgPage * 10 + 10}{' '}
           of {msgs.length}
         </p>
-        <IconButton>
+        <IconButton className={classes.paginatorButton}>
           <ChevronRightRounded onClick={() => handleChangePage(true)} />
         </IconButton>
       </div>
@@ -141,10 +175,12 @@ const Dashboard = (messages, props) => {
         ))}
       </Container>
       <div className={classes.backToTop}>
-        <ScrollTop>
-          <a style={{ textDecoration: 'none' }}>Back to Top</a>
-          <ArrowUpwardRounded />
-        </ScrollTop>
+        <div className={classes.backToTopZoom}>
+          <p>Back to top</p>
+          <IconButton className={classes.backToTopIcon}>
+            <ArrowUpwardRounded onClick={scrollTop} />
+          </IconButton>
+        </div>
         <Paginator className={classes.bottomPaginator} />
       </div>
     </div>
