@@ -1,3 +1,7 @@
+/* General Code */
+/* SendMessagePopup uses the following style rules */
+/* ReadMessagePopup require modifications done at the end */
+
 .letterpopup-classes-root {
   position: fixed;
   top: 0;
@@ -102,5 +106,78 @@
     left: 50%;
     top: calc(50% + 12vh);
     transform: translateX(-50%) scale(0.75);
+  }
+}
+
+/*/////////////////////////////////////////////*/
+/* Specific Modifications for ReadMessagePopup */
+/*/////////////////////////////////////////////*/
+
+.letterpopup-classes-message
+  > div.letterpopup-classes-messageBoxesWrapper
+  > div.letterpopup-classes-messageBody {
+  margin-top: 1rem;
+}
+.letterpopup-classes-message > div.letterpopup-classes-messageBoxesWrapper {
+  overflow-y: auto;
+  height: 37%;
+}
+.letterpopup-classes-dateTime {
+  position: absolute;
+  right: 8.5vw;
+  top: 3vw;
+  width: 4vw;
+  font-size: 1vw;
+}
+.letterpopup-classes-left-arrow {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  height: 50%;
+  width: 3rem;
+  margin-left: 3rem;
+
+  transform: translateY(-50%);
+
+  background-image: url('./../../imageassets/arrow-left.svg');
+  background-color: rgba(0, 0, 0, 0) !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  cursor: pointer;
+}
+.letterpopup-classes-right-arrow {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  height: 50%;
+  width: 3rem;
+  margin-right: 3rem;
+
+  transform: translateY(-50%);
+
+  background-image: url('./../../imageassets/arrow-right.svg');
+  background-color: rgba(0, 0, 0, 0) !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  cursor: pointer;
+}
+
+/* phone breakpoint */
+@media only screen and (max-width: 768px) {
+  .letterpopup-classes-message
+    > div.letterpopup-classes-messageBoxesWrapper
+    > div.letterpopup-classes-messageBody {
+    margin-top: 0;
+  }
+
+  .letterpopup-classes-dateTime {
+    right: 12vw;
+    top: 11vw;
+    width: 12vw;
+    font-size: 2.5vw;
   }
 }
