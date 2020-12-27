@@ -1,0 +1,240 @@
+.crux1{
+    position: absolute;
+    height: 12vh;
+    width: 100%;
+    color:#EF4646;
+}
+#color1{
+    background: #FFFDE8; 
+    padding-top: 0px;
+    position: absolute;
+    margin-top: 52px;
+    height:150vh;
+    width:100%;
+    border-radius: 20px 20px 0px 0px;
+    border-bottom: 22px #EF4646 solid;
+}
+.set1{
+    position: relative;
+    height:100vh;
+    width:100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+.terov1{
+    width: 100%;
+    background: #FFFDE8; 
+    margin-top: -1.2vh;
+    height:121vh;  
+}
+ .clue{
+     position: relative;
+     background-color: #EF4646;
+ }
+.c1{
+    margin-top: 2vh;
+    padding:2.2vw;
+}
+.c2{
+    margin-top: 3.9vh;
+    padding:2.2vw;
+    margin-left:2.9vw; 
+}
+.cA{
+    width: 100%;
+}
+.hexad{
+    height:6vh;
+    position: absolute;
+    margin-top: 147.5vh;
+    width:100vw;
+} 
+
+.hexad1{
+    height: 2vh;
+    width:100vw;
+    color: #EF4646;
+} 
+.fix{
+    height: 12vh;
+    background: #FFFDE8; 
+} 
+
+
+@media only screen and (min-width: 120px) and (max-width: 1940px){
+    #cross{
+        transform: scale(0.90); 
+    }
+    #kraus{
+        transform: scale(0.80);  
+    }
+}
+
+.ter{
+    position:fixed;
+    margin-left:87vw;
+    margin-top: 75vh;
+}
+
+
+.margi1{
+    transform: scale(1.04,1.29);
+    border-radius: 10px;
+    width: 100%;
+    padding-bottom: 3vh; 
+}
+
+.tetris{
+    background: #EF4646;
+}
+
+.margi{
+        transform: scale(1.1,1.29);
+        border-radius: 10px;
+        width: 100%;
+}
+
+.mark{
+    margin-bottom: 10px;
+}
+
+
+.rad{
+    margin-top: 23px;
+    border-radius: 10px;
+    transform: scale(1.25);
+}
+.rad1{
+    border-radius: 10px;
+    transform: scale(1.25);
+    margin-top: 2.3vh;
+    background-color: #EF4646;
+}
+.tera{
+    transform: scale(3.1);
+}
+@media only screen and (min-width: 552px) and (max-width: 708px){
+    .tera{
+        transform: scale(2.5);   
+    }
+    .ter{
+        margin-left:91vw; 
+    }
+}
+@media only screen and (min-width: 120px) and (max-width: 619px){
+    .tera{
+        transform: scale(2.5);
+    }
+    .ter{
+        
+    }
+}
+@media only screen and (min-width: 709px) and (max-width: 1000px){
+
+    .ter{
+        margin-left: 91vw;
+    }
+}
+@media only screen and (min-width: 1001px) and (max-width: 1400px){
+
+    .ter{
+        margin-left: 91vw;
+    }
+}
+@media only screen and (min-width: 1479px) and (max-width: 1556px){
+
+    .ter{
+        margin-left: 86vw;
+    }
+}
+@media only screen and (min-width: 1556px) and (max-width: 1800px){
+    .ter{
+        margin-left: 83vw;
+    }
+}
+
+
+  @media only screen and (min-width: 760px){
+    .set1::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 30px;
+      }
+      
+      /* Track */
+      .set1::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 30px;
+      }
+      
+      /* Handle */
+      .set1::-webkit-scrollbar-thumb {
+        background: #EF4646;
+      }
+      
+      /* Handle on hover */
+      .set1::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+}
+@media only screen and (max-width: 759px){
+    .set1::-webkit-scrollbar {
+        width: 4px;
+      }
+      
+      /* Track */
+      .set1::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+      
+      /* Handle */
+      .set1::-webkit-scrollbar-thumb {
+        background: #EF4646;
+      }
+      
+      /* Handle on hover */
+      .set1::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+}
+@media only screen and (max-width: 390px){
+    .set1::-webkit-scrollbar {
+        width:2.5px;
+      }
+      
+      /* Track */
+      .set1::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+      
+      /* Handle */
+      .set1::-webkit-scrollbar-thumb {
+        background: #EF4646;
+      }
+      
+      /* Handle on hover */
+      .set1::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+}
+@media only screen and (min-height: 580px) and (max-height: 680px){
+.hexad{
+    margin-top: 150.5vh;
+    } 
+}
+@media only screen and (max-height: 580px){
+    .hexad{
+        margin-top: 152.5vh;
+    } 
+}
+@media only screen and (max-width: 510px){
+    #color1{
+        margin-top: 47px;
+    }
+}    
+@media only screen and (max-width: 380px){
+    #color1{
+        margin-top: 45px;
+    }
+}  

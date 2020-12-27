@@ -19,10 +19,11 @@ import MessageCard from './MessageCard';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#FFFDE8',
+    overflow: 'hidden',
   },
   pageBar: {
     backgroundColor: '#EF4646',
-    padding: '20px 0 0 50px',
+    padding: '20px 0 0 100px',
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -58,11 +59,13 @@ const useStyles = makeStyles((theme) => ({
   backToTop: {
     marginTop: '25px',
     display: 'flex',
+    height: '50px',
+    backgroundColor: '#FFFDE8',
   },
   backToTopZoom: {
-    left: '47%',
+    display: 'flex',
     position: 'absolute',
-    marginTop: '10px',
+    left: '47%',
   },
   backToTopIcon: {
     marginBottom: '5px',
@@ -94,6 +97,25 @@ const useStyles = makeStyles((theme) => ({
       left: '30%',
     },
   },
+  '@media (max-width: 470px)': {
+    pageBar: {
+      display: 'block',
+      padding: '20px 0 0 10px',
+      justifyContent: 'flex-start',
+    },
+    paginatorFragment: {
+      position: 'relative',
+      left: '30%',
+    },
+    tabBox: {
+      position: 'relative',
+      left: '15%',
+    },
+    backToTopZoom: {
+      position: 'relative',
+      left: '10%',
+    },
+  },
 }));
 
 const Dashboard = (messages, props) => {
@@ -115,32 +137,9 @@ const Dashboard = (messages, props) => {
       }
     }
   };
-  function ScrollTop(props) {
-    const { children, window } = props;
-    const classes = useStyles();
-    const trigger = useScrollTrigger({
-      target: window ? window() : undefined,
-      disableHysteresis: true,
-      threshold: 100,
-    });
-
-    const handleClick = (event) => {
-      const anchor = (event.target.ownerDocument || document).querySelector(
-        '#back-to-top-anchor'
-      );
-      if (anchor) {
-        anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    };
-
-    return (
-      <Zoom in={trigger} className={classes.backToTopZoom}>
-        <div onClick={handleClick} role="presentation" className={classes.root}>
-          {children}
-        </div>
-      </Zoom>
-    );
-  }
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
@@ -176,12 +175,12 @@ const Dashboard = (messages, props) => {
         ))}
       </Container>
       <div className={classes.backToTop}>
-        <ScrollTop>
-          <a style={{ textDecoration: 'none' }}>Back to Top</a>
+        <div className={classes.backToTopZoom}>
+          <p>Back to top</p>
           <IconButton className={classes.backToTopIcon}>
-            <ArrowUpwardRounded />
+            <ArrowUpwardRounded onClick={scrollTop} />
           </IconButton>
-        </ScrollTop>
+        </div>
         <Paginator className={classes.bottomPaginator} />
       </div>
     </div>
