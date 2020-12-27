@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import Welcome from './components/welcome/welcome';
 import CoreDashboard from './components/core/CoreDashboard';
-import Personal from './personal/personal';
+import Personal from './components/personal/personal';
 import SendMessagePopup from './components/letterpopup/SendMessagePopup';
 import ReadMessagePopup from './components/letterpopup/ReadMessagePopup';
 import './App.css';
