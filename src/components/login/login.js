@@ -5,7 +5,7 @@ import { Route, Redirect, useHistory } from 'react-router';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 
 const clientId =
-  '962832623705-a7nlpkt0ps3bo3rdsov390bppfifrrp0.apps.googleusercontent.com';
+  '125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com';
 
 function Login() {
   let history = useHistory();
@@ -61,7 +61,7 @@ function Login() {
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
         uxMode="redirect"
-        redirectUri="http://localhost:3000/"
+        redirectUri="https://tender-kilby-a8e96b.netlify.app/"
         render={(renderProps) => (
           <div
             onClick={renderProps.onClick}
