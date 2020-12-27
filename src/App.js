@@ -29,6 +29,7 @@ function App() {
         submitFunction={(a, b) => {
           console.log(a, b);
         }}
+        enabled={true}
       />
       {/* <ReadMessagePopup
         messageArray={[
