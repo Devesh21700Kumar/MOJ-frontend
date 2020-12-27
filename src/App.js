@@ -11,7 +11,6 @@ import CoreDashboard from './components/core/CoreDashboard';
 import Personal from './personal/personal';
 import SendMessagePopup from './components/letterpopup/SendMessagePopup';
 import ReadMessagePopup from './components/letterpopup/ReadMessagePopup';
-import Personal from './components/personal/personal';
 import './App.css';
 import AdminDashboard from './components/admin/AdminDashboard';
 
