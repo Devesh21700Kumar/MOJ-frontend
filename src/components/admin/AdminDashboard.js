@@ -339,41 +339,46 @@ const AdminDashboard = () => {
   const [redFlag, setRedFlag] = useState('transparent');
   const [yellowFlag, setYellowFlag] = useState('transparent');
   const [greenFlag, setGreenFlag] = useState('transparent');
-  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     setMsgs(message_data);
     setRedFlaggedMsgs(message_data.filter((message) => message.flag === 'red'));
+
     setYellowFlaggedMsgs(
       message_data.filter((message) => message.flag === 'yellow')
     );
+
     setGreenFlaggedMsgs(
       message_data.filter((message) => message.flag === 'green')
     );
   }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
 
-  useEffect(() => {
-    setRedFlaggedMsgs((redFlaggedMsgs) =>
-      redFlaggedMsgs.slice(pageCount * 50, (pageCount + 1) * 50 - 1)
-    );
-    setYellowFlaggedMsgs((yellowFlaggedMsgs) =>
-      yellowFlaggedMsgs.slice(pageCount * 50, (pageCount + 1) * 50 - 1)
-    );
-    setGreenFlaggedMsgs((greenFlaggedMsgs) =>
-      greenFlaggedMsgs.slice(pageCount * 50, (pageCount + 1) * 50 - 1)
-    );
-  }, [setPageCount]);
-
   const handleChange25 = () => {
+    if (checked50 === true) {
+      setChecked50(!checked50);
+    }
+    setValue(' ');
+
     setChecked25(!checked25);
   };
 
   const handleChange50 = () => {
+    if (checked25 === true) {
+      setChecked25(!checked25);
+    }
+    setValue(' ');
+
     setChecked50(!checked50);
   };
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    if (checked25 === true) {
+      setChecked25(!checked25);
+    }
+    if (checked50 === true) {
+      setChecked50(!checked50);
+    }
   };
 
   const setNumber = () => {
@@ -381,22 +386,85 @@ const AdminDashboard = () => {
     else if (checked50) return '50';
     else return value;
   };
+  const [i, seti] = useState(0);
 
+  const hc1 = () => {
+    if (i >= 50) {
+      seti((i) => i - 50);
+      setValue(' ');
+      if (checked25 === true) {
+        setChecked25(!checked25);
+      }
+      if (checked50 === true) {
+        setChecked50(!checked50);
+      }
+    }
+    //console.log(i);
+  };
+
+  const hc2 = () => {
+    seti((i) => i + 50);
+    setValue(' ');
+    if (checked25 === true) {
+      setChecked25(!checked25);
+      if (checked50 === true) {
+        setChecked50(!checked50);
+      }
+      //console.log(i);
+    }
+  };
+
+  useEffect(() => {
+    setMsgs(message_data);
+    console.log(redFlaggedMsgs.length);
+    setRedFlaggedMsgs(
+      message_data
+        .filter((message) => message.flag === 'red')
+        .slice(
+          redFlaggedMsgs.length >= i ? i : i - 50,
+          redFlaggedMsgs.length >= i ? i + 50 : i
+        )
+    );
+    setYellowFlaggedMsgs(
+      message_data
+        .filter((message) => message.flag === 'yellow')
+        .slice(
+          yellowFlaggedMsgs.length >= i ? i : i - 50,
+          yellowFlaggedMsgs.length >= i ? i + 50 : i
+        )
+    );
+    setGreenFlaggedMsgs(
+      message_data
+        .filter((message) => message.flag === 'green')
+        .slice(
+          greenFlaggedMsgs.length >= i ? i : i - 50,
+          greenFlaggedMsgs.length >= i ? i + 50 : i
+        )
+    );
+    /*setRedFlaggedMsgs((redFlaggedMsgs) =>
+    redFlaggedMsgs.slice(i,i+50)
+  );
+  setYellowFlaggedMsgs((yellowFlaggedMsgs) =>
+    yellowFlaggedMsgs.slice(i,i+50)
+  );
+  setGreenFlaggedMsgs((greenFlaggedMsgs) =>
+    greenFlaggedMsgs.slice(i,i+50)
+  );*/
+    //},[i,setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
+  }, [i]);
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
         <Button
           className={classes.paginatorButton}
-          onClick={() =>
-            pageCount > 0 && setPageCount((pageCount) => pageCount - 1)
-          }
+          onClick={hc1}
           startIcon={<ChevronLeftRounded />}
         >
           Previous 50
         </Button>
         <Button
           className={classes.paginatorButton}
-          onClick={() => setPageCount((pageCount) => pageCount + 1)}
+          onClick={hc2}
           endIcon={<ChevronRightRounded />}
         >
           Next 50
