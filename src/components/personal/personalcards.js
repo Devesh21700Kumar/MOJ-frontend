@@ -115,7 +115,7 @@ export default function PersonalCards({ text, index }) {
                 value={index}
                 className={classes.margi}
                 id="cross"
-                raised={true}
+                //raised={true}}
               >
                 <Grid
                   onClick={() => {

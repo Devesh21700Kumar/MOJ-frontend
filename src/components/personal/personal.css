@@ -58,7 +58,21 @@
     height: 12vh;
     background: #FFFDE8; 
 } 
-
+@media  only screen and (min-width: 900px) and (max-width: 1940px){
+#cross:hover{
+    transform: translateX(-2px);
+}
+#cross{
+    transition: transform 0.7s linear ;
+}
+}
+#cross:hover{
+    transform: translateX(0.01vmin);
+    transform: translateX(-0.01vmin);
+}
+#cross{
+    transition: transform 0.7s linear ;
+}
 
 @media only screen and (min-width: 120px) and (max-width: 1940px){
     #cross{
