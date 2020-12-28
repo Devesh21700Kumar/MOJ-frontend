@@ -134,7 +134,6 @@ export default function Personal({ name, bitsId }, props) {
   useEffect(async () => {
     try{ 
       let response = await axios.get(`https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,{
-        method: 'GET',
         headers: { token: `${localStorage.getItem('token')}` },
       })
       console.log(response);

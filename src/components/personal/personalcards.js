@@ -67,6 +67,15 @@ const useStyles = makeStyles((theme) => ({
     Gin1: {
       marginTop: '0.08vh',
     },
+  }, 
+  '@media(max-height: 750px)': {
+    Gin: {
+      fontSize: '20px',
+      marginTop: '0.36vh',
+    },
+    Gin1: {
+      marginTop: '0.08vh',
+    },
   },
 }));
 
