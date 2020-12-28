@@ -160,7 +160,7 @@ export default function PersonalCards({ text, index }) {
             </Grid>
           ))
       ) : (
-        <h1 style={{color:"#EF4646",fontFamily:"oxygen",marginLeft:'31vw'}}>No Messages to Display !</h1>
+        <h1 className="baxter" >No Messages to Display !</h1>
       )}
     </Fragment>
   );

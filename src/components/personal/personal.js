@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     },
     hot1: {
       fontSize: '28px',
+      marginLeft:'-6.4vw',
     },
   },
   '@media(max-width: 520px)': {
@@ -94,17 +95,24 @@ const useStyles = makeStyles((theme) => ({
     },
     hot1: {
       fontSize: '16px',
+      marginLeft:'-6.4vw',
     },
   },
   '@media(min-width: 920px)': {
     hot: {
       marginLeft: '5.2vw',
     },
+    hot1:{
+      marginLeft:'-6.4vw',
+    }
   },
   '@media(min-width: 1200px)': {
     hot: {
       marginLeft: '6.2vw',
     },
+    hot1:{
+      marginLeft:'-6.9vw',
+    }
   },
 }));
 
