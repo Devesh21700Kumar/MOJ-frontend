@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       justifyContent: 'space-evenly',
       alignItems: 'center',
-      marginBottom: '1rem',
+      marginBottom: '0.5rem',
       padding: '1rem',
     },
     flag: {
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) =>
       width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: '10px 0px',
+      padding: '20px 0px',
     },
     subtitle1: {
       fontFamily: 'Oxygen',
@@ -87,7 +87,6 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: '1rem',
     },
     subtitle2: {
       fontFamily: 'Oxygen',
@@ -98,7 +97,6 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: '1rem',
     },
     input: {
       width: '70px',
@@ -147,6 +145,17 @@ const useStyles = makeStyles((theme) =>
     paginatorFragment: {
       width: 'mex-content',
     },
+    backToTop: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    backToTopButton: {
+      textTransform: 'none',
+      fontSize: '1rem',
+      fontFamily: 'Oxygen, sans serif',
+    },
     '@media(min-width: 320px)': {
       flag: {
         fontSize: '12px',
@@ -159,6 +168,12 @@ const useStyles = makeStyles((theme) =>
       },
       select: {
         flexDirection: 'column',
+      },
+      subtitle1: {
+        marginBottom: '0.5rem',
+      },
+      subtitle2: {
+        marginBottom: '0.5rem',
       },
       input: {
         width: 'max-content',
@@ -228,6 +243,12 @@ const useStyles = makeStyles((theme) =>
         flexDirection: 'row',
         justifyContent: 'center',
       },
+      subtitle1: {
+        marginTop: '0.5rem',
+      },
+      subtitle2: {
+        marginTop: '0.5rem',
+      },
       input: {
         width: '70px',
       },
@@ -244,7 +265,6 @@ const useStyles = makeStyles((theme) =>
       },
       messages: {
         width: '90%',
-        padding: '10px',
       },
       buttons: {
         width: '100%',
@@ -459,6 +479,7 @@ const AdminDashboard = () => {
           className={classes.paginatorButton}
           onClick={hc1}
           startIcon={<ChevronLeftRounded />}
+          disabled={i === 0}
         >
           Previous 50
         </Button>
@@ -466,6 +487,11 @@ const AdminDashboard = () => {
           className={classes.paginatorButton}
           onClick={hc2}
           endIcon={<ChevronRightRounded />}
+          disabled={
+            i > redFlaggedMsgs.length ||
+            i > greenFlaggedMsgs.length ||
+            i > yellowFlaggedMsgs.length
+          }
         >
           Next 50
         </Button>
@@ -477,7 +503,7 @@ const AdminDashboard = () => {
     <div className={classes.root}>
       <CssBaseline />
       {/* Tabs */}
-      <div className={classes.tabs}>
+      <div className={classes.tabs} id="top">
         <Box
           className={classes.tab}
           style={{ backgroundColor: tabColor1 }}
@@ -489,6 +515,7 @@ const AdminDashboard = () => {
             setGreenFlag('transparent');
             setChecked25(false);
             setChecked50(false);
+            seti(0);
           }}
         >
           <Button className={classes.tabButton}>Pending Messages</Button>
@@ -502,6 +529,7 @@ const AdminDashboard = () => {
             setGreenFlag(green);
             setChecked25(false);
             setChecked50(false);
+            seti(0);
           }}
         >
           <Button className={classes.tabButton}>Final Approval</Button>
@@ -522,6 +550,7 @@ const AdminDashboard = () => {
                     setChecked25(false);
                     setChecked50(false);
                     setValue('');
+                    seti(0);
                   }}
                   style={{ borderBottom: `3px solid ${redFlag}` }}
                 >
@@ -536,6 +565,7 @@ const AdminDashboard = () => {
                     setChecked25(false);
                     setChecked50(false);
                     setValue('');
+                    seti(0);
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
                 >
@@ -550,6 +580,7 @@ const AdminDashboard = () => {
                     setChecked25(false);
                     setChecked50(false);
                     setValue('');
+                    seti(0);
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
                 >
@@ -660,6 +691,11 @@ const AdminDashboard = () => {
               </Grid>
             </div>
           </Grid>
+          {tabColor1 === '#FFFDE8' && (
+            <div className={classes.buttons}>
+              <AssignCoreMembersPopup />
+            </div>
+          )}
           <div className={classes.messages}>
             <ShowMessages
               msgs={msgs}
@@ -697,6 +733,16 @@ const AdminDashboard = () => {
               </Button>
             </div>
           )}
+          <div className={classes.backToTop}>
+            <Button
+              className={classes.backToTopButton}
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+              }
+            >
+              Back to Top
+            </Button>
+          </div>
         </Box>
       </div>
     </div>

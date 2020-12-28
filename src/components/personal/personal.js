@@ -252,7 +252,7 @@ fetchCoreMembers();
         <div id="color1">
           <Box display="flex" className="cA">
             <Box width="35%" className="c1">
-              <Typography className={classes.hot}>Welcome Nipun </Typography>
+              <Typography className={classes.hot}>Welcome Nipun</Typography>
             </Box>
 
             <Box width="15%" textAlign="center" className="c2">
