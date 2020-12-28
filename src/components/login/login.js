@@ -69,7 +69,7 @@ function Login() {
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
         uxMode="redirect"
-        redirectUri="https://tender-kilby-a8e96b.netlify.app/"
+        redirectUri="https://tender-kilby-a8e96b.netlify.app/core"
         render={(renderProps) => (
           <div
             onClick={renderProps.onClick}
