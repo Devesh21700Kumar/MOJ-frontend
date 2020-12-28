@@ -12,6 +12,7 @@ import PersonalCards from '../personal/personalcards';
 import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
 export const Data = createContext();
+import axios from 'axios';
 export const Data1 = createContext();
 
 const useStyles = makeStyles((theme) => ({
@@ -125,18 +126,24 @@ export default function Personal({ name, bitsId }, props) {
     );
  
     setData(result.data);
-  }); /*
+  }); */
 
 
-
-  /* useEffect(async () => {
+  function fetchCoreMembers() {
+  useEffect(async () => {
     try{ 
-      let response = await axios.get(`/api/level0/receivedmessages`)
-      setret(response);
+      let response = await axios.get(`https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,{
+        method: 'GET',
+        headers: { token: `${localStorage.getItem('token')}` },
+      })
+      console.log(response);
     } catch(error) {
        console.error(error.message);
     }
-  },[]); */
+  },[]); 
+}
+
+fetchCoreMembers();
 
   const [get, setGet] = useState(det);
 

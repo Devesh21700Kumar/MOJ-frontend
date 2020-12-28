@@ -81,6 +81,7 @@ export default function PersonalCards({ text, index }) {
      // setvat(true);
      // setpos(pos);
   // }, [setvat,setpos] );
+  console.log(pos)
   };
   
   return (
@@ -90,6 +91,7 @@ export default function PersonalCards({ text, index }) {
       //) : (
        // console.log('pls click icon')
      // )}
+     
             }
 
       {get.slice(i, i + 15 <= get.length ? i + 15 : get.length)
