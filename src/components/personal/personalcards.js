@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     height: '7vh',
-    boxShadow: ' 10px 10px 5px grey',
+    boxShadow: '  0 8px 6px -6px black',
   },
   Gin: {
     padding: '0 0px 0px 0px',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Gin1: {
     padding: '0 0px 0px 0px',
-    marginRight: '2rem',
+    marginRight: '0rem',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     float: 'right',
@@ -40,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Gi: {
-    flex: 2,
+    flex: 1.5,
   },
   date: {
-    margin: '.8rem 1rem 0 0',
+    margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
     fontSize: '1rem',
   },
@@ -97,7 +97,7 @@ export default function PersonalCards({ text, index }) {
               <Grid container direction={'row'} className={classes.krait}>
                 <Grid item xs className={classes.Gin}>
                   <p className={classes.date}>
-                    {screen.width >= 591
+                    {`${((i)/15)*15+index+1}.  `}{screen.width >= 591
                       ? text.body.slice(0, 15)
                       : text.body.slice(0, 10)}
                   </p>
