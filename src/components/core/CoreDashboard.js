@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -7,13 +7,12 @@ import {
   IconButton,
 } from '@material-ui/core';
 // import Navbar from '../navbar/navbar';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Zoom from '@material-ui/core/Zoom';
 import {
   ChevronRightRounded,
   ChevronLeftRounded,
   KeyboardArrowUpRounded,
 } from '@material-ui/icons';
+import axios from 'axios';
 import MessageCard from './MessageCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -127,13 +126,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
+
+const postApproval = () => {};
+
 const Dashboard = (messages, props) => {
   const classes = useStyles();
-  const [msgs, setMsgs] = useState(
-    Array(32).fill(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.'
-    )
-  );
+  const [msgs, setMsgs] = useState({});
   const [msgPage, setMsgPage] = useState(0);
   const handleChangePage = (goToNext) => {
     if (goToNext) {
@@ -152,20 +151,53 @@ const Dashboard = (messages, props) => {
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
-        <IconButton className={classes.paginatorButton}>
-          <ChevronLeftRounded onClick={() => handleChangePage(false)} />
+        <IconButton
+          className={classes.paginatorButton}
+          onClick={() => handleChangePage(false)}
+        >
+          <ChevronLeftRounded />
         </IconButton>
         <p className={classes.paginatorText}>
           {msgPage * 10 + 1} -
           {(msgPage + 1) * 10 > msgs.length ? msgs.length : msgPage * 10 + 10}{' '}
           of {msgs.length}
         </p>
-        <IconButton className={classes.paginatorButton}>
-          <ChevronRightRounded onClick={() => handleChangePage(true)} />
+        <IconButton
+          className={classes.paginatorButton}
+          onClick={() => handleChangePage(true)}
+        >
+          <ChevronRightRounded />
         </IconButton>
       </div>
     );
   };
+  const dateFormatter = (timestamp) => {
+    var date = new Date(timestamp);
+    var day = date.getDate() + 'th ';
+    var month = date.toLocaleString('default', { month: 'short' }) + ' ';
+    var year = date.getFullYear() + ', ';
+    var time = date.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return day + month + year + time;
+  };
+  useEffect(async () => {
+    try {
+      let response = await axios.get(API_URL + '/getassignment', {
+        method: 'GET',
+        headers: {
+          token: `${atob(localStorage.getItem('token'))}`,
+        },
+      });
+      console.log(response.data.data);
+      console.log(Date(response.data.data[0].date).substr(0, 21));
+      setMsgs(response.data.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
   return (
     <div className={classes.root}>
       <div className={classes.pageBar}>
@@ -175,13 +207,20 @@ const Dashboard = (messages, props) => {
         <Paginator />
       </div>
       <Container>
-        {msgs.slice(msgPage * 10, msgPage * 10 + 9).map((message) => (
-          <MessageCard
-            rollNumber={'2019A8PS0666G'}
-            message={message}
-            date={'28th Dec 2020, 2:31 a.m.'}
-          />
-        ))}
+        {Array.isArray(msgs) && msgs.length !== 0 ? (
+          msgs
+            .slice(msgPage * 10, msgPage * 10 + 9)
+            .map((message) => (
+              <MessageCard
+                rollNumber={message.receiverId}
+                message={message.body}
+                date={dateFormatter(message.date)}
+                key={msgs.indexOf(message)}
+              />
+            ))
+        ) : (
+          <h1> Sorry no messages found.</h1>
+        )}
       </Container>
       <div className={classes.backToTop}>
         <div className={classes.backToTopZoom}>
