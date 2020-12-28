@@ -22,7 +22,7 @@ function App() {
         <Route exact path="/home" component={Personal} />
         <Route exact path="/core" component={CoreDashboard} />
         <Route exact path="/admin" component={AdminDashboard} />
-        <Route exact path="/send" component={SendMessagePopup} />
+        <Route exact path="/send" component={ReadMessagePopup} />
       </Switch>
     </Router>
   );

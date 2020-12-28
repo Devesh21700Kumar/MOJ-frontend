@@ -1,10 +1,15 @@
-import { React, useState, Fragment } from 'react';
+import { React, useState, Fragment, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import './personal.css';
 import Typography from '@material-ui/core/Typography';
+import { Data } from '../personal/personal';
+import { Data1 } from '../personal/personal';
+import Button from '@material-ui/core/Button';
+import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
+import SendMessagePopup from '../letterpopup/SendMessagePopup';
 
 const useStyles = makeStyles((theme) => ({
   margi: {
@@ -67,32 +72,57 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersonalCards({ text, index }) {
   const classes = useStyles();
-  const date = ['28th Dec 2020, 2:31 a.m.', '28th Dec 2020, 2:31 a.m.'];
+  const { get } = useContext(Data);
+  const i = useContext(Data1);
+  const [vat, setvat] = useState(false);
+  const [k, setk] = useState(0);
+  const handle1 = (event) => {
+    setvat(true);
+  };
   return (
-    <Grid container irection={'column'}>
-      <Container className={classes.margi} id="cross" raised={true}>
-        <Grid container direction={'row'} className={classes.krait}>
-          <Grid item xs className={classes.Gin}>
-            <p className={classes.date}>
-              {screen.width >= 591 ? text.slice(0, 15) : text.slice(0, 10)}
-            </p>
-          </Grid>
-          <Grid item xs alignContent="flex-end" className={classes.Gi}></Grid>
-          <Grid item xs lg={2} className={classes.Gin1}>
-            <Typography variant="h6" edge="start">
-              <b key="index">
+    <Fragment>
+      <ReadMessagePopup messagearray={{ get }} startFrom={3} enabled={vat} />
+      {console.log(get)};{console.log(vat)};
+      {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
+        <Grid container direction={'column'}>
+          <Container
+            value={index}
+            onClick={handle1}
+            className={classes.margi}
+            id="cross"
+            raised={true}
+          >
+            <Grid container direction={'row'} className={classes.krait}>
+              <Grid item xs className={classes.Gin}>
                 <p className={classes.date}>
                   {screen.width >= 591
-                    ? screen.width >= 680
-                      ? date[0].slice(0, 24)
-                      : date[0].slice(0, 19)
-                    : date[0].slice(0, 9)}
+                    ? text.body.slice(0, 15)
+                    : text.body.slice(0, 10)}
                 </p>
-              </b>
-            </Typography>
-          </Grid>
+              </Grid>
+              <Grid
+                item
+                xs
+                alignContent="flex-end"
+                className={classes.Gi}
+              ></Grid>
+              <Grid item xs lg={2} className={classes.Gin1}>
+                <Typography variant="h6" edge="start">
+                  <b key="index">
+                    <p className={classes.date}>
+                      {screen.width >= 591
+                        ? screen.width >= 680
+                          ? text.date.slice(0, 24)
+                          : text.date.slice(0, 19)
+                        : text.date.slice(0, 9)}
+                    </p>
+                  </b>
+                </Typography>
+              </Grid>
+            </Grid>
+          </Container>
         </Grid>
-      </Container>
-    </Grid>
+      ))}
+    </Fragment>
   );
 }

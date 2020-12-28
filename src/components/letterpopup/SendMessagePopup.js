@@ -57,27 +57,30 @@ export default class SendMessagePopup extends React.Component {
                   />
                 </div>
 
-            <div className="letterpopup-classes-messageBody">
-              <TextField
-                multiline
-                className="letterpopup-classes-messageTextField"
-                value={messageText}
-                onChange={(e) => {
-                  setMessageText(e.target.value);
-                }}
-                variant="outlined"
-                rows={calculateTextAreaRows()}
-              />
-            </div>
-          </div>
-          <div className="letterpopup-classes-sendButton">
-            <Button variant="contained" className='rejectButton' textTransform='none' type="submit">
-              Send
-            </Button>
-          </div>
-        </form>
-      </Paper>
-    </div>
-  );
-}
+                <div className="letterpopup-classes-messageBody">
+                  <TextField
+                    multiline
+                    className="letterpopup-classes-messageTextField"
+                    value={this.state.messageText}
+                    onChange={(e) => {
+                      this.setState({
+                        messageText: e.target.value,
+                      });
+                    }}
+                    variant="outlined"
+                    rows={this.calculateTextAreaRows}
+                  />
+                </div>
+              </div>
+              <div className="letterpopup-classes-sendButton">
+                <Button variant="outlined" type="submit">
+                  Send
+                </Button>
+              </div>
+            </form>
+          </Paper>
+        </div>
+      );
+    else return <div />;
+  }
 }
