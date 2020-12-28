@@ -81,7 +81,7 @@ export default function PersonalCards({ text, index }) {
   };
   return (
     <Fragment>
-      <ReadMessagePopup messagearray={{ get }} startFrom={3} enabled={vat} />
+      <ReadMessagePopup messageArray={{ get }} startFrom={1} enabled={vat} />
       {console.log(get)};{console.log(vat)};
       {get
         .slice(i, i + 15 <= get.length ? i + 15 : get.length)
