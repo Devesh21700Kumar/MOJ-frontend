@@ -68,7 +68,7 @@ export default class SendMessagePopup extends React.Component {
                       });
                     }}
                     variant="outlined"
-                    rows={this.calculateTextAreaRows()}
+                    rows={this.calculateTextAreaRows}
                   />
                 </div>
               </div>
