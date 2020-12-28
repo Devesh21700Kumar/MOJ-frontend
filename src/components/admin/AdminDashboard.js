@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Box, Button, CssBaseline, Grid, InputBase } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  IconButton,
+  InputBase,
+  Snackbar,
+} from '@material-ui/core';
 import { ChevronLeftRounded, ChevronRightRounded } from '@material-ui/icons';
+import CloseIcon from '@material-ui/icons/Close';
+import { Redirect } from 'react-router-dom';
 
 import MessageCard from './MessageCard';
 import message_data from './messageData';
 import AssignCoreMembersPopup from '../popups/AssignCoreMembersPopup';
+import URL from '../util/url';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -295,49 +306,63 @@ const ShowMessages = ({
   yellowFlag,
   greenFlag,
   setNumber,
+  messageId,
+  setMessageId,
 }) => {
   return (
     <>
       {redFlag === red
         ? redFlaggedMsgs.map((message, index) => (
             <MessageCard
-              bitsId={message.bitsId}
-              message={message.message}
+              bitsId={message.receiverId}
+              body={message.body}
               date={message.date}
               key={index}
               index={index}
+              _id={message._id}
+              messageId={messageId}
+              setMessageId={setMessageId}
               n={setNumber()}
             />
           ))
         : greenFlag === green
         ? greenFlaggedMsgs.map((message, index) => (
             <MessageCard
-              bitsId={message.bitsId}
-              message={message.message}
+              bitsId={message.receiverId}
+              body={message.body}
               date={message.date}
               key={index}
               index={index}
+              _id={message._id}
+              messageId={messageId}
+              setMessageId={setMessageId}
               n={setNumber()}
             />
           ))
         : yellowFlag === yellow
         ? yellowFlaggedMsgs.map((message, index) => (
             <MessageCard
-              bitsId={message.bitsId}
-              message={message.message}
+              bitsId={message.receiverId}
+              body={message.body}
               date={message.date}
               key={index}
               index={index}
+              _id={message._id}
+              messageId={messageId}
+              setMessageId={setMessageId}
               n={setNumber()}
             />
           ))
         : msgs.map((message, index) => (
             <MessageCard
-              bitsId={message.bitsId}
-              message={message.message}
+              bitsId={message.receiverId}
+              body={message.body}
               date={message.date}
               key={index}
               index={index}
+              _id={message._id}
+              messageId={messageId}
+              setMessageId={setMessageId}
               n={setNumber()}
             />
           ))}
@@ -359,18 +384,44 @@ const AdminDashboard = () => {
   const [redFlag, setRedFlag] = useState('transparent');
   const [yellowFlag, setYellowFlag] = useState('transparent');
   const [greenFlag, setGreenFlag] = useState('transparent');
+  const [messageId, setMessageId] = useState([]);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [type, setType] = useState('');
+
+  const { permissionLevel } = JSON.parse(
+    atob(localStorage.getItem('token').split('.')[1])
+  );
+
+  if (permissionLevel !== 2) return <Redirect to="/home" />;
 
   useEffect(() => {
-    setMsgs(message_data);
-    setRedFlaggedMsgs(message_data.filter((message) => message.flag === 'red'));
+    async function fetchMessages() {
+      const { messages } = await (
+        await fetch(`${URL}/api/level2/unassignedMessages`, {
+          method: 'GET',
+          headers: {
+            token: `${localStorage.getItem('token')}`,
+          },
+        })
+      ).json();
+      setMsgs(messages);
 
-    setYellowFlaggedMsgs(
-      message_data.filter((message) => message.flag === 'yellow')
-    );
+      const { data } = await (
+        await fetch(`${URL}/api/level2/finalapproval`, {
+          method: 'GET',
+          headers: {
+            token: `${localStorage.getItem('token')}`,
+          },
+        })
+      ).json();
+      const { approved, denied, yellowflagged } = data;
+      setRedFlaggedMsgs(denied);
+      setYellowFlaggedMsgs(yellowflagged);
+      setGreenFlaggedMsgs(approved);
+      console.log(data);
+    }
 
-    setGreenFlaggedMsgs(
-      message_data.filter((message) => message.flag === 'green')
-    );
+    fetchMessages();
   }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
 
   const handleChange25 = () => {
@@ -380,6 +431,11 @@ const AdminDashboard = () => {
     setValue(' ');
 
     setChecked25(!checked25);
+    if (msgs.length > 25) {
+      for (let i = 0; i < 25; i++) {
+        setMessageId(msgs[i]._id);
+      }
+    }
   };
 
   const handleChange50 = () => {
@@ -389,10 +445,20 @@ const AdminDashboard = () => {
     setValue(' ');
 
     setChecked50(!checked50);
+    if (msgs.length > 50) {
+      for (let i = 0; i < 50; i++) {
+        setMessageId(msgs[i]._id);
+      }
+    }
   };
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    if (msgs.length > e.target.value) {
+      for (let i = 0; i < e.target.value; i++) {
+        setMessageId(msgs[i]._id);
+      }
+    }
     if (checked25 === true) {
       setChecked25(!checked25);
     }
@@ -436,30 +502,23 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     setMsgs(message_data);
-    console.log(redFlaggedMsgs.length);
     setRedFlaggedMsgs(
-      message_data
-        .filter((message) => message.flag === 'red')
-        .slice(
-          redFlaggedMsgs.length >= i ? i : i - 50,
-          redFlaggedMsgs.length >= i ? i + 50 : i
-        )
+      redFlaggedMsgs.slice(
+        redFlaggedMsgs.length >= i ? i : i - 50,
+        redFlaggedMsgs.length >= i ? i + 50 : i
+      )
     );
     setYellowFlaggedMsgs(
-      message_data
-        .filter((message) => message.flag === 'yellow')
-        .slice(
-          yellowFlaggedMsgs.length >= i ? i : i - 50,
-          yellowFlaggedMsgs.length >= i ? i + 50 : i
-        )
+      yellowFlaggedMsgs.slice(
+        yellowFlaggedMsgs.length >= i ? i : i - 50,
+        yellowFlaggedMsgs.length >= i ? i + 50 : i
+      )
     );
     setGreenFlaggedMsgs(
-      message_data
-        .filter((message) => message.flag === 'green')
-        .slice(
-          greenFlaggedMsgs.length >= i ? i : i - 50,
-          greenFlaggedMsgs.length >= i ? i + 50 : i
-        )
+      greenFlaggedMsgs.slice(
+        greenFlaggedMsgs.length >= i ? i : i - 50,
+        greenFlaggedMsgs.length >= i ? i + 50 : i
+      )
     );
     /*setRedFlaggedMsgs((redFlaggedMsgs) =>
     redFlaggedMsgs.slice(i,i+50)
@@ -497,6 +556,59 @@ const AdminDashboard = () => {
         </Button>
       </div>
     );
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackBarOpen(false);
+  };
+
+  const handleRejection = () => {
+    async function postRejectedMessages() {
+      const response = await (
+        await fetch(`${URL}/api/level2/approveMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            token: `${localStorage.getItem('token')}`,
+          },
+          body: JSON.stringify({ disapproveId: messageId }),
+        })
+      ).json();
+
+      if (response.ok) {
+        setType('Declined');
+        setSnackBarOpen(true);
+      }
+    }
+
+    postRejectedMessages();
+  };
+
+  const handleApproval = () => {
+    console.log(messageId);
+    async function postApprovedMessages() {
+      const response = await (
+        await fetch(`${URL}/api/level2/approveMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            token: `${localStorage.getItem('token')}`,
+          },
+          body: JSON.stringify({ approveId: messageId }),
+        })
+      ).json();
+
+      if (response.ok) {
+        setType('Approved');
+        setSnackBarOpen(true);
+      }
+    }
+
+    postApprovedMessages();
   };
 
   return (
@@ -693,7 +805,7 @@ const AdminDashboard = () => {
           </Grid>
           {tabColor1 === '#FFFDE8' && (
             <div className={classes.buttons}>
-              <AssignCoreMembersPopup />
+              <AssignCoreMembersPopup messageId={messageId} />
             </div>
           )}
           <div className={classes.messages}>
@@ -706,13 +818,15 @@ const AdminDashboard = () => {
               yellowFlag={yellowFlag}
               greenFlag={greenFlag}
               setNumber={setNumber}
+              messageId={messageId}
+              setMessageId={setMessageId}
             />
           </div>
 
           {/* Buttons */}
           {tabColor1 === '#FFFDE8' ? (
             <div className={classes.buttons}>
-              <AssignCoreMembersPopup />
+              <AssignCoreMembersPopup messageId={messageId} />
             </div>
           ) : (
             <div className={classes.buttons1}>
@@ -720,6 +834,7 @@ const AdminDashboard = () => {
                 variant="contained"
                 className={classes.rejectButton}
                 size="large"
+                onClick={handleRejection}
               >
                 Reject
               </Button>
@@ -728,6 +843,7 @@ const AdminDashboard = () => {
                 variant="contained"
                 className={classes.approveButton}
                 size="large"
+                onClick={handleApproval}
               >
                 Approve
               </Button>
@@ -743,6 +859,28 @@ const AdminDashboard = () => {
               Back to Top
             </Button>
           </div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            open={snackBarOpen}
+            autoHideDuration={3000}
+            onClose={handleSnackbarClose}
+            message={`${type} messages successfully!`}
+            action={
+              <React.Fragment>
+                <IconButton
+                  size="small"
+                  aria-label="close"
+                  color="inherit"
+                  onClick={handleSnackbarClose}
+                >
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </React.Fragment>
+            }
+          />
         </Box>
       </div>
     </div>
