@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     Gin1: {
       marginTop: '0.08vh',
     },
-  }, 
+  },
   '@media(max-height: 750px)': {
     Gin: {
       fontSize: '20px',
@@ -84,31 +84,32 @@ export default function PersonalCards({ text, index }) {
   const { get } = useContext(Data);
   const i = useContext(Data1);
   const [vat, setvat] = useState(false);
-  const [pos,setpos]=useState(0)
+  const [pos, setpos] = useState(0);
   const handle1 = (pos) => {
-   // useEffect( ()=>{
-     // setvat(true);
-     // setpos(pos);
-  // }, [setvat,setpos] );
-  console.log(pos)
+    // useEffect( ()=>{
+    // setvat(true);
+    // setpos(pos);
+    // }, [setvat,setpos] );
+    console.log(pos);
   };
-  
+
   return (
     <Fragment>
-            {//vat=== true ? (
-             //<ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
-      //) : (
-       // console.log('pls click icon')
-     // )}
-     
-            }
+      {
+        //vat=== true ? (
+        //<ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
+        //) : (
+        // console.log('pls click icon')
+        // )}
+      }
 
-      {get.slice(i, i + 15 <= get.length ? i + 15 : get.length)
+      {get
+        .slice(i, i + 15 <= get.length ? i + 15 : get.length)
         .map((text, index) => (
           <Grid container direction={'column'}>
             <Container
               value={index}
-              onClick={handle1(((i)/15)*15+index+1)}
+              onClick={handle1((i / 15) * 15 + index + 1)}
               className={classes.margi}
               id="cross"
               raised={true}
@@ -116,7 +117,8 @@ export default function PersonalCards({ text, index }) {
               <Grid container direction={'row'} className={classes.krait}>
                 <Grid item xs className={classes.Gin}>
                   <p className={classes.date}>
-                    {`${((i)/15)*15+index+1}.  `}{screen.width >= 591
+                    {`${(i / 15) * 15 + index + 1}.  `}
+                    {screen.width >= 591
                       ? text.body.slice(0, 15)
                       : text.body.slice(0, 10)}
                   </p>

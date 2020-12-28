@@ -14,7 +14,7 @@ import SendMessagePopup from '../letterpopup/SendMessagePopup';
 export const Data = createContext();
 import axios from 'axios';
 export const Data1 = createContext();
-import Login from "../login/login";
+import Login from '../login/login';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Oxygen',
     fontWeight: 'bold',
     fontSize: '3.3vmax',
-    marginLeft:'3.7vw',
+    marginLeft: '3.7vw',
   },
   hot1: {
     fontFamily: 'Oxygen',
@@ -93,16 +93,16 @@ const useStyles = makeStyles((theme) => ({
     hot1: {
       fontSize: '16px',
     },
-  }, 
-   '@media(min-width: 920px)': {
+  },
+  '@media(min-width: 920px)': {
     hot: {
-      marginLeft:'5.2vw',
-    }
+      marginLeft: '5.2vw',
+    },
   },
   '@media(min-width: 1200px)': {
     hot: {
-      marginLeft:'6.2vw',
-    }
+      marginLeft: '6.2vw',
+    },
   },
 }));
 
@@ -129,21 +129,23 @@ export default function Personal({ name, bitsId }, props) {
     setData(result.data);
   }); */
 
-
   function fetchCoreMembers() {
-  useEffect(async () => {
-    try{ 
-      let response = await axios.get(`https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,{
-        headers: { token: `${localStorage.getItem('token')}` },
-      })
-      console.log(response);
-    } catch(error) {
-       console.error(error.message);
-    }
-  },[]); 
-}
+    useEffect(async () => {
+      try {
+        let response = await axios.get(
+          `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
+          {
+            headers: { token: `${localStorage.getItem('token')}` },
+          }
+        );
+        console.log(response);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }, []);
+  }
 
-fetchCoreMembers();
+  fetchCoreMembers();
 
   const [get, setGet] = useState(det);
 
@@ -266,7 +268,7 @@ fetchCoreMembers();
               </Data1.Provider>
             </Data.Provider>
           </div>
-        {/*Container to show all messages   
+          {/*Container to show all messages   
           <div className="terov1">
             {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
               <PersonalCards text={text}  index={index} />
@@ -274,60 +276,60 @@ fetchCoreMembers();
           </div>
             */}
 
-        <div className="hexad">
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            display="flex"
-            alignItems="center"
-          >
-            <Grid item marginLeft="21vw" textAlign="center">
-              <svg
-                onClick={hc1}
-                width="48"
-                height="23"
-                viewBox="0 0 48 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
-                  fill={x1}
-                />
-              </svg>
+          <div className="hexad">
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              display="flex"
+              alignItems="center"
+            >
+              <Grid item marginLeft="21vw" textAlign="center">
+                <svg
+                  onClick={hc1}
+                  width="48"
+                  height="23"
+                  viewBox="0 0 48 23"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
+                    fill={x1}
+                  />
+                </svg>
+              </Grid>
+              <Grid item textAlign="center">
+                <Button
+                  style={{
+                    fontWeight: '700',
+                    textTransform: 'none',
+                    fontFamily: 'Oxygen',
+                    fontSize: '2.2vh',
+                    margin: '1vw',
+                  }}
+                >
+                  Showing {i}-{i + 15 < get.length ? i + 15 : get.length} of{' '}
+                  {get.length}
+                </Button>
+              </Grid>
+              <Grid item textAlign="center">
+                <svg
+                  onClick={hc2}
+                  width="48"
+                  height="23"
+                  viewGrid="0 0 48 23"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
+                    fill={x2}
+                  />
+                </svg>
+              </Grid>
             </Grid>
-            <Grid item textAlign="center">
-              <Button
-                style={{
-                  fontWeight: '700',
-                  textTransform: 'none',
-                  fontFamily: 'Oxygen',
-                  fontSize: '2.2vh',
-                  margin: '1vw',
-                }}
-              >
-                Showing {i}-{i + 15 < get.length ? i + 15 : get.length} of{' '}
-                {get.length}
-              </Button>
-            </Grid>
-            <Grid item textAlign="center">
-              <svg
-                onClick={hc2}
-                width="48"
-                height="23"
-                viewGrid="0 0 48 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
-                  fill={x2}
-                />
-              </svg>
-            </Grid>
-          </Grid>
-        </div>
+          </div>
         </div>
         <div className="ter">
           <IconButton onClick={hit} style={{ color: '#EF4646' }}>
@@ -339,4 +341,3 @@ fetchCoreMembers();
     </Fragment>
   );
 }
-
