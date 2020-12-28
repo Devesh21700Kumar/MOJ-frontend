@@ -97,7 +97,7 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(55).fill({
+    Array(52).fill({
       body: 'Lorem Ipsum is simply dummy.',
       date: ' 28th Dec 2020, 2:31 a.m.',
     })
