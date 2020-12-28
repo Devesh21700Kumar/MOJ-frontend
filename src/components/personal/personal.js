@@ -136,14 +136,15 @@ export default function Personal({ name, bitsId }, props) {
       try {
         let response = await axios.get(
           `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
-          { method: 'GET',
+          {
+            method: 'GET',
             headers: { token: `${atob(localStorage.getItem('token'))}` },
           }
         );
         //console.log(response.data);
         //var r=response.data;
-        var r=response.data.data;
-        setret(response.data.data)
+        var r = response.data.data;
+        setret(response.data.data);
         //svar r=response.data.data[0];
         console.log(r);
       } catch (error) {
@@ -197,8 +198,7 @@ export default function Personal({ name, bitsId }, props) {
     } else if (get.length - (i + 15) < 15 && get.length - (i + 15) > 0) {
       seti(i + 15);
       setX2('#C4C4C4');
-    }
-    else{
+    } else {
       seti(i);
       setX2('#C4C4C4');
     }
@@ -217,10 +217,10 @@ export default function Personal({ name, bitsId }, props) {
       {/*<Navbar/>*/}
       {enables === true ? (
         <SendMessagePopup enabled={enables} />
-     ) : (
+      ) : (
         console.log('pls click icon')
-       )}
-             {/*<Navbar/>*/}
+      )}
+      {/*<Navbar/>*/}
 
       <div className="set1">
         <div>

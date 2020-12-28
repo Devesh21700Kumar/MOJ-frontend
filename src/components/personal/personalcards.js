@@ -84,64 +84,70 @@ const useStyles = makeStyles((theme) => ({
 export default function PersonalCards({ text, index }) {
   const classes = useStyles();
   const { get } = useContext(Data);
- // const pos=useContext(Data3);
+  // const pos=useContext(Data3);
   const i = useContext(Data1);
   //const vat=useContext(Data4);
-    // setvat(true);
-    const [pos, setpos] = useState(0);
-    const [vat, setvat]= useState(false);
-    console.log(pos);
+  // setvat(true);
+  const [pos, setpos] = useState(0);
+  const [vat, setvat] = useState(false);
+  console.log(pos);
   return (
     <Fragment>
-     <ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />       
-      {(Array.isArray(get) && get.length !== 0 )?
+      <ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
+      {Array.isArray(get) && get.length !== 0 ? (
         get
-        .slice(i, i + 15 <= get.length ? i + 15 : get.length)
-        .map((text, index) => (
-          <Grid container direction={'column'}>
-            <Container
-              value={index}
-              className={classes.margi}
-              id="cross"
-              raised={true}
-            >
-               
-              <Grid  onClick={()=>{setvat(true); setpos((i / 15) * 15 + index + 1)}} container direction={'row'} className={classes.krait}>
-                <Grid item xs className={classes.Gin}>
-                  <p className={classes.date}>
-                    {`${(i / 15) * 15 + index + 1}.  `}
-                    {screen.width >= 591
-                      ?
-                       text.body.slice(0, 15)
-                      : text.body.slice(0, 10)
-                    }
-                  </p>
-                </Grid>
+          .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+          .map((text, index) => (
+            <Grid container direction={'column'}>
+              <Container
+                value={index}
+                className={classes.margi}
+                id="cross"
+                raised={true}
+              >
                 <Grid
-                  item
-                  xs
-                  alignContent="flex-end"
-                  className={classes.Gi}
-                ></Grid>
-                <Grid item xs lg={2} className={classes.Gin1}>
-                  <Typography variant="h6" edge="start">
-                    <b key="index">
-                      <p className={classes.date}>
-                        {screen.width >= 591
-                          ? screen.width >= 680
-                            ? text.date.toString().slice(0, 22)
-                            : text.date.toString().slice(0, 19)
-                          : text.date.toString().slice(0, 9)
-                        }
-                      </p>
-                    </b>
-                  </Typography>
+                  onClick={() => {
+                    setvat(true);
+                    setpos((i / 15) * 15 + index + 1);
+                  }}
+                  container
+                  direction={'row'}
+                  className={classes.krait}
+                >
+                  <Grid item xs className={classes.Gin}>
+                    <p className={classes.date}>
+                      {`${(i / 15) * 15 + index + 1}.  `}
+                      {screen.width >= 591
+                        ? text.body.slice(0, 15)
+                        : text.body.slice(0, 10)}
+                    </p>
+                  </Grid>
+                  <Grid
+                    item
+                    xs
+                    alignContent="flex-end"
+                    className={classes.Gi}
+                  ></Grid>
+                  <Grid item xs lg={2} className={classes.Gin1}>
+                    <Typography variant="h6" edge="start">
+                      <b key="index">
+                        <p className={classes.date}>
+                          {screen.width >= 591
+                            ? screen.width >= 680
+                              ? text.date.toString().slice(0, 22)
+                              : text.date.toString().slice(0, 19)
+                            : text.date.toString().slice(0, 9)}
+                        </p>
+                      </b>
+                    </Typography>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Container>
-          </Grid>
-        ))
-      :<h1 color='#EF4646'>No Messages to Display</h1>}
+              </Container>
+            </Grid>
+          ))
+      ) : (
+        <h1 color="#EF4646">No Messages to Display</h1>
+      )}
     </Fragment>
   );
 }
