@@ -7,6 +7,8 @@ import './personal.css';
 import Typography from '@material-ui/core/Typography';
 import { Data } from '../personal/personal';
 import { Data1 } from '../personal/personal';
+//import { Data3 } from '../personal/personal';
+//import { Data4 } from '../personal/personal';
 import Button from '@material-ui/core/Button';
 import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
@@ -82,45 +84,37 @@ const useStyles = makeStyles((theme) => ({
 export default function PersonalCards({ text, index }) {
   const classes = useStyles();
   const { get } = useContext(Data);
+ // const pos=useContext(Data3);
   const i = useContext(Data1);
-  const [vat, setvat] = useState(false);
-  const [pos, setpos] = useState(0);
-  const handle1 = (pos) => {
-    // useEffect( ()=>{
+  //const vat=useContext(Data4);
     // setvat(true);
-    // setpos(pos);
-    // }, [setvat,setpos] );
+    const [pos, setpos] = useState(0);
+    const [vat, setvat]= useState(false);
     console.log(pos);
-  };
-
   return (
     <Fragment>
-      {
-        //vat=== true ? (
-        //<ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
-        //) : (
-        // console.log('pls click icon')
-        // )}
-      }
-
-      {get
+     <ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />       
+      {(Array.isArray(get) && get.length !== 0 )?
+        get
         .slice(i, i + 15 <= get.length ? i + 15 : get.length)
         .map((text, index) => (
           <Grid container direction={'column'}>
             <Container
               value={index}
-              onClick={handle1((i / 15) * 15 + index + 1)}
               className={classes.margi}
               id="cross"
               raised={true}
             >
-              <Grid container direction={'row'} className={classes.krait}>
+               
+              <Grid  onClick={()=>{setvat(true); setpos((i / 15) * 15 + index + 1)}} container direction={'row'} className={classes.krait}>
                 <Grid item xs className={classes.Gin}>
                   <p className={classes.date}>
                     {`${(i / 15) * 15 + index + 1}.  `}
                     {screen.width >= 591
-                      ? text.body.slice(0, 15)
-                      : text.body.slice(0, 10)}
+                      ?
+                       text.body.slice(0, 15)
+                      : text.body.slice(0, 10)
+                    }
                   </p>
                 </Grid>
                 <Grid
@@ -135,9 +129,10 @@ export default function PersonalCards({ text, index }) {
                       <p className={classes.date}>
                         {screen.width >= 591
                           ? screen.width >= 680
-                            ? text.date.slice(0, 24)
-                            : text.date.slice(0, 19)
-                          : text.date.slice(0, 9)}
+                            ? text.date.toString().slice(0, 22)
+                            : text.date.toString().slice(0, 19)
+                          : text.date.toString().slice(0, 9)
+                        }
                       </p>
                     </b>
                   </Typography>
@@ -145,7 +140,8 @@ export default function PersonalCards({ text, index }) {
               </Grid>
             </Container>
           </Grid>
-        ))}
+        ))
+      :<h1 color='#EF4646'>No Messages to Display</h1>}
     </Fragment>
   );
 }

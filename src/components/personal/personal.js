@@ -14,6 +14,8 @@ import SendMessagePopup from '../letterpopup/SendMessagePopup';
 export const Data = createContext();
 import axios from 'axios';
 export const Data1 = createContext();
+//export const Data3 = createContext();
+//export const Data4 = createContext();
 import Login from '../login/login';
 
 const useStyles = makeStyles((theme) => ({
@@ -134,11 +136,16 @@ export default function Personal({ name, bitsId }, props) {
       try {
         let response = await axios.get(
           `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
-          {
-            headers: { token: `${localStorage.getItem('token')}` },
+          { method: 'GET',
+            headers: { token: `${atob(localStorage.getItem('token'))}` },
           }
         );
-        console.log(response);
+        //console.log(response.data);
+        //var r=response.data;
+        var r=response.data.data;
+        setret(response.data.data)
+        //svar r=response.data.data[0];
+        console.log(r);
       } catch (error) {
         console.error(error.message);
       }
@@ -146,7 +153,7 @@ export default function Personal({ name, bitsId }, props) {
   }
 
   fetchCoreMembers();
-
+  //console.log(ret);
   const [get, setGet] = useState(det);
 
   const [color, setColor] = useState('#FFFDE8');
@@ -178,21 +185,25 @@ export default function Personal({ name, bitsId }, props) {
       seti(0);
       setX1('#C4C4C4');
     }
-    console.log(i);
+    //console.log(i);
   };
   const hc2 = (e) => {
-    console.log(i);
+    //console.log(i);
 
     if (i + 15 <= get.length - 15) {
       seti(i + 15);
       setX1('#EF4646');
       setX2('#EF4646');
-    } else if (get.length - (i + 15) < 15) {
+    } else if (get.length - (i + 15) < 15 && get.length - (i + 15) > 0) {
       seti(i + 15);
       setX2('#C4C4C4');
     }
+    else{
+      seti(i);
+      setX2('#C4C4C4');
+    }
 
-    console.log(i);
+    //console.log(i);
   };
   const [enables, setenables] = useState(false);
   const hit = () => {
@@ -206,9 +217,11 @@ export default function Personal({ name, bitsId }, props) {
       {/*<Navbar/>*/}
       {enables === true ? (
         <SendMessagePopup enabled={enables} />
-      ) : (
+     ) : (
         console.log('pls click icon')
-      )}
+       )}
+             {/*<Navbar/>*/}
+
       <div className="set1">
         <div>
           <Box className="crux1" display="flex" bgcolor="#EF4646">
