@@ -83,7 +83,7 @@ export default function PersonalCards({ text, index }) {
     <Fragment>
       <ReadMessagePopup messagearray={{ get }} startFrom={3} enabled={vat} />
       {console.log(get)};{console.log(vat)};
-      {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
+      {get.slice(i,i+15<=get.length?i+15:get.length).map((text, index) => (
         <Grid container direction={'column'}>
           <Container
             value={index}

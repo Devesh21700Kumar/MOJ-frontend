@@ -97,13 +97,13 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(40).fill({
+    Array(60).fill({
       body: 'Lorem Ipsum is simply dummy.',
       date: ' 28th Dec 2020, 2:31 a.m.',
     })
   );
   const [ret, setret] = useState(
-    Array(40).fill({
+    Array(60).fill({
       body: 'Lorem Ipsum BTits simply dummy.',
       date: ' 28th Dec 2020, 2:31 a.m.',
     })
@@ -163,11 +163,11 @@ export default function Personal({ name, bitsId }, props) {
   const hc2 = (e) => {
     console.log(i);
 
-    if (i <= get.length - 15) {
+    if (i+15 <= get.length - 15) {
       seti(i + 15);
       setX1('#EF4646');
       setX2('#EF4646');
-    } else if (i >= 15) {
+    } else  {
       setX2('#C4C4C4');
     }
 
