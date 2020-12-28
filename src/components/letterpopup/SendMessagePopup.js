@@ -56,7 +56,6 @@ export default class SendMessagePopup extends React.Component {
                     placeholder="Who is this for?"
                   />
                 </div>
-
                 <div className="letterpopup-classes-messageBody">
                   <TextField
                     multiline
