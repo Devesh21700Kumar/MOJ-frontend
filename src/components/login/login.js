@@ -27,16 +27,24 @@ function Login() {
         email: email,
       })
       .then(function (response) {
+        const permissionLevel = JSON.parse(
+          atob(response.data.token.split('.')[1])
+        ).permissionLevel;
         localStorage.setItem('token', btoa(response.data.token));
-        var level = response.data.ok;
-        if (level == '0') {
-          history.push('/home');
-        } else if (level == '1') {
-          history.push('/core');
-        } else if (level == '2') {
-          history.push('/admin');
+        var status = response.data.ok;
+        if (status) {
+          if (permissionLevel == 0) {
+            history.push('/home');
+          } else if (permissionLevel == 1) {
+            history.push('/core');
+          } else if (permissionLevel == 2) {
+            history.push('/admin');
+          } else {
+            signOut();
+          }
         } else {
           signOut();
+          history.push('/');
         }
       })
       .catch((e) => {
