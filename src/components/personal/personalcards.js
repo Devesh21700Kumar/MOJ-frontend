@@ -1,4 +1,4 @@
-import { React, useState, Fragment, useContext } from 'react';
+import { React, useState, Fragment, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     height: '7vh',
-    boxShadow: ' 10px 10px 5px grey',
+    boxShadow: '  0 8px 6px -6px black',
   },
   Gin: {
     padding: '0 0px 0px 0px',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Gin1: {
     padding: '0 0px 0px 0px',
-    marginRight: '2rem',
+    marginRight: '0rem',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     float: 'right',
@@ -40,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Gi: {
-    flex: 2,
+    flex: 1.5,
   },
   date: {
-    margin: '.8rem 1rem 0 0',
+    margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
     fontSize: '1rem',
   },
@@ -68,6 +68,15 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '0.08vh',
     },
   },
+  '@media(max-height: 750px)': {
+    Gin: {
+      fontSize: '20px',
+      marginTop: '0.36vh',
+    },
+    Gin1: {
+      marginTop: '0.08vh',
+    },
+  },
 }));
 
 export default function PersonalCards({ text, index }) {
@@ -75,19 +84,32 @@ export default function PersonalCards({ text, index }) {
   const { get } = useContext(Data);
   const i = useContext(Data1);
   const [vat, setvat] = useState(false);
-  const [k, setk] = useState(0);
-  const handle1 = (event) => {
-    setvat(true);
+  const [pos, setpos] = useState(0);
+  const handle1 = (pos) => {
+    // useEffect( ()=>{
+    // setvat(true);
+    // setpos(pos);
+    // }, [setvat,setpos] );
+    console.log(pos);
   };
+
   return (
     <Fragment>
-      <ReadMessagePopup messageArray={{ get }} startFrom={1} enabled={vat} />
-      {console.log(get)};{console.log(vat)};
-      {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
-        <Grid container direction={'column'}>
-          <div onClick={handle1}>
+      {
+        //vat=== true ? (
+        //<ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
+        //) : (
+        // console.log('pls click icon')
+        // )}
+      }
+
+      {get
+        .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+        .map((text, index) => (
+          <Grid container direction={'column'}>
             <Container
               value={index}
+              onClick={handle1((i / 15) * 15 + index + 1)}
               className={classes.margi}
               id="cross"
               raised={true}
@@ -95,6 +117,7 @@ export default function PersonalCards({ text, index }) {
               <Grid container direction={'row'} className={classes.krait}>
                 <Grid item xs className={classes.Gin}>
                   <p className={classes.date}>
+                    {`${(i / 15) * 15 + index + 1}.  `}
                     {screen.width >= 591
                       ? text.body.slice(0, 15)
                       : text.body.slice(0, 10)}
@@ -121,9 +144,8 @@ export default function PersonalCards({ text, index }) {
                 </Grid>
               </Grid>
             </Container>
-          </div>
-        </Grid>
-      ))}
+          </Grid>
+        ))}
     </Fragment>
   );
 }
