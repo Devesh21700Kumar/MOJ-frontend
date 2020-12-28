@@ -49,11 +49,11 @@ export default class ReadMessagePopup extends React.Component {
           <div className="letterpopup-classes-cross" onClick={this.hideMe} />
           <Paper elevation={0} className="letterpopup-classes-message">
             <div className="letterpopup-classes-dateTime">
-              {this.props.messageArray[this.state.currentPosition][1]}
+              {/*this.props.messageArray[this.state.currentPosition]*/}
             </div>
             <div className="letterpopup-classes-messageBoxesWrapper">
               <div className="letterpopup-classes-messageBody">
-                {this.props.messageArray[this.state.currentPosition][0]}
+                {/*this.props.messageArray[this.state.currentPosition]*/}
               </div>
             </div>
           </Paper>

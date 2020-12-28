@@ -121,7 +121,7 @@
         margin-left:91vw; 
     }
 }
-@media only screen and (min-width: 120px) and (max-width: 619px){
+@media only screen and (min-width: 402px) and (max-width: 619px){
     .tera{
         transform: scale(2.5);
     }
@@ -152,7 +152,16 @@
         margin-left: 83vw;
     }
 }
-
+@media only screen and (min-width: 200px) and (max-width: 370px){
+    .tera{
+        transform: scale(1.8);
+    }
+}
+@media only screen and (min-width: 370px) and (max-width: 390px){
+    .tera{
+        transform: scale(2.2);
+    }
+}
 
   @media only screen and (min-width: 760px){
     .set1::-webkit-scrollbar {
@@ -236,5 +245,13 @@
 @media only screen and (max-width: 380px){
     #color1{
         margin-top: 45px;
+    }
+}  
+@media only screen and (max-width: 340px){
+    .terov1{
+        width: 100%;
+        background: #FFFDE8; 
+        margin-top: -5.2vh;
+        height:121vh;  
     }
 }  

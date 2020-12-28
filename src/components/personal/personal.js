@@ -1,4 +1,4 @@
-import { React, useState, Fragment } from 'react';
+import { React, useState, Fragment, useEffect, createContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -9,6 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import '../personal/personal.css';
 import PersonalCards from '../personal/personalcards';
+import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
+import SendMessagePopup from '../letterpopup/SendMessagePopup';
+export const Data = createContext();
+export const Data1 = createContext();
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -93,15 +97,36 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(50).fill(
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    )
+    Array(40).fill({
+      body: 'Lorem Ipsum is simply dummy.',
+      date: ' 28th Dec 2020, 2:31 a.m.',
+    })
   );
   const [ret, setret] = useState(
-    Array(50).fill(
-      "Lorem tting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    )
+    Array(40).fill({
+      body: 'Lorem Ipsum BTits simply dummy.',
+      date: ' 28th Dec 2020, 2:31 a.m.',
+    })
   );
+  /* useEffect(async () => {
+    const result = await axios(
+      'https://hn.algolia.com/api/v1/search?query=redux',
+    );
+ 
+    setData(result.data);
+  }); /*
+
+
+
+  /* useEffect(async () => {
+    try{ 
+      let response = await axios.get(`/api/level0/receivedmessages`)
+      setret(response);
+    } catch(error) {
+       console.error(error.message);
+    }
+  },[]); */
+
   const [get, setGet] = useState(det);
 
   const [color, setColor] = useState('#FFFDE8');
@@ -138,20 +163,31 @@ export default function Personal({ name, bitsId }, props) {
   const hc2 = (e) => {
     console.log(i);
 
-    if (i < 15) {
+    if (i <= get.length - 15) {
       seti(i + 15);
       setX1('#EF4646');
       setX2('#EF4646');
     } else if (i >= 15) {
-      seti(30);
       setX2('#C4C4C4');
     }
 
     console.log(i);
   };
+  const [enables, setenables] = useState(false);
+  const hit = () => {
+    setenables(true);
+  };
+  //<ReadMessagePopup/>
+  //<SendMessagePopup/>
+
   return (
     <Fragment>
       {/*<Navbar/>*/}
+      {enables === true ? (
+        <SendMessagePopup enabled={enables} />
+      ) : (
+        console.log('pls click icon')
+      )}
       <div className="set1">
         <div>
           <Box className="crux1" display="flex" bgcolor="#EF4646">
@@ -204,15 +240,23 @@ export default function Personal({ name, bitsId }, props) {
               <Typography className={classes.hot1}>Messages</Typography>
             </Box>
           </Box>
-          {/*Container to show all messages   */}
           <div className="terov1">
-            {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
-              <PersonalCards text={text} index={index} />
-            ))}
+            <Data.Provider value={{ get }}>
+              <Data1.Provider value={i}>
+                <PersonalCards />
+              </Data1.Provider>
+            </Data.Provider>
           </div>
         </div>
+        {/*Container to show all messages   
+          <div className="terov1">
+            {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
+              <PersonalCards text={text}  index={index} />
+            ))}
+          </div>
+          */}
         <div className="ter">
-          <IconButton style={{ color: '#EF4646' }}>
+          <IconButton onClick={hit} style={{ color: '#EF4646' }}>
             <AddCircleIcon className="tera" />
           </IconButton>
         </div>
@@ -249,7 +293,8 @@ export default function Personal({ name, bitsId }, props) {
                   margin: '1vw',
                 }}
               >
-                Showing {i}-{i < 26 ? i + 15 : i + 10} of {det.length}
+                Showing {i}-{i + 15 < get.length ? i + 15 : get.length} of{' '}
+                {get.length}
               </Button>
             </Grid>
             <Grid item textAlign="center">
