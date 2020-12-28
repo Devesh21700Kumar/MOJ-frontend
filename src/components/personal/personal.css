@@ -255,3 +255,13 @@
         height:121vh;  
     }
 }  
+
+@media only screen and (min-height: 568px) and (max-height: 650px){
+    .terov1{
+        width: 100%;
+        background: #FFFDE8; 
+        margin-top: -4.2vh;
+        height:121vh;  
+    }
+}  
+
