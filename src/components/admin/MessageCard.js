@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActions, Collapse, IconButton } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '20px',
     backgroundColor: '#FFD94D',
     borderRadius: '15px',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
   },
   bitsId: {
     fontSize: '18px',
@@ -87,7 +91,11 @@ const MessageCard = ({ bitsId, message, date, index, n }) => {
   };
 
   return (
-    <Card className={classes.msgCard} raised={true}>
+    <Card
+      className={classes.msgCard}
+      raised={true}
+      onClick={() => setChecked(!checked)}
+    >
       <div className={classes.bitsId}>To: {bitsId}</div>
       <div>
         <div className={classes.cardContent}>
@@ -116,10 +124,7 @@ const MessageCard = ({ bitsId, message, date, index, n }) => {
             {date.toDateString()}, {date.toLocaleTimeString()}
           </p>
           <CardActions disableSpacing>
-            <IconButton
-              classes={{ root: classes.iconButton }}
-              onClick={() => setChecked(!checked)}
-            >
+            <IconButton classes={{ root: classes.iconButton }}>
               <CheckCircleOutlineIcon
                 style={{
                   color: index < changeToInt(n) || checked ? red : grey,

@@ -81,46 +81,47 @@ export default function PersonalCards({ text, index }) {
   };
   return (
     <Fragment>
-      <ReadMessagePopup messagearray={{ get }} startFrom={3} enabled={vat} />
+      <ReadMessagePopup messageArray={{ get }} startFrom={1} enabled={vat} />
       {console.log(get)};{console.log(vat)};
       {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
         <Grid container direction={'column'}>
-          <Container
-            value={index}
-            onClick={handle1}
-            className={classes.margi}
-            id="cross"
-            raised={true}
-          >
-            <Grid container direction={'row'} className={classes.krait}>
-              <Grid item xs className={classes.Gin}>
-                <p className={classes.date}>
-                  {screen.width >= 591
-                    ? text.body.slice(0, 15)
-                    : text.body.slice(0, 10)}
-                </p>
+          <div onClick={handle1}>
+            <Container
+              value={index}
+              className={classes.margi}
+              id="cross"
+              raised={true}
+            >
+              <Grid container direction={'row'} className={classes.krait}>
+                <Grid item xs className={classes.Gin}>
+                  <p className={classes.date}>
+                    {screen.width >= 591
+                      ? text.body.slice(0, 15)
+                      : text.body.slice(0, 10)}
+                  </p>
+                </Grid>
+                <Grid
+                  item
+                  xs
+                  alignContent="flex-end"
+                  className={classes.Gi}
+                ></Grid>
+                <Grid item xs lg={2} className={classes.Gin1}>
+                  <Typography variant="h6" edge="start">
+                    <b key="index">
+                      <p className={classes.date}>
+                        {screen.width >= 591
+                          ? screen.width >= 680
+                            ? text.date.slice(0, 24)
+                            : text.date.slice(0, 19)
+                          : text.date.slice(0, 9)}
+                      </p>
+                    </b>
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid
-                item
-                xs
-                alignContent="flex-end"
-                className={classes.Gi}
-              ></Grid>
-              <Grid item xs lg={2} className={classes.Gin1}>
-                <Typography variant="h6" edge="start">
-                  <b key="index">
-                    <p className={classes.date}>
-                      {screen.width >= 591
-                        ? screen.width >= 680
-                          ? text.date.slice(0, 24)
-                          : text.date.slice(0, 19)
-                        : text.date.slice(0, 9)}
-                    </p>
-                  </b>
-                </Typography>
-              </Grid>
-            </Grid>
-          </Container>
+            </Container>
+          </div>
         </Grid>
       ))}
     </Fragment>
