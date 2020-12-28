@@ -30,7 +30,7 @@ function Login() {
         const permissionLevel = JSON.parse(
           atob(response.data.token.split('.')[1])
         ).permissionLevel;
-        localStorage.setItem('token', btoa(response.data.token));
+        localStorage.setItem('token', response.data.token);
         var status = response.data.ok;
         if (status) {
           if (permissionLevel == 0) {
