@@ -8,7 +8,11 @@ import {
   makeStyles,
   Snackbar,
 } from '@material-ui/core';
-import { CancelRounded, CheckCircleRounded } from '@material-ui/icons';
+import {
+  CancelRounded,
+  CheckCircleRounded,
+  FlagRounded,
+} from '@material-ui/icons';
 import ShowMoreText from 'react-show-more-text';
 
 const useStyles = makeStyles((theme) => ({
@@ -88,6 +92,7 @@ const MessageCard = ({ rollNumber, message, date }) => {
   const handleStatus = () => {
     if (status === 'accepted') return '7px solid #00CF53';
     else if (status === 'rejected') return '7px solid #EF4646';
+    else if (status === 'flagged') return '7px solid #4B4B4B';
     else return;
   };
   const viewMore = () => {
@@ -118,6 +123,20 @@ const MessageCard = ({ rollNumber, message, date }) => {
           }}
         />
       </IconButton>
+      <IconButton
+        classes={{ root: classes.iconButton }}
+        onClick={() => handleClick('flagged')}
+      >
+        <FlagRounded
+          style={{
+            backgroundColor: '#4B4B4B',
+            color: 'white',
+            fontSize: '30px',
+            borderRadius: '20px',
+            padding: '5px',
+          }}
+        />
+      </IconButton>
     </React.Fragment>
   );
   // complete component
@@ -131,7 +150,7 @@ const MessageCard = ({ rollNumber, message, date }) => {
         title={'To: ' + rollNumber}
         className={classes.cardHeaderRollNum}
         titleTypographyProps={{
-          variant: 'paragraph',
+          variant: 'inherit',
         }}
       />
       <div>
