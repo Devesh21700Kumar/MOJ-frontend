@@ -1,4 +1,4 @@
-import { React, useState, Fragment, useContext } from 'react';
+import { React, useState, Fragment, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
@@ -75,26 +75,34 @@ export default function PersonalCards({ text, index }) {
   const { get } = useContext(Data);
   const i = useContext(Data1);
   const [vat, setvat] = useState(false);
-  const [k, setk] = useState(0);
-  const handle1 = (event) => {
-    setvat(true);
+  const [pos,setpos]=useState(0)
+  const handle1 = (pos) => {
+   // useEffect( ()=>{
+     // setvat(true);
+     // setpos(pos);
+  // }, [setvat,setpos] );
   };
+  
   return (
     <Fragment>
-      {console.log(get)};{console.log(vat)};
-      {get
-        .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+            {//vat=== true ? (
+             //<ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
+      //) : (
+       // console.log('pls click icon')
+     // )}
+            }
+
+      {get.slice(i, i + 15 <= get.length ? i + 15 : get.length)
         .map((text, index) => (
           <Grid container direction={'column'}>
             <Container
               value={index}
-              onClick={handle1}
+              onClick={handle1(((i)/15)*15+index+1)}
               className={classes.margi}
               id="cross"
               raised={true}
             >
               <Grid container direction={'row'} className={classes.krait}>
-              <ReadMessagePopup messagearray={{ get }} startFrom={((i)/15)*15+index+1} enabled={vat} />
                 <Grid item xs className={classes.Gin}>
                   <p className={classes.date}>
                     {`${((i)/15)*15+index+1}.  `}{screen.width >= 591
