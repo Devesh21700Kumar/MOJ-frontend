@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import {
   Button,
@@ -11,9 +11,11 @@ import {
   List,
   ListItem,
   Typography,
+  Snackbar,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
+import URL from '../util/url';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -215,7 +217,15 @@ const searchResultsData = [
   },
 ];
 
-const SingleListItem = ({ index, name, bitsId }) => {
+const SingleListItem = ({
+  index,
+  name,
+  bitsId,
+  email,
+  messageId,
+  setSnackBarOpen,
+  setOpen,
+}) => {
   const classes = useStyles();
 
   const [c1, setc1] = useState('inline');
@@ -224,11 +234,36 @@ const SingleListItem = ({ index, name, bitsId }) => {
   const click1 = () => {
     setc2('inline');
     setc1('none');
+
+    console.log(messageId);
+
+    async function assignMessages() {
+      if (c1 === 'inline' && c2 === 'none') {
+        const response = await (
+          await fetch(`${URL}/api/level2/assignMessage`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ email, messageId }),
+          })
+        ).json();
+
+        if (response.ok) {
+          setSnackBarOpen(true);
+          setOpen(false);
+        }
+      }
+    }
+
+    assignMessages();
   };
 
   const click2 = () => {
     setc1('inline');
     setc2('none');
+    console.log('clicked click2');
   };
 
   return (
@@ -281,7 +316,13 @@ const SingleListItem = ({ index, name, bitsId }) => {
   );
 };
 
-const NamesList = ({ searchedData, data }) => {
+const NamesList = ({
+  searchedData,
+  data,
+  messageId,
+  setSnackBarOpen,
+  setOpen,
+}) => {
   const classes = useStyles();
 
   return (
@@ -293,7 +334,11 @@ const NamesList = ({ searchedData, data }) => {
               index={index}
               name={result.name}
               bitsId={result.bitsId}
+              email={result.email}
               key={index}
+              messageId={messageId}
+              setSnackBarOpen={setSnackBarOpen}
+              setOpen={setOpen}
             />
           );
         })
@@ -304,6 +349,11 @@ const NamesList = ({ searchedData, data }) => {
               index={index}
               name={result.name}
               bitsId={result.bitsId}
+              email={result.email}
+              key={index}
+              messageId={messageId}
+              setSnackBarOpen={setSnackBarOpen}
+              setOpen={setOpen}
             />
           );
         })
@@ -314,16 +364,28 @@ const NamesList = ({ searchedData, data }) => {
   );
 };
 
-const AssignCoreMembersPopup = () => {
+const AssignCoreMembersPopup = ({ messageId }) => {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
-  const [searchResults, setSearchResults] = React.useState([]);
-  const [searchTerm, setSearchTerm] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
 
-  React.useEffect(() => {
-    setSearchResults(searchResultsData);
-  }, [searchResults, setSearchResults]);
+  useEffect(() => {
+    async function fetchCoreMembers() {
+      const { members } = await (
+        await fetch(`${URL}/api/level2/coreMembers`, {
+          method: 'GET',
+          headers: { token: `${localStorage.getItem('token')}` },
+        })
+      ).json();
+
+      setSearchResults(members);
+    }
+
+    fetchCoreMembers();
+  }, [setSearchResults]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -331,6 +393,14 @@ const AssignCoreMembersPopup = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackBarOpen(false);
   };
 
   const filterSearch = () => {
@@ -386,12 +456,40 @@ const AssignCoreMembersPopup = () => {
                 />
               </Paper>
               <Paper className={classes.searchResults}>
-                <NamesList searchedData={filterSearch()} data={searchResults} />
+                <NamesList
+                  searchedData={filterSearch()}
+                  data={searchResults}
+                  messageId={messageId}
+                  setSnackBarOpen={setSnackBarOpen}
+                  setOpen={setOpen}
+                />
               </Paper>
             </div>
           </div>
         </Fade>
       </Modal>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        open={snackBarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        message={`Assigned messages successfully!`}
+        action={
+          <React.Fragment>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
     </>
   );
 };

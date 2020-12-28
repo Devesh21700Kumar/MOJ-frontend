@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '20px',
     backgroundColor: '#FFD94D',
     borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
     '&:hover': {
       cursor: 'pointer',
       transform: 'translateY(-2px)',
@@ -74,7 +75,16 @@ const useStyles = makeStyles((theme) => ({
 const red = '#EF4646';
 const grey = '#9D9D9D';
 
-const MessageCard = ({ bitsId, message, date, index, n }) => {
+const MessageCard = ({
+  bitsId,
+  body,
+  date,
+  index,
+  _id,
+  messageId,
+  setMessageId,
+  n,
+}) => {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -90,24 +100,29 @@ const MessageCard = ({ bitsId, message, date, index, n }) => {
     return num;
   };
 
+  const handleClick = () => {
+    if (!checked) {
+      setMessageId((messageId) => [...messageId, _id]);
+    }
+    setChecked(!checked);
+  };
+
   return (
-    <Card
-      className={classes.msgCard}
-      raised={true}
-      onClick={() => setChecked(!checked)}
-    >
-      <div className={classes.bitsId}>To: {bitsId}</div>
+    <Card className={classes.msgCard} raised={true} onClick={handleClick}>
+      <div className={classes.bitsId}>
+        {index + 1}. To: {bitsId}
+      </div>
       <div>
         <div className={classes.cardContent}>
           <div>
-            {!showPrimaryText ? `${message.slice(0, 200)}...` : ''}
+            {!showPrimaryText ? `${body}...` : ''}
             <Collapse
               in={expanded}
               timeout="auto"
               unmountOnExit
               component="div"
             >
-              {message}
+              {body}
             </Collapse>
           </div>
           <span
@@ -121,7 +136,8 @@ const MessageCard = ({ bitsId, message, date, index, n }) => {
         </div>
         <div className={classes.cardFooter}>
           <p className={classes.date}>
-            {date.toDateString()}, {date.toLocaleTimeString()}
+            {new Date(date).toDateString()},{' '}
+            {new Date(date).toLocaleTimeString()}
           </p>
           <CardActions disableSpacing>
             <IconButton classes={{ root: classes.iconButton }}>
