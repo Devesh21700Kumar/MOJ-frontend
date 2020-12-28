@@ -81,7 +81,6 @@ export default function PersonalCards({ text, index }) {
   };
   return (
     <Fragment>
-      <ReadMessagePopup messagearray={{ get }} startFrom={3} enabled={vat} />
       {console.log(get)};{console.log(vat)};
       {get
         .slice(i, i + 15 <= get.length ? i + 15 : get.length)
@@ -95,6 +94,7 @@ export default function PersonalCards({ text, index }) {
               raised={true}
             >
               <Grid container direction={'row'} className={classes.krait}>
+              <ReadMessagePopup messagearray={{ get }} startFrom={((i)/15)*15+index+1} enabled={vat} />
                 <Grid item xs className={classes.Gin}>
                   <p className={classes.date}>
                     {`${((i)/15)*15+index+1}.  `}{screen.width >= 591
