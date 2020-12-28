@@ -205,22 +205,23 @@ export default function Personal({ name, bitsId }, props) {
 
     //console.log(i);
   };
-  const [enables, setenables] = useState(false);
+  const [enables, setEnables] = useState(false);
   const hit = () => {
-    setenables(true);
+    setEnables(!enables);
   };
   //<ReadMessagePopup/>
   //<SendMessagePopup/>
 
   return (
     <Fragment>
-      {/*<Navbar/>*/}
-      {enables === true ? (
-        <SendMessagePopup enabled={enables} />
-      ) : (
-        console.log('pls click icon')
-      )}
-      {/*<Navbar/>*/}
+      <SendMessagePopup
+        enabled={enables}
+        submitFunction={(a, b) => {
+          console.log(a, b);
+        }}
+        toggleVisibility={hit}
+        key={'SendMessagePopupKey-' + enables}
+      />
 
       <div className="set1">
         <div>

@@ -5,14 +5,24 @@ import Button from '@material-ui/core/Button';
 
 import './LetterPopup.css';
 
-export default function SendMessagePopup(props) {
+export default function SendMessagePopup({
+  enabled,
+  submitFunction,
+  toggleVisibility,
+}) {
   const [messageText, setMessageText] = useState('');
   const [sendToAddress, setSendToAddress] = useState('');
-  const [enabled, setEnabled] = useState(props.enabled);
+  const [componentEnabled, setComponentEnabled] = useState(enabled);
+
+  React.useEffect(() => {
+    return () => {
+      setComponentEnabled(enabled);
+    };
+  }, [enabled]);
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    props.submitFunction(messageText, sendToAddress);
+    submitFunction(messageText, sendToAddress);
   };
   let calculateTextAreaRows = () => {
     let rows = 0;
@@ -22,10 +32,10 @@ export default function SendMessagePopup(props) {
     return rows;
   };
   let hideMe = () => {
-    setEnabled(false);
+    toggleVisibility();
   };
 
-  if (enabled)
+  if (componentEnabled)
     return (
       <div className="letterpopup-classes-root">
         <div className="letterpopup-classes-cross" onClick={hideMe} />
