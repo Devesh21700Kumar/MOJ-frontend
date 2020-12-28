@@ -163,12 +163,12 @@ export default function Personal({ name, bitsId }, props) {
   const hc2 = (e) => {
     console.log(i);
 
-    if (i+15 <= get.length - 15) {
+    if (i + 15 <= get.length - 15) {
       seti(i + 15);
       setX1('#EF4646');
       setX2('#EF4646');
-    } else if(get.length-(i+15)<15)  {
-      seti(i+15)
+    } else if (get.length - (i + 15) < 15) {
+      seti(i + 15);
       setX2('#C4C4C4');
     }
 
