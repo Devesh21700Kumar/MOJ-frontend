@@ -102,10 +102,21 @@ export default function PersonalCards({ text, index }) {
   };
   const [pos, setpos] = useState(0);
   const [vat, setvat] = useState(false);
+  const toggleReadMessages = (b) => {
+    setvat(b);
+  };
   console.log(pos);
   return (
     <Fragment>
-      <ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
+      <ReadMessagePopup
+        messageArray={get.map((obj) => {
+          return [obj.body, dateFormatter(obj.date)];
+        })}
+        startFrom={pos}
+        enabled={vat}
+        toggleVisibility={toggleReadMessages}
+        key={'ReadMessagePopupKey-' + vat}
+      />
       {Array.isArray(get) && get.length !== 0 ? (
         get
           .slice(i, i + 15 <= get.length ? i + 15 : get.length)
@@ -119,7 +130,7 @@ export default function PersonalCards({ text, index }) {
               >
                 <Grid
                   onClick={() => {
-                    setvat(true);
+                    toggleReadMessages(true);
                     setpos((i / 15) * 15 + index + 1);
                   }}
                   container
@@ -144,11 +155,12 @@ export default function PersonalCards({ text, index }) {
                     <Typography variant="h6" edge="start">
                       <b key="index">
                         <p className={classes.date}>
-                          {screen.width >= 591
-                            ? screen.width >= 680
-                              ? dateFormatter(text.date).slice(0, 22)
-                              : dateFormatter(text.date).slice(0, 19)
-                            : dateFormatter(text.date).slice(0, 9)
+                          {
+                            screen.width >= 591
+                              ? screen.width >= 680
+                                ? dateFormatter(text.date).slice(0, 22)
+                                : dateFormatter(text.date).slice(0, 19)
+                              : dateFormatter(text.date).slice(0, 9)
                             //dateFormatter(text.date).slice(0,21)
                           }
                         </p>
@@ -160,7 +172,7 @@ export default function PersonalCards({ text, index }) {
             </Grid>
           ))
       ) : (
-        <h1 className="baxter" >No Messages to Display !</h1>
+        <h1 className="baxter">No Messages to Display !</h1>
       )}
     </Fragment>
   );

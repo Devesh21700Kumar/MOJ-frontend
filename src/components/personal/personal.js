@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
     },
     hot1: {
       fontSize: '28px',
-      marginLeft:'-6.4vw',
+      marginLeft: '-6.4vw',
     },
   },
   '@media(max-width: 520px)': {
@@ -95,24 +95,24 @@ const useStyles = makeStyles((theme) => ({
     },
     hot1: {
       fontSize: '16px',
-      marginLeft:'-6.4vw',
+      marginLeft: '-6.4vw',
     },
   },
   '@media(min-width: 920px)': {
     hot: {
       marginLeft: '5.2vw',
     },
-    hot1:{
-      marginLeft:'-6.4vw',
-    }
+    hot1: {
+      marginLeft: '-6.4vw',
+    },
   },
   '@media(min-width: 1200px)': {
     hot: {
       marginLeft: '6.2vw',
     },
-    hot1:{
-      marginLeft:'-6.9vw',
-    }
+    hot1: {
+      marginLeft: '-6.9vw',
+    },
   },
 }));
 
@@ -120,15 +120,22 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(10).fill({
-      body: 'Lorem Ipsum is simply dummy.',
-      date: ' 28th Dec 2020, 2:31 a.m.',
-    })
+    Array(10)
+      .fill({
+        body: 'Lorem Ipsum is simply dummy.',
+        date: ' 28th Dec 2020, 2:31 a.m.',
+      })
+      .map((obj) => {
+        return {
+          body: obj.body + Math.random(),
+          date: obj.data + Math.random(),
+        };
+      })
   );
   const [ret, setret] = useState(
     Array(0).fill({
       body: 'Lorem Ipsum BTits simply dummy.',
-      date: ' 28th Dec 2020, 2:31 a.m.',
+      date: '28th Dec 2020, 2:31 a.m.',
     })
   );
   /* useEffect(async () => {
@@ -140,49 +147,49 @@ export default function Personal({ name, bitsId }, props) {
   }); */
 
   //function fetchsentmessages() {
-    useEffect(async () => {
-      try {
-        let response = await axios.get(
-          `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
-          {
-            method: 'GET',
-            headers: { token: `${atob(localStorage.getItem('token'))}` },
-          }
-        );
-        //console.log(response.data);
-        //var r=response.data;
-        var t = response.data.data;
-        setdet(response.data.data);
-        //svar r=response.data.data[0];
-        console.log(t);
-      } catch (error) {
-        console.error(error.message);
-      }
-    }, []);
+  useEffect(async () => {
+    try {
+      let response = await axios.get(
+        `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
+        {
+          method: 'GET',
+          headers: { token: `${atob(localStorage.getItem('token'))}` },
+        }
+      );
+      //console.log(response.data);
+      //var r=response.data;
+      var t = response.data.data;
+      setdet(response.data.data);
+      //svar r=response.data.data[0];
+      console.log(t);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
   //}
 
   //fetchsentmessages();
 
   //function fetchreceivedmessages() {
-    useEffect(async () => {
-      try {
-        let response = await axios.get(
-          `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
-          {
-            method: 'GET',
-            headers: { token: `${atob(localStorage.getItem('token'))}` },
-          }
-        );
-        //console.log(response.data);
-        //var r=response.data;
-        var r = response.data.data;
-        setret(response.data.data);
-        //svar r=response.data.data[0];
-        console.log(r);
-      } catch (error) {
-        console.error(error.message);
-      }
-    }, []);
+  useEffect(async () => {
+    try {
+      let response = await axios.get(
+        `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
+        {
+          method: 'GET',
+          headers: { token: `${atob(localStorage.getItem('token'))}` },
+        }
+      );
+      //console.log(response.data);
+      //var r=response.data;
+      var r = response.data.data;
+      setret(response.data.data);
+      //svar r=response.data.data[0];
+      console.log(r);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
   //}
 
   //fetchreceivedmessages();
@@ -237,9 +244,9 @@ export default function Personal({ name, bitsId }, props) {
 
     //console.log(i);
   };
-  const [enables, setenables] = useState(false);
+  const [enables, setEnables] = useState(false);
   const hit = () => {
-    setenables(true);
+    setEnables(!enables);
   };
   //<ReadMessagePopup/>
   //<SendMessagePopup/>
@@ -247,12 +254,14 @@ export default function Personal({ name, bitsId }, props) {
   return (
     <Fragment>
       {/*<Navbar/>*/}
-      {enables === true ? (
-        <SendMessagePopup enabled={enables} />
-      ) : (
-        console.log('pls click icon')
-      )}
-      {/*<Navbar/>*/}
+      <SendMessagePopup
+        enabled={enables}
+        submitFunction={(a, b) => {
+          console.log(a, b);
+        }}
+        toggleVisibility={hit}
+        key={'SendMessagePopupKey-' + enables}
+      />
 
       <div className="set1">
         <div>
@@ -369,7 +378,7 @@ export default function Personal({ name, bitsId }, props) {
                 >
                   <path
                     d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
-                    fill={get.length>15?x2:x1}
+                    fill={get.length > 15 ? x2 : x1}
                   />
                 </svg>
               </Grid>
