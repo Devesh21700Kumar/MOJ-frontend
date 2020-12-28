@@ -112,15 +112,22 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(52).fill({
-      body: 'Lorem Ipsum is simply dummy.',
-      date: ' 28th Dec 2020, 2:31 a.m.',
-    })
+    Array(52)
+      .fill({
+        body: 'Lorem Ipsum BTits simply dummy.',
+        date: '28th Dec 2020, 2:31 a.m.',
+      })
+      .map((obj) => {
+        return {
+          body: obj.body + Math.random(),
+          date: obj.data + Math.random(),
+        };
+      })
   );
   const [ret, setret] = useState(
     Array(55).fill({
       body: 'Lorem Ipsum BTits simply dummy.',
-      date: ' 28th Dec 2020, 2:31 a.m.',
+      date: '28th Dec 2020, 2:31 a.m.',
     })
   );
   /* useEffect(async () => {
@@ -205,22 +212,23 @@ export default function Personal({ name, bitsId }, props) {
 
     //console.log(i);
   };
-  const [enables, setenables] = useState(false);
+  const [enables, setEnables] = useState(false);
   const hit = () => {
-    setenables(true);
+    setEnables(!enables);
   };
   //<ReadMessagePopup/>
   //<SendMessagePopup/>
 
   return (
     <Fragment>
-      {/*<Navbar/>*/}
-      {enables === true ? (
-        <SendMessagePopup enabled={enables} />
-      ) : (
-        console.log('pls click icon')
-      )}
-      {/*<Navbar/>*/}
+      <SendMessagePopup
+        enabled={enables}
+        submitFunction={(a, b) => {
+          console.log(a, b);
+        }}
+        toggleVisibility={hit}
+        key={'SendMessagePopupKey-' + enables}
+      />
 
       <div className="set1">
         <div>

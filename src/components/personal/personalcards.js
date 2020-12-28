@@ -90,10 +90,21 @@ export default function PersonalCards({ text, index }) {
   // setvat(true);
   const [pos, setpos] = useState(0);
   const [vat, setvat] = useState(false);
+  const toggleReadMessages = (b) => {
+    setvat(b);
+  };
   console.log(pos);
   return (
     <Fragment>
-      <ReadMessagePopup messageArray={{ get }} startFrom={pos} enabled={vat} />
+      <ReadMessagePopup
+        messageArray={get.map((obj) => {
+          return [obj.body, obj.date];
+        })}
+        startFrom={pos}
+        enabled={vat}
+        toggleVisibility={toggleReadMessages}
+        key={'ReadMessagePopupKey-' + vat}
+      />
       {Array.isArray(get) && get.length !== 0 ? (
         get
           .slice(i, i + 15 <= get.length ? i + 15 : get.length)
@@ -107,7 +118,7 @@ export default function PersonalCards({ text, index }) {
               >
                 <Grid
                   onClick={() => {
-                    setvat(true);
+                    toggleReadMessages(true);
                     setpos((i / 15) * 15 + index + 1);
                   }}
                   container
