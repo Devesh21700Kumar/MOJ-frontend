@@ -153,7 +153,7 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
         {
           method: 'GET',
-          headers: { token: `${atob(localStorage.getItem('token'))}` },
+          headers: { token: `${localStorage.getItem('token')}` },
         }
       );
       //console.log(response.data);
@@ -179,7 +179,7 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
         {
           method: 'GET',
-          headers: { token: `${atob(localStorage.getItem('token'))}` },
+          headers: { token: `${localStorage.getItem('token')}` },
         }
       );
       //console.log(response.data);

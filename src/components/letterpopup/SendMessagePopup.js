@@ -34,7 +34,7 @@ export default function SendMessagePopup({
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              token: `${atob(localStorage.getItem('token'))}`,
+              token: `${localStorage.getItem('token')}`,
             },
             body: JSON.stringify({ messageBody, receiverEmail, date }),
           })
