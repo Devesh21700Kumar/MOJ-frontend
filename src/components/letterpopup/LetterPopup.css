@@ -1,6 +1,7 @@
 /* General Code */
 /* SendMessagePopup uses the following style rules */
 /* ReadMessagePopup require modifications done at the end */
+
 .letterpopup-classes-root {
   position: fixed;
   top: 0;
@@ -19,17 +20,22 @@
   right: 0;
   margin-top: 3rem;
   margin-right: 3rem;
+
   width: 3rem;
   height: 3rem;
+
   background-image: url('./../../imageassets/closecross.svg');
   background-size: contain;
+
   cursor: pointer;
 }
+
 .letterpopup-classes-message {
   position: absolute;
   left: 50vw;
   top: 50vh;
   transform: translate(-50%, -50%);
+
   background-image: url('./../../imageassets/letter-coloured.svg');
   background-color: rgba(0, 0, 0, 0) !important;
   background-repeat: no-repeat;
@@ -37,14 +43,18 @@
   background-position: center;
   width: 50vw;
   height: 50vw;
+
   max-width: 70vh;
   max-height: 70vh;
 }
+
 .letterpopup-classes-form {
   position: initial;
+
   height: 100%;
   height: -webkit-fill-available;
 }
+
 .letterpopup-classes-messageBoxesWrapper {
   position: relative;
   height: 40%;
@@ -52,39 +62,49 @@
   left: 20%;
   width: 60%;
 }
+
 .letterpopup-classes-sendTo {
   position: relative;
 }
+
 .letterpopup-classes-sendToTextField {
   width: 100%;
 }
+
 .letterpopup-classes-messageBody {
   position: relative;
   margin-top: 3rem;
 }
+
 .letterpopup-classes-messageTextField {
   width: 100%;
 }
+
 .letterpopup-classes-sendButton {
   position: absolute;
   left: 50%;
   top: 80%;
+
   transform: translateX(-50%);
 }
+
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
   .letterpopup-classes-messageBody {
     margin-top: 1rem;
   }
+
   .letterpopup-classes-messageBoxesWrapper {
     top: 25%;
   }
+
   .letterpopup-classes-message {
     background-image: url('./../../imageassets/letter-coloured-mobile.svg');
     background-position: center;
     width: 70vw;
     height: 90vw;
   }
+
   .letterpopup-classes-sendButton {
     position: absolute;
     left: 50%;
@@ -92,9 +112,11 @@
     transform: translateX(-50%) scale(0.75);
   }
 }
+
 /*/////////////////////////////////////////////*/
 /* Specific Modifications for ReadMessagePopup */
 /*/////////////////////////////////////////////*/
+
 .letterpopup-classes-message
   > div.letterpopup-classes-messageBoxesWrapper
   > div.letterpopup-classes-messageBody {
@@ -118,12 +140,15 @@
   height: 50%;
   width: 3rem;
   margin-left: 3rem;
+
   transform: translateY(-50%);
+
   background-image: url('./../../imageassets/arrow-left.svg');
   background-color: rgba(0, 0, 0, 0) !important;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+
   cursor: pointer;
 }
 .letterpopup-classes-right-arrow {
@@ -133,14 +158,18 @@
   height: 50%;
   width: 3rem;
   margin-right: 3rem;
+
   transform: translateY(-50%);
+
   background-image: url('./../../imageassets/arrow-right.svg');
   background-color: rgba(0, 0, 0, 0) !important;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+
   cursor: pointer;
 }
+
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
   .letterpopup-classes-message
@@ -148,6 +177,7 @@
     > div.letterpopup-classes-messageBody {
     margin-top: 0;
   }
+
   .letterpopup-classes-dateTime {
     right: 12vw;
     top: 11vw;
@@ -155,9 +185,11 @@
     font-size: 2.5vw;
   }
 }
+
 /*/////////////////////////////////////////////*/
 /* Specific Modifications for ReadMessagePopup */
 /*/////////////////////////////////////////////*/
+
 .letterpopup-classes-root.letterpopup-classes-disabled {
   visibility: hidden;
 }

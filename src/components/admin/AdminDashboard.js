@@ -14,7 +14,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Redirect } from 'react-router-dom';
 
 import MessageCard from './MessageCard';
-import message_data from './messageData';
 import AssignCoreMembersPopup from '../popups/AssignCoreMembersPopup';
 import URL from '../util/url';
 
@@ -312,7 +311,8 @@ const ShowMessages = ({
   return (
     <>
       {redFlag === red
-        ? redFlaggedMsgs.map((message, index) => (
+        ? redFlaggedMsgs.length > 0 &&
+          redFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
@@ -326,7 +326,8 @@ const ShowMessages = ({
             />
           ))
         : greenFlag === green
-        ? greenFlaggedMsgs.map((message, index) => (
+        ? greenFlaggedMsgs.length > 0 &&
+          greenFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
@@ -340,7 +341,8 @@ const ShowMessages = ({
             />
           ))
         : yellowFlag === yellow
-        ? yellowFlaggedMsgs.map((message, index) => (
+        ? yellowFlaggedMsgs.length > 0 &&
+          yellowFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
@@ -353,7 +355,8 @@ const ShowMessages = ({
               n={setNumber()}
             />
           ))
-        : msgs.map((message, index) => (
+        : msgs.length !== 0 &&
+          msgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
@@ -387,6 +390,7 @@ const AdminDashboard = () => {
   const [messageId, setMessageId] = useState([]);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [type, setType] = useState('');
+  const [i, seti] = useState(0);
 
   const { permissionLevel } = JSON.parse(
     atob(localStorage.getItem('token').split('.')[1])
@@ -418,7 +422,6 @@ const AdminDashboard = () => {
       setRedFlaggedMsgs(denied);
       setYellowFlaggedMsgs(yellowflagged);
       setGreenFlaggedMsgs(approved);
-      console.log(data);
     }
 
     fetchMessages();
@@ -472,7 +475,6 @@ const AdminDashboard = () => {
     else if (checked50) return '50';
     else return value;
   };
-  const [i, seti] = useState(0);
 
   const hc1 = () => {
     if (i >= 50) {
@@ -485,7 +487,6 @@ const AdminDashboard = () => {
         setChecked50(!checked50);
       }
     }
-    //console.log(i);
   };
 
   const hc2 = () => {
@@ -496,12 +497,10 @@ const AdminDashboard = () => {
       if (checked50 === true) {
         setChecked50(!checked50);
       }
-      //console.log(i);
     }
   };
 
   useEffect(() => {
-    setMsgs(message_data);
     setRedFlaggedMsgs(
       redFlaggedMsgs.slice(
         redFlaggedMsgs.length >= i ? i : i - 50,
@@ -520,16 +519,6 @@ const AdminDashboard = () => {
         greenFlaggedMsgs.length >= i ? i + 50 : i
       )
     );
-    /*setRedFlaggedMsgs((redFlaggedMsgs) =>
-    redFlaggedMsgs.slice(i,i+50)
-  );
-  setYellowFlaggedMsgs((yellowFlaggedMsgs) =>
-    yellowFlaggedMsgs.slice(i,i+50)
-  );
-  setGreenFlaggedMsgs((greenFlaggedMsgs) =>
-    greenFlaggedMsgs.slice(i,i+50)
-  );*/
-    //},[i,setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
   }, [i]);
   const Paginator = () => {
     return (
@@ -589,7 +578,6 @@ const AdminDashboard = () => {
   };
 
   const handleApproval = () => {
-    console.log(messageId);
     async function postApprovedMessages() {
       const response = await (
         await fetch(`${URL}/api/level2/approveMessage`, {

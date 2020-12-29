@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
 } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 // import Navbar from '../navbar/navbar';
 import {
   ChevronRightRounded,
@@ -148,6 +149,11 @@ const Dashboard = (messages, props) => {
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const { permissionLevel } = JSON.parse(
+    atob(localStorage.getItem('token').split('.')[1])
+  );
+
+  if (permissionLevel !== 1) return <Redirect to="/home" />;
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
