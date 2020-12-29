@@ -235,8 +235,6 @@ const SingleListItem = ({
     setc2('inline');
     setc1('none');
 
-    console.log(messageId);
-
     async function assignMessages() {
       if (c1 === 'inline' && c2 === 'none') {
         const response = await (
@@ -263,7 +261,6 @@ const SingleListItem = ({
   const click2 = () => {
     setc1('inline');
     setc2('none');
-    console.log('clicked click2');
   };
 
   return (
