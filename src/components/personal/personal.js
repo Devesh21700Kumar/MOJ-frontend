@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     },
     hot1: {
       fontSize: '28px',
+      marginLeft: '-6.4vw',
     },
   },
   '@media(max-width: 520px)': {
@@ -94,16 +95,23 @@ const useStyles = makeStyles((theme) => ({
     },
     hot1: {
       fontSize: '16px',
+      marginLeft: '-6.4vw',
     },
   },
   '@media(min-width: 920px)': {
     hot: {
       marginLeft: '5.2vw',
     },
+    hot1: {
+      marginLeft: '-6.4vw',
+    },
   },
   '@media(min-width: 1200px)': {
     hot: {
       marginLeft: '6.2vw',
+    },
+    hot1: {
+      marginLeft: '-6.9vw',
     },
   },
 }));
@@ -112,10 +120,10 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(52)
+    Array(10)
       .fill({
-        body: 'Lorem Ipsum BTits simply dummy.',
-        date: '28th Dec 2020, 2:31 a.m.',
+        body: 'Lorem Ipsum is simply dummy.',
+        date: ' 28th Dec 2020, 2:31 a.m.',
       })
       .map((obj) => {
         return {
@@ -125,7 +133,7 @@ export default function Personal({ name, bitsId }, props) {
       })
   );
   const [ret, setret] = useState(
-    Array(55).fill({
+    Array(0).fill({
       body: 'Lorem Ipsum BTits simply dummy.',
       date: '28th Dec 2020, 2:31 a.m.',
     })
@@ -138,29 +146,53 @@ export default function Personal({ name, bitsId }, props) {
     setData(result.data);
   }); */
 
-  function fetchCoreMembers() {
-    useEffect(async () => {
-      try {
-        let response = await axios.get(
-          `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
-          {
-            method: 'GET',
-            headers: { token: `${atob(localStorage.getItem('token'))}` },
-          }
-        );
-        //console.log(response.data);
-        //var r=response.data;
-        var r = response.data.data;
-        setret(response.data.data);
-        //svar r=response.data.data[0];
-        console.log(r);
-      } catch (error) {
-        console.error(error.message);
-      }
-    }, []);
-  }
+  //function fetchsentmessages() {
+  useEffect(async () => {
+    try {
+      let response = await axios.get(
+        `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
+        {
+          method: 'GET',
+          headers: { token: `${atob(localStorage.getItem('token'))}` },
+        }
+      );
+      //console.log(response.data);
+      //var r=response.data;
+      var t = response.data.data;
+      setret(response.data.data);
+      //svar r=response.data.data[0];
+      console.log(t);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
+  //}
 
-  fetchCoreMembers();
+  //fetchsentmessages();
+
+  //function fetchreceivedmessages() {
+  useEffect(async () => {
+    try {
+      let response = await axios.get(
+        `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
+        {
+          method: 'GET',
+          headers: { token: `${atob(localStorage.getItem('token'))}` },
+        }
+      );
+      //console.log(response.data);
+      //var r=response.data;
+      var r = response.data.data;
+      setdet(response.data.data);
+      //svar r=response.data.data[0];
+      console.log(r);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
+  //}
+
+  //fetchreceivedmessages();
   //console.log(ret);
   const [get, setGet] = useState(det);
 
@@ -221,6 +253,7 @@ export default function Personal({ name, bitsId }, props) {
 
   return (
     <Fragment>
+      {/*<Navbar/>*/}
       <SendMessagePopup
         enabled={enables}
         submitFunction={(a, b) => {
@@ -345,7 +378,7 @@ export default function Personal({ name, bitsId }, props) {
                 >
                   <path
                     d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
-                    fill={x2}
+                    fill={get.length > 15 ? x2 : x1}
                   />
                 </svg>
               </Grid>
