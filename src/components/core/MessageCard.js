@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardActions,
@@ -13,7 +13,7 @@ import {
   CheckCircleRounded,
   FlagRounded,
 } from '@material-ui/icons';
-import ShowMoreText from 'react-show-more-text';
+import classNames from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
@@ -71,9 +71,42 @@ const useStyles = makeStyles((theme) => ({
     border: 'none',
     outline: 'none',
   },
+  acceptedMessage: {
+    borderRight: '7px solid #00CF53',
+  },
+  rejectedMessage: {
+    borderRight: '7px solid #EF4646',
+  },
+  flaggedMessage: {
+    borderRight: '7px solid #4B4B4B',
+  },
 }));
 
-const MessageCard = ({ rollNumber, message, date }) => {
+const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
+
+const postApproval = async (id, approval, flag) => {
+  try {
+    const response = await (
+      await fetch(`${API_URL}/approval`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          token: `${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          messageId: id,
+          approved: approval,
+          flag: flag,
+        }),
+      })
+    ).json();
+    console.log(response);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+const MessageCard = ({ rollNumber, message, date, id }) => {
   const classes = useStyles();
   // State variables
   const [open, setOpen] = useState(false);
@@ -89,12 +122,16 @@ const MessageCard = ({ rollNumber, message, date }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleStatus = () => {
-    if (status === 'accepted') return '7px solid #00CF53';
-    else if (status === 'rejected') return '7px solid #EF4646';
-    else if (status === 'flagged') return '7px solid #4B4B4B';
-    else return;
-  };
+  useEffect(() => {
+    if (status === 'accepted') {
+      postApproval(id, true, false);
+    } else if (status === 'rejected') {
+      postApproval(id, false, false);
+    } else if (status === 'flagged') {
+      postApproval(id, false, true);
+    }
+    return () => {};
+  }, [status]);
   const viewMore = () => {
     setFullView(!fullView);
   };
@@ -139,13 +176,19 @@ const MessageCard = ({ rollNumber, message, date }) => {
       </IconButton>
     </React.Fragment>
   );
+  var cardClass = classNames(
+    classes.msgCard,
+    status === 'accepted'
+      ? classes.acceptedMessage
+      : status === 'rejected'
+      ? classes.rejectedMessage
+      : status === 'flagged'
+      ? classes.flaggedMessage
+      : null
+  );
   // complete component
   return (
-    <Card
-      className={classes.msgCard}
-      style={{ borderRight: handleStatus() }}
-      raised={true}
-    >
+    <Card className={cardClass} raised={true}>
       <CardHeader
         title={'To: ' + rollNumber}
         className={classes.cardHeaderRollNum}
