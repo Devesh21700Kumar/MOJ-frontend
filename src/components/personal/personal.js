@@ -17,6 +17,7 @@ export const Data1 = createContext();
 //export const Data3 = createContext();
 //export const Data4 = createContext();
 import Login from '../login/login';
+import Navbar from '../navbar/navbar';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -160,10 +161,10 @@ export default function Personal({ name, bitsId }, props) {
       //var r=response.data;
       var t = response.data.data;
       setret(response.data.data);
-      setGet(t);
+      //setGet(t);
       //svar r=response.data.data[0];
-      console.log(t );
-      console.log('this');
+      //console.log(t );
+      //console.log('this');
     } catch (error) {
       console.error(error.message);
     }
@@ -188,7 +189,7 @@ export default function Personal({ name, bitsId }, props) {
       setdet(response.data.data);
       setGet(r);
       //svar r=response.data.data[0];
-      console.log(r);
+      //console.log(r);
     } catch (error) {
       console.error(error.message);
     }
@@ -255,17 +256,15 @@ export default function Personal({ name, bitsId }, props) {
   //<SendMessagePopup/>
 
   return (
-    <Fragment>
-      {/*<Navbar/>*/}
+    <div className="nav">
       <SendMessagePopup
         enabled={enables}
-        submitFunction={(a, b) => {
-          console.log(a, b);
-        }}
         toggleVisibility={hit}
         key={'SendMessagePopupKey-' + enables}
       />
-
+      <div>
+        <Navbar />
+      </div>
       <div className="set1">
         <div>
           <Box className="crux1" display="flex" bgcolor="#EF4646">
@@ -395,6 +394,6 @@ export default function Personal({ name, bitsId }, props) {
         </div>
         <div className="hexad1"></div>
       </div>
-    </Fragment>
+    </div>
   );
 }

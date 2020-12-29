@@ -84,6 +84,8 @@ const useStyles = makeStyles((theme) => ({
 export default function PersonalCards({ text, index }) {
   const classes = useStyles();
   const { get } = useContext(Data);
+  const kit = get.reverse();
+  console.log(kit);
   // const pos=useContext(Data3);
   const i = useContext(Data1);
   //const vat=useContext(Data4);
@@ -118,7 +120,7 @@ export default function PersonalCards({ text, index }) {
         key={'ReadMessagePopupKey-' + vat}
       />
       {Array.isArray(get) && get.length !== 0 ? (
-        get
+        kit
           .slice(i, i + 15 <= get.length ? i + 15 : get.length)
           .map((text, index) => (
             <Grid container direction={'column'}>

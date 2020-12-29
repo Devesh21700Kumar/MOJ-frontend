@@ -309,3 +309,8 @@
         margin-left: 41vw;
     }
 }
+.nav{
+    overflow-x: hidden;
+    height:150%;
+    overflow-y: hidden;
+}

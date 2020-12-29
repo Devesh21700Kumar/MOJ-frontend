@@ -55,19 +55,19 @@ export default function ReadMessagePopup({
   else return <></>;
 }
 
-function SendMessage({ messageArray, currentPosition, next, prev, hideMe }){
-const dateFormatter = (timestamp) => {
-  var date = new Date(timestamp);
-  var day = date.getDate() + 'th ';
-  var month = date.toLocaleString('default', { month: 'short' }) + ' ';
-  var year = date.getFullYear() + ', ';
-  var time = date.toLocaleString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  });
-  return day + month + year + time;
-};
+function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
+  const dateFormatter = (timestamp) => {
+    var date = new Date(timestamp);
+    var day = date.getDate() + 'th ';
+    var month = date.toLocaleString('default', { month: 'short' }) + ' ';
+    var year = date.getFullYear() + ', ';
+    var time = date.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return day + month + year + time;
+  };
   return (
     <div className="letterpopup-classes-root">
       <div className="letterpopup-classes-cross" onClick={hideMe} />
