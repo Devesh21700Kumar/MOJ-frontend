@@ -110,7 +110,7 @@ export default function PersonalCards({ text, index }) {
     <Fragment>
       <ReadMessagePopup
         messageArray={get.map((obj) => {
-          return [obj.body, dateFormatter(obj.date)];
+          return [obj.body, obj.date];
         })}
         startFrom={pos}
         enabled={vat}
@@ -131,7 +131,7 @@ export default function PersonalCards({ text, index }) {
                 <Grid
                   onClick={() => {
                     toggleReadMessages(true);
-                    setpos((i / 15) * 15 + index + 1);
+                    setpos((i / 15) * 15 + index );
                   }}
                   container
                   direction={'row'}

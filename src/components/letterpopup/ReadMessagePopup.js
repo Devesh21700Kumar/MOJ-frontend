@@ -62,7 +62,7 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
       <Paper elevation={0} className="letterpopup-classes-message">
         <div className="letterpopup-classes-dateTime">
           {
-            //messageArray[currentPosition][1]
+            messageArray[currentPosition][1]
           }
         </div>
         <div className="letterpopup-classes-messageBoxesWrapper">
