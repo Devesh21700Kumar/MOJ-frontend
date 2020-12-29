@@ -131,7 +131,7 @@ export default function PersonalCards({ text, index }) {
                 <Grid
                   onClick={() => {
                     toggleReadMessages(true);
-                    setpos((i / 15) * 15 + index );
+                    setpos((i / 15) * 15 + index);
                   }}
                   container
                   direction={'row'}
