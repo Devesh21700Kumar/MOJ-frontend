@@ -17,6 +17,7 @@ export const Data1 = createContext();
 //export const Data3 = createContext();
 //export const Data4 = createContext();
 import Login from '../login/login';
+import Navbar from '../navbar/navbar';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -120,7 +121,7 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(10)
+    Array(0)
       .fill({
         body: 'Lorem Ipsum is simply dummy.',
         date: ' 28th Dec 2020, 2:31 a.m.',
@@ -153,15 +154,17 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
         {
           method: 'GET',
-          headers: { token: `${atob(localStorage.getItem('token'))}` },
+          headers: { token: `${localStorage.getItem('token')}` },
         }
       );
       //console.log(response.data);
       //var r=response.data;
       var t = response.data.data;
       setret(response.data.data);
+      //setGet(t);
       //svar r=response.data.data[0];
-      console.log(t);
+      //console.log(t );
+      //console.log('this');
     } catch (error) {
       console.error(error.message);
     }
@@ -177,15 +180,16 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
         {
           method: 'GET',
-          headers: { token: `${atob(localStorage.getItem('token'))}` },
+          headers: { token: `${localStorage.getItem('token')}` },
         }
       );
       //console.log(response.data);
       //var r=response.data;
       var r = response.data.data;
       setdet(response.data.data);
+      setGet(r);
       //svar r=response.data.data[0];
-      console.log(r);
+      //console.log(r);
     } catch (error) {
       console.error(error.message);
     }
@@ -252,17 +256,15 @@ export default function Personal({ name, bitsId }, props) {
   //<SendMessagePopup/>
 
   return (
-    <Fragment>
-      {/*<Navbar/>*/}
+    <div className="nav">
       <SendMessagePopup
         enabled={enables}
-        submitFunction={(a, b) => {
-          console.log(a, b);
-        }}
         toggleVisibility={hit}
         key={'SendMessagePopupKey-' + enables}
       />
-
+      <div>
+        <Navbar />
+      </div>
       <div className="set1">
         <div>
           <Box className="crux1" display="flex" bgcolor="#EF4646">
@@ -392,6 +394,6 @@ export default function Personal({ name, bitsId }, props) {
         </div>
         <div className="hexad1"></div>
       </div>
-    </Fragment>
+    </div>
   );
 }
