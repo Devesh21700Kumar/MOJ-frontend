@@ -120,7 +120,7 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(10)
+    Array(0)
       .fill({
         body: 'Lorem Ipsum is simply dummy.',
         date: ' 28th Dec 2020, 2:31 a.m.',
@@ -160,8 +160,10 @@ export default function Personal({ name, bitsId }, props) {
       //var r=response.data;
       var t = response.data.data;
       setret(response.data.data);
+      setGet(t);
       //svar r=response.data.data[0];
-      console.log(t);
+      console.log(t );
+      console.log('this');
     } catch (error) {
       console.error(error.message);
     }
@@ -184,6 +186,7 @@ export default function Personal({ name, bitsId }, props) {
       //var r=response.data;
       var r = response.data.data;
       setdet(response.data.data);
+      setGet(r);
       //svar r=response.data.data[0];
       console.log(r);
     } catch (error) {
