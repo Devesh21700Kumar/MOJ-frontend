@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
 } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 // import Navbar from '../navbar/navbar';
 import {
   ChevronRightRounded,
