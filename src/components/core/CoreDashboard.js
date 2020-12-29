@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#FFFDE8',
     overflow: 'hidden',
     borderBottom: '25px solid #EF4646',
+    minHeight: '100vh',
   },
   pageBar: {
     backgroundColor: '#EF4646',
@@ -128,8 +129,6 @@ const useStyles = makeStyles((theme) => ({
 
 const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
 
-const postApproval = () => {};
-
 const Dashboard = (messages, props) => {
   const classes = useStyles();
   const [msgs, setMsgs] = useState({});
@@ -188,7 +187,8 @@ const Dashboard = (messages, props) => {
       let response = await axios.get(API_URL + '/getassignment', {
         method: 'GET',
         headers: {
-          token: `${atob(localStorage.getItem('token'))}`,
+          // eslint-disable-next-line prettier/prettier
+          'token': `${localStorage.getItem('token')}`,
         },
       });
       console.log(response.data.data);
@@ -197,7 +197,7 @@ const Dashboard = (messages, props) => {
     } catch (error) {
       console.error(error.message);
     }
-  }, []);
+  }, [setMsgs]);
   return (
     <div className={classes.root}>
       <div className={classes.pageBar}>
@@ -210,23 +210,24 @@ const Dashboard = (messages, props) => {
         {Array.isArray(msgs) && msgs.length !== 0 ? (
           msgs
             .slice(msgPage * 10, msgPage * 10 + 9)
-            .map((message) => (
+            .map((message, index) => (
               <MessageCard
                 rollNumber={message.receiverId}
                 message={message.body}
                 date={dateFormatter(message.date)}
-                key={msgs.indexOf(message)}
+                id={message._id}
+                key={index}
               />
             ))
         ) : (
-          <h1> Sorry no messages found.</h1>
+          <h2>No messages left to review</h2>
         )}
       </Container>
       <div className={classes.backToTop}>
         <div className={classes.backToTopZoom}>
           <p>Back to top</p>
-          <IconButton className={classes.backToTopIcon}>
-            <KeyboardArrowUpRounded onClick={scrollTop} />
+          <IconButton onClick={scrollTop} className={classes.backToTopIcon}>
+            <KeyboardArrowUpRounded />
           </IconButton>
         </div>
         <Paginator className={classes.bottomPaginator} />
