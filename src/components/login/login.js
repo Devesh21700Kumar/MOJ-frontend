@@ -33,7 +33,7 @@ function Login() {
         localStorage.setItem('token', response.data.token);
         var status = response.data.ok;
         if (status) {
-            return <Redirect to="/home" />;
+          return <Redirect to="/home" />;
         } else {
           signOut();
           return <Redirect to="/" />;
