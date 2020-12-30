@@ -1,22 +1,20 @@
-.icons{
+.icons {
+  transform: scale(1.7);
+  padding-right: 11px;
+  margin-right: 12px;
+  margin-top: -3vh;
+}
+
+#plus {
+  margin-right: -7vw;
+}
+.ps {
+  margin-right: -7vw;
+}
+
+@media only screen and (min-width: 570px) and (max-width: 1100px) {
+  .icons {
     transform: scale(1.7);
-    padding-right: 11px;
-    margin-right: 12px;
-    margin-top: -3vh;
-}
-
-.setflex{
-}
-#plus{
-    margin-right: -7vw;
-}
-.ps{
-    margin-right: -7vw;
-}
-
-@media only screen and (min-width:570px) and (max-width:1100px){
-    .icons{
-        transform: scale(1.7);
-        padding-right: 5px;
-    }
+    padding-right: 5px;
+  }
 }
