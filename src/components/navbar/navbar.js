@@ -7,7 +7,6 @@ import Notifs from './notifs';
 import Profile from './profile';
 import Search from './search';
 import '../navbar/navbar.css';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
@@ -81,11 +80,10 @@ export default function Navbar({ navHeading, name, bitsId }) {
             className={classes.top}
             id="free2"
           >
-            <Search />
+            <Notifs />
             <Profile name={name} bitsId={bitsId} />
 
             {/* <IconButton className={classes.menuButton}><NotificationsActiveIcon  /></IconButton> */}
-            
           </Grid>
         </Grid>
       </div>

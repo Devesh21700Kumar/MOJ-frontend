@@ -193,3 +193,21 @@
 .letterpopup-classes-root.letterpopup-classes-disabled {
   visibility: hidden;
 }
+
+@media only screen and (min-width: 330px) and (max-width: 400px) {
+  .search {
+    margin-left: -4vw;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 329.9px) {
+  .search {
+    margin-left: -9vw;
+  }
+}
+
+@media only screen and (min-width: 260px) and (max-width: 299.9px) {
+  .search {
+    margin-left: -9vw;
+  }
+}
