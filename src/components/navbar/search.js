@@ -44,7 +44,7 @@ export default function Search() {
     <div className="wrapper">
       <div className="setflex">
         <div>
-          <IconButton className={classes.menuButton}>
+          <IconButton className={classes.menuButton} onClick={() => setk(!k)}>
             <SearchIcon className="icons" />
           </IconButton>
         </div>

@@ -13,6 +13,7 @@ import { ChevronLeftRounded, ChevronRightRounded } from '@material-ui/icons';
 import CloseIcon from '@material-ui/icons/Close';
 import { Redirect } from 'react-router-dom';
 
+import Navbar from '../navbar/navbar';
 import MessageCard from './MessageCard';
 import AssignCoreMembersPopup from '../popups/AssignCoreMembersPopup';
 import URL from '../util/url';
@@ -392,7 +393,7 @@ const AdminDashboard = () => {
   const [type, setType] = useState('');
   const [i, seti] = useState(0);
 
-  const { permissionLevel } = JSON.parse(
+  const { permissionLevel, name, bitsId } = JSON.parse(
     atob(localStorage.getItem('token').split('.')[1])
   );
 
@@ -603,6 +604,7 @@ const AdminDashboard = () => {
     <div className={classes.root}>
       <CssBaseline />
       {/* Tabs */}
+      <Navbar navHeading="Admin Dashboard" name={name} bitsId={bitsId} />
       <div className={classes.tabs} id="top">
         <Box
           className={classes.tab}
