@@ -144,6 +144,10 @@ export default function SendMessagePopup({
   };
   console.log(data[0].name);
 
+  function checkspace(dat) {
+    return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
+  }
+
   if (componentEnabled)
     return (
       <div className="letterpopup-classes-root">
@@ -194,39 +198,46 @@ export default function SendMessagePopup({
                 }}
               >
                 <List component="nav" className aria-label="notifications">
-                  {(receiverEmail.toLowerCase().length!=0)?data
-                    .filter(
-                      (dataset) =>
-                        dataset.name
-                          .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) || dataset.name
-                          .toLowerCase()===receiverEmail.toLowerCase()||
-                        dataset.email.includes(receiverEmail.toLowerCase())
-                    )
-                    .slice(0, 4)
-                    .map((person, index) => (
-                      <ListItem button>
-                        <ListItemText
-                          className
-                          primary={person.name}
-                          secondary={person.email}
-                          onClick={() => {
-                            setSendToAddress(person.email);
-                            handleClose2();
-                          }}
-                        />
-                      </ListItem>
-                    )):
+                  {receiverEmail.toLowerCase() != null ? (
+                    data
+                      .filter(
+                        (dataset) =>
+                          dataset.name
+                            .toLowerCase()
+                            .includes(receiverEmail.toLowerCase()) ||
+                          dataset.name.toLowerCase() ===
+                            receiverEmail.toLowerCase() ||
+                          checkspace(dataset.name)
+                            .toLowerCase()
+                            .includes(receiverEmail.toLowerCase()) ||
+                          dataset.email.includes(receiverEmail.toLowerCase())
+                      )
+                      .slice(0, 4)
+                      .map((person, index) => (
+                        <ListItem button>
+                          <ListItemText
+                            className
+                            primary={person.name}
+                            secondary={person.email}
+                            onClick={() => {
+                              setSendToAddress(person.email);
+                              handleClose2();
+                            }}
+                          />
+                        </ListItem>
+                      ))
+                  ) : (
                     <ListItem button>
-                    <ListItemText
-                      className
-                      primary="enter value to search"
-                      onClick={() => {
-                        setSendToAddress(person.email);
-                        handleClose2();
-                      }}
-                    />
-                  </ListItem>}
+                      <ListItemText
+                        className
+                        primary="enter value to search"
+                        onClick={() => {
+                          setSendToAddress(person.email);
+                          handleClose2();
+                        }}
+                      />
+                    </ListItem>
+                  )}
                 </List>
               </Popover>
               <div className="letterpopup-classes-messageBody">
