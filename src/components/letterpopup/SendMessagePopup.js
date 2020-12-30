@@ -15,6 +15,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import DOMPurify from 'dompurify';
+import sanitizeHtml from "sanitize-html"; 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -177,7 +179,7 @@ export default function SendMessagePopup({
                     className="letterpopup-classes-sendToTextField"
                     value={receiverEmail}
                     onChange={(e) => {
-                      setSendToAddress(e.target.value);
+                      setSendToAddress(DOMPurify.sanitize(e.target.value));
                     }}
                     placeholder="Who is this for?"
                   />
@@ -220,7 +222,7 @@ export default function SendMessagePopup({
                             primary={person.name}
                             secondary={person.email}
                             onClick={() => {
-                              setSendToAddress(person.email);
+                              setSendToAddress(DOMPurify.sanitize(person.email));
                               handleClose2();
                             }}
                           />
@@ -232,7 +234,7 @@ export default function SendMessagePopup({
                         className
                         primary="enter value to search"
                         onClick={() => {
-                          setSendToAddress(person.email);
+                          setSendToAddress(DOMPurify.sanitize(person.email));
                           handleClose2();
                         }}
                       />
@@ -246,7 +248,7 @@ export default function SendMessagePopup({
                   className="letterpopup-classes-messageTextField"
                   value={messageBody}
                   onChange={(e) => {
-                    setMessageText(e.target.value);
+                    setMessageText(DOMPurify.sanitize(e.target.value));
                   }}
                   variant="outlined"
                   rows={calculateTextAreaRows()}
