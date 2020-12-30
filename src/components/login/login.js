@@ -34,11 +34,14 @@ function Login() {
         var status = response.data.ok;
         if (status) {
           if (permissionLevel == 0) {
-            history.push('/home');
+            //history.push('/home');
+            return <Redirect to="/home" />
           } else if (permissionLevel == 1) {
-            history.push('/core');
+            //Redirect('/core');
+            return <Redirect to="/core" />
           } else if (permissionLevel == 2) {
-            history.push('/admin');
+            //Redirect('/admin');
+            return <Redirect to="/admin" />
           } else {
             signOut();
           }

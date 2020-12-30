@@ -266,7 +266,6 @@ export default function Personal({ name, bitsId }, props) {
       />
       <div>
         <Navbar
-          navHeading=" Admin DashBoard"
           name={userdata.name}
           bitsId={userdata.bitsId}
         />

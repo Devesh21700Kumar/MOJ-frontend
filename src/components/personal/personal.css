@@ -182,13 +182,11 @@
   @media only screen and (min-width: 760px){
     .set1::-webkit-scrollbar {
         width: 10px;
-        border-radius: 30px;
       }
       
       /* Track */
       .set1::-webkit-scrollbar-track {
         background: #f1f1f1;
-        border-radius: 30px;
       }
       
       /* Handle */
@@ -209,7 +207,6 @@
       /* Track */
       .set1::-webkit-scrollbar-track {
         background: #f1f1f1;
-        border-radius: 10px;
       }
       
       /* Handle */
@@ -230,7 +227,6 @@
       /* Track */
       .set1::-webkit-scrollbar-track {
         background: #f1f1f1;
-        border-radius: 10px;
       }
       
       /* Handle */
