@@ -84,10 +84,14 @@ const useStyles = makeStyles((theme) => ({
 export default function PersonalCards({ text, index }) {
   const classes = useStyles();
   const { get } = useContext(Data);
+  //console.log(get);
+  const kit = get.reverse();
+  //console.log(kit);
   // const pos=useContext(Data3);
   const i = useContext(Data1);
   //const vat=useContext(Data4);
   // setvat(true);
+  console.log(kit);
   const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
     var day = date.getDate() + 'th ';
@@ -109,7 +113,7 @@ export default function PersonalCards({ text, index }) {
   return (
     <Fragment>
       <ReadMessagePopup
-        messageArray={get.map((obj) => {
+        messageArray={kit.map((obj) => {
           return [obj.body, obj.date];
         })}
         startFrom={pos}
@@ -117,9 +121,9 @@ export default function PersonalCards({ text, index }) {
         toggleVisibility={toggleReadMessages}
         key={'ReadMessagePopupKey-' + vat}
       />
-      {Array.isArray(get) && get.length !== 0 ? (
-        get
-          .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+      {Array.isArray(kit) && kit.length !== 0 ? (
+        kit
+          .slice(i, i + 15 <= kit.length ? i + 15 : kit.length)
           .map((text, index) => (
             <Grid container direction={'column'}>
               <Container

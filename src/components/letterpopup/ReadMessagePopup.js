@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Paper from '@material-ui/core/Paper';
-
+import data from '../util/finaldata';
 import './LetterPopup.css';
 
 // message array structure:
@@ -18,7 +18,7 @@ export default function ReadMessagePopup({
 }) {
   const [currentPosition, setCurrentPosition] = useState(startFrom);
   const [componentEnabled, setComponentEnabled] = useState(enabled);
-
+  console.log(data[0]);
   React.useEffect(() => {
     return () => {
       setComponentEnabled(enabled);
@@ -56,12 +56,24 @@ export default function ReadMessagePopup({
 }
 
 function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
+  const dateFormatter = (timestamp) => {
+    var date = new Date(timestamp);
+    var day = date.getDate() + 'th ';
+    var month = date.toLocaleString('default', { month: 'short' }) + ' ';
+    var year = date.getFullYear() + ', ';
+    var time = date.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return day + month + year + time;
+  };
   return (
     <div className="letterpopup-classes-root">
       <div className="letterpopup-classes-cross" onClick={hideMe} />
       <Paper elevation={0} className="letterpopup-classes-message">
         <div className="letterpopup-classes-dateTime">
-          {messageArray[currentPosition][1]}
+          {dateFormatter(messageArray[currentPosition][1])}
         </div>
         <div className="letterpopup-classes-messageBoxesWrapper">
           <div className="letterpopup-classes-messageBody">
