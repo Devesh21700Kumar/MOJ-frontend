@@ -81,10 +81,11 @@ export default function Navbar({ navHeading, name, bitsId }) {
             className={classes.top}
             id="free2"
           >
+            <Search />
             <Profile name={name} bitsId={bitsId} />
 
             {/* <IconButton className={classes.menuButton}><NotificationsActiveIcon  /></IconButton> */}
-            <Search />
+            
           </Grid>
         </Grid>
       </div>

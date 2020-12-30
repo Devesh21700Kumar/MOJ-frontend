@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Paper from '@material-ui/core/Paper';
-
+import data from '../util/finaldata';
 import './LetterPopup.css';
 
 // message array structure:
@@ -18,7 +18,7 @@ export default function ReadMessagePopup({
 }) {
   const [currentPosition, setCurrentPosition] = useState(startFrom);
   const [componentEnabled, setComponentEnabled] = useState(enabled);
-
+  console.log(data[0]);
   React.useEffect(() => {
     return () => {
       setComponentEnabled(enabled);
