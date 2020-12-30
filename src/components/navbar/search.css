@@ -1,8 +1,21 @@
 .icons{
     transform: scale(1.4);
+    padding-right: 11px;
+    margin-right: 12px;
 }
 
 .setflex{
-    
-    justify-content: space-around;
+}
+#plus{
+    margin-right: -7vw;
+}
+.ps{
+    margin-right: -7vw;
+}
+
+@media only screen and (min-width:570px) and (max-width:1100px){
+    .icons{
+        transform: scale(1.7);
+        padding-right: 5px;
+    }
 }

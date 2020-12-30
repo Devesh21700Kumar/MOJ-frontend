@@ -7,6 +7,7 @@
     font-style: normal;
     font-weight: bold;
     font-size: 3rem;
+    margin-left: 22px;
 }
 
 .trux1{
@@ -41,12 +42,15 @@
     }
 }
 
-@media only screen and (min-width: 800px)  and (max-width: 1090px){
+@media only screen and (min-width: 800px)  and (max-width: 1200px){
   #free{
       transform: scale(0.69);
   }
   #free1{
     transform: scale(0.69);
+}
+#free2{
+    transform: scale(0.78);
 }
 }
 @media only screen and (min-width: 300px)  and (max-width: 500px){
@@ -56,12 +60,18 @@
      #free1{
         transform: scale(0.69);
     }
+    #free2{
+        transform: scale(0.69);
+    }
   }
   @media only screen and (min-width: 500px)  and (max-width: 800px){
     #free{
         transform: scale(0.79);
     }    
     #free1{
+        transform: scale(0.69);
+    }
+    #free2{
         transform: scale(0.69);
     }
   }

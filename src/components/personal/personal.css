@@ -16,8 +16,9 @@
 }
 .set1{
     position: relative;
-    height:100vh;
+    height:92.5vh;
     width:100vw;
+    margin-top: 0vh;
     overflow-x: hidden;
     overflow-y: scroll;
   }
@@ -133,13 +134,15 @@
     .ter{
         margin-left:91vw; 
     }
+    .set1{
+        height:85.5vh;
+        width:100vw;
+        margin-top: 0vh;
+      }
 }
 @media only screen and (min-width: 402px) and (max-width: 619px){
     .tera{
         transform: scale(2.5);
-    }
-    .ter{
-        
     }
 }
 @media only screen and (min-width: 709px) and (max-width: 1000px){
@@ -313,4 +316,20 @@
     overflow-x: hidden;
     height:150%;
     overflow-y: hidden;
+}
+@media only screen and (min-width: 708px) and (max-width: 1000px){
+
+    .set1{
+        height:85.5vh;
+        width:100vw;
+        margin-top: 0vh;
+      }
+}
+@media only screen and (min-height: 500px) and (max-height: 800px){
+
+    .set1{
+        height:89.5vh;
+        width:100vw;
+        margin-top: 0vh;
+      }
 }
