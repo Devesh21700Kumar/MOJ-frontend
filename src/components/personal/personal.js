@@ -265,10 +265,7 @@ export default function Personal({ name, bitsId }, props) {
         key={'SendMessagePopupKey-' + enables}
       />
       <div>
-        <Navbar
-          name={userdata.name}
-          bitsId={userdata.bitsId}
-        />
+        <Navbar name={userdata.name} bitsId={userdata.bitsId} />
       </div>
       <div className="set1">
         <div>

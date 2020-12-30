@@ -33,21 +33,10 @@ function Login() {
         localStorage.setItem('token', response.data.token);
         var status = response.data.ok;
         if (status) {
-          if (permissionLevel == 0) {
-            //history.push('/home');
-            return <Redirect to="/home" />
-          } else if (permissionLevel == 1) {
-            //Redirect('/core');
-            return <Redirect to="/core" />
-          } else if (permissionLevel == 2) {
-            //Redirect('/admin');
-            return <Redirect to="/admin" />
-          } else {
-            signOut();
-          }
+          return <Redirect to="/home" />;
         } else {
           signOut();
-          history.push('/');
+          return <Redirect to="/" />;
         }
       })
       .catch((e) => {
