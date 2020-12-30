@@ -218,7 +218,9 @@ export default function Personal({ name, bitsId }, props) {
   const [i, seti] = useState(0);
   const [x1, setX1] = useState('#C4C4C4');
   const [x2, setX2] = useState('#EF4646');
-
+  const userdata = JSON.parse(
+    window.atob(localStorage.getItem('token').split('.')[1])
+  );
   const hc1 = (e) => {
     if (i > 15) {
       seti(i - 15);
@@ -263,7 +265,11 @@ export default function Personal({ name, bitsId }, props) {
         key={'SendMessagePopupKey-' + enables}
       />
       <div>
-        <Navbar />
+        <Navbar
+          navHeading=" Admin DashBoard"
+          name={userdata.name}
+          bitsId={userdata.bitsId}
+        />
       </div>
       <div className="set1">
         <div>
@@ -310,7 +316,9 @@ export default function Personal({ name, bitsId }, props) {
         <div id="color1">
           <Box display="flex" className="cA">
             <Box width="35%" className="c1">
-              <Typography className={classes.hot}>Welcome Nipun</Typography>
+              <Typography className={classes.hot}>
+                Welcome {userdata.name.split(' ').slice(0, 1).join(' ')}
+              </Typography>
             </Box>
 
             <Box width="15%" textAlign="center" className="c2">

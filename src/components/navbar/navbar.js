@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   top: {
     marginTop: '0.77vh',
-    padding: '4px',
+    padding: '0px',
   },
   '@media(max-width: 540px)': {
     hide: {
@@ -79,12 +79,11 @@ export default function Navbar({ navHeading, name, bitsId }) {
             lg={4}
             alignContent="flex-end"
             className={classes.top}
-            id="free"
+            id="free2"
           >
             <Profile name={name} bitsId={bitsId} />
 
             {/* <IconButton className={classes.menuButton}><NotificationsActiveIcon  /></IconButton> */}
-            <Notifs />
             <Search />
           </Grid>
         </Grid>

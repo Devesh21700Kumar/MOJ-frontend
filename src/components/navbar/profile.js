@@ -39,7 +39,8 @@ const name = 'Nipun Gupta';
 export default function Profile({ name, bitsId }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  //const [name,setName] =React.useState('');
+  //const [bitsId,setId] =React.useState('');
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -87,9 +88,6 @@ export default function Profile({ name, bitsId }) {
             <ListItemText primary={name} secondary={bitsId} />
           </ListItem>
           <Divider variant="inset" component="li" />
-          <ListItem button>
-            <ListItemText className={classes.typography} primary="My profile" />
-          </ListItem>
           <Divider />
           <ListItem button>
             <ListItemText
