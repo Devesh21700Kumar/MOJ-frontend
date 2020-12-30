@@ -89,8 +89,9 @@ export default function Search() {
       <div className="setflex">
         <div>
           <IconButton onClick={handle} className={classes.menuButton}>
-           { //<SearchIcon className="icons" />
-           }
+            {
+              //<SearchIcon className="icons" />
+            }
           </IconButton>
         </div>
         <div className={k ? classes.setnone : classes.setone} id="plus">

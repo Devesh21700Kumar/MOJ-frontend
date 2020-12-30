@@ -85,7 +85,6 @@ export default function Navbar({ navHeading, name, bitsId }) {
             <Profile name={name} bitsId={bitsId} />
 
             {/* <IconButton className={classes.menuButton}><NotificationsActiveIcon  /></IconButton> */}
-            
           </Grid>
         </Grid>
       </div>
