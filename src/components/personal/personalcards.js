@@ -162,7 +162,7 @@ export default function PersonalCards({ text, index }) {
                           {
                             screen.width >= 591
                               ? screen.width >= 680
-                                ? dateFormatter(text.date).slice(0, 22)
+                                ? dateFormatter(text.date).slice(0, 23)
                                 : dateFormatter(text.date).slice(0, 19)
                               : dateFormatter(text.date).slice(0, 9)
                             //dateFormatter(text.date).slice(0,21)
