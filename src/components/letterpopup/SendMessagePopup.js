@@ -15,6 +15,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import DOMPurify from 'dompurify';
+import sanitizeHtml from 'sanitize-html';
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -177,7 +179,7 @@ export default function SendMessagePopup({
                     className="letterpopup-classes-sendToTextField"
                     value={receiverEmail}
                     onChange={(e) => {
-                      setSendToAddress(e.target.value);
+                      setSendToAddress(DOMPurify.sanitize(e.target.value));
                     }}
                     placeholder="Who is this for?"
                   />
@@ -198,41 +200,67 @@ export default function SendMessagePopup({
                 }}
               >
                 <List component="nav" className aria-label="notifications">
-                  {receiverEmail.toLowerCase() != null ? (
-                    data
-                      .filter(
-                        (dataset) =>
-                          dataset.name
-                            .toLowerCase()
-                            .includes(receiverEmail.toLowerCase()) ||
-                          dataset.name.toLowerCase() ===
-                            receiverEmail.toLowerCase() ||
-                          checkspace(dataset.name)
-                            .toLowerCase()
-                            .includes(receiverEmail.toLowerCase()) ||
-                          dataset.email.includes(receiverEmail.toLowerCase())
-                      )
-                      .slice(0, 4)
-                      .map((person, index) => (
-                        <ListItem button>
-                          <ListItemText
-                            className
-                            primary={person.name}
-                            secondary={person.email}
-                            onClick={() => {
-                              setSendToAddress(person.email);
-                              handleClose2();
-                            }}
-                          />
-                        </ListItem>
-                      ))
+                  {receiverEmail.length > 0 ? (
+                    data.filter(
+                      (dataset) =>
+                        dataset.name
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.name.toLowerCase() ===
+                          receiverEmail.toLowerCase() ||
+                        checkspace(dataset.name)
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.email.includes(receiverEmail.toLowerCase())
+                    ).length > 0 ? (
+                      data
+                        .filter(
+                          (dataset) =>
+                            dataset.name
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.name.toLowerCase() ===
+                              receiverEmail.toLowerCase() ||
+                            checkspace(dataset.name)
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.email.includes(receiverEmail.toLowerCase())
+                        )
+                        .slice(0, 4)
+                        .map((person, index) => (
+                          <ListItem button>
+                            <ListItemText
+                              className
+                              primary={person.name}
+                              secondary={person.email}
+                              onClick={() => {
+                                setSendToAddress(
+                                  DOMPurify.sanitize(person.email)
+                                );
+                                handleClose2();
+                              }}
+                            />
+                          </ListItem>
+                        ))
+                    ) : (
+                      <ListItem button>
+                        <ListItemText
+                          className
+                          primary="enter correct value to search"
+                          onClick={() => {
+                            setSendToAddress(DOMPurify.sanitize(person.email));
+                            handleClose2();
+                          }}
+                        />
+                      </ListItem>
+                    )
                   ) : (
                     <ListItem button>
                       <ListItemText
                         className
-                        primary="enter value to search"
+                        primary="enter some value to search"
                         onClick={() => {
-                          setSendToAddress(person.email);
+                          setSendToAddress(DOMPurify.sanitize(person.email));
                           handleClose2();
                         }}
                       />
@@ -246,7 +274,7 @@ export default function SendMessagePopup({
                   className="letterpopup-classes-messageTextField"
                   value={messageBody}
                   onChange={(e) => {
-                    setMessageText(e.target.value);
+                    setMessageText(DOMPurify.sanitize(e.target.value));
                   }}
                   variant="outlined"
                   rows={calculateTextAreaRows()}

@@ -50,6 +50,9 @@ export default function Notifs() {
   const handleClick1 = () => {
     return <Redirect to="/core" />;
   };
+  const handleClick2 = () => {
+    return <Redirect to="/home" />;
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -117,6 +120,18 @@ export default function Notifs() {
                 className={classes.typography}
                 primary="Redirect to Core"
                 onClick={handleClick1}
+              />
+            </ListItem>
+            <ListItem
+              button
+              className={
+                 classes.hey
+              }
+            >
+              <ListItemText
+                className={classes.typography}
+                primary="Redirect to Home"
+                onClick={handleClick2}
               />
             </ListItem>
             <Divider />
