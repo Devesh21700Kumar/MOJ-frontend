@@ -7,7 +7,7 @@ import {
   IconButton,
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
-// import Navbar from '../navbar/navbar';
+import Navbar from '../navbar/navbar';
 import {
   ChevronRightRounded,
   ChevronLeftRounded,
@@ -132,6 +132,9 @@ const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
 
 const Dashboard = (messages, props) => {
   const classes = useStyles();
+  const userInfo = JSON.parse(
+    atob(localStorage.getItem('token').split('.')[1])
+  );
   const [msgs, setMsgs] = useState({});
   const [msgPage, setMsgPage] = useState(0);
   const handleChangePage = (goToNext) => {
@@ -199,6 +202,7 @@ const Dashboard = (messages, props) => {
       });
       console.log(response.data.data);
       console.log(Date(response.data.data[0].date).substr(0, 21));
+      console.log(userInfo.name);
       setMsgs(response.data.data);
     } catch (error) {
       console.error(error.message);
@@ -206,6 +210,11 @@ const Dashboard = (messages, props) => {
   }, [setMsgs]);
   return (
     <div className={classes.root}>
+      <Navbar
+        navHeading="Core Dashboard"
+        name={userInfo.name}
+        bitsId={userInfo.bitsId}
+      />
       <div className={classes.pageBar}>
         <Box component="span" className={classes.tabBox}>
           <Button className={classes.tabButton}>Messages to review</Button>

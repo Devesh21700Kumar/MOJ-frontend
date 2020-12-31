@@ -10236,7 +10236,7 @@ const data = [
   },
   {
     email: 'f20190977@goa.bits-pilani.ac.in',
-    name: 'ROHAN  SINGHVI',
+    name: 'ROHAN SINGHVI',
     bitsId: '2019A1PS0977G',
   },
   {
@@ -10246,22 +10246,22 @@ const data = [
   },
   {
     email: 'f20190887@goa.bits-pilani.ac.in',
-    name: 'ANKIT  VERMA',
+    name: 'ANKIT VERMA',
     bitsId: '2019A1PS0887G',
   },
   {
     email: 'f20190884@goa.bits-pilani.ac.in',
-    name: 'SARTHAK  SINGH',
+    name: 'SARTHAK SINGH',
     bitsId: '2019A1PS0884G',
   },
   {
     email: 'f20190972@goa.bits-pilani.ac.in',
-    name: 'PARMARTH  RATNOO',
+    name: 'PARMARTH RATNOO',
     bitsId: '2019A1PS0972G',
   },
   {
     email: 'f20191045@goa.bits-pilani.ac.in',
-    name: 'DEVMAN  VASHISHT',
+    name: 'DEVMAN VASHISHT',
     bitsId: '2019A1PS1045G',
   },
   {
@@ -10271,12 +10271,12 @@ const data = [
   },
   {
     email: 'f20190971@goa.bits-pilani.ac.in',
-    name: 'SATVIK  SAXENA',
+    name: 'SATVIK SAXENA',
     bitsId: '2019A1PS0971G',
   },
   {
     email: 'f20190297@goa.bits-pilani.ac.in',
-    name: 'ISHAN  SHARMA',
+    name: 'ISHAN SHARMA',
     bitsId: '2019A3PS0297G',
   },
   {
@@ -10286,17 +10286,17 @@ const data = [
   },
   {
     email: 'f20190351@goa.bits-pilani.ac.in',
-    name: 'ANJALI  ROY',
+    name: 'ANJALI ROY',
     bitsId: '2019A3PS0351G',
   },
   {
     email: 'f20191113@goa.bits-pilani.ac.in',
-    name: 'VAIBHAV  RANA',
+    name: 'VAIBHAV RANA',
     bitsId: '2019A1PS1113G',
   },
   {
     email: 'f20190350@goa.bits-pilani.ac.in',
-    name: 'VARINDA  BANSAL',
+    name: 'VARINDA BANSAL',
     bitsId: '2019A3PS0350G',
   },
   {
@@ -10306,17 +10306,17 @@ const data = [
   },
   {
     email: 'f20191124@goa.bits-pilani.ac.in',
-    name: 'PARAG  SINGH',
+    name: 'PARAG SINGH',
     bitsId: '2019A1PS1124G',
   },
   {
     email: 'f20190292@goa.bits-pilani.ac.in',
-    name: 'AKSHAT  AGRAWAL',
+    name: 'AKSHAT AGRAWAL',
     bitsId: '2019A3PS0292G',
   },
   {
     email: 'f20190365@goa.bits-pilani.ac.in',
-    name: 'ISHAN  JAIN',
+    name: 'ISHAN JAIN',
     bitsId: '2019A3PS0365G',
   },
   {
@@ -10441,22 +10441,22 @@ const data = [
   },
   {
     email: 'f20191133@goa.bits-pilani.ac.in',
-    name: 'ADITYA  RANJAN',
+    name: 'ADITYA RANJAN',
     bitsId: '2019A1PS1133G',
   },
   {
     email: 'f20190231@goa.bits-pilani.ac.in',
-    name: 'HARSH  SHANDILYA',
+    name: 'HARSH SHANDILYA',
     bitsId: '2019A3PS0231G',
   },
   {
     email: 'f20190096@goa.bits-pilani.ac.in',
-    name: 'AAKARSH  GOYAL',
+    name: 'AAKARSH GOYAL',
     bitsId: '2019A3PS0096G',
   },
   {
     email: 'f20191130@goa.bits-pilani.ac.in',
-    name: 'SHRADDHA  KAJLE',
+    name: 'SHRADDHA KAJLE',
     bitsId: '2019A1PS1130G',
   },
   {
@@ -10471,12 +10471,12 @@ const data = [
   },
   {
     email: 'f20191129@goa.bits-pilani.ac.in',
-    name: 'AARYAN  VERMA',
+    name: 'AARYAN VERMA',
     bitsId: '2019A1PS1129G',
   },
   {
     email: 'f20191123@goa.bits-pilani.ac.in',
-    name: 'ROHIT  BONI',
+    name: 'ROHIT BONI',
     bitsId: '2019A1PS1123G',
   },
   {
@@ -10486,7 +10486,7 @@ const data = [
   },
   {
     email: 'f20191132@goa.bits-pilani.ac.in',
-    name: 'MADHAV  JINDAL',
+    name: 'MADHAV JINDAL',
     bitsId: '2019A1PS1132G',
   },
   {
@@ -10496,12 +10496,12 @@ const data = [
   },
   {
     email: 'f20190240@goa.bits-pilani.ac.in',
-    name: 'SAHIL  BABBAR',
+    name: 'SAHIL BABBAR',
     bitsId: '2019A3PS0240G',
   },
   {
     email: 'f20190371@goa.bits-pilani.ac.in',
-    name: 'GITARTH  JUGTAWAT',
+    name: 'GITARTH JUGTAWAT',
     bitsId: '2019A3PS0371G',
   },
   {
@@ -10521,17 +10521,17 @@ const data = [
   },
   {
     email: 'f20190388@goa.bits-pilani.ac.in',
-    name: 'TARESH  BATRA',
+    name: 'TARESH BATRA',
     bitsId: '2019A3PS0388G',
   },
   {
     email: 'f20190457@goa.bits-pilani.ac.in',
-    name: 'ASHITA  BHARDWAJ',
+    name: 'ASHITA BHARDWAJ',
     bitsId: '2019A3PS0457G',
   },
   {
     email: 'f20190466@goa.bits-pilani.ac.in',
-    name: 'RACHIT  GUPTA',
+    name: 'RACHIT GUPTA',
     bitsId: '2019A3PS0466G',
   },
   {
@@ -10551,7 +10551,7 @@ const data = [
   },
   {
     email: 'f20190505@goa.bits-pilani.ac.in',
-    name: 'MAYANK  MATHUR',
+    name: 'MAYANK MATHUR',
     bitsId: '2019A3PS0505G',
   },
   {
@@ -10566,7 +10566,7 @@ const data = [
   },
   {
     email: 'f20190415@goa.bits-pilani.ac.in',
-    name: 'AMRITASH  MISHRA',
+    name: 'AMRITASH MISHRA',
     bitsId: '2019A3PS0415G',
   },
   {
@@ -10576,7 +10576,7 @@ const data = [
   },
   {
     email: 'f20190372@goa.bits-pilani.ac.in',
-    name: 'ARYAN  SINGH',
+    name: 'ARYAN SINGH',
     bitsId: '2019A3PS0372G',
   },
   {
@@ -10591,7 +10591,7 @@ const data = [
   },
   {
     email: 'f20190442@goa.bits-pilani.ac.in',
-    name: 'AKARSH  MISHRA',
+    name: 'AKARSH MISHRA',
     bitsId: '2019A3PS0442G',
   },
   {
@@ -10601,17 +10601,17 @@ const data = [
   },
   {
     email: 'f20190419@goa.bits-pilani.ac.in',
-    name: 'SANJOG  AGARWAL',
+    name: 'SANJOG AGARWAL',
     bitsId: '2019A3PS0419G',
   },
   {
     email: 'f20190422@goa.bits-pilani.ac.in',
-    name: 'ANIRUDH  JAIN',
+    name: 'ANIRUDH JAIN',
     bitsId: '2019A3PS0422G',
   },
   {
     email: 'f20190468@goa.bits-pilani.ac.in',
-    name: 'VARNIT  JAIN',
+    name: 'VARNIT JAIN',
     bitsId: '2019A3PS0468G',
   },
   {
@@ -10626,12 +10626,12 @@ const data = [
   },
   {
     email: 'f20190423@goa.bits-pilani.ac.in',
-    name: 'HIMANSHU  JAIN',
+    name: 'HIMANSHU JAIN',
     bitsId: '2019A3PS0423G',
   },
   {
     email: 'f20190370@goa.bits-pilani.ac.in',
-    name: 'PRAKHAR  JAIN',
+    name: 'PRAKHAR JAIN',
     bitsId: '2019A3PS0370G',
   },
   {
@@ -12901,7 +12901,7 @@ const data = [
   },
   {
     email: 'f20190159@goa.bits-pilani.ac.in',
-    name: 'TAARUSH  BHATIA',
+    name: 'TAARUSH BHATIA',
     bitsId: '2019A7PS0159G',
   },
   {
@@ -12911,7 +12911,7 @@ const data = [
   },
   {
     email: 'f20190157@goa.bits-pilani.ac.in',
-    name: 'ATHARVA  AGRAWAL',
+    name: 'ATHARVA AGRAWAL',
     bitsId: '2019A7PS0157G',
   },
   {
@@ -12921,7 +12921,7 @@ const data = [
   },
   {
     email: 'f20190131@goa.bits-pilani.ac.in',
-    name: 'AEISHNA  KHAUND',
+    name: 'AEISHNA KHAUND',
     bitsId: '2019A7PS0131G',
   },
   {
@@ -12951,12 +12951,12 @@ const data = [
   },
   {
     email: 'f20190174@goa.bits-pilani.ac.in',
-    name: 'ROHAN  JAKHAR',
+    name: 'ROHAN JAKHAR',
     bitsId: '2019A7PS0174G',
   },
   {
     email: 'f20190122@goa.bits-pilani.ac.in',
-    name: 'RAJATH  V',
+    name: 'RAJATH V',
     bitsId: '2019A7PS0122G',
   },
   {
@@ -13001,7 +13001,7 @@ const data = [
   },
   {
     email: 'f20190151@goa.bits-pilani.ac.in',
-    name: 'YASH  BHARTIA',
+    name: 'YASH BHARTIA',
     bitsId: '2019A7PS0151G',
   },
   {
@@ -15261,12 +15261,12 @@ const data = [
   },
   {
     email: 'f20190480@goa.bits-pilani.ac.in',
-    name: 'ANANYA  PANT',
+    name: 'ANANYA PANT',
     bitsId: '2019A8PS0480G',
   },
   {
     email: 'f20190526@goa.bits-pilani.ac.in',
-    name: 'YASH  JANGIR',
+    name: 'YASH JANGIR',
     bitsId: '2019A8PS0526G',
   },
   {
@@ -15286,17 +15286,17 @@ const data = [
   },
   {
     email: 'f20190541@goa.bits-pilani.ac.in',
-    name: 'RAGHAV  KHANDELWAL',
+    name: 'RAGHAV KHANDELWAL',
     bitsId: '2019A8PS0541G',
   },
   {
     email: 'f20190580@goa.bits-pilani.ac.in',
-    name: 'NANDAN  MOHTA',
+    name: 'NANDAN MOHTA',
     bitsId: '2019A8PS0580G',
   },
   {
     email: 'f20190533@goa.bits-pilani.ac.in',
-    name: 'KARAN  PESHWANI',
+    name: 'KARAN PESHWANI',
     bitsId: '2019A8PS0533G',
   },
   {
@@ -15306,17 +15306,17 @@ const data = [
   },
   {
     email: 'f20190555@goa.bits-pilani.ac.in',
-    name: 'SNIGDHA  TIWARI',
+    name: 'SNIGDHA TIWARI',
     bitsId: '2019A8PS0555G',
   },
   {
     email: 'f20190509@goa.bits-pilani.ac.in',
-    name: 'SHIVANG  THAPLIYAL',
+    name: 'SHIVANG THAPLIYAL',
     bitsId: '2019A8PS0509G',
   },
   {
     email: 'f20190586@goa.bits-pilani.ac.in',
-    name: 'PARTH  PUSHKAR',
+    name: 'PARTH PUSHKAR',
     bitsId: '2019A8PS0586G',
   },
   {
@@ -15356,17 +15356,17 @@ const data = [
   },
   {
     email: 'f20190503@goa.bits-pilani.ac.in',
-    name: 'PRINCE  PANJA',
+    name: 'PRINCE PANJA',
     bitsId: '2019A8PS0503G',
   },
   {
     email: 'f20190484@goa.bits-pilani.ac.in',
-    name: 'AYUSH  SHARMA',
+    name: 'AYUSH SHARMA',
     bitsId: '2019A8PS0484G',
   },
   {
     email: 'f20190532@goa.bits-pilani.ac.in',
-    name: 'SHREYAS  SINGH',
+    name: 'SHREYAS SINGH',
     bitsId: '2019A8PS0532G',
   },
   {
@@ -16786,7 +16786,7 @@ const data = [
   },
   {
     email: 'f20190210@goa.bits-pilani.ac.in',
-    name: 'PRIYAL  AGARWAL',
+    name: 'PRIYAL AGARWAL',
     bitsId: '2019AAPS0210G',
   },
   {
@@ -16821,7 +16821,7 @@ const data = [
   },
   {
     email: 'f20190113@goa.bits-pilani.ac.in',
-    name: 'RAGHAV  DHIR',
+    name: 'RAGHAV DHIR',
     bitsId: '2019AAPS0113G',
   },
   {
@@ -16836,12 +16836,12 @@ const data = [
   },
   {
     email: 'f20190201@goa.bits-pilani.ac.in',
-    name: 'VISHAARAD  BAVEJA',
+    name: 'VISHAARAD BAVEJA',
     bitsId: '2019AAPS0201G',
   },
   {
     email: 'f20190241@goa.bits-pilani.ac.in',
-    name: 'AARABDH  TIWARI',
+    name: 'AARABDH TIWARI',
     bitsId: '2019AAPS0241G',
   },
   {
@@ -17011,12 +17011,12 @@ const data = [
   },
   {
     email: 'f20190290@goa.bits-pilani.ac.in',
-    name: 'SARTHAK  GUPTA',
+    name: 'SARTHAK GUPTA',
     bitsId: '2019AAPS0290G',
   },
   {
     email: 'f20190270@goa.bits-pilani.ac.in',
-    name: 'DEVESH  KUMAR',
+    name: 'DEVESH KUMAR',
     bitsId: '2019AAPS0270G',
   },
   {
@@ -28776,12 +28776,12 @@ const data = [
   },
   {
     email: 'f20191068@goa.bits-pilani.ac.in',
-    name: 'JAVIN  BACHANI',
+    name: 'JAVIN BACHANI',
     bitsId: '2019B1PS1068G',
   },
   {
     email: 'f20191093@goa.bits-pilani.ac.in',
-    name: 'ISHAAN  SINGH',
+    name: 'ISHAAN SINGH',
     bitsId: '2019B1PS1093G',
   },
   {
@@ -28791,27 +28791,27 @@ const data = [
   },
   {
     email: 'f20191077@goa.bits-pilani.ac.in',
-    name: 'RIYANSHI  AGRAWAL',
+    name: 'RIYANSHI AGRAWAL',
     bitsId: '2019B1PS1077G',
   },
   {
     email: 'f20191000@goa.bits-pilani.ac.in',
-    name: 'NIPUN  GUPTA',
+    name: 'NIPUN GUPTA',
     bitsId: '2019B1PS1000G',
   },
   {
     email: 'f20191076@goa.bits-pilani.ac.in',
-    name: 'ROHAN  ARORA',
+    name: 'ROHAN ARORA',
     bitsId: '2019B1PS1076G',
   },
   {
     email: 'f20190048@goa.bits-pilani.ac.in',
-    name: 'CHIRAG  GARG',
+    name: 'CHIRAG GARG',
     bitsId: '2019B2PS0048G',
   },
   {
     email: 'f20190969@goa.bits-pilani.ac.in',
-    name: 'B SHREYAS  BHAT',
+    name: 'B SHREYAS BHAT',
     bitsId: '2019B1PS0969G',
   },
   {
@@ -33261,7 +33261,7 @@ const data = [
   },
   {
     email: 'f2007198@goa.bits-pilani.ac.in',
-    name: 'NIPUN  BIDIKAR',
+    name: 'NIPUN BIDIKAR',
     bitsId: '2007A8PS198G',
   },
   {
@@ -36871,7 +36871,7 @@ const data = [
   },
   {
     email: 'f20190973@goa.bits-pilani.ac.in',
-    name: 'YASH  SAINI',
+    name: 'YASH SAINI',
     bitsId: '2019B2PS0973G',
   },
   {
@@ -37136,7 +37136,7 @@ const data = [
   },
   {
     email: 'f20191088@goa.bits-pilani.ac.in',
-    name: 'SAYAN  SAMANTA',
+    name: 'SAYAN SAMANTA',
     bitsId: '2019B2PS1088G',
   },
   {
@@ -37146,27 +37146,27 @@ const data = [
   },
   {
     email: 'f20190009@goa.bits-pilani.ac.in',
-    name: 'PRIYAL  SETHIA',
+    name: 'PRIYAL SETHIA',
     bitsId: '2019B3PS0009G',
   },
   {
     email: 'f20191080@goa.bits-pilani.ac.in',
-    name: 'SHAMBHAVI  SUMEDHA',
+    name: 'SHAMBHAVI SUMEDHA',
     bitsId: '2019B2PS1080G',
   },
   {
     email: 'f20190277@goa.bits-pilani.ac.in',
-    name: 'SHASHWAT  SHARMA',
+    name: 'SHASHWAT SHARMA',
     bitsId: '2019B3PS0277G',
   },
   {
     email: 'f20191097@goa.bits-pilani.ac.in',
-    name: 'RONIT  CHANDNANI',
+    name: 'RONIT CHANDNANI',
     bitsId: '2019B2PS1097G',
   },
   {
     email: 'f20190494@goa.bits-pilani.ac.in',
-    name: 'SHREYAS  ATHREYA',
+    name: 'SHREYAS ATHREYA',
     bitsId: '2019B3PS0494G',
   },
   {
@@ -37176,17 +37176,17 @@ const data = [
   },
   {
     email: 'f20190490@goa.bits-pilani.ac.in',
-    name: 'OWAIS  ALI',
+    name: 'OWAIS ALI',
     bitsId: '2019B3PS0490G',
   },
   {
     email: 'f20190289@goa.bits-pilani.ac.in',
-    name: 'ARMAAN  CHOWFIN',
+    name: 'ARMAAN CHOWFIN',
     bitsId: '2019B3PS0289G',
   },
   {
     email: 'f20190092@goa.bits-pilani.ac.in',
-    name: 'DHRUV  BHARGAVA',
+    name: 'DHRUV BHARGAVA',
     bitsId: '2019B3PS0092G',
   },
   {
@@ -37201,7 +37201,7 @@ const data = [
   },
   {
     email: 'f20190474@goa.bits-pilani.ac.in',
-    name: 'AVNI  GARG',
+    name: 'AVNI GARG',
     bitsId: '2019B3PS0474G',
   },
   {
@@ -37626,7 +37626,7 @@ const data = [
   },
   {
     email: 'f20190106@goa.bits-pilani.ac.in',
-    name: 'YASH  KASLIWAL',
+    name: 'YASH KASLIWAL',
     bitsId: '2019B4PS0106G',
   },
   {
@@ -38086,7 +38086,7 @@ const data = [
   },
   {
     email: 'f20190796@goa.bits-pilani.ac.in',
-    name: 'SARTHAK  KRISHNA',
+    name: 'SARTHAK KRISHNA',
     bitsId: '2019B4PS0796G',
   },
   {
@@ -38591,7 +38591,7 @@ const data = [
   },
   {
     email: 'f20190283@goa.bits-pilani.ac.in',
-    name: 'YASH  GUPTA',
+    name: 'YASH GUPTA',
     bitsId: '2019B5PS0283G',
   },
   {
@@ -42891,7 +42891,7 @@ const data = [
   },
   {
     email: 'f2013890@goa.bits-pilani.ac.in',
-    name: 'TANMAY  TIWARI                                    ',
+    name: 'TANMAY TIWARI                                    ',
     bitsId: '2013A1PS890G',
   },
   {
@@ -66846,7 +66846,7 @@ const data = [
   },
   {
     email: '2007A08PS198G@goa.bits-pilani.ac.in',
-    name: 'NIPUN  BIDIKAR',
+    name: 'NIPUN BIDIKAR',
     bitsId: '2007A8PS198G',
   },
   {
@@ -84141,7 +84141,7 @@ const data = [
   },
   {
     email: '2013A01PS890G@goa.bits-pilani.ac.in',
-    name: 'TANMAY  TIWARI',
+    name: 'TANMAY TIWARI',
     bitsId: '2013A1PS890G',
   },
   {

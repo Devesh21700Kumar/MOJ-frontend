@@ -85,13 +85,13 @@ export default function PersonalCards({ text, index }) {
   const classes = useStyles();
   const { get } = useContext(Data);
   //console.log(get);
-  const kit = get.reverse();
+  //const kit = get.reverse();
   //console.log(kit);
   // const pos=useContext(Data3);
   const i = useContext(Data1);
   //const vat=useContext(Data4);
   // setvat(true);
-  console.log(kit);
+  //console.log(kit);
   const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
     var day = date.getDate() + 'th ';
@@ -113,7 +113,7 @@ export default function PersonalCards({ text, index }) {
   return (
     <Fragment>
       <ReadMessagePopup
-        messageArray={kit.map((obj) => {
+        messageArray={get.map((obj) => {
           return [obj.body, obj.date];
         })}
         startFrom={pos}
@@ -121,9 +121,9 @@ export default function PersonalCards({ text, index }) {
         toggleVisibility={toggleReadMessages}
         key={'ReadMessagePopupKey-' + vat}
       />
-      {Array.isArray(kit) && kit.length !== 0 ? (
-        kit
-          .slice(i, i + 15 <= kit.length ? i + 15 : kit.length)
+      {Array.isArray(get) && get.length !== 0 ? (
+        get
+          .slice(i, i + 15 <= get.length ? i + 15 : get.length)
           .map((text, index) => (
             <Grid container direction={'column'}>
               <Container
@@ -162,7 +162,7 @@ export default function PersonalCards({ text, index }) {
                           {
                             screen.width >= 591
                               ? screen.width >= 680
-                                ? dateFormatter(text.date).slice(0, 22)
+                                ? dateFormatter(text.date).slice(0, 23)
                                 : dateFormatter(text.date).slice(0, 19)
                               : dateFormatter(text.date).slice(0, 9)
                             //dateFormatter(text.date).slice(0,21)

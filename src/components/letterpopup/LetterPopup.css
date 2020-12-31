@@ -169,6 +169,16 @@
 
   cursor: pointer;
 }
+@media only screen and (max-width: 711px) {
+  .letterpopup-classes-left-arrow {
+    transform: translateY(-50%);
+    margin-left: 1.2vw;
+  }
+  .letterpopup-classes-right-arrow {
+    transform: translateY(-50%);
+    margin-right: 1.2vw;
+  }
+}
 
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
@@ -192,4 +202,22 @@
 
 .letterpopup-classes-root.letterpopup-classes-disabled {
   visibility: hidden;
+}
+
+@media only screen and (min-width: 330px) and (max-width: 400px) {
+  .search {
+    margin-left: -4vw;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 329.9px) {
+  .search {
+    margin-left: -9vw;
+  }
+}
+
+@media only screen and (min-width: 260px) and (max-width: 299.9px) {
+  .search {
+    margin-left: -9vw;
+  }
 }

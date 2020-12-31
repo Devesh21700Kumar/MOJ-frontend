@@ -1,11 +1,12 @@
-// href="https://accounts.google.com/o/oauth2/v2/auth?client_id=125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Ftender-kilby-a8e96b.netlify.app%2F&response_type=code&scope=https%3A//www.googleapis.com/auth/userinfo.email&hd=goa.bits-pilani.ac.in&prompt=consent"
-
 import axios from 'axios';
-import { Route, Redirect, useHistory } from 'react-router';
+import { Route, Redirect, useHistory } from 'react-router-dom';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 
 const clientId =
   '125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com';
+
+// const clientId =
+//   '962832623705-a7nlpkt0ps3bo3rdsov390bppfifrrp0.apps.googleusercontent.com';
 
 function Login() {
   let history = useHistory();
@@ -27,16 +28,14 @@ function Login() {
         email: email,
       })
       .then(function (response) {
-        const permissionLevel = JSON.parse(
-          atob(response.data.token.split('.')[1])
-        ).permissionLevel;
         localStorage.setItem('token', response.data.token);
         var status = response.data.ok;
         if (status) {
-          return <Redirect to="/home" />;
+          signOut();
+          history.push('/home');
         } else {
           signOut();
-          return <Redirect to="/" />;
+          history.push('/');
         }
       })
       .catch((e) => {
@@ -54,7 +53,7 @@ function Login() {
       <GoogleLogin
         clientId={clientId}
         hostedDomain="goa.bits-pilani.ac.in"
-        prompt="consent"
+        prompt="select_account"
         buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
@@ -68,7 +67,7 @@ function Login() {
             disabled={renderProps.disabled}
             style={{ cursor: 'pointer' }}
           >
-            Login with Google
+            {screen.width > 610 ? 'Login with Google' : 'Google Login'}
           </div>
         )}
       />

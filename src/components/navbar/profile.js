@@ -27,11 +27,32 @@ const useStyles = makeStyles((theme) => ({
     float: 'right',
     width: '2rem',
     height: '2rem',
+    marginTop: '2.7vh',
     paddingRight: '2px',
+  },
+  menu: {
+    marginLeft: theme.spacing(2),
+    marginTop: theme.spacing(0.5),
+    float: 'right',
+    width: '2rem',
+    height: '2rem',
+    marginTop: '2.7vh',
+    paddingRight: '22.5px',
   },
   orange: {
     color: theme.palette.getContrastText('#aa11ff'),
     backgroundColor: '#aa11ff',
+  },
+  '@media(min-width: 1100px)': {
+    menu: {
+      marginLeft: theme.spacing(2),
+      marginTop: theme.spacing(0.5),
+      float: 'right',
+      width: '2rem',
+      height: '2rem',
+      marginTop: '2.7vh',
+      paddingRight: '45.5px',
+    },
   },
 }));
 const name = 'Nipun Gupta';
@@ -44,7 +65,9 @@ export default function Profile({ name, bitsId }) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  const userinfo = JSON.parse(
+    window.atob(localStorage.getItem('token').split('.')[1])
+  );
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -59,7 +82,12 @@ export default function Profile({ name, bitsId }) {
 
   return (
     <div>
-      <IconButton className={classes.menuButton} onClick={handleClick}>
+      <IconButton
+        className={
+          userinfo.permissionLevel != 0 ? classes.menuButton : classes.menu
+        }
+        onClick={handleClick}
+      >
         <AccountCircleRoundedIcon className="icons" />
       </IconButton>
 
