@@ -131,12 +131,12 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media(max-height: 400px)': {
       crack: {
-        paddingTop:'9px',
+        paddingTop: '9px',
       },
     },
     '@media(max-height: 400px)': {
       crack: {
-        paddingTop:'9px',
+        paddingTop: '9px',
       },
     },
   },
@@ -188,7 +188,11 @@ export default function Welcome1() {
                   />
                 </svg>
               </Box>
-              <Box className={classes.crack} paddingLeft="0.5em" paddingTop="0.5em">
+              <Box
+                className={classes.crack}
+                paddingLeft="0.5em"
+                paddingTop="0.5em"
+              >
                 <Login />
               </Box>
             </Box>

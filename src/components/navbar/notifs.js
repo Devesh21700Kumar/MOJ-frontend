@@ -122,12 +122,7 @@ export default function Notifs() {
                 onClick={handleClick1}
               />
             </ListItem>
-            <ListItem
-              button
-              className={
-                 classes.hey
-              }
-            >
+            <ListItem button className={classes.hey}>
               <ListItemText
                 className={classes.typography}
                 primary="Redirect to Home"
@@ -142,4 +137,3 @@ export default function Notifs() {
     </div>
   );
 }
-

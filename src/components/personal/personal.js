@@ -344,7 +344,7 @@ export default function Personal({ name, bitsId }, props) {
               display="flex"
               alignItems="center"
             >
-              <Grid item style={{ textAlign:"center"}}>
+              <Grid item style={{ textAlign: 'center' }}>
                 <svg
                   onClick={hc1}
                   width="48"

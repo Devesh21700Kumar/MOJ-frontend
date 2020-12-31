@@ -68,7 +68,7 @@ function Login() {
             disabled={renderProps.disabled}
             style={{ cursor: 'pointer' }}
           >
-            {screen.width>610?"Login with Google":"Google Login"}
+            {screen.width > 610 ? 'Login with Google' : 'Google Login'}
           </div>
         )}
       />
