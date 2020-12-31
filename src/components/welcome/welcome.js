@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Login from '../login/login';
 import Box from '@material-ui/core/Box';
+import { LinearScale } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -128,6 +129,16 @@ const useStyles = makeStyles((theme) => ({
       left: '20vw',
       fontSize: '2em',
     },
+    '@media(max-height: 400px)': {
+      crack: {
+        paddingTop:'9px',
+      },
+    },
+    '@media(max-height: 400px)': {
+      crack: {
+        paddingTop:'9px',
+      },
+    },
   },
 }));
 
@@ -148,10 +159,7 @@ export default function Welcome1() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            aliquip ex ea commodo consequat.
           </div>
           <div className={classes.loginBox} id="loginBox">
             <Box display="flex">
@@ -180,7 +188,7 @@ export default function Welcome1() {
                   />
                 </svg>
               </Box>
-              <Box paddingLeft="0.5em" paddingTop="0.5em">
+              <Box className={classes.crack} paddingLeft="0.5em" paddingTop="0.5em">
                 <Login />
               </Box>
             </Box>
