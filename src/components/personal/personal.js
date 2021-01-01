@@ -313,7 +313,7 @@ export default function Personal({ name, bitsId }, props) {
           <Box display="flex" className="cA">
             <Box width="35%" className="c1">
               <Typography className={classes.hot}>
-                Welcome {userdata.name.split(' ').slice(0, 1).join(' ')}
+                Welcome {userdata.name.split(' ').slice(0, 1).join(' ').charAt(0).toUpperCase()+userdata.name.split(' ').slice(0, 1).join(' ').toLowerCase().slice(1)}
               </Typography>
             </Box>
 

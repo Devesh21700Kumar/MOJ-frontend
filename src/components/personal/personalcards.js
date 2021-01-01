@@ -94,7 +94,7 @@ export default function PersonalCards({ text, index }) {
   //console.log(kit);
   const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
-    var day = date.getDate() + 'th ';
+    var day = date.getDate()==1?date.getDate() + 'st  ':date.getDate()==2?date.getDate() + 'nd  ':date.getDate()==3?date.getDate() + 'rd  ':date.getDate() + 'th ';
     var month = date.toLocaleString('default', { month: 'short' }) + ' ';
     var year = date.getFullYear() + ', ';
     var time = date.toLocaleString('en-US', {
@@ -109,7 +109,7 @@ export default function PersonalCards({ text, index }) {
   const toggleReadMessages = (b) => {
     setvat(b);
   };
-  console.log(pos);
+  //console.log(pos);
   return (
     <Fragment>
       <ReadMessagePopup

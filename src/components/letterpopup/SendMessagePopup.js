@@ -97,7 +97,7 @@ export default function SendMessagePopup({
       setComponentEnabled(enabled);
     };
   }, [enabled]);
-  console.log(receiverEmail);
+  //console.log(receiverEmail);
   let handleSubmit = (e) => {
     e.preventDefault();
     const date = Date.now();
@@ -117,7 +117,7 @@ export default function SendMessagePopup({
           setOpen(true);
         } else {
           setOpen(false);
-          console.log(response);
+          //console.log(response);
         }
       } catch (error) {
         console.error(error.message);
@@ -144,7 +144,7 @@ export default function SendMessagePopup({
 
     setOpen(false);
   };
-  console.log(data[0].name);
+  //console.log(data[0].name);
 
   function checkspace(dat) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
