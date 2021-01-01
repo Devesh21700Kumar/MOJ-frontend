@@ -155,7 +155,8 @@ const Dashboard = (messages, props) => {
     atob(localStorage.getItem('token').split('.')[1])
   );
 
-  if (permissionLevel !== 1) return <Redirect to="/home" />;
+  if (permissionLevel < 1) return <Redirect to="/home" />;
+  
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
@@ -197,7 +198,7 @@ const Dashboard = (messages, props) => {
         method: 'GET',
         headers: {
           // eslint-disable-next-line prettier/prettier
-          'token': `${localStorage.getItem('token')}`,
+          token: `${localStorage.getItem('token')}`,
         },
       });
       console.log(response.data.data);

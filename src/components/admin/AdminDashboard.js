@@ -393,11 +393,9 @@ const AdminDashboard = () => {
   const [type, setType] = useState('');
   const [i, seti] = useState(0);
 
-  const { permissionLevel, name, bitsId } = JSON.parse(
+  const { name, bitsId } = JSON.parse(
     atob(localStorage.getItem('token').split('.')[1])
   );
-
-  if (permissionLevel !== 2) return <Redirect to="/home" />;
 
   async function fetchMessages() {
     const { messages } = await (
