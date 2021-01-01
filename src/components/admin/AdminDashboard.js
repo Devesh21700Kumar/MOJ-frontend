@@ -399,32 +399,32 @@ const AdminDashboard = () => {
 
   if (permissionLevel !== 2) return <Redirect to="/home" />;
 
+  async function fetchMessages() {
+    const { messages } = await (
+      await fetch(`${URL}/api/level2/unassignedMessages`, {
+        method: 'GET',
+        headers: {
+          token: `${localStorage.getItem('token')}`,
+        },
+      })
+    ).json();
+    setMsgs(messages);
+
+    const { data } = await (
+      await fetch(`${URL}/api/level2/finalapproval`, {
+        method: 'GET',
+        headers: {
+          token: `${localStorage.getItem('token')}`,
+        },
+      })
+    ).json();
+    const { approved, denied, yellowflagged } = data;
+    setRedFlaggedMsgs(denied);
+    setYellowFlaggedMsgs(yellowflagged);
+    setGreenFlaggedMsgs(approved);
+  }
+
   useEffect(() => {
-    async function fetchMessages() {
-      const { messages } = await (
-        await fetch(`${URL}/api/level2/unassignedMessages`, {
-          method: 'GET',
-          headers: {
-            token: `${localStorage.getItem('token')}`,
-          },
-        })
-      ).json();
-      setMsgs(messages);
-
-      const { data } = await (
-        await fetch(`${URL}/api/level2/finalapproval`, {
-          method: 'GET',
-          headers: {
-            token: `${localStorage.getItem('token')}`,
-          },
-        })
-      ).json();
-      const { approved, denied, yellowflagged } = data;
-      setRedFlaggedMsgs(denied);
-      setYellowFlaggedMsgs(yellowflagged);
-      setGreenFlaggedMsgs(approved);
-    }
-
     fetchMessages();
   }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
 
@@ -435,9 +435,26 @@ const AdminDashboard = () => {
     setValue(' ');
 
     setChecked25(!checked25);
-    if (msgs.length > 25) {
-      for (let i = 0; i < 25; i++) {
-        setMessageId(msgs[i]._id);
+    if (!checked25) {
+      if (msgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          setMessageId((messageId) => [...messageId, msgs[i]._id]);
+        }
+      }
+      if (redFlaggedMsgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+        }
+      }
+      if (yellowFlaggedMsgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          setMessageId((messageId) => [...messageId, yellowFlaggedMsgs[i]._id]);
+        }
+      }
+      if (greenFlaggedMsgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          setMessageId((messageId) => [...messageId, greenFlaggedMsgs[i]._id]);
+        }
       }
     }
   };
@@ -449,18 +466,52 @@ const AdminDashboard = () => {
     setValue(' ');
 
     setChecked50(!checked50);
-    if (msgs.length > 50) {
-      for (let i = 0; i < 50; i++) {
-        setMessageId(msgs[i]._id);
+    if (!checked50) {
+      if (msgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          setMessageId((messageId) => [...messageId, msgs[i]._id]);
+        }
+      }
+      if (redFlaggedMsgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+        }
+      }
+      if (yellowFlaggedMsgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          setMessageId((messageId) => [...messageId, yellowFlaggedMsgs[i]._id]);
+        }
+      }
+      if (greenFlaggedMsgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          setMessageId((messageId) => [...messageId, greenFlaggedMsgs[i]._id]);
+        }
       }
     }
   };
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    if (msgs.length > e.target.value) {
-      for (let i = 0; i < e.target.value; i++) {
-        setMessageId(msgs[i]._id);
+    if (!value) {
+      if (msgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          setMessageId((messageId) => [...messageId, msgs[i]._id]);
+        }
+      }
+      if (redFlaggedMsgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+        }
+      }
+      if (yellowFlaggedMsgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          setMessageId((messageId) => [...messageId, yellowFlaggedMsgs[i]._id]);
+        }
+      }
+      if (greenFlaggedMsgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          setMessageId((messageId) => [...messageId, greenFlaggedMsgs[i]._id]);
+        }
       }
     }
     if (checked25 === true) {
@@ -521,6 +572,7 @@ const AdminDashboard = () => {
       )
     );
   }, [i]);
+
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
@@ -572,6 +624,7 @@ const AdminDashboard = () => {
       if (response.ok) {
         setType('Declined');
         setSnackBarOpen(true);
+        fetchMessages();
       }
     }
 
@@ -594,6 +647,7 @@ const AdminDashboard = () => {
       if (response.ok) {
         setType('Approved');
         setSnackBarOpen(true);
+        fetchMessages();
       }
     }
 
@@ -795,7 +849,10 @@ const AdminDashboard = () => {
           </Grid>
           {tabColor1 === '#FFFDE8' && (
             <div className={classes.buttons}>
-              <AssignCoreMembersPopup messageId={messageId} />
+              <AssignCoreMembersPopup
+                messageId={messageId}
+                fetchMessages={fetchMessages}
+              />
             </div>
           )}
           <div className={classes.messages}>
@@ -816,7 +873,10 @@ const AdminDashboard = () => {
           {/* Buttons */}
           {tabColor1 === '#FFFDE8' ? (
             <div className={classes.buttons}>
-              <AssignCoreMembersPopup messageId={messageId} />
+              <AssignCoreMembersPopup
+                messageId={messageId}
+                fetchMessages={fetchMessages}
+              />
             </div>
           ) : (
             <div className={classes.buttons1}>

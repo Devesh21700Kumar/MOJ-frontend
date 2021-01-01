@@ -5,9 +5,6 @@ import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 const clientId =
   '125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com';
 
-// const clientId =
-//   '962832623705-a7nlpkt0ps3bo3rdsov390bppfifrrp0.apps.googleusercontent.com';
-
 function Login() {
   let history = useHistory();
   const onLogoutSuccess = (res) => {
@@ -60,7 +57,7 @@ function Login() {
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
         uxMode="redirect"
-        redirectUri="https://tender-kilby-a8e96b.netlify.app/"
+        redirectUri="https://tender-kilby-a8e96b.netlify.app/home"
         render={(renderProps) => (
           <div
             onClick={renderProps.onClick}

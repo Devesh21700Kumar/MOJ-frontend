@@ -115,7 +115,6 @@ export default function Profile({ name, bitsId }) {
             </ListItemAvatar>
             <ListItemText primary={name} secondary={bitsId} />
           </ListItem>
-          <Divider variant="inset" component="li" />
           <Divider />
           <ListItem button>
             <ListItemText
