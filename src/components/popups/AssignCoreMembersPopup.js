@@ -223,6 +223,7 @@ const SingleListItem = ({
   bitsId,
   email,
   messageId,
+  fetchMessages,
   setSnackBarOpen,
   setOpen,
 }) => {
@@ -251,6 +252,7 @@ const SingleListItem = ({
         if (response.ok) {
           setSnackBarOpen(true);
           setOpen(false);
+          fetchMessages();
         }
       }
     }
@@ -319,6 +321,7 @@ const NamesList = ({
   messageId,
   setSnackBarOpen,
   setOpen,
+  fetchMessages,
 }) => {
   const classes = useStyles();
 
@@ -334,6 +337,7 @@ const NamesList = ({
               email={result.email}
               key={index}
               messageId={messageId}
+              fetchMessages={fetchMessages}
               setSnackBarOpen={setSnackBarOpen}
               setOpen={setOpen}
             />
@@ -349,6 +353,7 @@ const NamesList = ({
               email={result.email}
               key={index}
               messageId={messageId}
+              fetchMessages={fetchMessages}
               setSnackBarOpen={setSnackBarOpen}
               setOpen={setOpen}
             />
@@ -361,7 +366,7 @@ const NamesList = ({
   );
 };
 
-const AssignCoreMembersPopup = ({ messageId }) => {
+const AssignCoreMembersPopup = ({ messageId, fetchMessages }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -457,6 +462,7 @@ const AssignCoreMembersPopup = ({ messageId }) => {
                   searchedData={filterSearch()}
                   data={searchResults}
                   messageId={messageId}
+                  fetchMessages={fetchMessages}
                   setSnackBarOpen={setSnackBarOpen}
                   setOpen={setOpen}
                 />
