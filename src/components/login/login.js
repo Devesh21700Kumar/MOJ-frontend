@@ -5,7 +5,6 @@ import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 const clientId =
   '125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com';
 
-
 function Login() {
   let history = useHistory();
   const onLogoutSuccess = (res) => {
