@@ -9,7 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import './search.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +74,7 @@ export default function Profile({ name, bitsId }) {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    history.push("/");
+    history.push('/');
   };
 
   const open = Boolean(anchorEl);

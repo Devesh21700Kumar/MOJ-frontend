@@ -169,47 +169,41 @@ export default function Personal({ name, bitsId }, props) {
   const [color, setColor] = useState('#FFFDE8');
 
   const boxClick = () => {
-
-    if(det.lenght>=15)   
-    {
-    setColor('#FFFDE8');
-    setColor1('#FB8989');
-    setGet(det);
-    seti(0);
-    setX1('#C4C4C4');
-    setX2('#C4C4C4');
-  }
-    else{
+    if (det.length >= 15) {
       setColor('#FFFDE8');
       setColor1('#FB8989');
       setGet(det);
       seti(0);
       setX1('#C4C4C4');
       setX2('#EF4646');
+    } else {
+      setColor('#FFFDE8');
+      setColor1('#FB8989');
+      setGet(det);
+      seti(0);
+      setX1('#C4C4C4');
+      setX2('#C4C4C4');
     }
-    
   };
 
   const [color1, setColor1] = useState('#FB8989');
 
   const boxClick1 = () => {
-    if(ret.lenght>=15)   
-    {
+    if (ret.length >= 15) {
       setColor1('#FFFDE8');
       setColor('#FB8989');
       seti(0);
       setGet(ret);
       //console.log(ret.length);
       setX1('#C4C4C4');
-      setX2('#C4C4C4');
-  }
-    else{
+      setX2('#EF4646');
+    } else {
       setColor1('#FFFDE8');
       setColor('#FB8989');
       setGet(ret);
       seti(0);
       setX1('#C4C4C4');
-      setX2('#EF4646');
+      setX2('#C4C4C4');
     }
   };
   const [i, seti] = useState(0);
@@ -235,16 +229,15 @@ export default function Personal({ name, bitsId }, props) {
       seti(i + 15);
       setX1('#EF4646');
       setX2('#EF4646');
-    } else if (get.length - (i + 15) < 15 && get.length - (i + 15) >0) {
+    } else if (get.length - (i + 15) < 15 && get.length - (i + 15) > 0) {
       seti(i + 15);
       setX2('#C4C4C4');
       setX1('#EF4646');
-    } else if(i + 15 == get.length - 15) {
-      seti(i+15);
+    } else if (i + 15 == get.length - 15) {
+      seti(i + 15);
       setX2('#C4C4C4');
-      setX1('#EF4646')
-    }
-    else{
+      setX1('#EF4646');
+    } else {
       seti(i);
       setX2('#C4C4C4');
     }
