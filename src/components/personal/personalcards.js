@@ -7,8 +7,6 @@ import './personal.css';
 import Typography from '@material-ui/core/Typography';
 import { Data } from '../personal/personal';
 import { Data1 } from '../personal/personal';
-//import { Data3 } from '../personal/personal';
-//import { Data4 } from '../personal/personal';
 import Button from '@material-ui/core/Button';
 import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
@@ -84,17 +82,17 @@ const useStyles = makeStyles((theme) => ({
 export default function PersonalCards({ text, index }) {
   const classes = useStyles();
   const { get } = useContext(Data);
-  //console.log(get);
-  //const kit = get.reverse();
-  //console.log(kit);
-  // const pos=useContext(Data3);
   const i = useContext(Data1);
-  //const vat=useContext(Data4);
-  // setvat(true);
-  //console.log(kit);
   const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
-    var day = date.getDate() + 'th ';
+    var day =
+      date.getDate() == 1
+        ? date.getDate() + 'st  '
+        : date.getDate() == 2
+        ? date.getDate() + 'nd  '
+        : date.getDate() == 3
+        ? date.getDate() + 'rd  '
+        : date.getDate() + 'th ';
     var month = date.toLocaleString('default', { month: 'short' }) + ' ';
     var year = date.getFullYear() + ', ';
     var time = date.toLocaleString('en-US', {
@@ -109,7 +107,6 @@ export default function PersonalCards({ text, index }) {
   const toggleReadMessages = (b) => {
     setvat(b);
   };
-  console.log(pos);
   return (
     <Fragment>
       <ReadMessagePopup
@@ -126,12 +123,7 @@ export default function PersonalCards({ text, index }) {
           .slice(i, i + 15 <= get.length ? i + 15 : get.length)
           .map((text, index) => (
             <Grid container direction={'column'}>
-              <Container
-                value={index}
-                className={classes.margi}
-                id="cross"
-                //raised={true}}
-              >
+              <Container value={index} className={classes.margi} id="cross">
                 <Grid
                   onClick={() => {
                     toggleReadMessages(true);
@@ -159,14 +151,11 @@ export default function PersonalCards({ text, index }) {
                     <Typography variant="h6" edge="start">
                       <b key="index">
                         <p className={classes.date}>
-                          {
-                            screen.width >= 591
-                              ? screen.width >= 680
-                                ? dateFormatter(text.date).slice(0, 23)
-                                : dateFormatter(text.date).slice(0, 19)
-                              : dateFormatter(text.date).slice(0, 9)
-                            //dateFormatter(text.date).slice(0,21)
-                          }
+                          {screen.width >= 591
+                            ? screen.width >= 680
+                              ? dateFormatter(text.date).slice(0, 23)
+                              : dateFormatter(text.date).slice(0, 19)
+                            : dateFormatter(text.date).slice(0, 9)}
                         </p>
                       </b>
                     </Typography>

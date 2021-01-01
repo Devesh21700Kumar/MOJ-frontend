@@ -9,7 +9,6 @@ import Divider from '@material-ui/core/Divider';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import './search.css';
 import { Route, Redirect, useHistory } from 'react-router';
-import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -37,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Notifs() {
   const classes = useStyles();
+  let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const userinfo = JSON.parse(
     window.atob(localStorage.getItem('token').split('.')[1])
@@ -45,13 +45,13 @@ export default function Notifs() {
     setAnchorEl(event.currentTarget);
   };
   const handleClick0 = () => {
-    return <Redirect to="/admin" />;
+    history.push('/admin');
   };
   const handleClick1 = () => {
-    return <Redirect to="/core" />;
+    history.push('/core');
   };
   const handleClick2 = () => {
-    return <Redirect to="/home" />;
+    history.push('/home');
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -59,10 +59,6 @@ export default function Notifs() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-  //userinfo.permissionLevel!=0?classes.menuButton:classes.menu
-  //<IconButton className={userinfo.permissionLevel!=0?classes.menuButton:classes.menu} onClick={handleClick}>
-  //<ListItem button className={userinfo.permissionLevel!=2?classes.menu:classes.hey}>
-  //<ListItem button className={userinfo.permissionLevel==0?classes.menu:classes.hey}>
   return (
     <div>
       <IconButton
@@ -74,9 +70,6 @@ export default function Notifs() {
         <ArrowForwardIosIcon style={{}} className="icons" />
       </IconButton>
 
-      {/* <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-        Open Popover
-      </Button> */}
       <Popover
         id={id}
         open={open}
@@ -132,7 +125,6 @@ export default function Notifs() {
             <Divider />
           </div>
         </List>
-        {/* <Typography className={classes.typography}>New notifications</Typography> */}
       </Popover>
     </div>
   );

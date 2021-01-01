@@ -1,17 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Notifs from './notifs';
 import Profile from './profile';
-import Search from './search';
 import '../navbar/navbar.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
-    //bottom: theme.spacing(2),
-    //right: theme.spacing(2),
   },
   appBar: {
     backgroundColor: '#EF4646',
@@ -82,8 +77,6 @@ export default function Navbar({ navHeading, name, bitsId }) {
           >
             <Notifs />
             <Profile name={name} bitsId={bitsId} />
-
-            {/* <IconButton className={classes.menuButton}><NotificationsActiveIcon  /></IconButton> */}
           </Grid>
         </Grid>
       </div>
