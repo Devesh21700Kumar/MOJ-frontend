@@ -9,14 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import '../personal/personal.css';
 import PersonalCards from '../personal/personalcards';
-import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
 export const Data = createContext();
 import axios from 'axios';
 export const Data1 = createContext();
-//export const Data3 = createContext();
-//export const Data4 = createContext();
-import Login from '../login/login';
 import Navbar from '../navbar/navbar';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: ' #E7B8B8',
   },
   margi: {
-    // border: '3px solid black',
     backgroundColor: '#FFD94D',
     margin: '5px',
     borderRadius: '18px',
@@ -53,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
     height: '2rem',
     top: '2vh',
     left: '50vw',
-    //background: '#EF4646',
   },
   Gi: {
     flex: 2,
@@ -139,15 +133,6 @@ export default function Personal({ name, bitsId }, props) {
       date: '28th Dec 2020, 2:31 a.m.',
     })
   );
-  /* useEffect(async () => {
-    const result = await axios(
-      'https://hn.algolia.com/api/v1/search?query=redux',
-    );
- 
-    setData(result.data);
-  }); */
-
-  //function fetchsentmessages() {
   useEffect(async () => {
     try {
       let response = await axios.get(
@@ -157,23 +142,12 @@ export default function Personal({ name, bitsId }, props) {
           headers: { token: `${localStorage.getItem('token')}` },
         }
       );
-      //console.log(response.data);
-      //var r=response.data;
       var t = response.data.data;
       setret(response.data.data);
-      //setGet(t);
-      //svar r=response.data.data[0];
-      //console.log(t );
-      //console.log('this');
     } catch (error) {
       console.error(error.message);
     }
   }, []);
-  //}
-
-  //fetchsentmessages();
-
-  //function fetchreceivedmessages() {
   useEffect(async () => {
     try {
       let response = await axios.get(
@@ -183,21 +157,14 @@ export default function Personal({ name, bitsId }, props) {
           headers: { token: `${localStorage.getItem('token')}` },
         }
       );
-      //console.log(response.data);
-      //var r=response.data;
       var r = response.data.data;
       setdet(response.data.data);
       setGet(r);
-      //svar r=response.data.data[0];
-      //console.log(r);
     } catch (error) {
       console.error(error.message);
     }
   }, []);
-  //}
 
-  //fetchreceivedmessages();
-  //console.log(ret);
   const [get, setGet] = useState(det);
 
   const [color, setColor] = useState('#FFFDE8');
@@ -231,11 +198,8 @@ export default function Personal({ name, bitsId }, props) {
       seti(0);
       setX1('#C4C4C4');
     }
-    //console.log(i);
   };
   const hc2 = (e) => {
-    //console.log(i);
-
     if (i + 15 <= get.length - 15) {
       seti(i + 15);
       setX1('#EF4646');
@@ -247,15 +211,11 @@ export default function Personal({ name, bitsId }, props) {
       seti(i);
       setX2('#C4C4C4');
     }
-
-    //console.log(i);
   };
   const [enables, setEnables] = useState(false);
   const hit = () => {
     setEnables(!enables);
   };
-  //<ReadMessagePopup/>
-  //<SendMessagePopup/>
 
   return (
     <div className="nav">
@@ -313,7 +273,19 @@ export default function Personal({ name, bitsId }, props) {
           <Box display="flex" className="cA">
             <Box width="35%" className="c1">
               <Typography className={classes.hot}>
-                Welcome {userdata.name.split(' ').slice(0, 1).join(' ').charAt(0).toUpperCase()+userdata.name.split(' ').slice(0, 1).join(' ').toLowerCase().slice(1)}
+                Welcome{' '}
+                {userdata.name
+                  .split(' ')
+                  .slice(0, 1)
+                  .join(' ')
+                  .charAt(0)
+                  .toUpperCase() +
+                  userdata.name
+                    .split(' ')
+                    .slice(0, 1)
+                    .join(' ')
+                    .toLowerCase()
+                    .slice(1)}
               </Typography>
             </Box>
 
@@ -328,13 +300,6 @@ export default function Personal({ name, bitsId }, props) {
               </Data1.Provider>
             </Data.Provider>
           </div>
-          {/*Container to show all messages   
-          <div className="terov1">
-            {get.slice(i, i < 25 ? i + 15 : i + 10).map((text, index) => (
-              <PersonalCards text={text}  index={index} />
-            ))}
-          </div>
-            */}
 
           <div className="hexad">
             <Grid

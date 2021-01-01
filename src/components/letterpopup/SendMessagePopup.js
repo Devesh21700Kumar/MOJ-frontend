@@ -14,9 +14,7 @@ import List from '@material-ui/core/List';
 import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 import DOMPurify from 'dompurify';
-import sanitizeHtml from 'sanitize-html';
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -64,15 +62,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function SendMessagePopup({
-  enabled,
-  //submitFunction,
-  toggleVisibility,
-}) {
+export default function SendMessagePopup({ enabled, toggleVisibility }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  //const [name,setName] =React.useState('');
-  //const [bitsId,setId] =React.useState('');
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -97,7 +89,6 @@ export default function SendMessagePopup({
       setComponentEnabled(enabled);
     };
   }, [enabled]);
-  //console.log(receiverEmail);
   let handleSubmit = (e) => {
     e.preventDefault();
     const date = Date.now();
@@ -117,14 +108,12 @@ export default function SendMessagePopup({
           setOpen(true);
         } else {
           setOpen(false);
-          //console.log(response);
         }
       } catch (error) {
         console.error(error.message);
       }
     }
     postMessage();
-    //console.log('yay');
   };
   let calculateTextAreaRows = () => {
     let rows = 0;
@@ -136,7 +125,6 @@ export default function SendMessagePopup({
   let hideMe = () => {
     toggleVisibility();
   };
-  //function handlepost(){
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -144,7 +132,6 @@ export default function SendMessagePopup({
 
     setOpen(false);
   };
-  //console.log(data[0].name);
 
   function checkspace(dat) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));

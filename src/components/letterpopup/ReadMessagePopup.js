@@ -18,7 +18,6 @@ export default function ReadMessagePopup({
 }) {
   const [currentPosition, setCurrentPosition] = useState(startFrom);
   const [componentEnabled, setComponentEnabled] = useState(enabled);
- // console.log(data[0]);
   React.useEffect(() => {
     return () => {
       setComponentEnabled(enabled);
@@ -40,7 +39,6 @@ export default function ReadMessagePopup({
   let hideMe = () => {
     toggleVisibility(false);
   };
-  //console.log('reload');
 
   if (componentEnabled)
     return (
