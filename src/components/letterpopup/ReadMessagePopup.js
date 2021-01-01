@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-
 import Paper from '@material-ui/core/Paper';
-import data from '../util/finaldata';
 import './LetterPopup.css';
 
 // message array structure:
@@ -56,7 +54,14 @@ export default function ReadMessagePopup({
 function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
   const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
-    var day = date.getDate() + 'th ';
+    var day =
+      date.getDate() == 1
+        ? date.getDate() + 'st  '
+        : date.getDate() == 2
+        ? date.getDate() + 'nd  '
+        : date.getDate() == 3
+        ? date.getDate() + 'rd  '
+        : date.getDate() + 'th ';
     var month = date.toLocaleString('default', { month: 'short' }) + ' ';
     var year = date.getFullYear() + ', ';
     var time = date.toLocaleString('en-US', {
