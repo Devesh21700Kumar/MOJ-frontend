@@ -2,7 +2,6 @@ import { React, useState, Fragment, useEffect, createContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-//import Navbar from '../navbar/navbar';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -115,7 +114,7 @@ export default function Personal({ name, bitsId }, props) {
   const classes = useStyles();
 
   const [det, setdet] = useState(
-    Array(0)
+    Array(1)
       .fill({
         body: 'Lorem Ipsum is simply dummy.',
         date: ' 28th Dec 2020, 2:31 a.m.',
@@ -169,18 +168,49 @@ export default function Personal({ name, bitsId }, props) {
 
   const [color, setColor] = useState('#FFFDE8');
 
-  const boxClick = (e) => {
+  const boxClick = () => {
+
+    if(det.lenght>=15)   
+    {
     setColor('#FFFDE8');
     setColor1('#FB8989');
     setGet(det);
+    seti(0);
+    setX1('#C4C4C4');
+    setX2('#C4C4C4');
+  }
+    else{
+      setColor('#FFFDE8');
+      setColor1('#FB8989');
+      setGet(det);
+      seti(0);
+      setX1('#C4C4C4');
+      setX2('#EF4646');
+    }
+    
   };
 
   const [color1, setColor1] = useState('#FB8989');
 
-  const boxClick1 = (e) => {
-    setColor1('#FFFDE8');
-    setColor('#FB8989');
-    setGet(ret);
+  const boxClick1 = () => {
+    if(ret.lenght>=15)   
+    {
+      setColor1('#FFFDE8');
+      setColor('#FB8989');
+      seti(0);
+      setGet(ret);
+      //console.log(ret.length);
+      setX1('#C4C4C4');
+      setX2('#C4C4C4');
+  }
+    else{
+      setColor1('#FFFDE8');
+      setColor('#FB8989');
+      setGet(ret);
+      seti(0);
+      setX1('#C4C4C4');
+      setX2('#EF4646');
+    }
   };
   const [i, seti] = useState(0);
   const [x1, setX1] = useState('#C4C4C4');
@@ -197,17 +227,24 @@ export default function Personal({ name, bitsId }, props) {
     } else if (i <= 15) {
       seti(0);
       setX1('#C4C4C4');
+      setX2('#EF4646');
     }
   };
   const hc2 = (e) => {
-    if (i + 15 <= get.length - 15) {
+    if (i + 15 < get.length - 15) {
       seti(i + 15);
       setX1('#EF4646');
       setX2('#EF4646');
-    } else if (get.length - (i + 15) < 15 && get.length - (i + 15) > 0) {
+    } else if (get.length - (i + 15) < 15 && get.length - (i + 15) >0) {
       seti(i + 15);
       setX2('#C4C4C4');
-    } else {
+      setX1('#EF4646');
+    } else if(i + 15 == get.length - 15) {
+      seti(i+15);
+      setX2('#C4C4C4');
+      setX1('#EF4646')
+    }
+    else{
       seti(i);
       setX2('#C4C4C4');
     }

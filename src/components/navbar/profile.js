@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
+import { useHistory } from 'react-router-dom'
 import './search.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,8 +61,7 @@ const name = 'Nipun Gupta';
 export default function Profile({ name, bitsId }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  //const [name,setName] =React.useState('');
-  //const [bitsId,setId] =React.useState('');
+  let history = useHistory();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -74,7 +74,7 @@ export default function Profile({ name, bitsId }) {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    location.replace('/');
+    history.push("/");
   };
 
   const open = Boolean(anchorEl);
