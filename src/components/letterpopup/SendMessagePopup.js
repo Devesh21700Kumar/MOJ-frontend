@@ -264,7 +264,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                     setMessageText(DOMPurify.sanitize(e.target.value));
                   }}
                   variant="outlined"
-                  rows={calculateTextAreaRows()}
+                  rows={
+                    screen.width > 550
+                      ? calculateTextAreaRows() - 2.2
+                      : calculateTextAreaRows() - 4
+                  }
                 />
               </div>
             </div>
