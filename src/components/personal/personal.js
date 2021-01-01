@@ -112,6 +112,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Personal({ name, bitsId }, props) {
+  window.history.replaceState(null, null, '/home');
   const classes = useStyles();
 
   const [det, setdet] = useState(
