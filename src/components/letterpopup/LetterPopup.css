@@ -93,11 +93,11 @@
   }
 }
 
-@media only screen and (min-width: 500px) and (max-width: 790px) {
+@media only screen and (min-width: 500px) and (max-width: 759.999px) {
   .letterpopup-classes-messageBody {
     top: 3vh;
-    margin-left: 8.1vw;
-    transform: scale(1.55);
+    margin-left: 7.1vw;
+    transform: scale(1.45);
   }
 }
 
@@ -106,6 +106,14 @@
     margin-top: 2rem;
     margin-left: 8vw;
     transform: scale(1.37);
+  }
+}
+
+@media only screen and (min-width: 1210px) and (max-width: 2000px) and (min-height: 211px) and (max-height: 600px) {
+  .letterpopup-classes-messageBody {
+    margin-top: 1.2rem;
+    margin-left: 2vw;
+    transform: scale(1.1);
   }
 }
 
@@ -121,6 +129,11 @@
   transform: translateX(-50%);
 }
 
+@media only screen and (min-width: 760px) and (max-width: 893px) {
+  .letterpopup-classes-messageBody {
+    margin-top: 2vh;
+  }
+}
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
   .letterpopup-classes-messageBody {

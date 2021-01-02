@@ -12,6 +12,16 @@ import Divider from '@material-ui/core/Divider';
 import { useHistory } from 'react-router-dom';
 import './search.css';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+
+const theme = createMuiTheme({
+  props: {
+    MuiButtonBase: {
+      // The properties to apply
+      disableRipple: true, // No more ripple, on the whole application 💣!
+    },
+  },
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
     height: '2rem',
     marginTop: '2.7vh',
     paddingRight: '2px',
+    '&:hover': {
+      backgroundColor: 'unset !important',
+      color: 'unset !important',
+    },
+    '&:click': {
+      backgroundColor: 'unset !important',
+      color: 'unset !important',
+    },
+    disableRipple: true,
+    disableFocusRipple: true,
   },
   menu: {
     marginLeft: theme.spacing(2),
@@ -40,6 +60,12 @@ const useStyles = makeStyles((theme) => ({
     height: '2rem',
     marginTop: '2.7vh',
     paddingRight: '22.5px',
+    '&:hover': {
+      backgroundColor: 'unset !important',
+      color: 'unset !important',
+    },
+    disableRipple: true,
+    disableFocusRipple: true,
   },
   orange: {
     color: theme.palette.getContrastText('#aa11ff'),
@@ -54,6 +80,16 @@ const useStyles = makeStyles((theme) => ({
       height: '2rem',
       marginTop: '2.7vh',
       paddingRight: '45.5px',
+      '&:hover': {
+        backgroundColor: 'unset !important',
+        color: 'unset !important',
+      },
+      '&:click': {
+        backgroundColor: 'unset !important',
+        color: 'unset !important',
+      },
+      disableRipple: true,
+      disableFocusRipple: true,
     },
   },
 }));
@@ -94,15 +130,16 @@ export default function Profile({ name, bitsId }) {
 
   return (
     <div>
-      <IconButton
-        className={
-          userinfo.permissionLevel != 0 ? classes.menuButton : classes.menu
-        }
-        onClick={handleClick}
-      >
-        <AccountCircleRoundedIcon className="icons" />
-      </IconButton>
-
+      <MuiThemeProvider theme={theme}>
+        <IconButton
+          disableRipple
+          className={
+            userinfo.permissionLevel != 0 ? classes.menuButton : classes.menu
+          }
+        >
+          <AccountCircleRoundedIcon className="icons" onClick={handleClick} />
+        </IconButton>
+      </MuiThemeProvider>
       {/* <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
         Open Popover
       </Button> */}

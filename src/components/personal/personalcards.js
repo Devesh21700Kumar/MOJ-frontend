@@ -92,6 +92,12 @@ export default function PersonalCards({ text, index }) {
         ? date.getDate() + 'nd  '
         : date.getDate() == 3
         ? date.getDate() + 'rd  '
+        : date.getDate() == 21
+        ? date.getDate() + 'st  '
+        : date.getDate() == 22
+        ? date.getDate() + 'nd  '
+        : date.getDate() == 23
+        ? date.getDate() + 'rd  '
         : date.getDate() + 'th ';
     var month = date.toLocaleString('default', { month: 'short' }) + ' ';
     var year = date.getFullYear() + ', ';
@@ -125,6 +131,7 @@ export default function PersonalCards({ text, index }) {
             <Grid container direction={'column'}>
               <Container value={index} className={classes.margi} id="cross">
                 <Grid
+                  key={index}
                   onClick={() => {
                     toggleReadMessages(true);
                     setpos((i / 15) * 15 + index);
