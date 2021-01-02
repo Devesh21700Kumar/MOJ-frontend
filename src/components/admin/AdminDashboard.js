@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: '#FFFDE8',
       borderRadius: '20px 20px 0 0',
       padding: '1.5rem',
+      minHeight: '80vh',
     },
     flags: {
       width: '100%',
@@ -165,6 +166,12 @@ const useStyles = makeStyles((theme) =>
     backToTopButton: {
       textTransform: 'none',
       fontSize: '1rem',
+      fontFamily: 'Oxygen, sans serif',
+    },
+    noMessages: {
+      color: '#FC0404',
+      width: '100%',
+      textAlign: 'center',
       fontFamily: 'Oxygen, sans serif',
     },
     '@media(min-width: 320px)': {
@@ -309,10 +316,12 @@ const ShowMessages = ({
   messageId,
   setMessageId,
 }) => {
+  const classes = useStyles();
+
   return (
     <>
-      {redFlag === red
-        ? redFlaggedMsgs.length > 0 &&
+      {redFlag === red ? (
+        redFlaggedMsgs.length > 0 ? (
           redFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
@@ -326,8 +335,11 @@ const ShowMessages = ({
               n={setNumber()}
             />
           ))
-        : greenFlag === green
-        ? greenFlaggedMsgs.length > 0 &&
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : greenFlag === green ? (
+        greenFlaggedMsgs.length > 0 ? (
           greenFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
@@ -341,8 +353,11 @@ const ShowMessages = ({
               n={setNumber()}
             />
           ))
-        : yellowFlag === yellow
-        ? yellowFlaggedMsgs.length > 0 &&
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : yellowFlag === yellow ? (
+        yellowFlaggedMsgs.length > 0 ? (
           yellowFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
@@ -356,20 +371,26 @@ const ShowMessages = ({
               n={setNumber()}
             />
           ))
-        : msgs.length !== 0 &&
-          msgs.map((message, index) => (
-            <MessageCard
-              bitsId={message.receiverId}
-              body={message.body}
-              date={message.date}
-              key={index}
-              index={index}
-              _id={message._id}
-              messageId={messageId}
-              setMessageId={setMessageId}
-              n={setNumber()}
-            />
-          ))}
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : msgs.length !== 0 ? (
+        msgs.map((message, index) => (
+          <MessageCard
+            bitsId={message.receiverId}
+            body={message.body}
+            date={message.date}
+            key={index}
+            index={index}
+            _id={message._id}
+            messageId={messageId}
+            setMessageId={setMessageId}
+            n={setNumber()}
+          />
+        ))
+      ) : (
+        <h1 className={classes.noMessages}>No Messages to Display!</h1>
+      )}
     </>
   );
 };
@@ -392,9 +413,12 @@ const AdminDashboard = () => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [type, setType] = useState('');
   const [i, seti] = useState(0);
+  const token = localStorage.getItem('token');
+
+  if (token === null) return <Redirect to="/" />;
 
   const { permissionLevel, name, bitsId } = JSON.parse(
-    atob(localStorage.getItem('token').split('.')[1])
+    atob(token.split('.')[1])
   );
 
   if (permissionLevel !== 2) return <Redirect to="/home" />;
@@ -404,24 +428,28 @@ const AdminDashboard = () => {
       await fetch(`${URL}/api/level2/unassignedMessages`, {
         method: 'GET',
         headers: {
-          token: `${localStorage.getItem('token')}`,
+          token: `${token}`,
         },
       })
     ).json();
-    setMsgs(messages);
+    if (messages.length) {
+      setMsgs(messages.reverse());
+    }
 
     const { data } = await (
       await fetch(`${URL}/api/level2/finalapproval`, {
         method: 'GET',
         headers: {
-          token: `${localStorage.getItem('token')}`,
+          token: `${token}`,
         },
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    setRedFlaggedMsgs(denied);
-    setYellowFlaggedMsgs(yellowflagged);
-    setGreenFlaggedMsgs(approved);
+    if (approved.length && denied.length && yellowflagged.length) {
+      setRedFlaggedMsgs(denied.reverse());
+      setYellowFlaggedMsgs(yellowflagged.reverse());
+      setGreenFlaggedMsgs(approved.reverse());
+    }
   }
 
   useEffect(() => {
@@ -615,7 +643,7 @@ const AdminDashboard = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            token: `${localStorage.getItem('token')}`,
+            token: `${token}`,
           },
           body: JSON.stringify({ disapproveId: messageId }),
         })
@@ -638,7 +666,7 @@ const AdminDashboard = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            token: `${localStorage.getItem('token')}`,
+            token: `${token}`,
           },
           body: JSON.stringify({ approveId: messageId }),
         })
@@ -847,14 +875,14 @@ const AdminDashboard = () => {
               </Grid>
             </div>
           </Grid>
-          {tabColor1 === '#FFFDE8' && (
+          {tabColor1 === '#FFFDE8' && msgs.length ? (
             <div className={classes.buttons}>
               <AssignCoreMembersPopup
                 messageId={messageId}
                 fetchMessages={fetchMessages}
               />
             </div>
-          )}
+          ) : null}
           <div className={classes.messages}>
             <ShowMessages
               msgs={msgs}
@@ -872,12 +900,14 @@ const AdminDashboard = () => {
 
           {/* Buttons */}
           {tabColor1 === '#FFFDE8' ? (
-            <div className={classes.buttons}>
-              <AssignCoreMembersPopup
-                messageId={messageId}
-                fetchMessages={fetchMessages}
-              />
-            </div>
+            msgs.length ? (
+              <div className={classes.buttons}>
+                <AssignCoreMembersPopup
+                  messageId={messageId}
+                  fetchMessages={fetchMessages}
+                />
+              </div>
+            ) : null
           ) : (
             <div className={classes.buttons1}>
               <Button
