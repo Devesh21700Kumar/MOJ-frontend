@@ -875,14 +875,14 @@ const AdminDashboard = () => {
               </Grid>
             </div>
           </Grid>
-          {tabColor1 === '#FFFDE8' && (
+          {tabColor1 === '#FFFDE8' && msgs.length ? (
             <div className={classes.buttons}>
               <AssignCoreMembersPopup
                 messageId={messageId}
                 fetchMessages={fetchMessages}
               />
             </div>
-          )}
+          ) : null}
           <div className={classes.messages}>
             <ShowMessages
               msgs={msgs}
@@ -900,12 +900,14 @@ const AdminDashboard = () => {
 
           {/* Buttons */}
           {tabColor1 === '#FFFDE8' ? (
-            <div className={classes.buttons}>
-              <AssignCoreMembersPopup
-                messageId={messageId}
-                fetchMessages={fetchMessages}
-              />
-            </div>
+            msgs.length ? (
+              <div className={classes.buttons}>
+                <AssignCoreMembersPopup
+                  messageId={messageId}
+                  fetchMessages={fetchMessages}
+                />
+              </div>
+            ) : null
           ) : (
             <div className={classes.buttons1}>
               <Button
