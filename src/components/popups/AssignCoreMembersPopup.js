@@ -223,20 +223,25 @@ const SingleListItem = ({
   bitsId,
   email,
   messageId,
+  fetchMessages,
   setSnackBarOpen,
   setOpen,
+  checked25,
+  setChecked25,
+  checked50,
+  setChecked50,
+  value,
+  setValue,
 }) => {
   const classes = useStyles();
 
-  const [c1, setc1] = useState('inline');
-  const [c2, setc2] = useState('none');
+  const [c1, setc1] = useState(false);
 
   const click1 = () => {
-    setc2('inline');
-    setc1('none');
+    setc1(!c1);
 
     async function assignMessages() {
-      if (c1 === 'inline' && c2 === 'none') {
+      if (!c1 && messageId.length) {
         const response = await (
           await fetch(`${URL}/api/level2/assignMessage`, {
             method: 'POST',
@@ -247,27 +252,26 @@ const SingleListItem = ({
             body: JSON.stringify({ email, messageId }),
           })
         ).json();
-
         if (response.ok) {
           setSnackBarOpen(true);
           setOpen(false);
+          fetchMessages();
+          if (checked25) setChecked25(false);
+          if (checked50) setChecked50(false);
+          if (value) setValue('');
         }
+      } else {
+        email = '';
       }
     }
 
     assignMessages();
   };
 
-  const click2 = () => {
-    setc1('inline');
-    setc2('none');
-  };
-
   return (
-    <ListItem button>
+    <ListItem button onClick={click1}>
       <svg
-        onClick={click1}
-        display={c1}
+        display={!c1 ? 'block' : 'none'}
         val={index}
         width="37"
         height="37"
@@ -283,8 +287,7 @@ const SingleListItem = ({
         />
       </svg>
       <svg
-        onClick={click2}
-        display={c2}
+        display={c1 ? 'block' : 'none'}
         val={index}
         width="42"
         height="38"
@@ -319,6 +322,13 @@ const NamesList = ({
   messageId,
   setSnackBarOpen,
   setOpen,
+  fetchMessages,
+  checked25,
+  setChecked25,
+  checked50,
+  setChecked50,
+  value,
+  setValue,
 }) => {
   const classes = useStyles();
 
@@ -334,8 +344,15 @@ const NamesList = ({
               email={result.email}
               key={index}
               messageId={messageId}
+              fetchMessages={fetchMessages}
               setSnackBarOpen={setSnackBarOpen}
               setOpen={setOpen}
+              checked25={checked25}
+              setChecked25={setChecked25}
+              checked50={checked50}
+              setChecked50={setChecked50}
+              value={value}
+              setValue={setValue}
             />
           );
         })
@@ -349,8 +366,15 @@ const NamesList = ({
               email={result.email}
               key={index}
               messageId={messageId}
+              fetchMessages={fetchMessages}
               setSnackBarOpen={setSnackBarOpen}
               setOpen={setOpen}
+              checked25={checked25}
+              setChecked25={setChecked25}
+              checked50={checked50}
+              setChecked50={setChecked50}
+              value={value}
+              setValue={setValue}
             />
           );
         })
@@ -361,7 +385,16 @@ const NamesList = ({
   );
 };
 
-const AssignCoreMembersPopup = ({ messageId }) => {
+const AssignCoreMembersPopup = ({
+  messageId,
+  fetchMessages,
+  checked25,
+  setChecked25,
+  checked50,
+  setChecked50,
+  value,
+  setValue,
+}) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -457,8 +490,15 @@ const AssignCoreMembersPopup = ({ messageId }) => {
                   searchedData={filterSearch()}
                   data={searchResults}
                   messageId={messageId}
+                  fetchMessages={fetchMessages}
                   setSnackBarOpen={setSnackBarOpen}
                   setOpen={setOpen}
+                  checked25={checked25}
+                  setChecked25={setChecked25}
+                  checked50={checked50}
+                  setChecked50={setChecked50}
+                  value={value}
+                  setValue={setValue}
                 />
               </Paper>
             </div>

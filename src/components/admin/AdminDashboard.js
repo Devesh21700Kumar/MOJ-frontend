@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: '#FFFDE8',
       borderRadius: '20px 20px 0 0',
       padding: '1.5rem',
+      minHeight: '80vh',
     },
     flags: {
       width: '100%',
@@ -165,6 +166,12 @@ const useStyles = makeStyles((theme) =>
     backToTopButton: {
       textTransform: 'none',
       fontSize: '1rem',
+      fontFamily: 'Oxygen, sans serif',
+    },
+    noMessages: {
+      color: '#FC0404',
+      width: '100%',
+      textAlign: 'center',
       fontFamily: 'Oxygen, sans serif',
     },
     '@media(min-width: 320px)': {
@@ -309,10 +316,12 @@ const ShowMessages = ({
   messageId,
   setMessageId,
 }) => {
+  const classes = useStyles();
+
   return (
     <>
-      {redFlag === red
-        ? redFlaggedMsgs.length > 0 &&
+      {redFlag === red ? (
+        redFlaggedMsgs.length > 0 ? (
           redFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
@@ -326,8 +335,11 @@ const ShowMessages = ({
               n={setNumber()}
             />
           ))
-        : greenFlag === green
-        ? greenFlaggedMsgs.length > 0 &&
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : greenFlag === green ? (
+        greenFlaggedMsgs.length > 0 ? (
           greenFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
@@ -341,8 +353,11 @@ const ShowMessages = ({
               n={setNumber()}
             />
           ))
-        : yellowFlag === yellow
-        ? yellowFlaggedMsgs.length > 0 &&
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : yellowFlag === yellow ? (
+        yellowFlaggedMsgs.length > 0 ? (
           yellowFlaggedMsgs.map((message, index) => (
             <MessageCard
               bitsId={message.receiverId}
@@ -356,20 +371,26 @@ const ShowMessages = ({
               n={setNumber()}
             />
           ))
-        : msgs.length !== 0 &&
-          msgs.map((message, index) => (
-            <MessageCard
-              bitsId={message.receiverId}
-              body={message.body}
-              date={message.date}
-              key={index}
-              index={index}
-              _id={message._id}
-              messageId={messageId}
-              setMessageId={setMessageId}
-              n={setNumber()}
-            />
-          ))}
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : msgs.length !== 0 ? (
+        msgs.map((message, index) => (
+          <MessageCard
+            bitsId={message.receiverId}
+            body={message.body}
+            date={message.date}
+            key={index}
+            index={index}
+            _id={message._id}
+            messageId={messageId}
+            setMessageId={setMessageId}
+            n={setNumber()}
+          />
+        ))
+      ) : (
+        <h1 className={classes.noMessages}>No Messages to Display!</h1>
+      )}
     </>
   );
 };
@@ -392,39 +413,46 @@ const AdminDashboard = () => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [type, setType] = useState('');
   const [i, seti] = useState(0);
+  const [display, setDisplay] = useState('none');
+  const token = localStorage.getItem('token');
+
+  if (token === null) return <Redirect to="/" />;
 
   const { permissionLevel, name, bitsId } = JSON.parse(
-    atob(localStorage.getItem('token').split('.')[1])
+    atob(token.split('.')[1])
   );
 
   if (permissionLevel !== 2) return <Redirect to="/home" />;
 
-  useEffect(() => {
-    async function fetchMessages() {
-      const { messages } = await (
-        await fetch(`${URL}/api/level2/unassignedMessages`, {
-          method: 'GET',
-          headers: {
-            token: `${localStorage.getItem('token')}`,
-          },
-        })
-      ).json();
-      setMsgs(messages);
-
-      const { data } = await (
-        await fetch(`${URL}/api/level2/finalapproval`, {
-          method: 'GET',
-          headers: {
-            token: `${localStorage.getItem('token')}`,
-          },
-        })
-      ).json();
-      const { approved, denied, yellowflagged } = data;
-      setRedFlaggedMsgs(denied);
-      setYellowFlaggedMsgs(yellowflagged);
-      setGreenFlaggedMsgs(approved);
+  async function fetchMessages() {
+    const { messages } = await (
+      await fetch(`${URL}/api/level2/unassignedMessages`, {
+        method: 'GET',
+        headers: {
+          token: `${token}`,
+        },
+      })
+    ).json();
+    if (messages.length) {
+      setMsgs(messages.reverse());
     }
 
+    const { data } = await (
+      await fetch(`${URL}/api/level2/finalapproval`, {
+        method: 'GET',
+        headers: {
+          token: `${token}`,
+        },
+      })
+    ).json();
+    const { approved, denied, yellowflagged } = data;
+    setRedFlaggedMsgs(denied.reverse());
+    setYellowFlaggedMsgs(yellowflagged.reverse());
+    setGreenFlaggedMsgs(approved.reverse());
+    setDisplay('flex');
+  }
+
+  useEffect(() => {
     fetchMessages();
   }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
 
@@ -435,10 +463,43 @@ const AdminDashboard = () => {
     setValue(' ');
 
     setChecked25(!checked25);
-    if (msgs.length > 25) {
-      for (let i = 0; i < 25; i++) {
-        setMessageId(msgs[i]._id);
+    if (!checked25) {
+      if (msgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          if (msgs[i]) {
+            setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          }
+        }
       }
+      if (redFlaggedMsgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          if (redFlaggedMsgs[i]) {
+            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          }
+        }
+      }
+      if (yellowFlaggedMsgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          if (yellowFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              yellowFlaggedMsgs[i]._id,
+            ]);
+          }
+        }
+      }
+      if (greenFlaggedMsgs.length > 25) {
+        for (let i = 0; i < 25; i++) {
+          if (greenFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              greenFlaggedMsgs[i]._id,
+            ]);
+          }
+        }
+      }
+    } else {
+      setMessageId([]);
     }
   };
 
@@ -449,19 +510,85 @@ const AdminDashboard = () => {
     setValue(' ');
 
     setChecked50(!checked50);
-    if (msgs.length > 50) {
-      for (let i = 0; i < 50; i++) {
-        setMessageId(msgs[i]._id);
+    if (!checked50) {
+      if (msgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          if (msgs[i]) {
+            setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          }
+        }
       }
+      if (redFlaggedMsgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          if (redFlaggedMsgs[i]) {
+            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          }
+        }
+      }
+      if (yellowFlaggedMsgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          if (yellowFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              yellowFlaggedMsgs[i]._id,
+            ]);
+          }
+        }
+      }
+      if (greenFlaggedMsgs.length > 50) {
+        for (let i = 0; i < 50; i++) {
+          if (greenFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              greenFlaggedMsgs[i]._id,
+            ]);
+          }
+        }
+      }
+    } else {
+      setMessageId([]);
     }
   };
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    if (msgs.length > e.target.value) {
-      for (let i = 0; i < e.target.value; i++) {
-        setMessageId(msgs[i]._id);
+    if (value) {
+      if (msgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          if (msgs[i]) {
+            setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          }
+        }
       }
+      if (redFlaggedMsgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          if (redFlaggedMsgs[i]) {
+            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          }
+        }
+      }
+      if (yellowFlaggedMsgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          if (yellowFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              yellowFlaggedMsgs[i]._id,
+            ]);
+          }
+        }
+      }
+      if (greenFlaggedMsgs.length > e.target.value) {
+        for (let i = 0; i < e.target.value; i++) {
+          if (greenFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              greenFlaggedMsgs[i]._id,
+            ]);
+          }
+        }
+      }
+    } else {
+      setMessageId([]);
     }
     if (checked25 === true) {
       setChecked25(!checked25);
@@ -521,6 +648,7 @@ const AdminDashboard = () => {
       )
     );
   }, [i]);
+
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
@@ -563,7 +691,7 @@ const AdminDashboard = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            token: `${localStorage.getItem('token')}`,
+            token: `${token}`,
           },
           body: JSON.stringify({ disapproveId: messageId }),
         })
@@ -572,6 +700,7 @@ const AdminDashboard = () => {
       if (response.ok) {
         setType('Declined');
         setSnackBarOpen(true);
+        fetchMessages();
       }
     }
 
@@ -585,7 +714,7 @@ const AdminDashboard = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            token: `${localStorage.getItem('token')}`,
+            token: `${token}`,
           },
           body: JSON.stringify({ approveId: messageId }),
         })
@@ -594,10 +723,23 @@ const AdminDashboard = () => {
       if (response.ok) {
         setType('Approved');
         setSnackBarOpen(true);
+        fetchMessages();
       }
     }
 
     postApprovedMessages();
+  };
+
+  const getMaxNumber = () => {
+    if (redFlag === red) {
+      return redFlaggedMsgs.length;
+    } else if (yellowFlag === yellow) {
+      return yellowFlaggedMsgs.length;
+    } else if (greenFlag === green) {
+      return greenFlaggedMsgs.length;
+    } else {
+      return msgs.length;
+    }
   };
 
   return (
@@ -618,6 +760,7 @@ const AdminDashboard = () => {
             setChecked25(false);
             setChecked50(false);
             seti(0);
+            fetchMessages();
           }}
         >
           <Button className={classes.tabButton}>Pending Messages</Button>
@@ -632,6 +775,7 @@ const AdminDashboard = () => {
             setChecked25(false);
             setChecked50(false);
             seti(0);
+            fetchMessages();
           }}
         >
           <Button className={classes.tabButton}>Final Approval</Button>
@@ -653,6 +797,7 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue('');
                     seti(0);
+                    fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${redFlag}` }}
                 >
@@ -668,6 +813,7 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue('');
                     seti(0);
+                    fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
                 >
@@ -683,6 +829,7 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue('');
                     seti(0);
+                    fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
                 >
@@ -690,7 +837,7 @@ const AdminDashboard = () => {
                 </Button>
               </div>
             )}
-            <div className={classes.select}>
+            <div className={classes.select} style={{ display: display }}>
               <Grid item xs className={classes.subtitle1}>
                 Select
               </Grid>
@@ -699,7 +846,7 @@ const AdminDashboard = () => {
                 <span style={{ marginLeft: '2rem' }}>
                   <svg
                     onClick={handleChange25}
-                    display={checked25 === false ? 'block' : 'none'}
+                    display={!checked25 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
@@ -715,7 +862,7 @@ const AdminDashboard = () => {
                   </svg>
                   <svg
                     onClick={handleChange25}
-                    display={checked25 === true ? 'block' : 'none'}
+                    display={checked25 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 42 38"
@@ -742,7 +889,7 @@ const AdminDashboard = () => {
                 <span style={{ marginLeft: '2rem' }}>
                   <svg
                     onClick={handleChange50}
-                    display={checked50 === false ? 'block' : 'none'}
+                    display={!checked50 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
@@ -758,7 +905,7 @@ const AdminDashboard = () => {
                   </svg>
                   <svg
                     onClick={handleChange50}
-                    display={checked50 === true ? 'block' : 'none'}
+                    display={checked50 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 42 38"
@@ -785,19 +932,30 @@ const AdminDashboard = () => {
                   First
                   <InputBase
                     className={classes.input}
-                    inputProps={{ 'aria-label': 'naked' }}
+                    inputProps={{ min: 0, max: getMaxNumber() }}
                     value={value}
                     onChange={handleChange}
+                    id="standard-number"
+                    type="number"
                   />
                 </Grid>
               </Grid>
             </div>
           </Grid>
-          {tabColor1 === '#FFFDE8' && (
-            <div className={classes.buttons}>
-              <AssignCoreMembersPopup messageId={messageId} />
+          {tabColor1 === '#FFFDE8' && msgs.length ? (
+            <div className={classes.buttons} style={{ display: display }}>
+              <AssignCoreMembersPopup
+                messageId={messageId}
+                fetchMessages={fetchMessages}
+                checked25={checked25}
+                setChecked25={setChecked25}
+                checked50={checked50}
+                setChecked50={setChecked50}
+                value={value}
+                setValue={setValue}
+              />
             </div>
-          )}
+          ) : null}
           <div className={classes.messages}>
             <ShowMessages
               msgs={msgs}
@@ -815,11 +973,16 @@ const AdminDashboard = () => {
 
           {/* Buttons */}
           {tabColor1 === '#FFFDE8' ? (
-            <div className={classes.buttons}>
-              <AssignCoreMembersPopup messageId={messageId} />
-            </div>
+            msgs.length ? (
+              <div className={classes.buttons} style={{ display: display }}>
+                <AssignCoreMembersPopup
+                  messageId={messageId}
+                  fetchMessages={fetchMessages}
+                />
+              </div>
+            ) : null
           ) : (
-            <div className={classes.buttons1}>
+            <div className={classes.buttons1} style={{ display: display }}>
               <Button
                 variant="contained"
                 className={classes.rejectButton}
@@ -845,6 +1008,7 @@ const AdminDashboard = () => {
               onClick={() =>
                 window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
               }
+              style={{ display: display }}
             >
               Back to Top
             </Button>
