@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   backToTopIcon: {
     padding: '0 0 0 2px',
   },
-  '@media (max-width: 1000px)': {
+  '@media (max-width: 1200px)': {
     paginatorFragment: {
       paddingRight: 0,
       textAlign: 'center',
