@@ -13,6 +13,7 @@ export const Data = createContext();
 import axios from 'axios';
 export const Data1 = createContext();
 import Navbar from '../navbar/navbar';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -113,6 +114,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Personal({ name, bitsId }, props) {
   window.history.replaceState(null, null, '/home');
   const classes = useStyles();
+  const token = localStorage.getItem('token');
+
+  if (token === null) return <Redirect to="/" />;
 
   const [det, setdet] = useState(
     Array(0)
@@ -139,11 +143,11 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
         {
           method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
+          headers: { token: `${token}` },
         }
       );
       var t = response.data.data;
-      setret(response.data.data);
+      setret([...t].reverse());
     } catch (error) {
       console.error(error.message);
     }
@@ -154,12 +158,12 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
         {
           method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
+          headers: { token: `${token}` },
         }
       );
       var r = response.data.data;
-      setdet(response.data.data);
-      setGet(r);
+      setdet([...r].reverse());
+      setGet([...r].reverse());
     } catch (error) {
       console.error(error.message);
     }
@@ -210,9 +214,7 @@ export default function Personal({ name, bitsId }, props) {
   const [i, seti] = useState(0);
   const [x1, setX1] = useState('#C4C4C4');
   const [x2, setX2] = useState('#EF4646');
-  const userdata = JSON.parse(
-    window.atob(localStorage.getItem('token').split('.')[1])
-  );
+  const userdata = JSON.parse(window.atob(token.split('.')[1]));
   const hc1 = (e) => {
     if (i > 15) {
       seti(i - 15);

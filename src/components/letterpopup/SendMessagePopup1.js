@@ -14,7 +14,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import DOMPurify from 'dompurify';
-import CloseIcon from '@material-ui/icons/Close';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -64,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   hexap: {
     maxHeight: '40vh',
-    width: '49vw',
+    width: '30vw',
     overflowY: 'scroll',
   },
 }));
@@ -146,10 +145,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
     setc1('inline');
     setc2('none');
   };
-  const handleClick3 = () => {
-    setc1('inline');
-    setc2('none');
-  };
+
   function checkspace(dat) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
   }
@@ -170,7 +166,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                 className="letterpopup-classes-sendTo"
                 style={{ display: 'flex' }}
               >
-                <div style={{ display: c2 }}>
+                <div>
                   <IconButton
                     onClick={handleClick}
                     style={{ marginLeft: '-35%', marginTop: '-14%' }}
@@ -178,19 +174,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                     <SearchIcon />
                   </IconButton>
                 </div>
-                <div style={{ display: c1 }}>
-                  <IconButton
-                    onClick={handleClick}
-                    style={{ marginLeft: '-35%', marginTop: '-14%' }}
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                </div>
                 <div className="search">
                   <TextField
                     className="letterpopup-classes-sendToTextField"
                     value={receiverEmail}
-                    onClick={handleClick3}
+                    onClick={handleClick}
                     onChange={(e) => {
                       handleClick2();
                       setSendToAddress(DOMPurify.sanitize(e.target.value));
@@ -287,15 +275,13 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   className="letterpopup-classes-messageTextField"
                   value={messageBody}
                   onChange={(e) => {
-                    setMessageText(e.target.value);
+                    setMessageText(DOMPurify.sanitize(e.target.value));
                   }}
                   variant="outlined"
                   rows={
                     screen.width > 550
-                      ? screen.width > 900
-                        ? calculateTextAreaRows() - 0.6
-                        : calculateTextAreaRows() - 2.2
-                      : calculateTextAreaRows() - 1.1
+                      ? calculateTextAreaRows() - 2.2
+                      : calculateTextAreaRows() - 4
                   }
                 />
               </div>

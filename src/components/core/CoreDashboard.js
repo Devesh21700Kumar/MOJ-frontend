@@ -132,9 +132,11 @@ const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
 
 const Dashboard = (messages, props) => {
   const classes = useStyles();
-  const userInfo = JSON.parse(
-    atob(localStorage.getItem('token').split('.')[1])
-  );
+  const token = localStorage.getItem('token');
+
+  if (token === null) return <Redirect to="/" />;
+
+  const userInfo = JSON.parse(atob(token.split('.')[1]));
   const [msgs, setMsgs] = useState({});
   const [msgPage, setMsgPage] = useState(0);
   const handleChangePage = (goToNext) => {
@@ -151,11 +153,9 @@ const Dashboard = (messages, props) => {
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const { permissionLevel } = JSON.parse(
-    atob(localStorage.getItem('token').split('.')[1])
-  );
 
-  if (permissionLevel !== 1) return <Redirect to="/home" />;
+  if (userInfo.permissionLevel < 1) return <Redirect to="/home" />;
+
   const Paginator = () => {
     return (
       <div className={classes.paginatorFragment}>
@@ -196,8 +196,7 @@ const Dashboard = (messages, props) => {
       let response = await axios.get(API_URL + '/getassignment', {
         method: 'GET',
         headers: {
-          // eslint-disable-next-line prettier/prettier
-          'token': `${localStorage.getItem('token')}`,
+          token: `${token}`,
         },
       });
       console.log(response.data.data);
