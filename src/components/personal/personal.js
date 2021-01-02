@@ -142,7 +142,7 @@ export default function Personal({ name, bitsId }, props) {
         }
       );
       var t = response.data.data;
-      setret(response.data.data);
+      setret([...t].reverse());
     } catch (error) {
       console.error(error.message);
     }
@@ -157,8 +157,8 @@ export default function Personal({ name, bitsId }, props) {
         }
       );
       var r = response.data.data;
-      setdet(response.data.data);
-      setGet(r);
+      setdet([...r].reverse());
+      setGet([...r].reverse());
     } catch (error) {
       console.error(error.message);
     }

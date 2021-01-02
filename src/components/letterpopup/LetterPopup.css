@@ -73,7 +73,40 @@
 
 .letterpopup-classes-messageBody {
   position: relative;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  width: 30vw;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 500px) {
+  .letterpopup-classes-messageBody {
+    margin-top: 2rem;
+    margin-left: 3.9vw;
+    width: 36vw;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1600px) {
+  .letterpopup-classes-messageBody {
+    margin-top: 2rem;
+    margin-left: 6vw;
+    transform: scale(1.25);
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 790px) {
+  .letterpopup-classes-messageBody {
+    top: 3vh;
+    margin-left: 8.1vw;
+    transform: scale(1.55);
+  }
+}
+
+@media only screen and (min-width: 1600.0001px) and (max-width: 2068px) {
+  .letterpopup-classes-messageBody {
+    margin-top: 2rem;
+    margin-left: 8vw;
+    transform: scale(1.37);
+  }
 }
 
 .letterpopup-classes-messageTextField {

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Notifs from './notifs';
 import Profile from './profile';
 import '../navbar/navbar.css';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
@@ -45,6 +46,7 @@ export default function Navbar({ navHeading, name, bitsId }) {
   if (navHeading == null) {
     navHeading = 'DashBoard';
   }
+
   return (
     <React.Fragment>
       <div position="fixed" className={classes.appBar}>

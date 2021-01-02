@@ -11,6 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { useHistory } from 'react-router-dom';
 import './search.css';
+import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,11 +61,21 @@ const name = 'Nipun Gupta';
 
 export default function Profile({ name, bitsId }) {
   const classes = useStyles();
+  const onLogoutSuccess = (res) => {
+    console.log('Logged out');
+  };
+
+  const clientId =
+    '125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com';
   const [anchorEl, setAnchorEl] = React.useState(null);
   let history = useHistory();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const { signOut } = useGoogleLogout({
+    clientId,
+    onLogoutSuccess,
+  });
   const userinfo = JSON.parse(
     window.atob(localStorage.getItem('token').split('.')[1])
   );
@@ -73,6 +84,7 @@ export default function Profile({ name, bitsId }) {
   };
 
   const handleLogout = () => {
+    signOut();
     localStorage.removeItem('token');
     history.push('/');
   };
