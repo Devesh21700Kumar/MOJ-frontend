@@ -5,6 +5,7 @@ import Notifs from './notifs';
 import Profile from './profile';
 import '../navbar/navbar.css';
 import { useHistory } from 'react-router-dom';
+import Stats from './stats';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({ navHeading, name, bitsId }) {
+export default function Navbar({ navHeading, name, bitsId, stats }) {
   const classes = useStyles();
   if (navHeading == null) {
     navHeading = 'DashBoard';
@@ -85,6 +86,7 @@ export default function Navbar({ navHeading, name, bitsId }) {
           >
             <Notifs />
             <Profile name={name} bitsId={bitsId} />
+            {!stats ? <Stats /> : null}
           </Grid>
         </Grid>
       </div>
