@@ -14,6 +14,7 @@ import axios from 'axios';
 export const Data1 = createContext();
 import Navbar from '../navbar/navbar';
 import { Redirect } from 'react-router-dom';
+import URL from '../util/url';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -118,7 +119,14 @@ export default function Personal({ name, bitsId }, props) {
 
   if (token === null) return <Redirect to="/" />;
 
-  const [det, setdet] = useState(
+
+  const [rec, setrec] = useState(
+    Array(0).fill({
+      body: 'Lorem Ipsum BTits simply dummy.',
+      date: '28th Dec 2020, 2:31 a.m.',
+    })
+  );
+  const [sent, setsent] = useState(
     Array(0)
       .fill({
         body: 'Lorem Ipsum is simply dummy.',
@@ -131,60 +139,65 @@ export default function Personal({ name, bitsId }, props) {
         };
       })
   );
-  const [ret, setret] = useState(
-    Array(0).fill({
-      body: 'Lorem Ipsum BTits simply dummy.',
-      date: '28th Dec 2020, 2:31 a.m.',
-    })
-  );
-  useEffect(async () => {
+
+  async function call1 () {
     try {
       let response = await axios.get(
-        `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
-        {
-          method: 'GET',
-          headers: { token: `${token}` },
-        }
-      );
-      var t = response.data.data;
-      setret([...t].reverse());
-    } catch (error) {
-      console.error(error.message);
-    }
-  }, []);
-  useEffect(async () => {
-    try {
-      let response = await axios.get(
-        `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
+        `${URL}/api/level0/receivedmessages`,
         {
           method: 'GET',
           headers: { token: `${token}` },
         }
       );
       var r = response.data.data;
-      setdet([...r].reverse());
-      setGet([...r].reverse());
+      //console.log(r);
+      setrec([...r].reverse());
     } catch (error) {
       console.error(error.message);
     }
+  }
+  useEffect( () => {
+    call1 ();
   }, []);
 
-  const [get, setGet] = useState(det);
+  async function call2 () {
+    try {
+      let response = await axios.get(
+        `${URL}/api/level0/sentmessages`,
+        {
+          method: 'GET',
+          headers: { token: `${token}` },
+        }
+      );
+      var t = response.data.data;
+      setsent([...t].reverse());
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+  useEffect( () => {
+        call2 ();
+  }, []);
+
+
+  const [get, setGet] = useState(rec);
 
   const [color, setColor] = useState('#FFFDE8');
 
   const boxClick = () => {
-    if (det.length >= 15) {
+    if (rec.length >= 15) {
       setColor('#FFFDE8');
       setColor1('#FB8989');
-      setGet(det);
+      call1 ();
+      setGet(rec);
       seti(0);
       setX1('#C4C4C4');
       setX2('#EF4646');
     } else {
       setColor('#FFFDE8');
       setColor1('#FB8989');
-      setGet(det);
+      call1 ();
+      setGet(rec);
       seti(0);
       setX1('#C4C4C4');
       setX2('#C4C4C4');
@@ -194,18 +207,20 @@ export default function Personal({ name, bitsId }, props) {
   const [color1, setColor1] = useState('#FB8989');
 
   const boxClick1 = () => {
-    if (ret.length >= 15) {
+    if (sent.length >= 15) {
+      call2 ();
       setColor1('#FFFDE8');
       setColor('#FB8989');
       seti(0);
-      setGet(ret);
-      //console.log(ret.length);
+      setGet(sent);
+      //console.log(sent.length);
       setX1('#C4C4C4');
       setX2('#EF4646');
     } else {
+      call2 ();
       setColor1('#FFFDE8');
       setColor('#FB8989');
-      setGet(ret);
+      setGet(sent);
       seti(0);
       setX1('#C4C4C4');
       setX2('#C4C4C4');
