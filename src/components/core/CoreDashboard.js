@@ -181,15 +181,15 @@ const Dashboard = (messages, props) => {
   };
   const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
-    var day = date.getDate() + 'th ';
-    var month = date.toLocaleString('default', { month: 'short' }) + ' ';
+    var day = date.getDate() + ', ';
+    var month = date.toLocaleString('default', { month: 'long' }) + ' ';
     var year = date.getFullYear() + ', ';
     var time = date.toLocaleString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
       hour12: true,
     });
-    return day + month + year + time;
+    return month + day + year + time;
   };
   useEffect(async () => {
     try {
