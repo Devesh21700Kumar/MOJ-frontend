@@ -89,7 +89,7 @@ export default function Notifs() {
           className={classes.root}
           aria-label="notifications"
         >
-          <div>
+          <div style={{ padding: '0' }}>
             <ListItem
               button
               className={
@@ -115,6 +115,7 @@ export default function Notifs() {
                 onClick={handleClick1}
               />
             </ListItem>
+            <Divider />
             <ListItem button className={classes.hey}>
               <ListItemText
                 className={classes.typography}
@@ -122,7 +123,6 @@ export default function Notifs() {
                 onClick={handleClick2}
               />
             </ListItem>
-            <Divider />
           </div>
         </List>
       </Popover>
