@@ -13,7 +13,6 @@ import List from '@material-ui/core/List';
 import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import DOMPurify from 'dompurify';
 import CloseIcon from '@material-ui/icons/Close';
 
 function Alert(props) {
@@ -99,6 +98,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
         ).json();
         if (response.ok) {
           setOpen(true);
+          setSendToAddress('');
+          setMessageText('');
         } else {
           setOpen(false);
         }
@@ -193,7 +194,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                     onClick={handleClick3}
                     onChange={(e) => {
                       handleClick2();
-                      setSendToAddress(DOMPurify.sanitize(e.target.value));
+                      setSendToAddress(e.target.value);
                     }}
                     placeholder="Who is this for?"
                   />
@@ -248,7 +249,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                               secondary={person.email}
                               onClick={() => {
                                 setSendToAddress(
-                                  DOMPurify.sanitize(person.email)
+                                  person.email
                                 );
                                 handleClose2();
                               }}
@@ -261,7 +262,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                           className
                           primary="enter correct value to search"
                           onClick={() => {
-                            setSendToAddress(DOMPurify.sanitize(person.email));
+                            setSendToAddress(person.email);
                             handleClose2();
                           }}
                         />
@@ -304,7 +305,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
               style={{ display: c2 }}
               className="letterpopup-classes-sendButton"
             >
-              <Button variant="outlined" type="submit">
+              <Button variant="outlined" type="submit" >
                 Send
               </Button>
             </div>

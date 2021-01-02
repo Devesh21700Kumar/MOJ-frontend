@@ -13,6 +13,7 @@ export const Data = createContext();
 import axios from 'axios';
 export const Data1 = createContext();
 import Navbar from '../navbar/navbar';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -111,7 +112,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Personal({ name, bitsId }, props) {
+  window.history.replaceState(null, null, '/home');
   const classes = useStyles();
+  const token = localStorage.getItem('token');
+
+  if (token === null) return <Redirect to="/" />;
 
   const [det, setdet] = useState(
     Array(0)
@@ -138,7 +143,7 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/sentmessages`,
         {
           method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
+          headers: { token: `${token}` },
         }
       );
       var t = response.data.data;
@@ -153,7 +158,7 @@ export default function Personal({ name, bitsId }, props) {
         `https://jogwbackend.herokuapp.com/api/level0/receivedmessages`,
         {
           method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
+          headers: { token: `${token}` },
         }
       );
       var r = response.data.data;
@@ -209,9 +214,7 @@ export default function Personal({ name, bitsId }, props) {
   const [i, seti] = useState(0);
   const [x1, setX1] = useState('#C4C4C4');
   const [x2, setX2] = useState('#EF4646');
-  const userdata = JSON.parse(
-    window.atob(localStorage.getItem('token').split('.')[1])
-  );
+  const userdata = JSON.parse(window.atob(token.split('.')[1]));
   const hc1 = (e) => {
     if (i > 15) {
       seti(i - 15);
@@ -356,11 +359,12 @@ export default function Personal({ name, bitsId }, props) {
               </Grid>
               <Grid item textAlign="center">
                 <Button
+                  className="ken"
                   style={{
                     fontWeight: '700',
                     textTransform: 'none',
                     fontFamily: 'Oxygen',
-                    fontSize: '2.2vh',
+                    //fontSize: '2.2vh',
                     margin: '1vw',
                   }}
                 >

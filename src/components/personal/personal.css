@@ -129,6 +129,7 @@
 @media only screen and (min-width: 312px) and (max-width: 420px) {
   .ter {
     margin-left: 85vw;
+    margin-top: 79vh;
   }
 }
 @media only screen and (min-width: 402px) and (max-width: 619px) {
@@ -332,5 +333,34 @@
     height: 89.5vh;
     width: 100vw;
     margin-top: 0vh;
+  }
+}
+
+@media only screen and (min-height: 0px) and (max-height: 600px) and (min-width: 500px) and (max-width: 1907.9px) {
+  #color1 {
+    height: 1500px;
+  }
+  .set1 {
+    height: calc(-12vh+495px);
+  }
+  .hexad {
+    margin-top: 400px;
+  }
+  .ter {
+    position: fixed;
+    margin-left: 87vw;
+    margin-top: 70px;
+  }
+  .terov1 {
+    height: 800px;
+  }
+  #cross {
+    height: 68px;
+  }
+  .crux1 {
+    height: 60px;
+  }
+  .ken {
+    font-size: 11px;
   }
 }
