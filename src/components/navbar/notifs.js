@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import './search.css';
 import { Route, Redirect, useHistory } from 'react-router';
-import { createMuiTheme,MuiThemeProvider  } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
 const theme = createMuiTheme({
   props: {
@@ -19,7 +19,6 @@ const theme = createMuiTheme({
     },
   },
 });
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '2.7vh',
     marginRight: '2.6vw',
     paddingRight: '3px',
-    "&:hover": {
+    '&:hover': {
       backgroundColor: 'unset !important',
       color: 'unset !important',
     },
@@ -78,15 +77,16 @@ export default function Notifs() {
   return (
     <div>
       <MuiThemeProvider theme={theme}>
-      <IconButton disableRipple
-        className={
-          userinfo.permissionLevel != 0 ? classes.menuButton : classes.menu
-        }
-        onClick={handleClick}
-      >
-        <ArrowForwardIosIcon style={{}} className="icons" />
-      </IconButton>
-      </MuiThemeProvider>    
+        <IconButton
+          disableRipple
+          className={
+            userinfo.permissionLevel != 0 ? classes.menuButton : classes.menu
+          }
+          onClick={handleClick}
+        >
+          <ArrowForwardIosIcon style={{}} className="icons" />
+        </IconButton>
+      </MuiThemeProvider>
       <Popover
         id={id}
         open={open}
@@ -146,3 +146,4 @@ export default function Notifs() {
     </div>
   );
 }
+

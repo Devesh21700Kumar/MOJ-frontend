@@ -248,9 +248,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                               primary={person.name}
                               secondary={person.email}
                               onClick={() => {
-                                setSendToAddress(
-                                  person.email
-                                );
+                                setSendToAddress(person.email);
                                 handleClose2();
                               }}
                             />
@@ -305,7 +303,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
               style={{ display: c2 }}
               className="letterpopup-classes-sendButton"
             >
-              <Button variant="outlined" type="submit" >
+              <Button variant="outlined" type="submit">
                 Send
               </Button>
             </div>
