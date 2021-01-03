@@ -170,6 +170,8 @@
 }
 .letterpopup-classes-message > div.letterpopup-classes-messageBoxesWrapper {
   overflow-y: auto;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
   height: 37%;
 }
 .letterpopup-classes-dateTime {
