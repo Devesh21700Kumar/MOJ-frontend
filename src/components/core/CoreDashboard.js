@@ -40,14 +40,16 @@ const useStyles = makeStyles((theme) => ({
   },
   tabBox: {
     backgroundColor: '#FFFDE8',
-    borderRadius: '5px 5px 0 0',
+    borderRadius: '10px 10px 0 0',
   },
   tabButton: {
     fontWeight: '700',
     backgroundColor: '#FFFDE8',
     fontSize: '20px',
-    padding: '7px',
+    padding: '7px 15px',
     textTransform: 'none',
+    borderRadius: '10px 10px 0 0',
+    fontFamily: 'Oxygen, sans-serif',
   },
   headerText: {
     margin: 0,
@@ -68,18 +70,25 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
   },
   backToTop: {
-    marginTop: '25px',
+    width: '100%',
     display: 'flex',
-    height: '50px',
-    backgroundColor: '#FFFDE8',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '1rem 0rem',
   },
-  backToTopZoom: {
-    display: 'flex',
-    position: 'absolute',
-    left: '47%',
+  backToTopButton: {
+    textTransform: 'none',
+    fontSize: '1rem',
+    fontFamily: 'Oxygen, sans serif',
   },
-  backToTopIcon: {
-    padding: '0 0 0 2px',
+  bottomPaginator: {
+    margin: '1rem 0rem',
+  },
+  noMessages: {
+    color: '#FC0404',
+    width: '100%',
+    textAlign: 'center',
+    fontFamily: 'Oxygen, sans serif',
   },
   '@media (max-width: 1200px)': {
     paginatorFragment: {
@@ -103,9 +112,6 @@ const useStyles = makeStyles((theme) => ({
     paginatorFragment: {
       left: '65%',
     },
-    backToTopZoom: {
-      left: '30%',
-    },
   },
   '@media (max-width: 470px)': {
     pageBar: {
@@ -121,16 +127,12 @@ const useStyles = makeStyles((theme) => ({
       position: 'relative',
       left: '15%',
     },
-    backToTopZoom: {
-      position: 'relative',
-      left: '10%',
-    },
   },
 }));
 
 const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
 
-const Dashboard = (messages, props) => {
+const Dashboard = () => {
   const classes = useStyles();
   const token = localStorage.getItem('token');
 
@@ -149,9 +151,6 @@ const Dashboard = (messages, props) => {
         setMsgPage((newPage) => (newPage = msgPage - 1));
       }
     }
-  };
-  const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (userInfo.permissionLevel < 1) return <Redirect to="/home" />;
@@ -191,7 +190,7 @@ const Dashboard = (messages, props) => {
     });
     return month + day + year + time;
   };
-  useEffect(async () => {
+  async function fetchMessages() {
     try {
       let response = await axios.get(API_URL + '/getassignment', {
         method: 'GET',
@@ -199,13 +198,13 @@ const Dashboard = (messages, props) => {
           token: `${token}`,
         },
       });
-      console.log(response.data.data);
-      console.log(Date(response.data.data[0].date).substr(0, 21));
-      console.log(userInfo.name);
-      setMsgs(response.data.data);
+      setMsgs(response.data.data.reverse());
     } catch (error) {
       console.error(error.message);
     }
+  }
+  useEffect(async () => {
+    fetchMessages();
   }, [setMsgs]);
   return (
     <div className={classes.root}>
@@ -231,20 +230,24 @@ const Dashboard = (messages, props) => {
                 date={dateFormatter(message.date)}
                 id={message._id}
                 key={index}
+                index={index}
+                fetchMessages={fetchMessages}
               />
             ))
         ) : (
-          <h2>No messages left to review</h2>
+          <h1 className={classes.noMessages}>No Messages Left to Review</h1>
         )}
       </Container>
+      <Paginator className={classes.bottomPaginator} />
       <div className={classes.backToTop}>
-        <div className={classes.backToTopZoom}>
-          <p>Back to top</p>
-          <IconButton onClick={scrollTop} className={classes.backToTopIcon}>
-            <KeyboardArrowUpRounded />
-          </IconButton>
-        </div>
-        <Paginator className={classes.bottomPaginator} />
+        <Button
+          className={classes.backToTopButton}
+          onClick={() =>
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+          }
+        >
+          Back to Top
+        </Button>
       </div>
     </div>
   );

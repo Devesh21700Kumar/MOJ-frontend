@@ -4,6 +4,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Collapse,
   IconButton,
   makeStyles,
   Snackbar,
@@ -17,14 +18,21 @@ import classNames from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
+    width: '90%',
+    margin: '20px auto',
     padding: '15px',
-    marginTop: '20px',
     backgroundColor: '#FFD94D',
+    borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
   },
-  cardHeaderRollNum: {
-    fontSize: '20px',
+  bitsId: {
+    fontSize: '18px',
     fontFamily: 'Oxygen, sans-serif',
-    fontWeight: '700',
+    fontWeight: 700,
     padding: 0,
     marginTop: '10px',
   },
@@ -34,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Raleway, sans-serif',
     fontSize: '17px',
     fontWeight: '400',
-    transition: 'all 2s',
   },
   cardFooter: {
     display: 'flex',
@@ -42,34 +49,14 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   date: {
-    margin: '20px 15px 0 0',
+    margin: '30px 15px 0 0',
     fontStyle: 'italic',
-    fontSize: '17px',
-    fontFamily: 'Roboto. sans-serif',
+    fontFamily: 'Roboto, sans-serif',
+    fontWeight: 700,
   },
   iconButton: {
     padding: 0,
     margin: '5px 10px',
-  },
-  viewMore: {
-    lineClamp: 3,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    boxOrient: 'vertical',
-    display: '-webkit-box',
-    transition: 'all 2s',
-  },
-  anchorClass: {
-    textDecoration: 'none',
-    '&:link': {
-      fontSize: '17px',
-    },
-    transition: 'all 2s',
-  },
-  link: {
-    background: 'none',
-    border: 'none',
-    outline: 'none',
   },
   acceptedMessage: {
     borderRight: '7px solid #00CF53',
@@ -106,18 +93,28 @@ const postApproval = async (id, approval, flag) => {
   }
 };
 
-const MessageCard = ({ rollNumber, message, date, id }) => {
+const MessageCard = ({
+  rollNumber,
+  message,
+  date,
+  id,
+  index,
+  fetchMessages,
+}) => {
   const classes = useStyles();
   // State variables
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
   const [status, setStatus] = useState('');
-  const [fullView, setFullView] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [showPrimaryText, setShowPrimaryText] = useState(false);
+
   // click handlers
   const handleClick = (msg) => {
     setOpen(true);
     setText('This message has been ' + msg);
     setStatus(msg);
+    fetchMessages();
   };
   const handleClose = () => {
     setOpen(false);
@@ -132,9 +129,6 @@ const MessageCard = ({ rollNumber, message, date, id }) => {
     }
     return () => {};
   }, [status]);
-  const viewMore = () => {
-    setFullView(!fullView);
-  };
   // button react fragment
   const buttons = (
     <React.Fragment>
@@ -189,26 +183,35 @@ const MessageCard = ({ rollNumber, message, date, id }) => {
   // complete component
   return (
     <Card className={cardClass} raised={true}>
-      <CardHeader
-        title={'To: ' + rollNumber}
-        className={classes.cardHeaderRollNum}
-        titleTypographyProps={{
-          variant: 'inherit',
-        }}
-      />
+      <div className={classes.bitsId}>
+        {index + 1}. To: {rollNumber}
+      </div>
       <div>
-        <CardContent style={{ transitionDuration: '2s' }}>
-          <p
-            className={`${classes.cardContent} ${
-              fullView ? '' : classes.viewMore
-            }`}
+        <div className={classes.cardContent}>
+          <div>
+            {!showPrimaryText
+              ? message.length > 80
+                ? `${message.substr(0, 80)}...`
+                : `${message}`
+              : ''}
+            <Collapse
+              in={expanded}
+              timeout="auto"
+              unmountOnExit
+              component="div"
+            >
+              {message}
+            </Collapse>
+          </div>
+          <span
+            onClick={() => {
+              setExpanded(!expanded);
+              setShowPrimaryText(!showPrimaryText);
+            }}
           >
-            {message}
-          </p>
-          <button className={classes.link} onClick={viewMore}>
-            {fullView ? 'View less' : 'View more'}
-          </button>
-        </CardContent>
+            {message.length > 80 ? (!expanded ? 'View More' : 'View Less') : ''}
+          </span>
+        </div>
         <div className={classes.cardFooter}>
           <p className={classes.date}>{date}</p>
           <CardActions disableSpacing>{buttons}</CardActions>
