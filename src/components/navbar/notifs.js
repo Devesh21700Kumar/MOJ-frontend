@@ -148,4 +148,3 @@ export default function Notifs() {
     </div>
   );
 }
-

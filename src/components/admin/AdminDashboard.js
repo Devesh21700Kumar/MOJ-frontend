@@ -554,22 +554,22 @@ const AdminDashboard = () => {
   const handleChange = (e) => {
     setValue(e.target.value);
     if (value) {
-      if (msgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
+      if (msgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
           if (msgs[i]) {
             setMessageId((messageId) => [...messageId, msgs[i]._id]);
           }
         }
       }
-      if (redFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
+      if (redFlaggedMsgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
           if (redFlaggedMsgs[i]) {
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
           }
         }
       }
-      if (yellowFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
+      if (yellowFlaggedMsgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
           if (yellowFlaggedMsgs[i]) {
             setMessageId((messageId) => [
               ...messageId,
