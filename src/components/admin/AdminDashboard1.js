@@ -3,6 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Button,
+  CssBaseline,
   Grid,
   IconButton,
   InputBase,
@@ -303,27 +304,19 @@ const red = '#FC0404';
 const yellow = '#FFD94D';
 const green = '#4CBC14';
 
-const AdminDashboard = () => {
+const ShowMessages = ({
+  msgs,
+  redFlaggedMsgs,
+  yellowFlaggedMsgs,
+  greenFlaggedMsgs,
+  redFlag,
+  yellowFlag,
+  greenFlag,
+  setNumber,
+  messageId,
+  setMessageId,
+}) => {
   const classes = useStyles();
-  const [tabColor1, setTabColor1] = useState('#FFFDE8');
-  const [tabColor2, setTabColor2] = useState('#FB8989');
-  const [msgs, setMsgs] = useState([]);
-  const [redFlaggedMsgs, setRedFlaggedMsgs] = useState([]);
-  const [yellowFlaggedMsgs, setYellowFlaggedMsgs] = useState([]);
-  const [greenFlaggedMsgs, setGreenFlaggedMsgs] = useState([]);
-  const [checked25, setChecked25] = useState(false);
-  const [checked50, setChecked50] = useState(false);
-  const [value, setValue] = useState(null);
-  const [redFlag, setRedFlag] = useState('transparent');
-  const [yellowFlag, setYellowFlag] = useState('transparent');
-  const [greenFlag, setGreenFlag] = useState('transparent');
-  const [messageId, setMessageId] = useState([]);
-  const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [type, setType] = useState('');
-  const [j, setj] = useState(0);
-  const [f, setf] = useState(greenFlaggedMsgs);
-  const [display, setDisplay] = useState('none');
-  const token = localStorage.getItem('token');
 
   const dateFormatter = (timestamp) => {
     const date = new Date(timestamp);
@@ -337,6 +330,104 @@ const AdminDashboard = () => {
     });
     return month + day + year + time;
   };
+
+  return (
+    <>
+      {redFlag === red ? (
+        redFlaggedMsgs.length > 0 ? (
+          redFlaggedMsgs.map((message, index) => (
+            <MessageCard
+              bitsId={message.receiverId}
+              body={message.body}
+              date={dateFormatter(message.date)}
+              key={index}
+              index={index}
+              _id={message._id}
+              messageId={messageId}
+              setMessageId={setMessageId}
+              n={setNumber()}
+            />
+          ))
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : greenFlag === green ? (
+        greenFlaggedMsgs.length > 0 ? (
+          greenFlaggedMsgs.map((message, index) => (
+            <MessageCard
+              bitsId={message.receiverId}
+              body={message.body}
+              date={dateFormatter(message.date)}
+              key={index}
+              index={index}
+              _id={message._id}
+              messageId={messageId}
+              setMessageId={setMessageId}
+              n={setNumber()}
+            />
+          ))
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : yellowFlag === yellow ? (
+        yellowFlaggedMsgs.length > 0 ? (
+          yellowFlaggedMsgs.map((message, index) => (
+            <MessageCard
+              bitsId={message.receiverId}
+              body={message.body}
+              date={dateFormatter(message.date)}
+              key={index}
+              index={index}
+              _id={message._id}
+              messageId={messageId}
+              setMessageId={setMessageId}
+              n={setNumber()}
+            />
+          ))
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )
+      ) : msgs.length !== 0 ? (
+        msgs.map((message, index) => (
+          <MessageCard
+            bitsId={message.receiverId}
+            body={message.body}
+            date={dateFormatter(message.date)}
+            key={index}
+            index={index}
+            _id={message._id}
+            messageId={messageId}
+            setMessageId={setMessageId}
+            n={setNumber()}
+          />
+        ))
+      ) : (
+        <h1 className={classes.noMessages}>No Messages to Display!</h1>
+      )}
+    </>
+  );
+};
+
+const AdminDashboard = () => {
+  const classes = useStyles();
+  const [tabColor1, setTabColor1] = useState('#FFFDE8');
+  const [tabColor2, setTabColor2] = useState('#FB8989');
+  const [msgs, setMsgs] = useState([]);
+  const [redFlaggedMsgs, setRedFlaggedMsgs] = useState([]);
+  const [yellowFlaggedMsgs, setYellowFlaggedMsgs] = useState([]);
+  const [greenFlaggedMsgs, setGreenFlaggedMsgs] = useState([]);
+  const [checked25, setChecked25] = useState(false);
+  const [checked50, setChecked50] = useState(false);
+  const [value, setValue] = useState('');
+  const [redFlag, setRedFlag] = useState('transparent');
+  const [yellowFlag, setYellowFlag] = useState('transparent');
+  const [greenFlag, setGreenFlag] = useState('transparent');
+  const [messageId, setMessageId] = useState([]);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [type, setType] = useState('');
+  const [i, seti] = useState(0);
+  const [display, setDisplay] = useState('none');
+  const token = localStorage.getItem('token');
 
   if (token === null) return <Redirect to="/" />;
 
@@ -368,7 +459,6 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -377,14 +467,13 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchMessages();
-    console.log(greenFlaggedMsgs);
   }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
 
   const handleChange25 = () => {
     if (checked50 === true) {
       setChecked50(!checked50);
     }
-    setValue(null);
+    setValue(' ');
 
     setChecked25(!checked25);
     if (!checked25) {
@@ -431,7 +520,7 @@ const AdminDashboard = () => {
     if (checked25 === true) {
       setChecked25(!checked25);
     }
-    setValue(null);
+    setValue(' ');
 
     setChecked50(!checked50);
     if (!checked50) {
@@ -477,22 +566,22 @@ const AdminDashboard = () => {
   const handleChange = (e) => {
     setValue(e.target.value);
     if (value) {
-      if (msgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
+      if (msgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
           if (msgs[i]) {
             setMessageId((messageId) => [...messageId, msgs[i]._id]);
           }
         }
       }
-      if (redFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
+      if (redFlaggedMsgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
           if (redFlaggedMsgs[i]) {
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
           }
         }
       }
-      if (yellowFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
+      if (yellowFlaggedMsgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
           if (yellowFlaggedMsgs[i]) {
             setMessageId((messageId) => [
               ...messageId,
@@ -523,25 +612,15 @@ const AdminDashboard = () => {
   };
 
   const setNumber = () => {
-    if (checked25) return 25;
-    else if (checked50) return 50;
+    if (checked25) return '25';
+    else if (checked50) return '50';
     else return value;
   };
 
   const hc1 = () => {
-    if (j > 50) {
-      setj(j - 50);
-
-      setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-      }
-      if (checked50 === true) {
-        setChecked50(!checked50);
-      }
-    } else if (j <= 50) {
-      setj(0);
-      setValue(null);
+    if (i >= 50) {
+      seti((i) => i - 50);
+      setValue(' ');
       if (checked25 === true) {
         setChecked25(!checked25);
       }
@@ -552,50 +631,63 @@ const AdminDashboard = () => {
   };
 
   const hc2 = () => {
-    if (j + 50 < f.length - 50) {
-      setj(j + 50);
-      setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
-      }
-    } else if (f.length - (j + 50) < 50 && f.length - (j + 50) > 0) {
-      setj(j + 50);
-      setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
-      }
-    } else if (j + 50 == f.length - 50) {
-      setj(j + 50);
-      setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
-      }
-    } else {
-      setj(j);
-      setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
+    seti((i) => i + 50);
+    setValue(' ');
+    if (checked25 === true) {
+      setChecked25(!checked25);
+      if (checked50 === true) {
+        setChecked50(!checked50);
       }
     }
   };
 
   useEffect(() => {
-    setRedFlaggedMsgs(redFlaggedMsgs);
-    setYellowFlaggedMsgs(yellowFlaggedMsgs);
-    setGreenFlaggedMsgs(greenFlaggedMsgs);
-  }, [j]);
+    setRedFlaggedMsgs(
+      redFlaggedMsgs.slice(
+        redFlaggedMsgs.length >= i ? i : i - 50,
+        redFlaggedMsgs.length >= i ? i + 50 : i
+      )
+    );
+    setYellowFlaggedMsgs(
+      yellowFlaggedMsgs.slice(
+        yellowFlaggedMsgs.length >= i ? i : i - 50,
+        yellowFlaggedMsgs.length >= i ? i + 50 : i
+      )
+    );
+    setGreenFlaggedMsgs(
+      greenFlaggedMsgs.slice(
+        greenFlaggedMsgs.length >= i ? i : i - 50,
+        greenFlaggedMsgs.length >= i ? i + 50 : i
+      )
+    );
+  }, [i]);
+
+  const Paginator = () => {
+    return (
+      <div className={classes.paginatorFragment}>
+        <Button
+          className={classes.paginatorButton}
+          onClick={hc1}
+          startIcon={<ChevronLeftRounded />}
+          disabled={i === 0}
+        >
+          Previous 50
+        </Button>
+        <Button
+          className={classes.paginatorButton}
+          onClick={hc2}
+          endIcon={<ChevronRightRounded />}
+          disabled={
+            i > redFlaggedMsgs.length ||
+            i > greenFlaggedMsgs.length ||
+            i > yellowFlaggedMsgs.length
+          }
+        >
+          Next 50
+        </Button>
+      </div>
+    );
+  };
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -622,9 +714,6 @@ const AdminDashboard = () => {
         setType('Declined');
         setSnackBarOpen(true);
         fetchMessages();
-        setValue(null);
-        setChecked25(false);
-        setChecked50(false);
       }
     }
 
@@ -648,9 +737,6 @@ const AdminDashboard = () => {
         setType('Approved');
         setSnackBarOpen(true);
         fetchMessages();
-        setValue(null);
-        setChecked25(false);
-        setChecked50(false);
       }
     }
 
@@ -671,6 +757,7 @@ const AdminDashboard = () => {
 
   return (
     <div className={classes.root}>
+      <CssBaseline />
       {/* Tabs */}
       <Navbar navHeading="Admin Dashboard" name={name} bitsId={bitsId} />
       <div className={classes.tabs} id="top">
@@ -685,7 +772,7 @@ const AdminDashboard = () => {
             setGreenFlag('transparent');
             setChecked25(false);
             setChecked50(false);
-            setj(0);
+            seti(0);
             fetchMessages();
           }}
         >
@@ -700,7 +787,7 @@ const AdminDashboard = () => {
             setGreenFlag(green);
             setChecked25(false);
             setChecked50(false);
-            setj(0);
+            seti(0);
             fetchMessages();
           }}
         >
@@ -716,13 +803,13 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
-                    setf(redFlaggedMsgs);
+                    setRedFlag(red);
                     setYellowFlag('transparent');
                     setGreenFlag('transparent');
                     setChecked25(false);
                     setChecked50(false);
-                    setValue(null);
-                    setj(0);
+                    setValue('');
+                    seti(0);
                     fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${redFlag}` }}
@@ -732,14 +819,13 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
-                    setf(yellowFlaggedMsgs);
                     setYellowFlag(yellow);
                     setRedFlag('transparent');
                     setGreenFlag('transparent');
                     setChecked25(false);
                     setChecked50(false);
-                    setValue(null);
-                    setj(0);
+                    setValue('');
+                    seti(0);
                     fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
@@ -749,15 +835,13 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
-                    setf(greenFlaggedMsgs);
-                    setRedFlag();
                     setGreenFlag(green);
                     setRedFlag('transparent');
                     setYellowFlag('transparent');
                     setChecked25(false);
                     setChecked50(false);
-                    setValue(null);
-                    setj(0);
+                    setValue('');
+                    seti(0);
                     fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
@@ -886,91 +970,18 @@ const AdminDashboard = () => {
             </div>
           ) : null}
           <div className={classes.messages}>
-            {redFlag === red ? (
-              redFlaggedMsgs.length > 0 ? (
-                redFlaggedMsgs
-                  .slice(
-                    j,
-                    j + 50 <= redFlaggedMsgs.length
-                      ? j + 50
-                      : redFlaggedMsgs.length
-                  )
-                  .map((message, index) => (
-                    <MessageCard
-                      bitsId={message.receiverId}
-                      body={message.body}
-                      date={dateFormatter(message.date)}
-                      key={redFlaggedMsgs.indexOf(message)}
-                      index={redFlaggedMsgs.indexOf(message)}
-                      _id={message._id}
-                      messageId={messageId}
-                      setMessageId={setMessageId}
-                      n={setNumber()}
-                    />
-                  ))
-              ) : (
-                <h1 className={classes.noMessages}>No Messages to Display!</h1>
-              )
-            ) : greenFlag === green ? (
-              greenFlaggedMsgs.length > 0 ? (
-                greenFlaggedMsgs
-                  .slice(
-                    j,
-                    j + 50 <= greenFlaggedMsgs.length
-                      ? j + 50
-                      : greenFlaggedMsgs.length
-                  )
-                  .map((message, index) => (
-                    <MessageCard
-                      bitsId={message.receiverId}
-                      body={message.body}
-                      date={dateFormatter(message.date)}
-                      key={greenFlaggedMsgs.indexOf(message)}
-                      index={greenFlaggedMsgs.indexOf(message)}
-                      _id={message._id}
-                      messageId={messageId}
-                      setMessageId={setMessageId}
-                      n={setNumber()}
-                    />
-                  ))
-              ) : (
-                <h1 className={classes.noMessages}>No Messages to Display!</h1>
-              )
-            ) : yellowFlag === yellow ? (
-              yellowFlaggedMsgs.length > 0 ? (
-                yellowFlaggedMsgs.map((message, index) => (
-                  <MessageCard
-                    bitsId={message.receiverId}
-                    body={message.body}
-                    date={dateFormatter(message.date)}
-                    key={yellowFlaggedMsgs.indexOf(message)}
-                    index={yellowFlaggedMsgs.indexOf(message)}
-                    _id={message._id}
-                    messageId={messageId}
-                    setMessageId={setMessageId}
-                    n={setNumber()}
-                  />
-                ))
-              ) : (
-                <h1 className={classes.noMessages}>No Messages to Display!</h1>
-              )
-            ) : msgs.length !== 0 ? (
-              msgs.map((message, index) => (
-                <MessageCard
-                  bitsId={message.receiverId}
-                  body={message.body}
-                  date={dateFormatter(message.date)}
-                  key={msgs.indexOf(message)}
-                  index={msgs.indexOf(message)}
-                  _id={message._id}
-                  messageId={messageId}
-                  setMessageId={setMessageId}
-                  n={setNumber()}
-                />
-              ))
-            ) : (
-              <h1 className={classes.noMessages}>No Messages to Display!</h1>
-            )}
+            <ShowMessages
+              msgs={msgs}
+              redFlaggedMsgs={redFlaggedMsgs}
+              yellowFlaggedMsgs={yellowFlaggedMsgs}
+              greenFlaggedMsgs={greenFlaggedMsgs}
+              redFlag={redFlag}
+              yellowFlag={yellowFlag}
+              greenFlag={greenFlag}
+              setNumber={setNumber}
+              messageId={messageId}
+              setMessageId={setMessageId}
+            />
           </div>
 
           {/* Buttons */}
@@ -993,24 +1004,7 @@ const AdminDashboard = () => {
               >
                 Reject
               </Button>
-              <div className={classes.paginatorFragment}>
-                <Button
-                  className={classes.paginatorButton}
-                  onClick={hc1}
-                  startIcon={<ChevronLeftRounded />}
-                  disabled={j === 0}
-                >
-                  Previous 50
-                </Button>
-                <Button
-                  className={classes.paginatorButton}
-                  onClick={hc2}
-                  endIcon={<ChevronRightRounded />}
-                  disabled={50 >= f.length - j}
-                >
-                  Next 50
-                </Button>
-              </div>
+              <Paginator />
               <Button
                 variant="contained"
                 className={classes.approveButton}

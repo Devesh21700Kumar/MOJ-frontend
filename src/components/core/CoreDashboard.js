@@ -222,7 +222,7 @@ const Dashboard = () => {
       <Container>
         {Array.isArray(msgs) && msgs.length !== 0 ? (
           msgs
-            .slice(msgPage * 10, msgPage * 10 + 9)
+            .slice(msgPage * 10, msgPage * 10 + 10)
             .map((message, index) => (
               <MessageCard
                 rollNumber={message.receiverId}
