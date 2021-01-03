@@ -415,6 +415,7 @@ const AdminDashboard = () => {
   const [i, seti] = useState(0);
   const [display, setDisplay] = useState('none');
   const token = localStorage.getItem('token');
+  const [fret,setfret] =useState(redFlaggedMsgs);
 
   if (token === null) return <Redirect to="/" />;
 
@@ -605,8 +606,6 @@ const AdminDashboard = () => {
   };
 
   const hc1 = () => {
-    if (i >= 50) {
-      seti((i) => i - 50);
       setValue(' ');
       if (checked25 === true) {
         setChecked25(!checked25);
@@ -614,17 +613,37 @@ const AdminDashboard = () => {
       if (checked50 === true) {
         setChecked50(!checked50);
       }
+    
+    if (i > 50) {
+      seti(i - 50);
+
+
+    } else if (i <= 50) {
+      seti(0);
+ 
     }
   };
 
   const hc2 = () => {
-    seti((i) => i + 50);
     setValue(' ');
     if (checked25 === true) {
       setChecked25(!checked25);
       if (checked50 === true) {
         setChecked50(!checked50);
       }
+    }
+    if (i + 50 < fret.length - 50) {
+      seti(i + 50);
+
+    } else if (fret.length - (i + 50) < 50 && fret.length - (i + 50) > 0) {
+      seti(i + 50);
+
+    } else if (i + 50 == fret.length - 50) {
+      seti(i + 50);
+
+    } else {
+      seti(i);
+    
     }
   };
 
@@ -665,9 +684,9 @@ const AdminDashboard = () => {
           onClick={hc2}
           endIcon={<ChevronRightRounded />}
           disabled={
-            i > redFlaggedMsgs.length ||
-            i > greenFlaggedMsgs.length ||
-            i > yellowFlaggedMsgs.length
+            50 > redFlaggedMsgs.length ||
+            50 > greenFlaggedMsgs.length ||
+            50 > yellowFlaggedMsgs.length
           }
         >
           Next 50
@@ -790,6 +809,7 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
+                    setfret(redFlaggedMsgs);
                     setRedFlag(red);
                     setYellowFlag('transparent');
                     setGreenFlag('transparent');
@@ -806,6 +826,7 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
+                    setfret(yellowFlaggedMsgs);
                     setYellowFlag(yellow);
                     setRedFlag('transparent');
                     setGreenFlag('transparent');
@@ -822,6 +843,7 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
+                    setfret(greenFlaggedMsgs);
                     setGreenFlag(green);
                     setRedFlag('transparent');
                     setYellowFlag('transparent');

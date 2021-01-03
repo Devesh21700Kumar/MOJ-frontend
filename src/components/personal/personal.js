@@ -156,8 +156,22 @@ export default function Personal({ name, bitsId }, props) {
       console.error(error.message);
     }
   }
-  useEffect( () => {
-    call1 ();
+  useEffect( async()=> {
+    try {
+      let response = await axios.get(
+        `${URL}/api/level0/receivedmessages`,
+        {
+          method: 'GET',
+          headers: { token: `${token}` },
+        }
+      );
+      var r = response.data.data;
+      //console.log(r);
+      setGet([...r].reverse());
+      setrec([...r].reverse());
+    } catch (error) {
+      console.error(error.message);
+    }
   }, []);
 
   async function call2 () {

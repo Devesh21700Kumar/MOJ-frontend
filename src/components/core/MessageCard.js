@@ -106,13 +106,15 @@ const postApproval = async (id, approval, flag) => {
   }
 };
 
-const MessageCard = ({ rollNumber, message, date, id }) => {
+const MessageCard = ({ rollNumber, message, date, id, msgpage, keep }) => {
   const classes = useStyles();
   // State variables
+  //console.log(msgpage);
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
   const [status, setStatus] = useState('');
   const [fullView, setFullView] = useState(false);
+  const [pos,setpos] =useState(0);
   // click handlers
   const handleClick = (msg) => {
     setOpen(true);
@@ -135,12 +137,19 @@ const MessageCard = ({ rollNumber, message, date, id }) => {
   const viewMore = () => {
     setFullView(!fullView);
   };
+  console.log(keep);
+  console.log(msgpage);
   // button react fragment
   const buttons = (
     <React.Fragment>
       <IconButton
         classes={{ root: classes.iconButton }}
-        onClick={() => handleClick('accepted')}
+        onClick={() => 
+          {setpos((msgpage)*10  +keep+1)
+
+            //console.log(pos );
+          handleClick('accepted')}
+          }
       >
         <CheckCircleRounded
           style={{
@@ -151,7 +160,10 @@ const MessageCard = ({ rollNumber, message, date, id }) => {
       </IconButton>
       <IconButton
         classes={{ root: classes.iconButton }}
-        onClick={() => handleClick('rejected')}
+        onClick={() => 
+          {setpos((msgpage)*10 +keep)
+          handleClick('rejected')}
+        }
       >
         <CancelRounded
           style={{
@@ -162,7 +174,10 @@ const MessageCard = ({ rollNumber, message, date, id }) => {
       </IconButton>
       <IconButton
         classes={{ root: classes.iconButton }}
-        onClick={() => handleClick('flagged')}
+        onClick={() => 
+          {setpos((msgpage)*10  +keep)
+          handleClick('flagged')}
+        }
       >
         <FlagRounded
           style={{
@@ -178,17 +193,18 @@ const MessageCard = ({ rollNumber, message, date, id }) => {
   );
   var cardClass = classNames(
     classes.msgCard,
-    status === 'accepted'
+    status === 'accepted' && pos <=msgpage*10 +10
       ? classes.acceptedMessage
-      : status === 'rejected'
+      : status === 'rejected' && pos <=msgpage*10 +10
       ? classes.rejectedMessage
-      : status === 'flagged'
+      : status === 'flagged' && pos <=msgpage*10 +10
       ? classes.flaggedMessage
       : null
   );
   // complete component
   return (
-    <Card className={cardClass} raised={true}>
+
+<Card className={cardClass} raised={true}>
       <CardHeader
         title={'To: ' + rollNumber}
         className={classes.cardHeaderRollNum}
@@ -223,6 +239,9 @@ const MessageCard = ({ rollNumber, message, date, id }) => {
         key={text}
       />
     </Card>
+
+        
+    
   );
 };
 

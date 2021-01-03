@@ -200,9 +200,10 @@ const Dashboard = (messages, props) => {
         },
       });
       console.log(response.data.data);
-      console.log(Date(response.data.data[0].date).substr(0, 21));
-      console.log(userInfo.name);
-      setMsgs(response.data.data);
+      var  t= response.data.data;
+      //console.log(Date(response.data.data[0].date).substr(0, 21));
+      //console.log(userInfo.name);
+      setMsgs([...t].reverse());
     } catch (error) {
       console.error(error.message);
     }
@@ -223,7 +224,7 @@ const Dashboard = (messages, props) => {
       <Container>
         {Array.isArray(msgs) && msgs.length !== 0 ? (
           msgs
-            .slice(msgPage * 10, msgPage * 10 + 9)
+            .slice(msgPage * 10, msgPage * 10 + 10)
             .map((message, index) => (
               <MessageCard
                 rollNumber={message.receiverId}
