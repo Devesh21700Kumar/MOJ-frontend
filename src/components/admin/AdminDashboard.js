@@ -375,10 +375,9 @@ const AdminDashboard = () => {
     setDisplay('flex');
   }
 
-  useEffect(() => {
-    fetchMessages();
-    setf(greenFlaggedMsgs);
-    console.log(greenFlaggedMsgs);
+  useEffect(async() => {
+   await fetchMessages();
+   //await setj(0);
   }, []);
 
   const handleChange25 = () => {
@@ -702,6 +701,7 @@ const AdminDashboard = () => {
             setGreenFlag(green);
             setChecked25(false);
             setChecked50(false);
+            setf(greenFlaggedMsgs);
             setValue(null);
             setj(0);
             fetchMessages();
