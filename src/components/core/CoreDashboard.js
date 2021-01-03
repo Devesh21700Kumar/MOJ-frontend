@@ -229,7 +229,7 @@ const Dashboard = () => {
                 message={message.body}
                 date={dateFormatter(message.date)}
                 id={message._id}
-                key={msgPage*10 + index +1 }
+                key={msgPage * 10 + index + 1}
                 index={index}
                 fetchMessages={fetchMessages}
               />
