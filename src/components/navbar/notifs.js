@@ -109,6 +109,7 @@ export default function Notifs() {
           <div style={{ padding: '0' }}>
             <ListItem
               button
+              onClick={handleClick0}
               className={
                 userinfo.permissionLevel != 2 ? classes.menu : classes.hey
               }
@@ -122,6 +123,7 @@ export default function Notifs() {
             <Divider />
             <ListItem
               button
+              onClick={handleClick1}
               className={
                 userinfo.permissionLevel == 0 ? classes.menu : classes.hey
               }
@@ -133,7 +135,7 @@ export default function Notifs() {
               />
             </ListItem>
             <Divider />
-            <ListItem button className={classes.hey}>
+            <ListItem button className={classes.hey} onClick={handleClick2}>
               <ListItemText
                 className={classes.typography}
                 primary="Redirect to Home"
