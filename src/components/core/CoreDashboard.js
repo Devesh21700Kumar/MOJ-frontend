@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paginatorFragment: {
       position: 'relative',
-      left: '30%',
+      left: '35%',
     },
     tabBox: {
       position: 'relative',
@@ -205,7 +205,7 @@ const Dashboard = () => {
   }
   useEffect(async () => {
     fetchMessages();
-  }, [setMsgs]);
+  }, []);
   return (
     <div className={classes.root}>
       <Navbar
@@ -229,9 +229,8 @@ const Dashboard = () => {
                 message={message.body}
                 date={dateFormatter(message.date)}
                 id={message._id}
-                key={msgPage * 10 + index + 1}
-                index={index}
-                fetchMessages={fetchMessages}
+                key={msgPage * 10 + index}
+                index={msgPage * 10 + index}
               />
             ))
         ) : (
