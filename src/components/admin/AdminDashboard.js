@@ -155,7 +155,7 @@ const useStyles = makeStyles((theme) =>
       fontSize: '16px',
     },
     paginatorFragment: {
-      width: 'mex-content',
+      width: 'max-content',
     },
     backToTop: {
       width: '100%',
@@ -318,6 +318,19 @@ const ShowMessages = ({
 }) => {
   const classes = useStyles();
 
+  const dateFormatter = (timestamp) => {
+    const date = new Date(timestamp);
+    const day = date.getDate() + ', ';
+    const month = date.toLocaleString('default', { month: 'long' }) + ' ';
+    const year = date.getFullYear() + ', ';
+    const time = date.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return month + day + year + time;
+  };
+
   return (
     <>
       {redFlag === red ? (
@@ -326,7 +339,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -344,7 +357,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -362,7 +375,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -379,7 +392,7 @@ const ShowMessages = ({
           <MessageCard
             bitsId={message.receiverId}
             body={message.body}
-            date={message.date}
+            date={dateFormatter(message.date)}
             key={index}
             index={index}
             _id={message._id}
@@ -413,6 +426,7 @@ const AdminDashboard = () => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [type, setType] = useState('');
   const [i, seti] = useState(0);
+  const [display, setDisplay] = useState('none');
   const token = localStorage.getItem('token');
 
   if (token === null) return <Redirect to="/" />;
@@ -445,11 +459,10 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    if (approved.length && denied.length && yellowflagged.length) {
-      setRedFlaggedMsgs(denied.reverse());
-      setYellowFlaggedMsgs(yellowflagged.reverse());
-      setGreenFlaggedMsgs(approved.reverse());
-    }
+    setRedFlaggedMsgs(denied.reverse());
+    setYellowFlaggedMsgs(yellowflagged.reverse());
+    setGreenFlaggedMsgs(approved.reverse());
+    setDisplay('flex');
   }
 
   useEffect(() => {
@@ -466,24 +479,40 @@ const AdminDashboard = () => {
     if (!checked25) {
       if (msgs.length > 25) {
         for (let i = 0; i < 25; i++) {
-          setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          if (msgs[i]) {
+            setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          }
         }
       }
       if (redFlaggedMsgs.length > 25) {
         for (let i = 0; i < 25; i++) {
-          setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          if (redFlaggedMsgs[i]) {
+            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          }
         }
       }
       if (yellowFlaggedMsgs.length > 25) {
         for (let i = 0; i < 25; i++) {
-          setMessageId((messageId) => [...messageId, yellowFlaggedMsgs[i]._id]);
+          if (yellowFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              yellowFlaggedMsgs[i]._id,
+            ]);
+          }
         }
       }
       if (greenFlaggedMsgs.length > 25) {
         for (let i = 0; i < 25; i++) {
-          setMessageId((messageId) => [...messageId, greenFlaggedMsgs[i]._id]);
+          if (greenFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              greenFlaggedMsgs[i]._id,
+            ]);
+          }
         }
       }
+    } else {
+      setMessageId([]);
     }
   };
 
@@ -497,50 +526,82 @@ const AdminDashboard = () => {
     if (!checked50) {
       if (msgs.length > 50) {
         for (let i = 0; i < 50; i++) {
-          setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          if (msgs[i]) {
+            setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          }
         }
       }
       if (redFlaggedMsgs.length > 50) {
         for (let i = 0; i < 50; i++) {
-          setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          if (redFlaggedMsgs[i]) {
+            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          }
         }
       }
       if (yellowFlaggedMsgs.length > 50) {
         for (let i = 0; i < 50; i++) {
-          setMessageId((messageId) => [...messageId, yellowFlaggedMsgs[i]._id]);
+          if (yellowFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              yellowFlaggedMsgs[i]._id,
+            ]);
+          }
         }
       }
       if (greenFlaggedMsgs.length > 50) {
         for (let i = 0; i < 50; i++) {
-          setMessageId((messageId) => [...messageId, greenFlaggedMsgs[i]._id]);
+          if (greenFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              greenFlaggedMsgs[i]._id,
+            ]);
+          }
         }
       }
+    } else {
+      setMessageId([]);
     }
   };
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    if (!value) {
-      if (msgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
-          setMessageId((messageId) => [...messageId, msgs[i]._id]);
+    if (value) {
+      if (msgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
+          if (msgs[i]) {
+            setMessageId((messageId) => [...messageId, msgs[i]._id]);
+          }
         }
       }
-      if (redFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
-          setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+      if (redFlaggedMsgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
+          if (redFlaggedMsgs[i]) {
+            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
+          }
         }
       }
-      if (yellowFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
-          setMessageId((messageId) => [...messageId, yellowFlaggedMsgs[i]._id]);
+      if (yellowFlaggedMsgs.length > parseInt(e.target.value)) {
+        for (let i = 0; i < parseInt(e.target.value); i++) {
+          if (yellowFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              yellowFlaggedMsgs[i]._id,
+            ]);
+          }
         }
       }
       if (greenFlaggedMsgs.length > e.target.value) {
         for (let i = 0; i < e.target.value; i++) {
-          setMessageId((messageId) => [...messageId, greenFlaggedMsgs[i]._id]);
+          if (greenFlaggedMsgs[i]) {
+            setMessageId((messageId) => [
+              ...messageId,
+              greenFlaggedMsgs[i]._id,
+            ]);
+          }
         }
       }
+    } else {
+      setMessageId([]);
     }
     if (checked25 === true) {
       setChecked25(!checked25);
@@ -682,6 +743,18 @@ const AdminDashboard = () => {
     postApprovedMessages();
   };
 
+  const getMaxNumber = () => {
+    if (redFlag === red) {
+      return redFlaggedMsgs.length;
+    } else if (yellowFlag === yellow) {
+      return yellowFlaggedMsgs.length;
+    } else if (greenFlag === green) {
+      return greenFlaggedMsgs.length;
+    } else {
+      return msgs.length;
+    }
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -700,6 +773,7 @@ const AdminDashboard = () => {
             setChecked25(false);
             setChecked50(false);
             seti(0);
+            fetchMessages();
           }}
         >
           <Button className={classes.tabButton}>Pending Messages</Button>
@@ -714,6 +788,7 @@ const AdminDashboard = () => {
             setChecked25(false);
             setChecked50(false);
             seti(0);
+            fetchMessages();
           }}
         >
           <Button className={classes.tabButton}>Final Approval</Button>
@@ -735,6 +810,7 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue('');
                     seti(0);
+                    fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${redFlag}` }}
                 >
@@ -750,6 +826,7 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue('');
                     seti(0);
+                    fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
                 >
@@ -765,6 +842,7 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue('');
                     seti(0);
+                    fetchMessages();
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
                 >
@@ -772,7 +850,7 @@ const AdminDashboard = () => {
                 </Button>
               </div>
             )}
-            <div className={classes.select}>
+            <div className={classes.select} style={{ display: display }}>
               <Grid item xs className={classes.subtitle1}>
                 Select
               </Grid>
@@ -781,7 +859,7 @@ const AdminDashboard = () => {
                 <span style={{ marginLeft: '2rem' }}>
                   <svg
                     onClick={handleChange25}
-                    display={checked25 === false ? 'block' : 'none'}
+                    display={!checked25 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
@@ -797,7 +875,7 @@ const AdminDashboard = () => {
                   </svg>
                   <svg
                     onClick={handleChange25}
-                    display={checked25 === true ? 'block' : 'none'}
+                    display={checked25 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 42 38"
@@ -824,7 +902,7 @@ const AdminDashboard = () => {
                 <span style={{ marginLeft: '2rem' }}>
                   <svg
                     onClick={handleChange50}
-                    display={checked50 === false ? 'block' : 'none'}
+                    display={!checked50 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
@@ -840,7 +918,7 @@ const AdminDashboard = () => {
                   </svg>
                   <svg
                     onClick={handleChange50}
-                    display={checked50 === true ? 'block' : 'none'}
+                    display={checked50 ? 'block' : 'none'}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 42 38"
@@ -867,19 +945,27 @@ const AdminDashboard = () => {
                   First
                   <InputBase
                     className={classes.input}
-                    inputProps={{ 'aria-label': 'naked' }}
+                    inputProps={{ min: 0, max: getMaxNumber() }}
                     value={value}
                     onChange={handleChange}
+                    id="standard-number"
+                    type="number"
                   />
                 </Grid>
               </Grid>
             </div>
           </Grid>
           {tabColor1 === '#FFFDE8' && msgs.length ? (
-            <div className={classes.buttons}>
+            <div className={classes.buttons} style={{ display: display }}>
               <AssignCoreMembersPopup
                 messageId={messageId}
                 fetchMessages={fetchMessages}
+                checked25={checked25}
+                setChecked25={setChecked25}
+                checked50={checked50}
+                setChecked50={setChecked50}
+                value={value}
+                setValue={setValue}
               />
             </div>
           ) : null}
@@ -901,7 +987,7 @@ const AdminDashboard = () => {
           {/* Buttons */}
           {tabColor1 === '#FFFDE8' ? (
             msgs.length ? (
-              <div className={classes.buttons}>
+              <div className={classes.buttons} style={{ display: display }}>
                 <AssignCoreMembersPopup
                   messageId={messageId}
                   fetchMessages={fetchMessages}
@@ -909,7 +995,7 @@ const AdminDashboard = () => {
               </div>
             ) : null
           ) : (
-            <div className={classes.buttons1}>
+            <div className={classes.buttons1} style={{ display: display }}>
               <Button
                 variant="contained"
                 className={classes.rejectButton}
@@ -935,6 +1021,7 @@ const AdminDashboard = () => {
               onClick={() =>
                 window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
               }
+              style={{ display: display }}
             >
               Back to Top
             </Button>

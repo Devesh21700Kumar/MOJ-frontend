@@ -359,11 +359,12 @@ export default function Personal({ name, bitsId }, props) {
               </Grid>
               <Grid item textAlign="center">
                 <Button
+                  className="ken"
                   style={{
                     fontWeight: '700',
                     textTransform: 'none',
                     fontFamily: 'Oxygen',
-                    fontSize: '2.2vh',
+                    //fontSize: '2.2vh',
                     margin: '1vw',
                   }}
                 >

@@ -13,6 +13,7 @@ import SendMessagePopup from './components/letterpopup/SendMessagePopup';
 import ReadMessagePopup from './components/letterpopup/ReadMessagePopup';
 import './App.css';
 import AdminDashboard from './components/admin/AdminDashboard';
+import Statistics from './components/admin/Statistics';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="/core" component={CoreDashboard} />
         <Route exact path="/admin" component={AdminDashboard} />
         <Route exact path="/send" component={ReadMessagePopup} />
+        <Route exact path="/stats" component={Statistics} />
       </Switch>
     </Router>
   );

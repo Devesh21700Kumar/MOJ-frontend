@@ -61,6 +61,12 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
         ? date.getDate() + 'nd  '
         : date.getDate() == 3
         ? date.getDate() + 'rd  '
+        : date.getDate() == 21
+        ? date.getDate() + 'st  '
+        : date.getDate() == 22
+        ? date.getDate() + 'nd  '
+        : date.getDate() == 23
+        ? date.getDate() + 'rd  '
         : date.getDate() + 'th ';
     var month = date.toLocaleString('default', { month: 'short' }) + ' ';
     var year = date.getFullYear() + ', ';
@@ -76,7 +82,9 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
       <div className="letterpopup-classes-cross" onClick={hideMe} />
       <Paper elevation={0} className="letterpopup-classes-message">
         <div className="letterpopup-classes-dateTime">
-          {dateFormatter(messageArray[currentPosition][1])}
+          {
+            //dateFormatter(messageArray[currentPosition][1])
+          }
         </div>
         <div className="letterpopup-classes-messageBoxesWrapper">
           <div className="letterpopup-classes-messageBody">
