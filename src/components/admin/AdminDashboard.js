@@ -717,6 +717,7 @@ const AdminDashboard = () => {
                   className={classes.flag}
                   onClick={() => {
                     setf(redFlaggedMsgs);
+                    setRedFlag(red);
                     setYellowFlag('transparent');
                     setGreenFlag('transparent');
                     setChecked25(false);
