@@ -368,7 +368,7 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    setf(approved.reverse());
+    //setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -377,8 +377,9 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchMessages();
+    setf(greenFlaggedMsgs);
     console.log(greenFlaggedMsgs);
-  }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
+  }, []);
 
   const handleChange25 = () => {
     if (checked50 === true) {
@@ -685,6 +686,7 @@ const AdminDashboard = () => {
             setGreenFlag('transparent');
             setChecked25(false);
             setChecked50(false);
+            setValue(null);
             setj(0);
             fetchMessages();
           }}
@@ -700,6 +702,7 @@ const AdminDashboard = () => {
             setGreenFlag(green);
             setChecked25(false);
             setChecked50(false);
+            setValue(null);
             setj(0);
             fetchMessages();
           }}
@@ -751,7 +754,6 @@ const AdminDashboard = () => {
                   className={classes.flag}
                   onClick={() => {
                     setf(greenFlaggedMsgs);
-                    setRedFlag();
                     setGreenFlag(green);
                     setRedFlag('transparent');
                     setYellowFlag('transparent');
@@ -939,7 +941,14 @@ const AdminDashboard = () => {
               )
             ) : yellowFlag === yellow ? (
               yellowFlaggedMsgs.length > 0 ? (
-                yellowFlaggedMsgs.map((message, index) => (
+                yellowFlaggedMsgs
+                .slice(
+                  j,
+                  j + 50 <= greenFlaggedMsgs.length
+                    ? j + 50
+                    : greenFlaggedMsgs.length
+                )
+                .map((message, index) => (
                   <MessageCard
                     bitsId={message.receiverId}
                     body={message.body}
