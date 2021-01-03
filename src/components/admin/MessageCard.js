@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '10px',
   },
   cardContent: {
+    margin: 0,
     padding: '5px',
     fontFamily: 'Raleway',
     fontWeight: 500,
@@ -115,7 +116,11 @@ const MessageCard = ({
       <div>
         <div className={classes.cardContent}>
           <div>
-            {!showPrimaryText ? `${body}...` : ''}
+            {!showPrimaryText
+              ? body.length > 80
+                ? `${body.substr(0, 80)}...`
+                : `${body}`
+              : ''}
             <Collapse
               in={expanded}
               timeout="auto"
@@ -131,14 +136,11 @@ const MessageCard = ({
               setShowPrimaryText(!showPrimaryText);
             }}
           >
-            {!expanded ? 'View More' : 'View Less'}
+            {body.length > 80 ? (!expanded ? 'View More' : 'View Less') : ''}
           </span>
         </div>
         <div className={classes.cardFooter}>
-          <p className={classes.date}>
-            {new Date(date).toDateString()},{' '}
-            {new Date(date).toLocaleTimeString()}
-          </p>
+          <p className={classes.date}>{date}</p>
           <CardActions disableSpacing>
             <IconButton classes={{ root: classes.iconButton }}>
               <CheckCircleOutlineIcon

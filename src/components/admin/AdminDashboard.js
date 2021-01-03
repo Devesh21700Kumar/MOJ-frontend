@@ -155,7 +155,7 @@ const useStyles = makeStyles((theme) =>
       fontSize: '16px',
     },
     paginatorFragment: {
-      width: 'mex-content',
+      width: 'max-content',
     },
     backToTop: {
       width: '100%',
@@ -318,6 +318,19 @@ const ShowMessages = ({
 }) => {
   const classes = useStyles();
 
+  const dateFormatter = (timestamp) => {
+    const date = new Date(timestamp);
+    const day = date.getDate() + ', ';
+    const month = date.toLocaleString('default', { month: 'long' }) + ' ';
+    const year = date.getFullYear() + ', ';
+    const time = date.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return month + day + year + time;
+  };
+
   return (
     <>
       {redFlag === red ? (
@@ -326,7 +339,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -344,7 +357,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -362,7 +375,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -379,7 +392,7 @@ const ShowMessages = ({
           <MessageCard
             bitsId={message.receiverId}
             body={message.body}
-            date={message.date}
+            date={dateFormatter(message.date)}
             key={index}
             index={index}
             _id={message._id}
