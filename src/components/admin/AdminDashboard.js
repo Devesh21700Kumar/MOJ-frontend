@@ -368,17 +368,17 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    setf(approved.reverse());
+    //setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
     setDisplay('flex');
   }
 
-  useEffect(() => {
-    fetchMessages();
-    console.log(greenFlaggedMsgs);
-  }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
+  useEffect(async () => {
+    await fetchMessages();
+    //await setj(0);
+  }, []);
 
   const handleChange25 = () => {
     if (checked50 === true) {
@@ -685,6 +685,7 @@ const AdminDashboard = () => {
             setGreenFlag('transparent');
             setChecked25(false);
             setChecked50(false);
+            setValue(null);
             setj(0);
             fetchMessages();
           }}
@@ -700,6 +701,8 @@ const AdminDashboard = () => {
             setGreenFlag(green);
             setChecked25(false);
             setChecked50(false);
+            setf(greenFlaggedMsgs);
+            setValue(null);
             setj(0);
             fetchMessages();
           }}
@@ -751,7 +754,6 @@ const AdminDashboard = () => {
                   className={classes.flag}
                   onClick={() => {
                     setf(greenFlaggedMsgs);
-                    setRedFlag();
                     setGreenFlag(green);
                     setRedFlag('transparent');
                     setYellowFlag('transparent');
@@ -939,19 +941,26 @@ const AdminDashboard = () => {
               )
             ) : yellowFlag === yellow ? (
               yellowFlaggedMsgs.length > 0 ? (
-                yellowFlaggedMsgs.map((message, index) => (
-                  <MessageCard
-                    bitsId={message.receiverId}
-                    body={message.body}
-                    date={dateFormatter(message.date)}
-                    key={yellowFlaggedMsgs.indexOf(message)}
-                    index={yellowFlaggedMsgs.indexOf(message)}
-                    _id={message._id}
-                    messageId={messageId}
-                    setMessageId={setMessageId}
-                    n={setNumber()}
-                  />
-                ))
+                yellowFlaggedMsgs
+                  .slice(
+                    j,
+                    j + 50 <= greenFlaggedMsgs.length
+                      ? j + 50
+                      : greenFlaggedMsgs.length
+                  )
+                  .map((message, index) => (
+                    <MessageCard
+                      bitsId={message.receiverId}
+                      body={message.body}
+                      date={dateFormatter(message.date)}
+                      key={yellowFlaggedMsgs.indexOf(message)}
+                      index={yellowFlaggedMsgs.indexOf(message)}
+                      _id={message._id}
+                      messageId={messageId}
+                      setMessageId={setMessageId}
+                      n={setNumber()}
+                    />
+                  ))
               ) : (
                 <h1 className={classes.noMessages}>No Messages to Display!</h1>
               )
