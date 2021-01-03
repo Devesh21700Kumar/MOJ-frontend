@@ -375,9 +375,9 @@ const AdminDashboard = () => {
     setDisplay('flex');
   }
 
-  useEffect(async() => {
-   await fetchMessages();
-   //await setj(0);
+  useEffect(async () => {
+    await fetchMessages();
+    //await setj(0);
   }, []);
 
   const handleChange25 = () => {
@@ -942,25 +942,25 @@ const AdminDashboard = () => {
             ) : yellowFlag === yellow ? (
               yellowFlaggedMsgs.length > 0 ? (
                 yellowFlaggedMsgs
-                .slice(
-                  j,
-                  j + 50 <= greenFlaggedMsgs.length
-                    ? j + 50
-                    : greenFlaggedMsgs.length
-                )
-                .map((message, index) => (
-                  <MessageCard
-                    bitsId={message.receiverId}
-                    body={message.body}
-                    date={dateFormatter(message.date)}
-                    key={yellowFlaggedMsgs.indexOf(message)}
-                    index={yellowFlaggedMsgs.indexOf(message)}
-                    _id={message._id}
-                    messageId={messageId}
-                    setMessageId={setMessageId}
-                    n={setNumber()}
-                  />
-                ))
+                  .slice(
+                    j,
+                    j + 50 <= greenFlaggedMsgs.length
+                      ? j + 50
+                      : greenFlaggedMsgs.length
+                  )
+                  .map((message, index) => (
+                    <MessageCard
+                      bitsId={message.receiverId}
+                      body={message.body}
+                      date={dateFormatter(message.date)}
+                      key={yellowFlaggedMsgs.indexOf(message)}
+                      index={yellowFlaggedMsgs.indexOf(message)}
+                      _id={message._id}
+                      messageId={messageId}
+                      setMessageId={setMessageId}
+                      n={setNumber()}
+                    />
+                  ))
               ) : (
                 <h1 className={classes.noMessages}>No Messages to Display!</h1>
               )
