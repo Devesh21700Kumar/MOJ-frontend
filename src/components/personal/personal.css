@@ -319,7 +319,7 @@
     margin-top: 0vh;
   }
 }
-@media only screen and (min-width: 350px) and (max-width: 707.9px) {
+@media only screen and (min-width: 250px) and (max-width: 707.9px) {
   .baxter {
     margin-left: 22vw;
     transform: scale(0.7);

@@ -200,7 +200,7 @@ const Dashboard = (messages, props) => {
         },
       });
       console.log(response.data.data);
-      var  t= response.data.data;
+      var t = response.data.data;
       //console.log(Date(response.data.data[0].date).substr(0, 21));
       //console.log(userInfo.name);
       setMsgs([...t].reverse());
