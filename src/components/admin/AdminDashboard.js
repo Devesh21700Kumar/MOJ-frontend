@@ -3,7 +3,6 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Button,
-  CssBaseline,
   Grid,
   IconButton,
   InputBase,
@@ -155,7 +154,7 @@ const useStyles = makeStyles((theme) =>
       fontSize: '16px',
     },
     paginatorFragment: {
-      width: 'mex-content',
+      width: 'max-content',
     },
     backToTop: {
       width: '100%',
@@ -318,6 +317,19 @@ const ShowMessages = ({
 }) => {
   const classes = useStyles();
 
+  const dateFormatter = (timestamp) => {
+    const date = new Date(timestamp);
+    const day = date.getDate() + ', ';
+    const month = date.toLocaleString('default', { month: 'long' }) + ' ';
+    const year = date.getFullYear() + ', ';
+    const time = date.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return month + day + year + time;
+  };
+
   return (
     <>
       {redFlag === red ? (
@@ -326,7 +338,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -344,7 +356,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -362,7 +374,7 @@ const ShowMessages = ({
             <MessageCard
               bitsId={message.receiverId}
               body={message.body}
-              date={message.date}
+              date={dateFormatter(message.date)}
               key={index}
               index={index}
               _id={message._id}
@@ -379,7 +391,7 @@ const ShowMessages = ({
           <MessageCard
             bitsId={message.receiverId}
             body={message.body}
-            date={message.date}
+            date={dateFormatter(message.date)}
             key={index}
             index={index}
             _id={message._id}
@@ -415,7 +427,6 @@ const AdminDashboard = () => {
   const [i, seti] = useState(0);
   const [display, setDisplay] = useState('none');
   const token = localStorage.getItem('token');
-  const [fret,setfret] =useState(redFlaggedMsgs);
 
   if (token === null) return <Redirect to="/" />;
 
@@ -606,6 +617,8 @@ const AdminDashboard = () => {
   };
 
   const hc1 = () => {
+    if (i >= 50) {
+      seti((i) => i - 50);
       setValue(' ');
       if (checked25 === true) {
         setChecked25(!checked25);
@@ -613,37 +626,17 @@ const AdminDashboard = () => {
       if (checked50 === true) {
         setChecked50(!checked50);
       }
-    
-    if (i > 50) {
-      seti(i - 50);
-
-
-    } else if (i <= 50) {
-      seti(0);
- 
     }
   };
 
   const hc2 = () => {
+    seti((i) => i + 50);
     setValue(' ');
     if (checked25 === true) {
       setChecked25(!checked25);
       if (checked50 === true) {
         setChecked50(!checked50);
       }
-    }
-    if (i + 50 < fret.length - 50) {
-      seti(i + 50);
-
-    } else if (fret.length - (i + 50) < 50 && fret.length - (i + 50) > 0) {
-      seti(i + 50);
-
-    } else if (i + 50 == fret.length - 50) {
-      seti(i + 50);
-
-    } else {
-      seti(i);
-    
     }
   };
 
@@ -684,9 +677,9 @@ const AdminDashboard = () => {
           onClick={hc2}
           endIcon={<ChevronRightRounded />}
           disabled={
-            50 > redFlaggedMsgs.length ||
-            50 > greenFlaggedMsgs.length ||
-            50 > yellowFlaggedMsgs.length
+            i > redFlaggedMsgs.length ||
+            i > greenFlaggedMsgs.length ||
+            i > yellowFlaggedMsgs.length
           }
         >
           Next 50
@@ -763,7 +756,6 @@ const AdminDashboard = () => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       {/* Tabs */}
       <Navbar navHeading="Admin Dashboard" name={name} bitsId={bitsId} />
       <div className={classes.tabs} id="top">
@@ -809,7 +801,6 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
-                    setfret(redFlaggedMsgs);
                     setRedFlag(red);
                     setYellowFlag('transparent');
                     setGreenFlag('transparent');
@@ -826,7 +817,6 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
-                    setfret(yellowFlaggedMsgs);
                     setYellowFlag(yellow);
                     setRedFlag('transparent');
                     setGreenFlag('transparent');
@@ -843,7 +833,6 @@ const AdminDashboard = () => {
                 <Button
                   className={classes.flag}
                   onClick={() => {
-                    setfret(greenFlaggedMsgs);
                     setGreenFlag(green);
                     setRedFlag('transparent');
                     setYellowFlag('transparent');
