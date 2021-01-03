@@ -95,7 +95,7 @@ const MessageCard = ({
     if (num === '') {
       num = 0;
     } else {
-      num = parseInt(num);
+      num = num;
     }
 
     return num;
