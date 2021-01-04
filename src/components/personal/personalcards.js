@@ -17,10 +17,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#FFD94D',
     margin: '5px',
     borderRadius: '18px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    height: '7vh',
+
+    height: '11vh',
     boxShadow: '  0 8px 6px -6px black',
+  },
+  msgCard: {
+    padding: '15px',
+    marginTop: '20px',
+    backgroundColor: '#FFD94D',
+    borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
   },
   Gin: {
     padding: '0 0px 0px 0px',
@@ -128,48 +138,40 @@ export default function PersonalCards({ text, index }) {
         get
           .slice(i, i + 15 <= get.length ? i + 15 : get.length)
           .map((text, index) => (
-            <Grid container direction={'column'}>
-              <Container value={index} className={classes.margi} id="cross">
-                <Grid
-                  key={index}
-                  onClick={() => {
-                    toggleReadMessages(true);
-                    setpos((i / 15) * 15 + index);
-                  }}
-                  container
-                  direction={'row'}
-                  className={classes.krait}
-                >
-                  <Grid item xs className={classes.Gin}>
+            <Card
+              className={classes.msgCard}
+              raised={true}
+              key={index}
+              onClick={() => {
+                toggleReadMessages(true);
+                setpos((i / 15) * 15 + index);
+              }}
+            >
+              <div className={classes.Gin}>
+                <p className={classes.date}>
+                  {`${(i / 15) * 15 + index + 1}.  `}
+                  {screen.width >= 591
+                    ? screen.width >= 680
+                      ? text.body.slice(0, 43)
+                      : text.body.slice(0, 31)
+                    : text.body.slice(0, 23)}
+                </p>
+              </div>
+              <div className={classes.Gi}></div>
+              <div className={classes.Gin1}>
+                <Typography variant="h6" edge="start">
+                  <b key="index">
                     <p className={classes.date}>
-                      {`${(i / 15) * 15 + index + 1}.  `}
                       {screen.width >= 591
-                        ? text.body.slice(0, 15)
-                        : text.body.slice(0, 10)}
+                        ? screen.width >= 680
+                          ? dateFormatter(text.date).slice(0, 23)
+                          : dateFormatter(text.date).slice(0, 23)
+                        : dateFormatter(text.date).slice(0, 23)}
                     </p>
-                  </Grid>
-                  <Grid
-                    item
-                    xs
-                    alignContent="flex-end"
-                    className={classes.Gi}
-                  ></Grid>
-                  <Grid item xs lg={2} className={classes.Gin1}>
-                    <Typography variant="h6" edge="start">
-                      <b key="index">
-                        <p className={classes.date}>
-                          {screen.width >= 591
-                            ? screen.width >= 680
-                              ? dateFormatter(text.date).slice(0, 23)
-                              : dateFormatter(text.date).slice(0, 19)
-                            : dateFormatter(text.date).slice(0, 9)}
-                        </p>
-                      </b>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Container>
-            </Grid>
+                  </b>
+                </Typography>
+              </div>
+            </Card>
           ))
       ) : (
         <h1 className="baxter">No Messages to Display !</h1>
