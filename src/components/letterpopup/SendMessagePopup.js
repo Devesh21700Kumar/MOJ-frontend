@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '40vh',
     width: '49vw',
     overflowY: 'scroll',
+    overflowX: 'hidden',
   },
 }));
 export default function SendMessagePopup({ enabled, toggleVisibility }) {
@@ -208,70 +209,58 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   className={classes.hexap}
                   aria-label="notifications"
                 >
-                  {receiverEmail.length > 0 ? (
-                    data.filter(
-                      (dataset) =>
-                        dataset.name
-                          .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
-                        dataset.bitsId
-                          .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
-                        dataset.name.toLowerCase() ===
-                          receiverEmail.toLowerCase() ||
-                        checkspace(dataset.name)
-                          .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
-                        dataset.email.includes(receiverEmail.toLowerCase())
-                    ).length > 0 ? (
-                      data
-                        .filter(
-                          (dataset) =>
-                            dataset.name
-                              .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
-                            dataset.bitsId
-                              .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
-                            dataset.name.toLowerCase() ===
-                              receiverEmail.toLowerCase() ||
-                            checkspace(dataset.name)
-                              .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
-                            dataset.email.includes(receiverEmail.toLowerCase())
-                        )
-                        .slice(0, 101)
-                        .map((person, index) => (
-                          <ListItem button>
-                            <ListItemText
-                              className
-                              primary={person.name}
-                              secondary={person.email}
-                              onClick={() => {
-                                setSendToAddress(person.email);
-                                handleClose2();
-                              }}
-                            />
-                          </ListItem>
-                        ))
-                    ) : (
-                      <ListItem button>
-                        <ListItemText
-                          className
-                          primary="enter correct value to search"
-                          onClick={() => {
-                            setSendToAddress(person.email);
-                            handleClose2();
-                          }}
-                        />
-                      </ListItem>
-                    )
+                  {data.filter(
+                    (dataset) =>
+                      dataset.name
+                        .toLowerCase()
+                        .includes(receiverEmail.toLowerCase()) ||
+                      dataset.bitsId
+                        .toLowerCase()
+                        .includes(receiverEmail.toLowerCase()) ||
+                      dataset.name.toLowerCase() ===
+                        receiverEmail.toLowerCase() ||
+                      checkspace(dataset.name)
+                        .toLowerCase()
+                        .includes(receiverEmail.toLowerCase()) ||
+                      dataset.email.includes(receiverEmail.toLowerCase())
+                  ).length > 0 ? (
+                    data
+                      .filter(
+                        (dataset) =>
+                          dataset.name
+                            .toLowerCase()
+                            .includes(receiverEmail.toLowerCase()) ||
+                          dataset.bitsId
+                            .toLowerCase()
+                            .includes(receiverEmail.toLowerCase()) ||
+                          dataset.name.toLowerCase() ===
+                            receiverEmail.toLowerCase() ||
+                          checkspace(dataset.name)
+                            .toLowerCase()
+                            .includes(receiverEmail.toLowerCase()) ||
+                          dataset.email.includes(receiverEmail.toLowerCase())
+                      )
+                      .slice(0, 101)
+                      .map((person, index) => (
+                        <ListItem button>
+                          <ListItemText
+                            className
+                            primary={person.name}
+                            secondary={person.email}
+                            onClick={() => {
+                              setSendToAddress(person.email);
+                              handleClose2();
+                            }}
+                          />
+                        </ListItem>
+                      ))
                   ) : (
                     <ListItem button>
                       <ListItemText
                         className
-                        primary="enter some value to search"
+                        primary="enter correct value to search"
                         onClick={() => {
+                          setSendToAddress(person.email);
                           handleClose2();
                         }}
                       />
@@ -279,10 +268,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   )}
                 </List>
               </Paper>
-              <div display="none" className="letterpopup-classes-messageBody">
+              <div display="none" className="letterpopup-classes-messageBody1">
                 <TextField
                   style={{ display: c2 }}
                   multiline
+                  inputProps={{ maxLength: 500 }}
                   className="letterpopup-classes-messageTextField"
                   value={messageBody}
                   onChange={(e) => {

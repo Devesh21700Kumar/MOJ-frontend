@@ -74,16 +74,7 @@ export default function Navbar({ navHeading, name, bitsId, stats }) {
               {navHeading}
             </div>
           </Grid>
-          <Grid
-            item
-            xs
-            sm
-            md={4}
-            lg={4}
-            alignContent="flex-end"
-            className={classes.top}
-            id="free2"
-          >
+          <Grid item xs sm md={4} lg={4} className={classes.top} id="free2">
             <Notifs />
             <Profile name={name} bitsId={bitsId} />
             {!stats ? <Stats /> : null}

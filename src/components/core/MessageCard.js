@@ -93,14 +93,7 @@ const postApproval = async (id, approval, flag) => {
   }
 };
 
-const MessageCard = ({
-  rollNumber,
-  message,
-  date,
-  id,
-  index,
-  fetchMessages,
-}) => {
+const MessageCard = ({ rollNumber, message, date, id, index }) => {
   const classes = useStyles();
   // State variables
   const [open, setOpen] = useState(false);
@@ -114,7 +107,6 @@ const MessageCard = ({
     setOpen(true);
     setText('This message has been ' + msg);
     setStatus(msg);
-    fetchMessages();
   };
   const handleClose = () => {
     setOpen(false);

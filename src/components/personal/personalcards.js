@@ -12,22 +12,22 @@ import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
 
 const useStyles = makeStyles((theme) => ({
-  margi: {
-    // border: '3px solid black',
+  msgCard: {
+    padding: '15px',
+    marginTop: '20px',
     backgroundColor: '#FFD94D',
-    margin: '5px',
-    borderRadius: '18px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    height: '7vh',
-    boxShadow: '  0 8px 6px -6px black',
+    borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
   },
   Gin: {
     padding: '0 0px 0px 0px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    flex: 1.1,
-    marginTop: '0.87vh',
+    flex: 1,
   },
   Gin1: {
     padding: '0 0px 0px 0px',
@@ -35,12 +35,11 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     float: 'right',
-    flex: 1.1,
-    marginTop: '0.77vh',
+    flex: 1,
   },
 
   Gi: {
-    flex: 1.5,
+    flex: 1,
   },
   date: {
     margin: '.8rem 0rem 0 0',
@@ -53,29 +52,20 @@ const useStyles = makeStyles((theme) => ({
   '@media(max-height: 680px)': {
     Gin: {
       fontSize: '20px',
-      marginTop: '0.32vh',
     },
-    Gin1: {
-      marginTop: '0.18vh',
-    },
+    Gin1: {},
   },
   '@media(max-height: 568px)': {
     Gin: {
       fontSize: '20px',
-      marginTop: '0.12vh',
     },
-    Gin1: {
-      marginTop: '0.08vh',
-    },
+    Gin1: {},
   },
   '@media(max-height: 750px)': {
     Gin: {
       fontSize: '20px',
-      marginTop: '0.36vh',
     },
-    Gin1: {
-      marginTop: '0.08vh',
-    },
+    Gin1: {},
   },
 }));
 
@@ -128,48 +118,40 @@ export default function PersonalCards({ text, index }) {
         get
           .slice(i, i + 15 <= get.length ? i + 15 : get.length)
           .map((text, index) => (
-            <Grid container direction={'column'}>
-              <Container value={index} className={classes.margi} id="cross">
-                <Grid
-                  key={index}
-                  onClick={() => {
-                    toggleReadMessages(true);
-                    setpos((i / 15) * 15 + index);
-                  }}
-                  container
-                  direction={'row'}
-                  className={classes.krait}
-                >
-                  <Grid item xs className={classes.Gin}>
+            <Card
+              className={classes.msgCard}
+              raised={true}
+              key={index}
+              onClick={() => {
+                toggleReadMessages(true);
+                setpos((i / 15) * 15 + index);
+              }}
+            >
+              <div className={classes.Gin}>
+                <p className={classes.date}>
+                  {`${(i / 15) * 15 + index + 1}.  `}
+                  {screen.width >= 591
+                    ? screen.width >= 680
+                      ? text.body.slice(0, 43)
+                      : text.body.slice(0, 31)
+                    : text.body.slice(0, 23)}
+                </p>
+              </div>
+
+              <div className={classes.Gin1}>
+                <Typography variant="h6" edge="start">
+                  <b key="index">
                     <p className={classes.date}>
-                      {`${(i / 15) * 15 + index + 1}.  `}
                       {screen.width >= 591
-                        ? text.body.slice(0, 15)
-                        : text.body.slice(0, 10)}
+                        ? screen.width >= 680
+                          ? dateFormatter(text.date).slice(0, 23)
+                          : dateFormatter(text.date).slice(0, 23)
+                        : dateFormatter(text.date).slice(0, 23)}
                     </p>
-                  </Grid>
-                  <Grid
-                    item
-                    xs
-                    alignContent="flex-end"
-                    className={classes.Gi}
-                  ></Grid>
-                  <Grid item xs lg={2} className={classes.Gin1}>
-                    <Typography variant="h6" edge="start">
-                      <b key="index">
-                        <p className={classes.date}>
-                          {screen.width >= 591
-                            ? screen.width >= 680
-                              ? dateFormatter(text.date).slice(0, 23)
-                              : dateFormatter(text.date).slice(0, 19)
-                            : dateFormatter(text.date).slice(0, 9)}
-                        </p>
-                      </b>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Container>
-            </Grid>
+                  </b>
+                </Typography>
+              </div>
+            </Card>
           ))
       ) : (
         <h1 className="baxter">No Messages to Display !</h1>

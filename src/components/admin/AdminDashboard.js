@@ -19,16 +19,19 @@ import URL from '../util/url';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      backgroundColor: '#FFFDE8',
-      flexGrow: 1,
+    '@global': {
       '*::-webkit-scrollbar': {
         width: '10px',
       },
       '*::-webkit-scrollbar-thumb': {
         backgroundColor: '#EF4646',
-        borderRadius: '30px',
+        borderRadius: '10px',
       },
+    },
+    root: {
+      backgroundColor: '#FFFDE8',
+      flexGrow: 1,
+      height: '100vh',
     },
     tabs: {
       backgroundColor: '#EF4646',
@@ -57,7 +60,6 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: '#FFFDE8',
       borderRadius: '20px 20px 0 0',
       padding: '1.5rem',
-      minHeight: '80vh',
     },
     flags: {
       width: '100%',
@@ -284,16 +286,16 @@ const useStyles = makeStyles((theme) =>
         width: '90%',
       },
       buttons: {
-        width: '100%',
+        width: '90%',
+        margin: '0px auto',
         display: 'flex',
         justifyContent: 'flex-end',
-        padding: '10px 70px',
       },
       buttons1: {
-        width: '100%',
+        width: '90%',
+        margin: '0px auto',
         display: 'flex',
         justifyContent: 'space-between',
-        padding: '10px 70px',
       },
     },
   })
@@ -355,9 +357,7 @@ const AdminDashboard = () => {
         },
       })
     ).json();
-    if (messages.length) {
-      setMsgs(messages.reverse());
-    }
+    setMsgs(messages.reverse());
 
     const { data } = await (
       await fetch(`${URL}/api/level2/finalapproval`, {
@@ -368,7 +368,7 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    setf(approved.reverse());
+    //setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -377,8 +377,8 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchMessages();
-    console.log(greenFlaggedMsgs);
-  }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
+    //await setj(0);
+  }, []);
 
   const handleChange25 = () => {
     if (checked50 === true) {
@@ -685,6 +685,7 @@ const AdminDashboard = () => {
             setGreenFlag('transparent');
             setChecked25(false);
             setChecked50(false);
+            setValue(null);
             setj(0);
             fetchMessages();
           }}
@@ -700,6 +701,8 @@ const AdminDashboard = () => {
             setGreenFlag(green);
             setChecked25(false);
             setChecked50(false);
+            setf(greenFlaggedMsgs);
+            setValue(null);
             setj(0);
             fetchMessages();
           }}
@@ -717,6 +720,7 @@ const AdminDashboard = () => {
                   className={classes.flag}
                   onClick={() => {
                     setf(redFlaggedMsgs);
+                    setRedFlag(red);
                     setYellowFlag('transparent');
                     setGreenFlag('transparent');
                     setChecked25(false);
@@ -750,7 +754,6 @@ const AdminDashboard = () => {
                   className={classes.flag}
                   onClick={() => {
                     setf(greenFlaggedMsgs);
-                    setRedFlag();
                     setGreenFlag(green);
                     setRedFlag('transparent');
                     setYellowFlag('transparent');
@@ -862,7 +865,7 @@ const AdminDashboard = () => {
                   <InputBase
                     className={classes.input}
                     inputProps={{ min: 0, max: getMaxNumber() }}
-                    value={value}
+                    value={value === null ? '' : value}
                     onChange={handleChange}
                     id="standard-number"
                     type="number"
@@ -938,19 +941,26 @@ const AdminDashboard = () => {
               )
             ) : yellowFlag === yellow ? (
               yellowFlaggedMsgs.length > 0 ? (
-                yellowFlaggedMsgs.map((message, index) => (
-                  <MessageCard
-                    bitsId={message.receiverId}
-                    body={message.body}
-                    date={dateFormatter(message.date)}
-                    key={yellowFlaggedMsgs.indexOf(message)}
-                    index={yellowFlaggedMsgs.indexOf(message)}
-                    _id={message._id}
-                    messageId={messageId}
-                    setMessageId={setMessageId}
-                    n={setNumber()}
-                  />
-                ))
+                yellowFlaggedMsgs
+                  .slice(
+                    j,
+                    j + 50 <= greenFlaggedMsgs.length
+                      ? j + 50
+                      : greenFlaggedMsgs.length
+                  )
+                  .map((message, index) => (
+                    <MessageCard
+                      bitsId={message.receiverId}
+                      body={message.body}
+                      date={dateFormatter(message.date)}
+                      key={yellowFlaggedMsgs.indexOf(message)}
+                      index={yellowFlaggedMsgs.indexOf(message)}
+                      _id={message._id}
+                      messageId={messageId}
+                      setMessageId={setMessageId}
+                      n={setNumber()}
+                    />
+                  ))
               ) : (
                 <h1 className={classes.noMessages}>No Messages to Display!</h1>
               )
@@ -1040,7 +1050,7 @@ const AdminDashboard = () => {
             open={snackBarOpen}
             autoHideDuration={3000}
             onClose={handleSnackbarClose}
-            message={`${type} messages successfully!`}
+            message={`${type} message(s) successfully!`}
             action={
               <React.Fragment>
                 <IconButton
