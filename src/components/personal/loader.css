@@ -70,6 +70,11 @@
     margin-left: 31vw;
   }
 }
+@media only screen and (min-width: 1180px) and (max-width: 1380px) {
+  .spinwrap {
+    margin-left: 38.5vw;
+  }
+}
 @media only screen and (min-width: 2080px) and (max-width: 2900px) {
   .spinwrap {
     margin-left: 27.8vw;
@@ -87,8 +92,8 @@
     margin-left: 24vw;
   }
 }
-@media only screen and (min-width: 1000px) and (max-width: 1380px) {
+@media only screen and (min-width: 1000px) and (max-width: 1180px) {
   .spinwrap {
-    margin-left: 42vw;
+    margin-left: 38vw;
   }
 }
