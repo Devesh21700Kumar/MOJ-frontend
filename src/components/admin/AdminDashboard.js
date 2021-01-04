@@ -375,10 +375,9 @@ const AdminDashboard = () => {
     setDisplay('flex');
   }
 
-  useEffect(async () => {
-    await fetchMessages();
-    //await setj(0);
-  }, []);
+  useEffect(() => {
+    fetchMessages();
+  }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
 
   const handleChange25 = () => {
     if (checked50 === true) {

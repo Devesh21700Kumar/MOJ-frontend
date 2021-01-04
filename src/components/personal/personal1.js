@@ -1,7 +1,6 @@
 import { React, useState, Fragment, useEffect, createContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,50 +18,52 @@ import URL from '../util/url';
 import '../personal/loader.css';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#fffde8',
-    width: '100vw',
-    minHeight: '90vh',
-    flexGrow: '1',
-    overflowX: 'hidden',
-    marginRight: '-6vw',
-    minWidth: '100vw',
-    '*::-webkit-scrollbar': {
-      width: '10px',
-    },
-    '*::-webkit-scrollbar-thumb': {
-      backgroundColor: '#EF4646',
-      borderRadius: '10px',
-    },
+  margin: {
+    borderBottom: '3px solid green',
   },
-  messages: {
-    width: '100%',
-    padding: '10px',
-    margin: '0px auto 40px auto',
+  card: {
+    backgroundColor: ' #E7B8B8',
   },
-  tab: {
-    borderRadius: '10px 10px 0 0',
-    width: '30%',
-    textAlign: 'center',
+  margi: {
+    backgroundColor: '#FFD94D',
+    margin: '5px',
+    borderRadius: '18px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
-  tabButton: {
-    fontWeight: '700',
-    fontSize: '20px',
-    textTransform: 'none',
-    width: '100%',
+  Gin: {
+    marginTop: '12px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    flex: 1,
+  },
+  Gin1: {
+    marginTop: '12px',
+    marginRight: '2rem',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    float: 'right',
+    flex: 1,
+  },
+  ter: {
+    width: '2rem',
+    height: '2rem',
+    top: '2vh',
+    left: '50vw',
+  },
+  Gi: {
+    flex: 2,
+  },
+  rad: {
+    borderRadius: '10px',
+  },
+  date: {
+    margin: '.8rem 1rem 0 0',
     fontFamily: 'oxygen',
-    borderRadius: '10px 10px 0 0',
+    fontSize: '1rem',
   },
-  tabs: {
-    backgroundColor: '#EF4646',
-    padding: '20px 0px 0px 10px',
-    display: 'flex',
-    justifyContent: 'space-evenly',
-  },
-  mainContent: {
-    width: '100%',
-    backgroundColor: '#EF4646',
-    marginTop: '0vh',
+  krait: {
+    marginLeft: '7px',
   },
   hot: {
     color: '#EF4646',
@@ -76,13 +77,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: '2.8vmax',
   },
-  inner: {
-    backgroundColor: '#FFFDE8',
-    borderRadius: '20px 20px 0 0',
-    padding: '1.5rem',
-    minHeight: '80vh',
-  },
-
   '@media(min-width: 560px)': {
     hot: {
       fontSize: '34px',
@@ -98,16 +92,7 @@ const useStyles = makeStyles((theme) => ({
     },
     hot1: {
       fontSize: '16px',
-      marginLeft: '-4.4vw',
-    },
-  },
-  '@media(max-width: 320px)': {
-    hot: {
-      fontSize: '20px',
-    },
-    hot1: {
-      fontSize: '16px',
-      marginLeft: '-2.4vw',
+      marginLeft: '-6.4vw',
     },
   },
   '@media(min-width: 920px)': {
@@ -292,88 +277,98 @@ export default function Personal({ name, bitsId }, props) {
   };
 
   return (
-    <Fragment>
-      <div className={classes.root} id="root">
-        <SendMessagePopup
-          enabled={enables}
-          toggleVisibility={hit}
-          key={'SendMessagePopupKey-' + enables}
-        />
-
+    <div className="nav">
+      <SendMessagePopup
+        enabled={enables}
+        toggleVisibility={hit}
+        key={'SendMessagePopupKey-' + enables}
+      />
+      <div>
         <Navbar name={userdata.name} bitsId={userdata.bitsId} />
-
-        <div className={classes.tabs} id="top">
-          <Box
-            className={classes.tab}
-            style={{ backgroundColor: color }}
-            onClick={boxClick}
-          >
-            <Button className={classes.tabButton}>Inbox</Button>
-          </Box>
-          <Box
-            className={classes.tab}
-            style={{ backgroundColor: color1 }}
-            onClick={boxClick1}
-          >
-            <Button className={classes.tabButton}>Sent</Button>
+      </div>
+      <div className="set1">
+        <div>
+          <Box className="crux1" display="flex" bgcolor="#EF4646">
+            <Box width="10%"></Box>
+            <Box
+              p={0.8}
+              style={{ backgroundColor: color, textTransform: 'none' }}
+              className="rad1"
+              width="20%"
+              textAlign="center"
+            >
+              <Button
+                onClick={boxClick}
+                style={{ fontWeight: '200', textTransform: 'none' }}
+                size="small"
+                className="margi1"
+              >
+                <b> Inbox</b>
+              </Button>
+            </Box>
+            <Box bgcolor="#EF4646" width="40%"></Box>
+            <Box
+              p={0.8}
+              style={{ backgroundColor: color1, textTransform: 'none' }}
+              width="20%"
+              className="rad1"
+              textAlign="center"
+            >
+              <Button
+                onClick={boxClick1}
+                style={{ fontWeight: '200', textTransform: 'none' }}
+                size="small"
+                className="margi1"
+              >
+                <b>Sent</b>
+              </Button>
+            </Box>
+            <Box width="10%"></Box>
           </Box>
         </div>
 
         {/*Welcome message and heading*/}
-
-        <div className={classes.mainContent}>
-          <div class="ter">
-            <IconButton
-              className="ter"
-              onClick={hit}
-              style={{ color: '#EF4646' }}
-            >
-              <AddCircleIcon className="tera" />
-            </IconButton>
-          </div>
-          <Box className={classes.inner}>
-            <Box display="flex" className="cA">
-              <Box width="35%" className="c1">
-                <Typography className={classes.hot}>
-                  Welcome{' '}
-                  {userdata.name
+        <div id="color1">
+          <Box display="flex" className="cA">
+            <Box width="35%" className="c1">
+              <Typography className={classes.hot}>
+                Welcome{' '}
+                {userdata.name
+                  .split(' ')
+                  .slice(0, 1)
+                  .join(' ')
+                  .charAt(0)
+                  .toUpperCase() +
+                  userdata.name
                     .split(' ')
                     .slice(0, 1)
                     .join(' ')
-                    .charAt(0)
-                    .toUpperCase() +
-                    userdata.name
-                      .split(' ')
-                      .slice(0, 1)
-                      .join(' ')
-                      .toLowerCase()
-                      .slice(1)}
-                </Typography>
-              </Box>
-
-              <Box width="15%" textAlign="center" className="c2">
-                <Typography className={classes.hot1}>Messages</Typography>
-              </Box>
+                    .toLowerCase()
+                    .slice(1)}
+              </Typography>
             </Box>
-            <div className={classes.messages}>
-              <Container>
-                {load ? (
-                  <div className="spinwrap">
-                    <div class="spinner">
-                      <div></div>
-                      <div></div>
-                    </div>
-                  </div>
-                ) : (
-                  <Data.Provider value={{ get }}>
-                    <Data1.Provider value={i}>
-                      <PersonalCards />
-                    </Data1.Provider>
-                  </Data.Provider>
-                )}
-              </Container>
-            </div>
 
+            <Box width="15%" textAlign="center" className="c2">
+              <Typography className={classes.hot1}>Messages</Typography>
+            </Box>
+          </Box>
+          <div className="terov1">
+            {load ? (
+              <div className="spinwrap">
+                <div class="spinner">
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            ) : (
+              <Data.Provider value={{ get }}>
+                <Data1.Provider value={i}>
+                  <PersonalCards />
+                </Data1.Provider>
+              </Data.Provider>
+            )}
+          </div>
+          <div className="hexad">
             <Grid
               container
               direction="row"
@@ -427,9 +422,15 @@ export default function Personal({ name, bitsId }, props) {
                 </svg>
               </Grid>
             </Grid>
-          </Box>
+          </div>
         </div>
+        <div className="ter">
+          <IconButton onClick={hit} style={{ color: '#EF4646' }}>
+            <AddCircleIcon className="tera" />
+          </IconButton>
+        </div>
+        <div className="hexad1"></div>
       </div>
-    </Fragment>
+    </div>
   );
 }

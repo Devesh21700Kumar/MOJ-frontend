@@ -8,16 +8,15 @@
   background: #fffde8;
   padding-top: 0px;
   position: absolute;
-  height: 90vh;
   margin-top: 52px;
+  height: 155vh;
   width: 100%;
   border-radius: 20px 20px 0px 0px;
   border-bottom: 22px #ef4646 solid;
 }
-
 .set1 {
   position: relative;
-  height: 90.5vh;
+  height: 92.5vh;
   width: 100vw;
   margin-top: 0vh;
   overflow-x: hidden;
@@ -45,12 +44,17 @@
   width: 100%;
 }
 .hexad {
-  width: 100vw;
+  height: 6vh;
   position: absolute;
-  background-color: #fffde8;
-  margin-top: -3.1vh;
+  margin-top: 4.5vh;
+  width: 100vw;
 }
 
+.hexad1 {
+  height: 2vh;
+  width: 100vw;
+  color: #ef4646;
+}
 .fix {
   height: 12vh;
   background: #fffde8;
@@ -68,29 +72,7 @@
 .ter {
   position: fixed;
   margin-left: 87vw;
-  margin-top: 60vh;
-  z-index: 1;
-}
-@media only screen and (min-width: 709px) and (max-width: 1000px) {
-  .ter {
-    margin-left: 87vw;
-    margin-top: 70vh;
-  }
-}
-@media only screen and (min-width: 900px) and (max-width: 1200px) {
-  .ter {
-    margin-left: 91vw;
-  }
-}
-@media only screen and (min-width: 1200px) and (max-width: 1479px) {
-  .ter {
-    margin-left: 95vw;
-  }
-}
-@media only screen and (min-width: 1479px) and (max-width: 1800px) {
-  .ter {
-    margin-left: 92vw;
-  }
+  margin-top: 75vh;
 }
 
 .margi1 {
@@ -132,7 +114,9 @@
   .tera {
     transform: scale(2.5);
   }
-
+  .ter {
+    margin-left: 91vw;
+  }
   .set1 {
     height: 85.5vh;
     width: 100vw;
@@ -140,13 +124,36 @@
   }
 }
 @media only screen and (min-width: 312px) and (max-width: 420px) {
+  .ter {
+    margin-left: 85vw;
+    margin-top: 79vh;
+  }
 }
 @media only screen and (min-width: 402px) and (max-width: 619px) {
   .tera {
     transform: scale(2.5);
   }
 }
-
+@media only screen and (min-width: 709px) and (max-width: 1000px) {
+  .ter {
+    margin-left: 91vw;
+  }
+}
+@media only screen and (min-width: 1001px) and (max-width: 1479px) {
+  .ter {
+    margin-left: 94vw;
+  }
+}
+@media only screen and (min-width: 1479px) and (max-width: 1556px) {
+  .ter {
+    margin-left: 89vw;
+  }
+}
+@media only screen and (min-width: 1556px) and (max-width: 1800px) {
+  .ter {
+    margin-left: 86vw;
+  }
+}
 @media only screen and (min-width: 200px) and (max-width: 320px) {
   .tera {
     transform: scale(1.8);
@@ -228,7 +235,16 @@
     background: #555;
   }
 }
-
+@media only screen and (min-height: 580px) and (max-height: 680px) {
+  .hexad {
+    margin-top: 4.5vh;
+  }
+}
+@media only screen and (max-height: 580px) {
+  .hexad {
+    margin-top: 2.5vh;
+  }
+}
 @media only screen and (max-width: 510px) {
   #color1 {
     margin-top: 47px;
@@ -253,9 +269,18 @@
     background: #fffde8;
     margin-top: -2.6vh;
   }
+  .hexad {
+    margin-top: 1vh;
+  }
 }
 
 @media only screen and (min-height: 600px) and (max-height: 800px) and (min-width: 500px) and (max-width: 1650px) {
+  .hexad {
+    height: 4.5vh;
+    position: absolute;
+    margin-top: 4.5vh;
+    width: 100vw;
+  }
   .terov1 {
     margin-top: -2.5vh;
   }
@@ -315,7 +340,14 @@
   .set1 {
     height: calc(-12vh+495px);
   }
-
+  .hexad {
+    margin-top: 400px;
+  }
+  .ter {
+    position: fixed;
+    margin-left: 87vw;
+    margin-top: 70px;
+  }
   .terov1 {
     height: 800px;
   }
