@@ -12,6 +12,7 @@ import {
   ChevronRightRounded,
   ChevronLeftRounded,
   KeyboardArrowUpRounded,
+  CachedRounded,
 } from '@material-ui/icons';
 import axios from 'axios';
 import MessageCard from './MessageCard';
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   tabBox: {
     backgroundColor: '#FFFDE8',
     borderRadius: '10px 10px 0 0',
+    display: 'flex',
   },
   tabButton: {
     fontWeight: '700',
@@ -50,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     borderRadius: '10px 10px 0 0',
     fontFamily: 'Oxygen, sans-serif',
+  },
+  refreshButton: {
+    color: '#EF4646',
+    padding: '0 7px',
   },
   headerText: {
     margin: 0,
@@ -124,8 +130,8 @@ const useStyles = makeStyles((theme) => ({
       left: '35%',
     },
     tabBox: {
-      position: 'relative',
-      left: '15%',
+      margin: '0 7vh',
+      textAlign: 'center',
     },
   },
 }));
@@ -215,7 +221,10 @@ const Dashboard = () => {
       />
       <div className={classes.pageBar}>
         <Box component="span" className={classes.tabBox}>
-          <Button className={classes.tabButton}>Messages to review</Button>
+          <div className={classes.tabButton}>Messages to review</div>
+          <IconButton className={classes.refreshButton} onClick={fetchMessages}>
+            <CachedRounded />
+          </IconButton>
         </Box>
         <Paginator />
       </div>
