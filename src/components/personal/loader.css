@@ -55,9 +55,19 @@
 .spinwrap {
   margin-left: 37vw;
 }
-@media only screen and (min-width: 1380px) and (max-width: 2080px) {
+@media only screen and (min-width: 1380px) and (max-width: 1510px) {
   .spinwrap {
-    margin-left: 34vw;
+    margin-left: 41vw;
+  }
+}
+@media only screen and (min-width: 1510px) and (max-width: 1800px) {
+  .spinwrap {
+    margin-left: 39vw;
+  }
+}
+@media only screen and (min-width: 1800px) and (max-width: 2080px) {
+  .spinwrap {
+    margin-left: 31vw;
   }
 }
 @media only screen and (min-width: 2080px) and (max-width: 2900px) {
@@ -75,5 +85,10 @@
 @media only screen and (min-width: 280px) and (max-width: 379.999px) {
   .spinwrap {
     margin-left: 24vw;
+  }
+}
+@media only screen and (min-width: 1000px) and (max-width: 1380px) {
+  .spinwrap {
+    margin-left: 42vw;
   }
 }
