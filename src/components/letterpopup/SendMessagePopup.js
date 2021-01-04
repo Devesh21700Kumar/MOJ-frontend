@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '40vh',
     width: '49vw',
     overflowY: 'scroll',
+    overflowX:'hidden',
   },
 }));
 export default function SendMessagePopup({ enabled, toggleVisibility }) {
