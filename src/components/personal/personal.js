@@ -19,24 +19,25 @@ import URL from '../util/url';
 import '../personal/loader.css';
 
 const useStyles = makeStyles((theme) => ({
+    '@global': {
+      '*::-webkit-scrollbar': {
+        width: '4px',
+      },
+      '*::-webkit-scrollbar-thumb': {
+        backgroundColor: '#EF4646',
+        borderRadius: '0px',
+      },
+    },
   root: {
     backgroundColor: '#fffde8',
     width: '100%',
-
     flexGrow: '1',
-    overflowX: 'hidden',
-    '*::-webkit-scrollbar': {
-      width: '10px',
-    },
-    '*::-webkit-scrollbar-thumb': {
-      backgroundColor: '#EF4646',
-      borderRadius: '10px',
-    },
+
   },
   messages: {
     width: '100%',
-    padding: '10px',
-    margin: '0px auto 40px auto',
+    padding:'10px',
+    marginTop:'-3.4vh',
   },
   tab: {
     borderRadius: '10px 10px 0 0',
@@ -78,7 +79,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#FFFDE8',
     borderRadius: '20px 20px 0 0',
     padding: '1.5rem',
-    minHeight: '80vh',
+    minHeight: '79.5vh',
+    '@media(max-height 900px)': {
+      minHeight: '72vh',
+    },
   },
 
   '@media(min-width: 560px)': {
@@ -405,7 +409,7 @@ export default function Personal({ name, bitsId }, props) {
                     margin: '1vw',
                   }}
                 >
-                  Showing {i}-{i + 15 < get.length ? i + 15 : get.length} of{' '}
+                  Showing {get.length>0?i+1:i}-{i + 15 < get.length ? i + 15 : get.length} of{' '}
                   {get.length}
                 </Button>
               </Grid>
