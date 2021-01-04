@@ -19,16 +19,19 @@ import URL from '../util/url';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      backgroundColor: '#FFFDE8',
-      flexGrow: 1,
+    '@global': {
       '*::-webkit-scrollbar': {
         width: '10px',
       },
       '*::-webkit-scrollbar-thumb': {
         backgroundColor: '#EF4646',
-        borderRadius: '30px',
+        borderRadius: '10px',
       },
+    },
+    root: {
+      backgroundColor: '#FFFDE8',
+      flexGrow: 1,
+      height: '100vh',
     },
     tabs: {
       backgroundColor: '#EF4646',
@@ -57,7 +60,6 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: '#FFFDE8',
       borderRadius: '20px 20px 0 0',
       padding: '1.5rem',
-      minHeight: '80vh',
     },
     flags: {
       width: '100%',
@@ -284,16 +286,16 @@ const useStyles = makeStyles((theme) =>
         width: '90%',
       },
       buttons: {
-        width: '100%',
+        width: '90%',
+        margin: '0px auto',
         display: 'flex',
         justifyContent: 'flex-end',
-        padding: '10px 70px',
       },
       buttons1: {
-        width: '100%',
+        width: '90%',
+        margin: '0px auto',
         display: 'flex',
         justifyContent: 'space-between',
-        padding: '10px 70px',
       },
     },
   })
@@ -355,9 +357,7 @@ const AdminDashboard = () => {
         },
       })
     ).json();
-    if (messages.length) {
-      setMsgs(messages.reverse());
-    }
+    setMsgs(messages.reverse());
 
     const { data } = await (
       await fetch(`${URL}/api/level2/finalapproval`, {
@@ -377,7 +377,8 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchMessages();
-  }, [setMsgs, setRedFlaggedMsgs, setYellowFlaggedMsgs, setGreenFlaggedMsgs]);
+    //await setj(0);
+  }, []);
 
   const handleChange25 = () => {
     if (checked50 === true) {
@@ -864,7 +865,7 @@ const AdminDashboard = () => {
                   <InputBase
                     className={classes.input}
                     inputProps={{ min: 0, max: getMaxNumber() }}
-                    value={value}
+                    value={value === null ? '' : value}
                     onChange={handleChange}
                     id="standard-number"
                     type="number"
@@ -1049,7 +1050,7 @@ const AdminDashboard = () => {
             open={snackBarOpen}
             autoHideDuration={3000}
             onClose={handleSnackbarClose}
-            message={`${type} messages successfully!`}
+            message={`${type} message(s) successfully!`}
             action={
               <React.Fragment>
                 <IconButton

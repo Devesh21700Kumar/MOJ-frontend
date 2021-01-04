@@ -94,8 +94,6 @@ const MessageCard = ({
   const changeToInt = (num) => {
     if (num === '') {
       num = 0;
-    } else {
-      num = num;
     }
 
     return num;
