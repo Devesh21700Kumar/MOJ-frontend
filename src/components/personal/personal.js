@@ -19,14 +19,7 @@ import URL from '../util/url';
 import '../personal/loader.css';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#fffde8',
-    width: '100vw',
-    minHeight: '90vh',
-    flexGrow: '1',
-    overflowX: 'hidden',
-    marginRight: '-6vw',
-    minWidth: '100vw',
+  '@global': {
     '*::-webkit-scrollbar': {
       width: '10px',
     },
@@ -35,8 +28,12 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '10px',
     },
   },
+  root: {
+    backgroundColor: '#fffde8',
+    flexGrow: 1,
+  },
   messages: {
-    width: '100%',
+    width: '90%',
     padding: '10px',
     margin: '0px auto 40px auto',
   },
@@ -62,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   mainContent: {
     width: '100%',
     backgroundColor: '#EF4646',
-    marginTop: '0vh',
+    margin: '0px auto',
   },
   hot: {
     color: '#EF4646',
@@ -79,10 +76,14 @@ const useStyles = makeStyles((theme) => ({
   inner: {
     backgroundColor: '#FFFDE8',
     borderRadius: '20px 20px 0 0',
-    padding: '1.5rem',
-    minHeight: '80vh',
+    padding: '1.5rem 1rem',
+    margin: '0px auto',
   },
-
+  '@media(max-width: 414px)': {
+    messages: {
+      width: '95%',
+    },
+  },
   '@media(min-width: 560px)': {
     hot: {
       fontSize: '34px',
@@ -322,7 +323,7 @@ export default function Personal({ name, bitsId }, props) {
         {/*Welcome message and heading*/}
 
         <div className={classes.mainContent}>
-          <div class="ter">
+          <div className="ter">
             <IconButton
               className="ter"
               onClick={hit}
@@ -351,7 +352,7 @@ export default function Personal({ name, bitsId }, props) {
                 </Typography>
               </Box>
 
-              <Box width="15%" textAlign="center" className="c2">
+              <Box width="15%" style={{ textAlign: 'center' }} className="c2">
                 <Typography className={classes.hot1}>Messages</Typography>
               </Box>
             </Box>
@@ -359,7 +360,7 @@ export default function Personal({ name, bitsId }, props) {
               <Container>
                 {load ? (
                   <div className="spinwrap">
-                    <div class="spinner">
+                    <div className="spinner">
                       <div></div>
                       <div></div>
                     </div>
@@ -396,7 +397,7 @@ export default function Personal({ name, bitsId }, props) {
                   />
                 </svg>
               </Grid>
-              <Grid item textAlign="center">
+              <Grid item style={{ textAlign: 'center' }}>
                 <Button
                   className="ken"
                   style={{
@@ -411,12 +412,12 @@ export default function Personal({ name, bitsId }, props) {
                   {get.length}
                 </Button>
               </Grid>
-              <Grid item textAlign="center">
+              <Grid item style={{ textAlign: 'center' }}>
                 <svg
                   onClick={hc2}
                   width="48"
                   height="23"
-                  viewGrid="0 0 48 23"
+                  viewBox="0 0 48 23"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
