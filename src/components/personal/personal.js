@@ -19,20 +19,19 @@ import URL from '../util/url';
 import '../personal/loader.css';
 
 const useStyles = makeStyles((theme) => ({
-    '@global': {
-      '*::-webkit-scrollbar': {
-        width: '4px',
-      },
-      '*::-webkit-scrollbar-thumb': {
-        backgroundColor: '#EF4646',
-        borderRadius: '0px',
-      },
+  '@global': {
+    '*::-webkit-scrollbar': {
+      width: '4px',
     },
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: '#EF4646',
+      borderRadius: '0px',
+    },
+  },
   root: {
     backgroundColor: '#fffde8',
     width: '100%',
     flexGrow: '1',
-
   },
   root: {
     backgroundColor: '#fffde8',
@@ -412,8 +411,8 @@ export default function Personal({ name, bitsId }, props) {
                     margin: '1vw',
                   }}
                 >
-                  Showing {get.length>0?i+1:i}-{i + 15 < get.length ? i + 15 : get.length} of{' '}
-                  {get.length}
+                  Showing {get.length > 0 ? i + 1 : i}-
+                  {i + 15 < get.length ? i + 15 : get.length} of {get.length}
                 </Button>
               </Grid>
               <Grid item style={{ textAlign: 'center' }}>
