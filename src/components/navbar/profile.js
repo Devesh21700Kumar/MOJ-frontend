@@ -136,8 +136,9 @@ export default function Profile({ name, bitsId }) {
           className={
             userinfo.permissionLevel != 0 ? classes.menuButton : classes.menu
           }
+          onClick={handleClick}
         >
-          <AccountCircleRoundedIcon className="icons" onClick={handleClick} />
+          <AccountCircleRoundedIcon className="icons" />
         </IconButton>
       </MuiThemeProvider>
       {/* <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>

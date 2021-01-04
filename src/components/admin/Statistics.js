@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
 import Navbar from '../navbar/navbar';
 import URL from '../util/url';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      backgroundColor: '#FFFDE8',
-      flexGrow: 1,
-      overflowX: 'hidden',
+    '@global': {
       '*::-webkit-scrollbar': {
         width: '10px',
       },
       '*::-webkit-scrollbar-thumb': {
         backgroundColor: '#EF4646',
-        borderRadius: '30px',
+        borderRadius: '10px',
       },
     },
+    root: {
+      backgroundColor: '#FFFDE8',
+      flexGrow: 1,
+      maxWidth: '100vw',
+      height: '100vh',
+    },
     mainContent: {
-      width: '100vw',
-      minHeight: '100vh',
       backgroundColor: '#FFFDE8',
       padding: '1.5rem',
     },
@@ -90,7 +90,6 @@ const Statistics = () => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       {/* Tabs */}
       <Navbar
         navHeading="Admin Dashboard"
