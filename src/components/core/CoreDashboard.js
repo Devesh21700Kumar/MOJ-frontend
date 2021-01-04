@@ -209,6 +209,7 @@ const Dashboard = () => {
   return (
     <div className={classes.root}>
       <Navbar
+        navtext="JoGW"
         navHeading="Core Dashboard"
         name={userInfo.name}
         bitsId={userInfo.bitsId}
