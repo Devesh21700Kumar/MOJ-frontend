@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { ButtonBase } from '@material-ui/core';
+import CsvDownload from 'react-json-to-csv';
 import Navbar from '../navbar/navbar';
 import URL from '../util/url';
 
@@ -30,6 +32,22 @@ const useStyles = makeStyles((theme) =>
     },
     stat: {
       fontFamily: 'Oxygen, sans-serif',
+    },
+    inactive: {
+      backgroundColor: '#4CBC14',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      cursor: 'pointer',
+      borderRadius: '30px',
+      boxShadow:
+        'rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+      fontWeight: 'bold',
+      fontFamily: 'Oxygen',
+      outline: 'none',
+    },
+    inactiveOuter: {
+      borderRadius: '30px',
     },
     '@media(min-width: 320px)': {
       stat: {
@@ -65,6 +83,7 @@ const Statistics = () => {
   const [pending, setPending] = useState('');
   const [delivered, setDelivered] = useState('');
   const [rejected, setRejected] = useState('');
+  const [inactiveUsers, setInactiveUsers] = useState({});
   const token = localStorage.getItem('token');
 
   if (token === null) return <Redirect to="/" />;
@@ -84,9 +103,20 @@ const Statistics = () => {
     setRejected(rejected);
   }
 
+  async function fetchInactiveUsers() {
+    const { mails } = await (
+      await fetch(`${URL}/api/level2/inactivemails`, {
+        method: 'GET',
+        headers: { token: `${token}` },
+      })
+    ).json();
+    setInactiveUsers(mails);
+  }
+
   useEffect(() => {
     fetchStatistics();
-  }, [setTotal, setPending, setDelivered, setRejected]);
+    fetchInactiveUsers();
+  }, [setTotal, setPending, setDelivered, setRejected, setInactiveUsers]);
 
   return (
     <div className={classes.root}>
@@ -115,6 +145,17 @@ const Statistics = () => {
             Total Rejected Messages:{' '}
             <span style={{ color: '#FC0404' }}>{rejected}</span>
           </h1>
+          {inactiveUsers.length > 0 ? (
+            <ButtonBase className={classes.inactiveOuter}>
+              <CsvDownload
+                data={inactiveUsers}
+                className={classes.inactive}
+                filename="inactive_users.csv"
+              >
+                Download CSV File of Inactive Users
+              </CsvDownload>
+            </ButtonBase>
+          ) : null}
         </div>
       </div>
     </div>
