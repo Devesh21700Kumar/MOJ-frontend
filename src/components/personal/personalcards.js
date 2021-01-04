@@ -12,15 +12,6 @@ import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
 
 const useStyles = makeStyles((theme) => ({
-  margi: {
-    // border: '3px solid black',
-    backgroundColor: '#FFD94D',
-    margin: '5px',
-    borderRadius: '18px',
-
-    height: '11vh',
-    boxShadow: '  0 8px 6px -6px black',
-  },
   msgCard: {
     padding: '15px',
     marginTop: '20px',
@@ -36,8 +27,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 0px 0px 0px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    flex: 1.1,
-    marginTop: '0.87vh',
+    flex: 1,
   },
   Gin1: {
     padding: '0 0px 0px 0px',
@@ -45,12 +35,11 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     float: 'right',
-    flex: 1.1,
-    marginTop: '0.77vh',
+    flex: 1,
   },
 
   Gi: {
-    flex: 1.5,
+    flex: 1,
   },
   date: {
     margin: '.8rem 0rem 0 0',
@@ -63,29 +52,20 @@ const useStyles = makeStyles((theme) => ({
   '@media(max-height: 680px)': {
     Gin: {
       fontSize: '20px',
-      marginTop: '0.32vh',
     },
-    Gin1: {
-      marginTop: '0.18vh',
-    },
+    Gin1: {},
   },
   '@media(max-height: 568px)': {
     Gin: {
       fontSize: '20px',
-      marginTop: '0.12vh',
     },
-    Gin1: {
-      marginTop: '0.08vh',
-    },
+    Gin1: {},
   },
   '@media(max-height: 750px)': {
     Gin: {
       fontSize: '20px',
-      marginTop: '0.36vh',
     },
-    Gin1: {
-      marginTop: '0.08vh',
-    },
+    Gin1: {},
   },
 }));
 
@@ -157,7 +137,7 @@ export default function PersonalCards({ text, index }) {
                     : text.body.slice(0, 23)}
                 </p>
               </div>
-              <div className={classes.Gi}></div>
+
               <div className={classes.Gin1}>
                 <Typography variant="h6" edge="start">
                   <b key="index">

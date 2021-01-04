@@ -21,12 +21,10 @@ import '../personal/loader.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#fffde8',
-    width: '100vw',
-    minHeight: '90vh',
+    width: '100%',
+
     flexGrow: '1',
     overflowX: 'hidden',
-    marginRight: '-6vw',
-    minWidth: '100vw',
     '*::-webkit-scrollbar': {
       width: '10px',
     },
@@ -299,9 +297,9 @@ export default function Personal({ name, bitsId }, props) {
           toggleVisibility={hit}
           key={'SendMessagePopupKey-' + enables}
         />
-
-        <Navbar name={userdata.name} bitsId={userdata.bitsId} />
-
+        <div className="nav1">
+          <Navbar name={userdata.name} bitsId={userdata.bitsId} />
+        </div>
         <div className={classes.tabs} id="top">
           <Box
             className={classes.tab}
