@@ -18,7 +18,6 @@ import classNames from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
-    width: '90%',
     margin: '20px auto',
     padding: '15px',
     backgroundColor: '#FFD94D',
@@ -87,7 +86,6 @@ const postApproval = async (id, approval, flag) => {
         }),
       })
     ).json();
-    console.log(response);
   } catch (error) {
     console.error(error.message);
   }
@@ -174,41 +172,47 @@ const MessageCard = ({ rollNumber, message, date, id, index }) => {
   );
   // complete component
   return (
-    <Card className={cardClass} raised={true}>
-      <div className={classes.bitsId}>
-        {index + 1}. To: {rollNumber}
-      </div>
-      <div>
-        <div className={classes.cardContent}>
-          <div>
-            {!showPrimaryText
-              ? message.length > 80
-                ? `${message.substr(0, 80)}...`
-                : `${message}`
-              : ''}
-            <Collapse
-              in={expanded}
-              timeout="auto"
-              unmountOnExit
-              component="div"
+    <div>
+      <Card className={cardClass} raised={true}>
+        <div className={classes.bitsId}>
+          {index + 1}. To: {rollNumber}
+        </div>
+        <div>
+          <div className={classes.cardContent}>
+            <div>
+              {!showPrimaryText
+                ? message.length > 450
+                  ? `${message.substr(0, 450)}...`
+                  : `${message}`
+                : ''}
+              <Collapse
+                in={expanded}
+                timeout="auto"
+                unmountOnExit
+                component="div"
+              >
+                {message}
+              </Collapse>
+            </div>
+            <span
+              onClick={() => {
+                setExpanded(!expanded);
+                setShowPrimaryText(!showPrimaryText);
+              }}
             >
-              {message}
-            </Collapse>
+              {message.length > 80
+                ? !expanded
+                  ? 'View More'
+                  : 'View Less'
+                : ''}
+            </span>
           </div>
-          <span
-            onClick={() => {
-              setExpanded(!expanded);
-              setShowPrimaryText(!showPrimaryText);
-            }}
-          >
-            {message.length > 80 ? (!expanded ? 'View More' : 'View Less') : ''}
-          </span>
+          <div className={classes.cardFooter}>
+            <p className={classes.date}>{date}</p>
+            <CardActions disableSpacing>{buttons}</CardActions>
+          </div>
         </div>
-        <div className={classes.cardFooter}>
-          <p className={classes.date}>{date}</p>
-          <CardActions disableSpacing>{buttons}</CardActions>
-        </div>
-      </div>
+      </Card>
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={open}
@@ -217,7 +221,7 @@ const MessageCard = ({ rollNumber, message, date, id, index }) => {
         message={text}
         key={text}
       />
-    </Card>
+    </div>
   );
 };
 

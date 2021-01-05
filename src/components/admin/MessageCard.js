@@ -92,7 +92,7 @@ const MessageCard = ({
   const [showPrimaryText, setShowPrimaryText] = useState(false);
 
   const changeToInt = (num) => {
-    if (num === '') {
+    if (num === null) {
       num = 0;
     }
 
