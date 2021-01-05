@@ -325,7 +325,10 @@ const AdminDashboard = () => {
   const [j, setj] = useState(0);
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
+
   const token = localStorage.getItem('token');
+
+  if (token === null) return <Redirect to="/" />;
 
   const dateFormatter = (timestamp) => {
     const date = new Date(timestamp);
@@ -339,8 +342,6 @@ const AdminDashboard = () => {
     });
     return month + day + year + time;
   };
-
-  if (token === null) return <Redirect to="/" />;
 
   const { permissionLevel, name, bitsId } = JSON.parse(
     atob(token.split('.')[1])
@@ -850,7 +851,6 @@ const AdminDashboard = () => {
                       key={redFlaggedMsgs.indexOf(message)}
                       index={redFlaggedMsgs.indexOf(message)}
                       _id={message._id}
-                      messageId={messageId}
                       setMessageId={setMessageId}
                       n={setNumber()}
                     />
@@ -875,7 +875,6 @@ const AdminDashboard = () => {
                       key={greenFlaggedMsgs.indexOf(message)}
                       index={greenFlaggedMsgs.indexOf(message)}
                       _id={message._id}
-                      messageId={messageId}
                       setMessageId={setMessageId}
                       n={setNumber()}
                     />
@@ -900,7 +899,6 @@ const AdminDashboard = () => {
                       key={yellowFlaggedMsgs.indexOf(message)}
                       index={yellowFlaggedMsgs.indexOf(message)}
                       _id={message._id}
-                      messageId={messageId}
                       setMessageId={setMessageId}
                       n={setNumber()}
                     />
@@ -917,7 +915,6 @@ const AdminDashboard = () => {
                   key={msgs.indexOf(message)}
                   index={msgs.indexOf(message)}
                   _id={message._id}
-                  messageId={messageId}
                   setMessageId={setMessageId}
                   n={setNumber()}
                 />
