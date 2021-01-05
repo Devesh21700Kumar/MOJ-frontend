@@ -616,7 +616,12 @@ const AdminDashboard = () => {
   return (
     <div className={classes.root}>
       {/* Tabs */}
-      <Navbar navtext="JoGW" navHeading="Admin Dashboard" name={name} bitsId={bitsId} />
+      <Navbar
+        navtext="JoGW"
+        navHeading="Admin Dashboard"
+        name={name}
+        bitsId={bitsId}
+      />
       <div className={classes.tabs} id="top">
         <Box
           className={classes.tab}

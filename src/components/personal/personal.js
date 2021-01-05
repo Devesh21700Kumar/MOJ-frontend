@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '-6.4vw',
     },
   },
-  '@media(max-width: 520px)': {
+  '@media(max-width: 560px)': {
     hot: {
       fontSize: '20px',
     },
