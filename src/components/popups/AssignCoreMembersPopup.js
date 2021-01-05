@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      width: '100%',
+      height: '100%',
     },
     paper: {
       color: '#ffffff',
@@ -53,7 +55,6 @@ const useStyles = makeStyles((theme) =>
       width: '45vw',
     },
     heading: {
-      width: '100%',
       display: 'flex',
       padding: '0rem 1rem 0rem 1rem',
       alignItems: 'center',
@@ -64,12 +65,9 @@ const useStyles = makeStyles((theme) =>
     close: {
       color: '#000',
       fontSize: '32px',
-      '&:hover': {
-        cursor: 'pointer',
-      },
+      cursor: 'pointer',
     },
     modalBody: {
-      width: '100%',
       height: '70vh',
       maxHeight: '80%',
       display: 'flex',
@@ -78,17 +76,16 @@ const useStyles = makeStyles((theme) =>
       background: '#FFD94D',
     },
     search: {
-      width: '100%',
       borderRadius: '10px',
       background: '#FFFDE8',
-      margin: '0.2rem 0rem 0.2rem 0rem',
+      margin: '0.2rem 0rem',
       transform: 'scaleX(0.98)',
     },
     searchResults: {
       width: '100%',
       borderRadius: '10px',
       background: '#FFFDE8',
-      margin: '0.2rem 0rem 0.2rem 0rem',
+      margin: '0.2rem 0rem',
       overflowY: 'scroll',
       maxHeight: '100%',
     },
@@ -164,59 +161,6 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const searchResultsData = [
-  {
-    id: 0,
-    name: 'Himanshu Jain',
-    bitsId: '2019A3PS0432G',
-  },
-  {
-    id: 1,
-    name: 'Nipun Gupta ',
-    bitsId: '2019B4PS1111G',
-  },
-  {
-    id: 2,
-    name: 'Rohit Mundada',
-    bitsId: '2019A3PS0343G',
-  },
-  {
-    id: 3,
-    name: 'Vedant Bang',
-    bitsId: '2019AAPS0251G',
-  },
-  {
-    id: 4,
-    name: 'Taarush Bhatia',
-    bitsId: '2019A7PS0159G',
-  },
-  {
-    id: 5,
-    name: 'Himanshu Jain',
-    bitsId: '2019A3PS0432G',
-  },
-  {
-    id: 6,
-    name: 'Himanshu Jain',
-    bitsId: '2019A3PS0432G',
-  },
-  {
-    id: 7,
-    name: 'Himanshu Jain',
-    bitsId: '2019A3PS0432G',
-  },
-  {
-    id: 8,
-    name: 'Himanshu Jain',
-    bitsId: '2019A3PS0432G',
-  },
-  {
-    id: 8,
-    name: 'Himanshu Jain',
-    bitsId: '2019A3PS0432G',
-  },
-];
-
 const SingleListItem = ({
   index,
   name,
@@ -258,7 +202,7 @@ const SingleListItem = ({
           fetchMessages();
           if (checked25) setChecked25(false);
           if (checked50) setChecked50(false);
-          if (value) setValue('');
+          if (value) setValue(null);
         }
       } else {
         email = '';
