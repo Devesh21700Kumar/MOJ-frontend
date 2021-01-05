@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { IconButton } from '@material-ui/core';
-import './LetterPopup.css';
+import './sendmessage.css';
 import URL from '../util/url';
 import data from '../util/finaldata';
 import List from '@material-ui/core/List';
@@ -158,18 +158,18 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
 
   if (componentEnabled)
     return (
-      <div className="letterpopup-classes-root">
-        <div className="letterpopup-classes-cross" onClick={hideMe} />
-        <Paper elevation={0} className="letterpopup-classes-message">
+      <div className="letterpopup-classes-root1">
+        <div className="letterpopup-classes-cross1" onClick={hideMe} />
+        <Paper elevation={0} className="letterpopup-classes-message1">
           <form
-            className="letterpopup-classes-form"
+            className="letterpopup-classes-form1"
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
           >
-            <div className="letterpopup-classes-messageBoxesWrapper">
+            <div className="letterpopup-classes-messageBoxesWrapper1">
               <div
-                className="letterpopup-classes-sendTo"
+                className="letterpopup-classes-sendTo1"
                 style={{ display: 'flex' }}
               >
                 <div style={{ display: c2 }}>
@@ -188,9 +188,9 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                     <CloseIcon />
                   </IconButton>
                 </div>
-                <div className="search">
+                <div className="search1">
                   <TextField
-                    className="letterpopup-classes-sendToTextField"
+                    className="letterpopup-classes-sendToTextField1"
                     value={receiverEmail}
                     onClick={handleClick3}
                     onChange={(e) => {
@@ -273,7 +273,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   style={{ display: c2 }}
                   multiline
                   inputProps={{ maxLength: 500 }}
-                  className="letterpopup-classes-messageTextField"
+                  className="letterpopup-classes-messageTextField1"
                   value={messageBody}
                   onChange={(e) => {
                     setMessageText(e.target.value);
@@ -282,16 +282,18 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   rows={
                     screen.width > 550
                       ? screen.width > 900
-                        ? calculateTextAreaRows() - 0.6
-                        : calculateTextAreaRows() - 2.2
-                      : calculateTextAreaRows() - 1.1
+                        ? calculateTextAreaRows() + 0.2
+                        : calculateTextAreaRows() + 3.2
+                      : screen.width > 330
+                      ? calculateTextAreaRows() + 6.1
+                      : calculateTextAreaRows() + 4.1
                   }
                 />
               </div>
             </div>
             <div
               style={{ display: c2 }}
-              className="letterpopup-classes-sendButton"
+              className="letterpopup-classes-sendButton1"
             >
               <Button variant="outlined" type="submit">
                 Send

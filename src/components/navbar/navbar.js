@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({ navHeading, name, bitsId, stats }) {
+export default function Navbar({ navHeading, name, bitsId, stats, navtext }) {
   const classes = useStyles();
   if (navHeading == null) {
     navHeading = 'DashBoard';
@@ -66,7 +66,7 @@ export default function Navbar({ navHeading, name, bitsId, stats }) {
         >
           <Grid item xs sm md={4} lg={4}>
             <div onClick={handler1} className="trux" id="free">
-              JoGW
+              {navtext}
             </div>
           </Grid>
           <Grid className={classes.hide} item xs sm md={4} lg={4}>
