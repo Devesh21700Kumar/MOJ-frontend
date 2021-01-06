@@ -6,12 +6,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: calc(var(--this-width-var) * 1.0);
+  height: calc(var(--this-height-var) * 1.0);
 
   background-color: rgba(0, 0, 0, 0.5);
 
   z-index: 10;
+
+  overflow: hidden;
 }
 
 .letterpopup-classes-cross {
@@ -28,12 +30,14 @@
   background-size: contain;
 
   cursor: pointer;
+
+  z-index: 11;
 }
 
 .letterpopup-classes-message {
   position: absolute;
-  left: 50vw;
-  top: 50vh;
+  left: calc(var(--this-width-var) * 0.50);
+  top: calc(var(--this-height-var) * 0.50);
   transform: translate(-50%, -50%);
 
   background-image: url('./../../imageassets/letter-coloured.svg');
@@ -41,11 +45,11 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  width: 50vw;
-  height: 50vw;
+  width: calc(var(--this-width-var) * 0.50);
+  height: calc(var(--this-width-var) * 0.50);
 
-  max-width: 70vh;
-  max-height: 70vh;
+  max-width: calc(var(--this-height-var) * 0.70);
+  max-height: calc(var(--this-height-var) * 0.70);
 }
 
 .letterpopup-classes-form {
@@ -67,59 +71,17 @@
   position: relative;
 }
 
+.letterpopup-classes-sendToTextFieldWrapper {
+  width: 100%;
+}
+
 .letterpopup-classes-sendToTextField {
   width: 100%;
 }
 
-.letterpopup-classes-messageBody1 {
-  position: relative;
-  margin-top: 2rem;
-  width: 30vw;
-}
 .letterpopup-classes-messageBody {
   position: relative;
-  margin-top: 2rem;
-  overflow-wrap: break-word;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 500px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2rem;
-    margin-left: 3.9vw;
-    width: 36vw;
-  }
-}
-
-@media only screen and (min-width: 800px) and (max-width: 1600px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2rem;
-    margin-left: 6vw;
-    transform: scale(1.25);
-  }
-}
-
-@media only screen and (min-width: 500px) and (max-width: 759.999px) {
-  .letterpopup-classes-messageBody1 {
-    top: 3vh;
-    margin-left: 7.1vw;
-    transform: scale(1.45);
-  }
-}
-
-@media only screen and (min-width: 1600.0001px) and (max-width: 2068px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2rem;
-    margin-left: 8vw;
-    transform: scale(1.37);
-  }
-}
-
-@media only screen and (min-width: 1210px) and (max-width: 2000px) and (min-height: 211px) and (max-height: 600px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 1.2rem;
-    margin-left: 2vw;
-    transform: scale(1.1);
-  }
+  margin-top: 3rem;
 }
 
 .letterpopup-classes-messageTextField {
@@ -134,15 +96,10 @@
   transform: translateX(-50%);
 }
 
-@media only screen and (min-width: 760px) and (max-width: 893px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2vh;
-  }
-}
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 0rem;
+  .letterpopup-classes-messageBody {
+    margin-top: 1rem;
   }
 
   .letterpopup-classes-messageBoxesWrapper {
@@ -152,14 +109,15 @@
   .letterpopup-classes-message {
     background-image: url('./../../imageassets/letter-coloured-mobile.svg');
     background-position: center;
-    width: 70vw;
-    height: 90vw;
+    width: calc(var(--this-width-var) * 0.70);
+    height: calc(var(--this-width-var) * 0.90);
+    top: 50vh;
   }
 
   .letterpopup-classes-sendButton {
     position: absolute;
     left: 50%;
-    top: calc(50% + 12vh);
+    top: calc(50% + calc(var(--this-height-var) * 0.12));
     transform: translateX(-50%) scale(0.75);
   }
 }
@@ -170,30 +128,19 @@
 
 .letterpopup-classes-message
   > div.letterpopup-classes-messageBoxesWrapper
-  > div.letterpopup-classes-messageBody1 {
-  margin-top: 1rem;
-  text-overflow: ellipsis;
-  overflow-wrap: break-word;
-}
-.letterpopup-classes-message
-  > div.letterpopup-classes-messageBoxesWrapper
   > div.letterpopup-classes-messageBody {
   margin-top: 1rem;
-  text-overflow: ellipsis;
-  overflow-wrap: break-word;
 }
 .letterpopup-classes-message > div.letterpopup-classes-messageBoxesWrapper {
   overflow-y: auto;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
   height: 37%;
 }
 .letterpopup-classes-dateTime {
   position: absolute;
-  right: 8.5vw;
-  top: 3vw;
-  width: 4vw;
-  font-size: 1vw;
+  right: calc(var(--this-width-var) * 0.085);
+  top: calc(var(--this-width-var) * 0.03);
+  width: calc(var(--this-width-var) * 0.04);
+  font-size: calc(var(--this-width-var) * 0.01);
 }
 .letterpopup-classes-left-arrow {
   position: fixed;
@@ -231,30 +178,20 @@
 
   cursor: pointer;
 }
-@media only screen and (max-width: 711px) {
-  .letterpopup-classes-left-arrow {
-    transform: translateY(-50%);
-    margin-left: 1.2vw;
-  }
-  .letterpopup-classes-right-arrow {
-    transform: translateY(-50%);
-    margin-right: 1.2vw;
-  }
-}
 
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
   .letterpopup-classes-message
     > div.letterpopup-classes-messageBoxesWrapper
-    > div.letterpopup-classes-messageBody1 {
+    > div.letterpopup-classes-messageBody {
     margin-top: 0;
   }
 
   .letterpopup-classes-dateTime {
-    right: 12vw;
-    top: 11vw;
-    width: 12vw;
-    font-size: 2.5vw;
+    right: calc(var(--this-width-var) * 0.12);
+    top: calc(var(--this-width-var) * 0.11);
+    width: calc(var(--this-width-var) * 0.12);
+    font-size: calc(var(--this-width-var) * 0.025);
   }
 }
 
@@ -264,32 +201,4 @@
 
 .letterpopup-classes-root.letterpopup-classes-disabled {
   visibility: hidden;
-}
-
-@media only screen and (min-width: 1080px) and (max-width: 1300px) and (min-height: 800px) and (max-height: 1200px) {
-  .letterpopup-classes-dateTime {
-    transform: scale(0.6);
-    right: 8vw;
-    top: 5.1vh;
-    width: 8vw;
-    font-size: 2.5vmin;
-  }
-}
-
-@media only screen and (min-width: 330px) and (max-width: 400px) {
-  .search {
-    margin-left: -4vw;
-  }
-}
-
-@media only screen and (min-width: 300px) and (max-width: 329.9px) {
-  .search {
-    margin-left: -9vw;
-  }
-}
-
-@media only screen and (min-width: 260px) and (max-width: 299.9px) {
-  .search {
-    margin-left: -9vw;
-  }
 }
