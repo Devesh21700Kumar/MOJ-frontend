@@ -14,6 +14,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import CloseIcon from '@material-ui/icons/Close';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -101,6 +102,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
           setOpen(true);
           setSendToAddress('');
           setMessageText('');
+          setc4('none');
+          setc3('block');
         } else {
           setOpen(false);
         }
@@ -129,7 +132,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   };
   const [c1, setc1] = useState('none');
   const [c2, setc2] = useState('inline');
-
+  const [c3, setc3] = useState(false);
   const handleClick = () => {
     if (c1 == 'none' && c2 == 'inline') {
       setc1('inline');
@@ -139,7 +142,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
       setc2('inline');
     }
   };
-
+  const showme = () => {
+    setc3(!c3);
+    setSendToAddress('');
+    setMessageText('');
+  };
   const handleClose2 = () => {
     setc1('none');
     setc2('inline');
@@ -159,8 +166,26 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   if (componentEnabled)
     return (
       <div className="letterpopup-classes-root1">
+        <ul class="slideshow">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
         <div className="letterpopup-classes-cross1" onClick={hideMe} />
-        <Paper elevation={0} className="letterpopup-classes-message1">
+        <div className="letterpopup-classes-icon1">
+          <LabelImportantIcon
+            onClick={showme}
+            className="karge"
+            fontSize="large"
+          />
+        </div>
+        <Paper
+          style={c3?{ display: 'block' }:{display: 'none'}}
+          elevation={0}
+          className="letterpopup-classes-message1"
+        >
           <form
             className="letterpopup-classes-form1"
             noValidate

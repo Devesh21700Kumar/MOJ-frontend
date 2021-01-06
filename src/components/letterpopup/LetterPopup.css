@@ -71,55 +71,10 @@
   width: 100%;
 }
 
-.letterpopup-classes-messageBody1 {
-  position: relative;
-  margin-top: 2rem;
-  width: 30vw;
-}
 .letterpopup-classes-messageBody {
   position: relative;
   margin-top: 2rem;
   overflow-wrap: break-word;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 500px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2rem;
-    margin-left: 3.9vw;
-    width: 36vw;
-  }
-}
-
-@media only screen and (min-width: 800px) and (max-width: 1600px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2rem;
-    margin-left: 6vw;
-    transform: scale(1.25);
-  }
-}
-
-@media only screen and (min-width: 500px) and (max-width: 759.999px) {
-  .letterpopup-classes-messageBody1 {
-    top: 3vh;
-    margin-left: 7.1vw;
-    transform: scale(1.45);
-  }
-}
-
-@media only screen and (min-width: 1600.0001px) and (max-width: 2068px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2rem;
-    margin-left: 8vw;
-    transform: scale(1.37);
-  }
-}
-
-@media only screen and (min-width: 1210px) and (max-width: 2000px) and (min-height: 211px) and (max-height: 600px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 1.2rem;
-    margin-left: 2vw;
-    transform: scale(1.1);
-  }
 }
 
 .letterpopup-classes-messageTextField {
@@ -134,17 +89,8 @@
   transform: translateX(-50%);
 }
 
-@media only screen and (min-width: 760px) and (max-width: 893px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 2vh;
-  }
-}
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
-  .letterpopup-classes-messageBody1 {
-    margin-top: 0rem;
-  }
-
   .letterpopup-classes-messageBoxesWrapper {
     top: 25%;
   }
@@ -168,13 +114,6 @@
 /* Specific Modifications for ReadMessagePopup */
 /*/////////////////////////////////////////////*/
 
-.letterpopup-classes-message
-  > div.letterpopup-classes-messageBoxesWrapper
-  > div.letterpopup-classes-messageBody1 {
-  margin-top: 1rem;
-  text-overflow: ellipsis;
-  overflow-wrap: break-word;
-}
 .letterpopup-classes-message
   > div.letterpopup-classes-messageBoxesWrapper
   > div.letterpopup-classes-messageBody {
@@ -246,7 +185,7 @@
 @media only screen and (max-width: 768px) {
   .letterpopup-classes-message
     > div.letterpopup-classes-messageBoxesWrapper
-    > div.letterpopup-classes-messageBody1 {
+    > div.letterpopup-classes-messageBody {
     margin-top: 0;
   }
 
@@ -291,5 +230,64 @@
 @media only screen and (min-width: 260px) and (max-width: 299.9px) {
   .search {
     margin-left: -9vw;
+  }
+}
+.slideshow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.slideshow li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 50s linear infinite;
+}
+.slideshow li:nth-child(1) {
+  background-image: url(https://images.unsplash.com/photo-1515871204537-49a5fe66a31f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTN8fGhlYXJ0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
+}
+.slideshow li:nth-child(2) {
+  background-image: url(https://images.unsplash.com/photo-1513279922550-250c2129b13a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Y291cGxlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 10s;
+}
+.slideshow li:nth-child(3) {
+  background-image: url(https://images.unsplash.com/photo-1603621760091-d7b12c66549a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8eW9kYXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 20s;
+}
+.slideshow li:nth-child(4) {
+  background-image: url(https://images.unsplash.com/photo-1421986527537-888d998adb74?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTJ8fHxlbnwwfHx8&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 30s;
+}
+.slideshow li:nth-child(5) {
+  background-image: url(https://images.unsplash.com/photo-1482356432770-3a99f07aba35?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNlY3JldHN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
+  animation-delay: 40s;
+}
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
   }
 }
