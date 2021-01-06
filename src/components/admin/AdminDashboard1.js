@@ -808,7 +808,7 @@ const AdminDashboard = () => {
                     setGreenFlag('transparent');
                     setChecked25(false);
                     setChecked50(false);
-                    setValue('');
+                    setValue(null);
                     seti(0);
                     fetchMessages();
                   }}
@@ -824,7 +824,7 @@ const AdminDashboard = () => {
                     setGreenFlag('transparent');
                     setChecked25(false);
                     setChecked50(false);
-                    setValue('');
+                    setValue(null);
                     seti(0);
                     fetchMessages();
                   }}
@@ -840,7 +840,7 @@ const AdminDashboard = () => {
                     setYellowFlag('transparent');
                     setChecked25(false);
                     setChecked50(false);
-                    setValue('');
+                    setValue(null);
                     seti(0);
                     fetchMessages();
                   }}

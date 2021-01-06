@@ -77,8 +77,24 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
     });
     return day + month + year + time;
   };
+
+  let presentViewportWidth = window.innerWidth;
+  let presentViewportHeight = window.innerHeight;
+  const getCSSVariables = () => {
+    return {
+      '--this-width-var': `${presentViewportWidth}px`,
+      '--this-height-var': `${presentViewportHeight}px`,
+    };
+  };
   return (
-    <div className="letterpopup-classes-root">
+    <div className="letterpopup-classes-root" style={getCSSVariables()}>
+      <ul class="slideshow">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <div className="letterpopup-classes-cross" onClick={hideMe} />
       <Paper elevation={0} className="letterpopup-classes-message">
         <div className="letterpopup-classes-dateTime">

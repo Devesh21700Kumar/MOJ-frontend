@@ -14,6 +14,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import CloseIcon from '@material-ui/icons/Close';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -112,9 +113,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   };
   let calculateTextAreaRows = () => {
     let rows = 0;
-    if (window.innerWidth > 768)
-      rows = parseInt((window.innerHeight * 7.5) / 1080);
-    else rows = parseInt((window.innerHeight * 2) / 768);
+    if (screen.width > 768) rows = parseInt((screen.height * 7.5) / 1080);
+    else rows = parseInt((screen.height * 2) / 768);
     return rows;
   };
   let hideMe = () => {
@@ -129,7 +129,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   };
   const [c1, setc1] = useState('none');
   const [c2, setc2] = useState('inline');
-
+  const [c3, setc3] = useState(true);
   const handleClick = () => {
     if (c1 == 'none' && c2 == 'inline') {
       setc1('inline');
@@ -139,7 +139,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
       setc2('inline');
     }
   };
-
+  const showme = () => {
+    setc3(!c3);
+    setSendToAddress('');
+    setMessageText('');
+  };
   const handleClose2 = () => {
     setc1('none');
     setc2('inline');
@@ -156,11 +160,38 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
   }
 
+  let presentViewportWidth = window.innerWidth;
+  let presentViewportHeight = window.innerHeight;
+  const getCSSVariables = () => {
+    return {
+      '--this-width-var': `${presentViewportWidth}px`,
+      '--this-height-var': `${presentViewportHeight}px`,
+    };
+  };
+
   if (componentEnabled)
     return (
-      <div className="letterpopup-classes-root">
+      <div className="letterpopup-classes-root" style={getCSSVariables()}>
+        <ul class="slideshow">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
         <div className="letterpopup-classes-cross" onClick={hideMe} />
-        <Paper elevation={0} className="letterpopup-classes-message">
+        <div className="letterpopup-classes-icon1">
+          <LabelImportantIcon
+            onClick={showme}
+            className="karge"
+            fontSize="large"
+          />
+        </div>
+        <Paper
+          style={c3 ? { display: 'block' } : { display: 'none' }}
+          elevation={0}
+          className="letterpopup-classes-message"
+        >
           <form
             className="letterpopup-classes-form"
             noValidate
@@ -188,9 +219,9 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                     <CloseIcon />
                   </IconButton>
                 </div>
-                <div className="search">
+                <div className="letterpopup-classes-sendToTextFieldWrapper">
                   <TextField
-                    className="letterpopup-classes-sendToTextField"
+                    className="letterpopup-classes-sendToTextFieldWrapper"
                     value={receiverEmail}
                     onClick={handleClick3}
                     onChange={(e) => {
@@ -268,9 +299,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   )}
                 </List>
               </Paper>
-              <div display="none" className="letterpopup-classes-messageBody1">
+              <div display="none" className="letterpopup-classes-messageBody">
                 <TextField
-                  style={{ display: c2 }}
                   multiline
                   inputProps={{ maxLength: 500 }}
                   className="letterpopup-classes-messageTextField"
@@ -280,11 +310,14 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   }}
                   variant="outlined"
                   rows={
-                    screen.width > 550
-                      ? screen.width > 900
-                        ? calculateTextAreaRows() - 0.6
-                        : calculateTextAreaRows() - 2.2
-                      : calculateTextAreaRows() - 1.1
+                    // screen.width > 550
+                    //   ? screen.width > 900
+                    //     ? calculateTextAreaRows() + 0.2
+                    //     : calculateTextAreaRows() + 3.2
+                    //   : screen.width > 330
+                    //   ? calculateTextAreaRows() + 6.1
+                    //   : calculateTextAreaRows() + 4.1
+                    calculateTextAreaRows()
                   }
                 />
               </div>
@@ -293,7 +326,13 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
               style={{ display: c2 }}
               className="letterpopup-classes-sendButton"
             >
-              <Button variant="outlined" type="submit">
+              <Button
+                variant="outlined"
+                type="submit"
+                style={{
+                  backgroundColor: '#EF4646',
+                }}
+              >
                 Send
               </Button>
             </div>

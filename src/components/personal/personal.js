@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '-6.4vw',
     },
   },
-  '@media(max-width: 520px)': {
+  '@media(max-width: 560px)': {
     hot: {
       fontSize: '20px',
     },
@@ -304,7 +304,7 @@ export default function Personal({ name, bitsId }, props) {
           key={'SendMessagePopupKey-' + enables}
         />
         <div className="nav1">
-          <Navbar name={userdata.name} bitsId={userdata.bitsId} />
+          <Navbar navtext="MoJ" name={userdata.name} bitsId={userdata.bitsId} />
         </div>
         <div className={classes.tabs} id="top">
           <Box

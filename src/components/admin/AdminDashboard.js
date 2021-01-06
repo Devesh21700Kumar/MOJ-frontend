@@ -325,7 +325,10 @@ const AdminDashboard = () => {
   const [j, setj] = useState(0);
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
+
   const token = localStorage.getItem('token');
+
+  if (token === null) return <Redirect to="/" />;
 
   const dateFormatter = (timestamp) => {
     const date = new Date(timestamp);
@@ -339,8 +342,6 @@ const AdminDashboard = () => {
     });
     return month + day + year + time;
   };
-
-  if (token === null) return <Redirect to="/" />;
 
   const { permissionLevel, name, bitsId } = JSON.parse(
     atob(token.split('.')[1])
@@ -381,45 +382,35 @@ const AdminDashboard = () => {
   }, []);
 
   const handleChange25 = () => {
-    if (checked50 === true) {
-      setChecked50(!checked50);
-    }
-    setValue(null);
+    if (checked50) setChecked50(!checked50);
 
+    setValue(null);
     setChecked25(!checked25);
     if (!checked25) {
-      if (msgs.length > 25) {
+      if (redFlag === red) {
         for (let i = 0; i < 25; i++) {
-          if (msgs[i]) {
-            setMessageId((messageId) => [...messageId, msgs[i]._id]);
-          }
-        }
-      }
-      if (redFlaggedMsgs.length > 25) {
-        for (let i = 0; i < 25; i++) {
-          if (redFlaggedMsgs[i]) {
+          if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
-          }
         }
-      }
-      if (yellowFlaggedMsgs.length > 25) {
+      } else if (yellowFlag === yellow) {
         for (let i = 0; i < 25; i++) {
-          if (yellowFlaggedMsgs[i]) {
+          if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
               yellowFlaggedMsgs[i]._id,
             ]);
-          }
         }
-      }
-      if (greenFlaggedMsgs.length > 25) {
+      } else if (greenFlag === green) {
         for (let i = 0; i < 25; i++) {
-          if (greenFlaggedMsgs[i]) {
+          if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
               greenFlaggedMsgs[i]._id,
             ]);
-          }
+        }
+      } else {
+        for (let i = 0; i < 25; i++) {
+          if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }
     } else {
@@ -428,45 +419,35 @@ const AdminDashboard = () => {
   };
 
   const handleChange50 = () => {
-    if (checked25 === true) {
-      setChecked25(!checked25);
-    }
-    setValue(null);
+    if (checked25) setChecked25(!checked25);
 
+    setValue(null);
     setChecked50(!checked50);
     if (!checked50) {
-      if (msgs.length > 50) {
+      if (redFlag === red) {
         for (let i = 0; i < 50; i++) {
-          if (msgs[i]) {
-            setMessageId((messageId) => [...messageId, msgs[i]._id]);
-          }
-        }
-      }
-      if (redFlaggedMsgs.length > 50) {
-        for (let i = 0; i < 50; i++) {
-          if (redFlaggedMsgs[i]) {
+          if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
-          }
         }
-      }
-      if (yellowFlaggedMsgs.length > 50) {
+      } else if (yellowFlag === yellow) {
         for (let i = 0; i < 50; i++) {
-          if (yellowFlaggedMsgs[i]) {
+          if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
               yellowFlaggedMsgs[i]._id,
             ]);
-          }
         }
-      }
-      if (greenFlaggedMsgs.length > 50) {
+      } else if (greenFlag === green) {
         for (let i = 0; i < 50; i++) {
-          if (greenFlaggedMsgs[i]) {
+          if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
               greenFlaggedMsgs[i]._id,
             ]);
-          }
+        }
+      } else {
+        for (let i = 0; i < 50; i++) {
+          if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }
     } else {
@@ -476,49 +457,38 @@ const AdminDashboard = () => {
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    if (checked25) setChecked25(!checked25);
+    if (checked50) setChecked50(!checked50);
+
     if (value) {
-      if (msgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
-          if (msgs[i]) {
-            setMessageId((messageId) => [...messageId, msgs[i]._id]);
-          }
-        }
-      }
-      if (redFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
-          if (redFlaggedMsgs[i]) {
+      if (redFlag === red) {
+        for (let i = 0; i < value; i++) {
+          if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
-          }
         }
-      }
-      if (yellowFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
-          if (yellowFlaggedMsgs[i]) {
+      } else if (yellowFlag === yellow) {
+        for (let i = 0; i < value; i++) {
+          if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
               yellowFlaggedMsgs[i]._id,
             ]);
-          }
         }
-      }
-      if (greenFlaggedMsgs.length > e.target.value) {
-        for (let i = 0; i < e.target.value; i++) {
-          if (greenFlaggedMsgs[i]) {
+      } else if (greenFlag === green) {
+        for (let i = 0; i < value; i++) {
+          if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
               greenFlaggedMsgs[i]._id,
             ]);
-          }
+        }
+      } else {
+        for (let i = 0; i < value; i++) {
+          if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }
     } else {
       setMessageId([]);
-    }
-    if (checked25 === true) {
-      setChecked25(!checked25);
-    }
-    if (checked50 === true) {
-      setChecked50(!checked50);
     }
   };
 
@@ -531,23 +501,14 @@ const AdminDashboard = () => {
   const hc1 = () => {
     if (j > 50) {
       setj(j - 50);
-
       setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-      }
-      if (checked50 === true) {
-        setChecked50(!checked50);
-      }
+      if (checked25) setChecked25(!checked25);
+      if (checked50) setChecked50(!checked50);
     } else if (j <= 50) {
       setj(0);
       setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-      }
-      if (checked50 === true) {
-        setChecked50(!checked50);
-      }
+      if (checked25) setChecked25(!checked25);
+      if (checked50) setChecked50(!checked50);
     }
   };
 
@@ -555,39 +516,23 @@ const AdminDashboard = () => {
     if (j + 50 < f.length - 50) {
       setj(j + 50);
       setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
-      }
+      if (checked25) setChecked25(!checked25);
+      if (checked50) setChecked50(!checked50);
     } else if (f.length - (j + 50) < 50 && f.length - (j + 50) > 0) {
       setj(j + 50);
       setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
-      }
+      if (checked25) setChecked25(!checked25);
+      if (checked50) setChecked50(!checked50);
     } else if (j + 50 == f.length - 50) {
       setj(j + 50);
       setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
-      }
+      if (checked25) setChecked25(!checked25);
+      if (checked50) setChecked50(!checked50);
     } else {
       setj(j);
       setValue(null);
-      if (checked25 === true) {
-        setChecked25(!checked25);
-        if (checked50 === true) {
-          setChecked50(!checked50);
-        }
-      }
+      if (checked25) setChecked25(!checked25);
+      if (checked50) setChecked50(!checked50);
     }
   };
 
@@ -672,7 +617,12 @@ const AdminDashboard = () => {
   return (
     <div className={classes.root}>
       {/* Tabs */}
-      <Navbar navHeading="Admin Dashboard" name={name} bitsId={bitsId} />
+      <Navbar
+        navtext="JoGW"
+        navHeading="Admin Dashboard"
+        name={name}
+        bitsId={bitsId}
+      />
       <div className={classes.tabs} id="top">
         <Box
           className={classes.tab}
@@ -860,7 +810,7 @@ const AdminDashboard = () => {
                 </span>
               </Grid>
               <Grid item xs className={classes.subtitle2}>
-                <Grid item>
+                <Grid item style={{ visibility: 'hidden' }}>
                   First
                   <InputBase
                     className={classes.input}
@@ -906,7 +856,6 @@ const AdminDashboard = () => {
                       key={redFlaggedMsgs.indexOf(message)}
                       index={redFlaggedMsgs.indexOf(message)}
                       _id={message._id}
-                      messageId={messageId}
                       setMessageId={setMessageId}
                       n={setNumber()}
                     />
@@ -931,7 +880,6 @@ const AdminDashboard = () => {
                       key={greenFlaggedMsgs.indexOf(message)}
                       index={greenFlaggedMsgs.indexOf(message)}
                       _id={message._id}
-                      messageId={messageId}
                       setMessageId={setMessageId}
                       n={setNumber()}
                     />
@@ -944,9 +892,9 @@ const AdminDashboard = () => {
                 yellowFlaggedMsgs
                   .slice(
                     j,
-                    j + 50 <= greenFlaggedMsgs.length
+                    j + 50 <= yellowFlaggedMsgs.length
                       ? j + 50
-                      : greenFlaggedMsgs.length
+                      : yellowFlaggedMsgs.length
                   )
                   .map((message, index) => (
                     <MessageCard
@@ -956,7 +904,6 @@ const AdminDashboard = () => {
                       key={yellowFlaggedMsgs.indexOf(message)}
                       index={yellowFlaggedMsgs.indexOf(message)}
                       _id={message._id}
-                      messageId={messageId}
                       setMessageId={setMessageId}
                       n={setNumber()}
                     />
@@ -973,7 +920,6 @@ const AdminDashboard = () => {
                   key={msgs.indexOf(message)}
                   index={msgs.indexOf(message)}
                   _id={message._id}
-                  messageId={messageId}
                   setMessageId={setMessageId}
                   n={setNumber()}
                 />
@@ -990,6 +936,12 @@ const AdminDashboard = () => {
                 <AssignCoreMembersPopup
                   messageId={messageId}
                   fetchMessages={fetchMessages}
+                  checked25={checked25}
+                  setChecked25={setChecked25}
+                  checked50={checked50}
+                  setChecked50={setChecked50}
+                  value={value}
+                  setValue={setValue}
                 />
               </div>
             ) : null
