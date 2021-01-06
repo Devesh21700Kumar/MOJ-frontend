@@ -174,17 +174,6 @@
   cursor: pointer;
 }
 
-.letterpopup-classes-icon1 {
-  position: fixed;
-  left: 0;
-  top: 0;
-  margin-top: 1.6rem;
-  transform: scale(1);
-  margin-left: 3rem;
-  color: #fffbeb;
-  padding-top: 3px;
-  border: 1px solid red;
-}
 .karge:hover {
   color: red;
 }

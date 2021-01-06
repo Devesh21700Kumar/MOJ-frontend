@@ -6,12 +6,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: calc(var(--this-width-var) * 1);
+  height: calc(var(--this-height-var) * 1);
 
   background-color: rgba(0, 0, 0, 0.5);
 
   z-index: 10;
+
+  overflow: hidden;
 }
 
 .letterpopup-classes-cross {
@@ -28,12 +30,14 @@
   background-size: contain;
 
   cursor: pointer;
+
+  z-index: 11;
 }
 
 .letterpopup-classes-message {
   position: absolute;
-  left: 50vw;
-  top: 50vh;
+  left: calc(var(--this-width-var) * 0.5);
+  top: calc(var(--this-height-var) * 0.5);
   transform: translate(-50%, -50%);
 
   background-image: url('./../../imageassets/letter-coloured.svg');
@@ -41,11 +45,11 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  width: 50vw;
-  height: 50vw;
+  width: calc(var(--this-width-var) * 0.5);
+  height: calc(var(--this-width-var) * 0.5);
 
-  max-width: 70vh;
-  max-height: 70vh;
+  max-width: calc(var(--this-height-var) * 0.7);
+  max-height: calc(var(--this-height-var) * 0.7);
 }
 
 .letterpopup-classes-form {
@@ -67,14 +71,17 @@
   position: relative;
 }
 
+.letterpopup-classes-sendToTextFieldWrapper {
+  width: 100%;
+}
+
 .letterpopup-classes-sendToTextField {
   width: 100%;
 }
 
 .letterpopup-classes-messageBody {
   position: relative;
-  margin-top: 2rem;
-  overflow-wrap: break-word;
+  margin-top: 3rem;
 }
 
 .letterpopup-classes-messageTextField {
@@ -91,6 +98,10 @@
 
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
+  .letterpopup-classes-messageBody {
+    margin-top: 1rem;
+  }
+
   .letterpopup-classes-messageBoxesWrapper {
     top: 25%;
   }
@@ -98,14 +109,15 @@
   .letterpopup-classes-message {
     background-image: url('./../../imageassets/letter-coloured-mobile.svg');
     background-position: center;
-    width: 70vw;
-    height: 90vw;
+    width: calc(var(--this-width-var) * 0.7);
+    height: calc(var(--this-width-var) * 0.9);
+    top: 50vh;
   }
 
   .letterpopup-classes-sendButton {
     position: absolute;
     left: 50%;
-    top: calc(50% + 12vh);
+    top: calc(50% + calc(var(--this-height-var) * 0.12));
     transform: translateX(-50%) scale(0.75);
   }
 }
@@ -118,21 +130,17 @@
   > div.letterpopup-classes-messageBoxesWrapper
   > div.letterpopup-classes-messageBody {
   margin-top: 1rem;
-  text-overflow: ellipsis;
-  overflow-wrap: break-word;
 }
 .letterpopup-classes-message > div.letterpopup-classes-messageBoxesWrapper {
   overflow-y: auto;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
   height: 37%;
 }
 .letterpopup-classes-dateTime {
   position: absolute;
-  right: 8.5vw;
-  top: 3vw;
-  width: 4vw;
-  font-size: 1vw;
+  right: calc(var(--this-width-var) * 0.085);
+  top: calc(var(--this-width-var) * 0.03);
+  width: calc(var(--this-width-var) * 0.04);
+  font-size: calc(var(--this-width-var) * 0.01);
 }
 .letterpopup-classes-left-arrow {
   position: fixed;
@@ -170,16 +178,6 @@
 
   cursor: pointer;
 }
-@media only screen and (max-width: 711px) {
-  .letterpopup-classes-left-arrow {
-    transform: translateY(-50%);
-    margin-left: 1.2vw;
-  }
-  .letterpopup-classes-right-arrow {
-    transform: translateY(-50%);
-    margin-right: 1.2vw;
-  }
-}
 
 /* phone breakpoint */
 @media only screen and (max-width: 768px) {
@@ -190,10 +188,10 @@
   }
 
   .letterpopup-classes-dateTime {
-    right: 12vw;
-    top: 11vw;
-    width: 12vw;
-    font-size: 2.5vw;
+    right: calc(var(--this-width-var) * 0.12);
+    top: calc(var(--this-width-var) * 0.11);
+    width: calc(var(--this-width-var) * 0.12);
+    font-size: calc(var(--this-width-var) * 0.025);
   }
 }
 
@@ -205,89 +203,14 @@
   visibility: hidden;
 }
 
-@media only screen and (min-width: 1080px) and (max-width: 1300px) and (min-height: 800px) and (max-height: 1200px) {
-  .letterpopup-classes-dateTime {
-    transform: scale(0.6);
-    right: 8vw;
-    top: 5.1vh;
-    width: 8vw;
-    font-size: 2.5vmin;
-  }
-}
-
-@media only screen and (min-width: 330px) and (max-width: 400px) {
-  .search {
-    margin-left: -4vw;
-  }
-}
-
-@media only screen and (min-width: 300px) and (max-width: 329.9px) {
-  .search {
-    margin-left: -9vw;
-  }
-}
-
-@media only screen and (min-width: 260px) and (max-width: 299.9px) {
-  .search {
-    margin-left: -9vw;
-  }
-}
-.slideshow {
+.letterpopup-classes-icon1 {
   position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
   left: 0;
-  z-index: 0;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.slideshow li {
-  width: 100%;
-  height: 100%;
-  position: absolute;
   top: 0;
-  left: 0;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  opacity: 0;
-  z-index: 0;
-  animation: imageAnimation 50s linear infinite;
-}
-.slideshow li:nth-child(1) {
-  background-image: url(https://images.unsplash.com/photo-1515871204537-49a5fe66a31f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTN8fGhlYXJ0fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
-}
-.slideshow li:nth-child(2) {
-  background-image: url(https://images.unsplash.com/photo-1513279922550-250c2129b13a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Y291cGxlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
-  animation-delay: 10s;
-}
-.slideshow li:nth-child(3) {
-  background-image: url(https://images.unsplash.com/photo-1603621760091-d7b12c66549a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8eW9kYXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
-  animation-delay: 20s;
-}
-.slideshow li:nth-child(4) {
-  background-image: url(https://images.unsplash.com/photo-1421986527537-888d998adb74?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTJ8fHxlbnwwfHx8&auto=format&fit=crop&w=900&q=60);
-  animation-delay: 30s;
-}
-.slideshow li:nth-child(5) {
-  background-image: url(https://images.unsplash.com/photo-1482356432770-3a99f07aba35?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNlY3JldHN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
-  animation-delay: 40s;
-}
-@keyframes imageAnimation {
-  0% {
-    opacity: 0;
-    animation-timing-function: ease-in;
-  }
-  10% {
-    opacity: 1;
-    animation-timing-function: ease-out;
-  }
-  20% {
-    opacity: 1;
-  }
-  30% {
-    opacity: 0;
-  }
+  margin-top: 1.6rem;
+  transform: scale(1);
+  margin-left: 3rem;
+  color: #fffbeb;
+  padding-top: 3px;
+  border: 1px solid red;
 }
