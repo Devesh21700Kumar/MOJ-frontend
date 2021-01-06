@@ -88,6 +88,13 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
   };
   return (
     <div className="letterpopup-classes-root" style={getCSSVariables()}>
+      <ul class="slideshow">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <div className="letterpopup-classes-cross" onClick={hideMe} />
       <Paper elevation={0} className="letterpopup-classes-message">
         <div className="letterpopup-classes-dateTime">

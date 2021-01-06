@@ -810,7 +810,7 @@ const AdminDashboard = () => {
                 </span>
               </Grid>
               <Grid item xs className={classes.subtitle2}>
-                <Grid item>
+                <Grid item style={{ visibility: 'hidden' }}>
                   First
                   <InputBase
                     className={classes.input}
