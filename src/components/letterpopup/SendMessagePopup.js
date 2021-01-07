@@ -172,13 +172,6 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   if (componentEnabled)
     return (
       <div className="letterpopup-classes-root" style={getCSSVariables()}>
-        <ul class="slideshow">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
         <div className="letterpopup-classes-cross" onClick={hideMe} />
         <div className="letterpopup-classes-icon1">
           <LabelImportantIcon
@@ -225,8 +218,9 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                     value={receiverEmail}
                     onClick={handleClick3}
                     onChange={(e) => {
-                      handleClick2();
+                      //handleClick2();
                       setSendToAddress(e.target.value);
+                      handleClick2();
                     }}
                     placeholder="Who is this for?"
                   />
@@ -299,7 +293,10 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   )}
                 </List>
               </Paper>
-              <div display="none" className="letterpopup-classes-messageBody">
+              <div
+                style={{ display: c2 }}
+                className="letterpopup-classes-messageBody"
+              >
                 <TextField
                   multiline
                   inputProps={{ maxLength: 500 }}
