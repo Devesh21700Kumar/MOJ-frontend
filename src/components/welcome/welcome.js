@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#EF4646',
   },
   Logo: {
-    //zIndex:'12',
+    zIndex:'12',
     position: 'fixed',
     width: '37vw',
     height: '25vw',
