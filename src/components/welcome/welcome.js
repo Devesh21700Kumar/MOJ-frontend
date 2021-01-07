@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Login from '../login/login';
 import Box from '@material-ui/core/Box';
-import { LinearScale } from '@material-ui/icons';
 import './welcome.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#EF4646',
   },
   Logo: {
-    zIndex:'12',
+    zIndex: '12',
     position: 'fixed',
     width: '37vw',
     height: '25vw',
