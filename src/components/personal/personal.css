@@ -149,3 +149,8 @@
     font-size: 11px;
   }
 }
+@media only screen and (min-height: 0px) and (max-height: 430.9px) {
+  .ter {
+    margin-top: 40px;
+  }
+}
