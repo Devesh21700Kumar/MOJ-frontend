@@ -122,6 +122,7 @@ const Statistics = () => {
     <div className={classes.root}>
       {/* Tabs */}
       <Navbar
+        navtext="JoGW"
         navHeading="Admin Dashboard"
         name={name}
         bitsId={bitsId}
