@@ -7,6 +7,7 @@ import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { IconButton } from '@material-ui/core';
 import './LetterPopup.css';
+import './sendmessage.css';
 import URL from '../util/url';
 import data from '../util/finaldata';
 import List from '@material-ui/core/List';
@@ -117,6 +118,12 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
     else rows = parseInt((screen.height * 2) / 768);
     return rows;
   };
+  let calculateTextAreaRows1 = () => {
+    let rows = 0;
+    if (screen.width > 768) rows = parseInt((screen.height * 7.5) / 1080);
+    else rows = parseInt((screen.height * 2) / 768);
+    return rows;
+  };
   let hideMe = () => {
     toggleVisibility();
   };
@@ -169,181 +176,353 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
     };
   };
 
-  if (componentEnabled)
-    return (
-      <div className="letterpopup-classes-root" style={getCSSVariables()}>
-        <ul class="slideshow">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-        <div className="letterpopup-classes-cross" onClick={hideMe} />
-        <div className="letterpopup-classes-icon1">
-          <LabelImportantIcon
-            onClick={showme}
-            className="karge"
-            fontSize="large"
-          />
-        </div>
-        <Paper
-          style={c3 ? { display: 'block' } : { display: 'none' }}
-          elevation={0}
-          className="letterpopup-classes-message"
-        >
-          <form
-            className="letterpopup-classes-form"
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
+  if (componentEnabled) {
+    if (window.innerWidth > 600) {
+      return (
+        <div className="letterpopup-classes-root" style={getCSSVariables()}>
+          <div className="letterpopup-classes-cross" onClick={hideMe} />
+          <div className="letterpopup-classes-icon1">
+            <LabelImportantIcon
+              onClick={showme}
+              className="karge"
+              fontSize="large"
+            />
+          </div>
+          <Paper
+            style={c3 ? { display: 'block' } : { display: 'none' }}
+            elevation={0}
+            className="letterpopup-classes-message"
           >
-            <div className="letterpopup-classes-messageBoxesWrapper">
-              <div
-                className="letterpopup-classes-sendTo"
-                style={{ display: 'flex' }}
-              >
-                <div style={{ display: c2 }}>
-                  <IconButton
-                    onClick={handleClick}
-                    style={{ marginLeft: '-35%', marginTop: '-14%' }}
-                  >
-                    <SearchIcon />
-                  </IconButton>
+            <form
+              className="letterpopup-classes-form"
+              noValidate
+              autoComplete="off"
+              onSubmit={handleSubmit}
+            >
+              <div className="letterpopup-classes-messageBoxesWrapper">
+                <div
+                  className="letterpopup-classes-sendTo"
+                  style={{ display: 'flex' }}
+                >
+                  <div style={{ display: c2 }}>
+                    <IconButton
+                      onClick={handleClick}
+                      style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </div>
+                  <div style={{ display: c1 }}>
+                    <IconButton
+                      onClick={handleClick}
+                      style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </div>
+                  <div className="letterpopup-classes-sendToTextFieldWrapper">
+                    <TextField
+                      className="letterpopup-classes-sendToTextFieldWrapper"
+                      value={receiverEmail}
+                      onClick={handleClick3}
+                      onChange={(e) => {
+                        //handleClick2();
+                        setSendToAddress(e.target.value);
+                        handleClick2();
+                      }}
+                      placeholder="Who is this for?"
+                    />
+                  </div>
                 </div>
-                <div style={{ display: c1 }}>
-                  <IconButton
-                    onClick={handleClick}
-                    style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                <Paper className={classes.hexap} elevation={3}>
+                  <List
+                    style={{ display: c1 }}
+                    elevation={3}
+                    component="nav"
+                    className={classes.hexap}
+                    aria-label="notifications"
                   >
-                    <CloseIcon />
-                  </IconButton>
-                </div>
-                <div className="letterpopup-classes-sendToTextFieldWrapper">
+                    {data.filter(
+                      (dataset) =>
+                        dataset.name
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.bitsId
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.name.toLowerCase() ===
+                          receiverEmail.toLowerCase() ||
+                        checkspace(dataset.name)
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.email.includes(receiverEmail.toLowerCase())
+                    ).length > 0 ? (
+                      data
+                        .filter(
+                          (dataset) =>
+                            dataset.name
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.bitsId
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.name.toLowerCase() ===
+                              receiverEmail.toLowerCase() ||
+                            checkspace(dataset.name)
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.email.includes(receiverEmail.toLowerCase())
+                        )
+                        .slice(0, 101)
+                        .map((person, index) => (
+                          <ListItem button>
+                            <ListItemText
+                              className
+                              primary={person.name}
+                              secondary={person.email}
+                              onClick={() => {
+                                setSendToAddress(person.email);
+                                handleClose2();
+                              }}
+                            />
+                          </ListItem>
+                        ))
+                    ) : (
+                      <ListItem button>
+                        <ListItemText
+                          className
+                          primary="enter correct value to search"
+                          onClick={() => {
+                            setSendToAddress(person.email);
+                            handleClose2();
+                          }}
+                        />
+                      </ListItem>
+                    )}
+                  </List>
+                </Paper>
+                <div
+                  style={{ display: c2 }}
+                  className="letterpopup-classes-messageBody"
+                >
                   <TextField
-                    className="letterpopup-classes-sendToTextFieldWrapper"
-                    value={receiverEmail}
-                    onClick={handleClick3}
+                    multiline
+                    inputProps={{ maxLength: 500 }}
+                    className="letterpopup-classes-messageTextField"
+                    value={messageBody}
                     onChange={(e) => {
-                      handleClick2();
-                      setSendToAddress(e.target.value);
+                      setMessageText(e.target.value);
                     }}
-                    placeholder="Who is this for?"
+                    variant="outlined"
+                    rows={
+                      // screen.width > 550
+                      //   ? screen.width > 900
+                      //     ? calculateTextAreaRows() + 0.2
+                      //     : calculateTextAreaRows() + 3.2
+                      //   : screen.width > 330
+                      //   ? calculateTextAreaRows() + 6.1
+                      //   : calculateTextAreaRows() + 4.1
+                      calculateTextAreaRows()
+                    }
                   />
                 </div>
               </div>
-              <Paper className={classes.hexap} elevation={3}>
-                <List
-                  style={{ display: c1 }}
-                  elevation={3}
-                  component="nav"
-                  className={classes.hexap}
-                  aria-label="notifications"
-                >
-                  {data.filter(
-                    (dataset) =>
-                      dataset.name
-                        .toLowerCase()
-                        .includes(receiverEmail.toLowerCase()) ||
-                      dataset.bitsId
-                        .toLowerCase()
-                        .includes(receiverEmail.toLowerCase()) ||
-                      dataset.name.toLowerCase() ===
-                        receiverEmail.toLowerCase() ||
-                      checkspace(dataset.name)
-                        .toLowerCase()
-                        .includes(receiverEmail.toLowerCase()) ||
-                      dataset.email.includes(receiverEmail.toLowerCase())
-                  ).length > 0 ? (
-                    data
-                      .filter(
-                        (dataset) =>
-                          dataset.name
-                            .toLowerCase()
-                            .includes(receiverEmail.toLowerCase()) ||
-                          dataset.bitsId
-                            .toLowerCase()
-                            .includes(receiverEmail.toLowerCase()) ||
-                          dataset.name.toLowerCase() ===
-                            receiverEmail.toLowerCase() ||
-                          checkspace(dataset.name)
-                            .toLowerCase()
-                            .includes(receiverEmail.toLowerCase()) ||
-                          dataset.email.includes(receiverEmail.toLowerCase())
-                      )
-                      .slice(0, 101)
-                      .map((person, index) => (
-                        <ListItem button>
-                          <ListItemText
-                            className
-                            primary={person.name}
-                            secondary={person.email}
-                            onClick={() => {
-                              setSendToAddress(person.email);
-                              handleClose2();
-                            }}
-                          />
-                        </ListItem>
-                      ))
-                  ) : (
-                    <ListItem button>
-                      <ListItemText
-                        className
-                        primary="enter correct value to search"
-                        onClick={() => {
-                          setSendToAddress(person.email);
-                          handleClose2();
-                        }}
-                      />
-                    </ListItem>
-                  )}
-                </List>
-              </Paper>
-              <div display="none" className="letterpopup-classes-messageBody">
-                <TextField
-                  multiline
-                  inputProps={{ maxLength: 500 }}
-                  className="letterpopup-classes-messageTextField"
-                  value={messageBody}
-                  onChange={(e) => {
-                    setMessageText(e.target.value);
-                  }}
-                  variant="outlined"
-                  rows={
-                    // screen.width > 550
-                    //   ? screen.width > 900
-                    //     ? calculateTextAreaRows() + 0.2
-                    //     : calculateTextAreaRows() + 3.2
-                    //   : screen.width > 330
-                    //   ? calculateTextAreaRows() + 6.1
-                    //   : calculateTextAreaRows() + 4.1
-                    calculateTextAreaRows()
-                  }
-                />
-              </div>
-            </div>
-            <div
-              style={{ display: c2 }}
-              className="letterpopup-classes-sendButton"
-            >
-              <Button
-                variant="outlined"
-                type="submit"
-                style={{
-                  backgroundColor: '#EF4646',
-                }}
+              <div
+                style={{ display: c2 }}
+                className="letterpopup-classes-sendButton"
               >
-                Send
-              </Button>
-            </div>
-          </form>
-        </Paper>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
-            Message Sent successfully!!
-          </Alert>
-        </Snackbar>
-      </div>
-    );
-  else return <div />;
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  style={{
+                    backgroundColor: '#EF4646',
+                  }}
+                >
+                  Send
+                </Button>
+              </div>
+            </form>
+          </Paper>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Message Sent successfully!!
+            </Alert>
+          </Snackbar>
+        </div>
+      );
+    } else {
+      return (
+        <div className="letterpopup-classes-root1">
+          <div className="letterpopup-classes-cross1" onClick={hideMe} />
+          <div className="letterpopup-classes-icon1">
+            <LabelImportantIcon
+              onClick={showme}
+              className="karge"
+              fontSize="large"
+            />
+          </div>
+          <Paper
+            style={c3 ? { display: 'block' } : { display: 'none' }}
+            elevation={0}
+            className="letterpopup-classes-message1"
+          >
+            <form
+              className="letterpopup-classes-form1"
+              noValidate
+              autoComplete="off"
+              onSubmit={handleSubmit}
+            >
+              <div className="letterpopup-classes-messageBoxesWrapper1">
+                <div
+                  className="letterpopup-classes-sendTo1"
+                  style={{ display: 'flex' }}
+                >
+                  <div style={{ display: c2 }}>
+                    <IconButton
+                      onClick={handleClick}
+                      style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </div>
+                  <div style={{ display: c1 }}>
+                    <IconButton
+                      onClick={handleClick}
+                      style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </div>
+                  <div className="letterpopup-classes-sendToTextFieldWrapper1">
+                    <TextField
+                      className="letterpopup-classes-sendToTextFieldWrapper1"
+                      value={receiverEmail}
+                      onClick={handleClick3}
+                      onChange={(e) => {
+                        //handleClick2();
+                        setSendToAddress(e.target.value);
+                        handleClick2();
+                      }}
+                      placeholder="Who is this for?"
+                    />
+                  </div>
+                </div>
+                <Paper className={classes.hexap} elevation={3}>
+                  <List
+                    style={{ display: c1 }}
+                    elevation={3}
+                    component="nav"
+                    className={classes.hexap}
+                    aria-label="notifications"
+                  >
+                    {data.filter(
+                      (dataset) =>
+                        dataset.name
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.bitsId
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.name.toLowerCase() ===
+                          receiverEmail.toLowerCase() ||
+                        checkspace(dataset.name)
+                          .toLowerCase()
+                          .includes(receiverEmail.toLowerCase()) ||
+                        dataset.email.includes(receiverEmail.toLowerCase())
+                    ).length > 0 ? (
+                      data
+                        .filter(
+                          (dataset) =>
+                            dataset.name
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.bitsId
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.name.toLowerCase() ===
+                              receiverEmail.toLowerCase() ||
+                            checkspace(dataset.name)
+                              .toLowerCase()
+                              .includes(receiverEmail.toLowerCase()) ||
+                            dataset.email.includes(receiverEmail.toLowerCase())
+                        )
+                        .slice(0, 101)
+                        .map((person, index) => (
+                          <ListItem button>
+                            <ListItemText
+                              className
+                              primary={person.name}
+                              secondary={person.email}
+                              onClick={() => {
+                                setSendToAddress(person.email);
+                                handleClose2();
+                              }}
+                            />
+                          </ListItem>
+                        ))
+                    ) : (
+                      <ListItem button>
+                        <ListItemText
+                          className
+                          primary="enter correct value to search"
+                          onClick={() => {
+                            setSendToAddress(person.email);
+                            handleClose2();
+                          }}
+                        />
+                      </ListItem>
+                    )}
+                  </List>
+                </Paper>
+                <div
+                  style={{ display: c2 }}
+                  className="letterpopup-classes-messageBody1"
+                >
+                  <TextField
+                    multiline
+                    inputProps={{ maxLength: 500 }}
+                    className="letterpopup-classes-messageTextField1"
+                    value={messageBody}
+                    onChange={(e) => {
+                      setMessageText(e.target.value);
+                    }}
+                    variant="outlined"
+                    rows={
+                      screen.width > 550
+                        ? screen.width > 900
+                          ? calculateTextAreaRows1() + 2
+                          : calculateTextAreaRows1() + 4
+                        : screen.width > 330
+                        ? calculateTextAreaRows1() + 9
+                        : calculateTextAreaRows1() + 6
+                      //calculateTextAreaRows()
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                style={{ display: c2 }}
+                className="letterpopup-classes-sendButton1"
+              >
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  style={{
+                    backgroundColor: '#EF4646',
+                  }}
+                >
+                  Send
+                </Button>
+              </div>
+            </form>
+          </Paper>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Message Sent successfully!!
+            </Alert>
+          </Snackbar>
+        </div>
+      );
+    }
+  } else return <div />;
 }
