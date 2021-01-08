@@ -36,12 +36,14 @@
 }
 @media only screen and (min-width: 1200px) and (max-width: 1479px) {
   .ter {
-    margin-left: 95vw;
+    margin-left: 93.9vw;
+    margin-top: 69vh;
   }
 }
 @media only screen and (min-width: 1479px) and (max-width: 1800px) {
   .ter {
     margin-left: 92vw;
+    margin-top: 69vh;
   }
 }
 

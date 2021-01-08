@@ -325,6 +325,7 @@ const AdminDashboard = () => {
   const [j, setj] = useState(0);
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
+  // const [checked, setChecked] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -568,6 +569,7 @@ const AdminDashboard = () => {
         setSnackBarOpen(true);
         fetchMessages();
         setValue(null);
+        //setChecked(false);
         setChecked25(false);
         setChecked50(false);
       }
@@ -595,6 +597,7 @@ const AdminDashboard = () => {
         fetchMessages();
         setValue(null);
         setChecked25(false);
+        //setChecked(false);
         setChecked50(false);
       }
     }
@@ -614,6 +617,7 @@ const AdminDashboard = () => {
     }
   };
 
+  const [c3, setc3] = useState(false);
   return (
     <div className={classes.root}>
       {/* Tabs */}
@@ -638,6 +642,7 @@ const AdminDashboard = () => {
             setValue(null);
             setj(0);
             fetchMessages();
+            setc3(false);
           }}
         >
           <Button className={classes.tabButton}>Pending Messages</Button>
@@ -655,6 +660,7 @@ const AdminDashboard = () => {
             setValue(null);
             setj(0);
             fetchMessages();
+            setc3(true);
           }}
         >
           <Button className={classes.tabButton}>Final Approval</Button>
@@ -692,9 +698,11 @@ const AdminDashboard = () => {
                     setGreenFlag('transparent');
                     setChecked25(false);
                     setChecked50(false);
+                    //setChecked(false);
                     setValue(null);
                     setj(0);
                     fetchMessages();
+                    // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
                 >
@@ -710,8 +718,10 @@ const AdminDashboard = () => {
                     setChecked25(false);
                     setChecked50(false);
                     setValue(null);
+                    //setChecked(false);
                     setj(0);
                     fetchMessages();
+                    // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
                 >
@@ -810,16 +820,18 @@ const AdminDashboard = () => {
                 </span>
               </Grid>
               <Grid item xs className={classes.subtitle2}>
-                <Grid item style={{ visibility: 'hidden' }}>
-                  First
-                  <InputBase
-                    className={classes.input}
-                    inputProps={{ min: 0, max: getMaxNumber() }}
-                    value={value === null ? '' : value}
-                    onChange={handleChange}
-                    id="standard-number"
-                    type="number"
-                  />
+                <Grid
+                  item
+                  style={c3 ? { display: 'block' } : { display: 'none' }}
+                >
+                  <Button
+                    variant="contained"
+                    className={classes.approveButton}
+                    size="large"
+                    onClick={handleApproval}
+                  >
+                    Approve
+                  </Button>
                 </Grid>
               </Grid>
             </div>
@@ -857,6 +869,8 @@ const AdminDashboard = () => {
                       index={redFlaggedMsgs.indexOf(message)}
                       _id={message._id}
                       setMessageId={setMessageId}
+                      //setChecked={setChecked}
+                      //checked={checked}
                       n={setNumber()}
                     />
                   ))
@@ -876,11 +890,13 @@ const AdminDashboard = () => {
                     <MessageCard
                       bitsId={message.receiverId}
                       body={message.body}
+                      // checked={checked}
                       date={dateFormatter(message.date)}
                       key={greenFlaggedMsgs.indexOf(message)}
                       index={greenFlaggedMsgs.indexOf(message)}
                       _id={message._id}
                       setMessageId={setMessageId}
+                      //setChecked={setChecked}
                       n={setNumber()}
                     />
                   ))
@@ -900,11 +916,13 @@ const AdminDashboard = () => {
                     <MessageCard
                       bitsId={message.receiverId}
                       body={message.body}
+                      //checked={checked}
                       date={dateFormatter(message.date)}
                       key={yellowFlaggedMsgs.indexOf(message)}
                       index={yellowFlaggedMsgs.indexOf(message)}
                       _id={message._id}
                       setMessageId={setMessageId}
+                      //setChecked={setChecked}
                       n={setNumber()}
                     />
                   ))
@@ -921,6 +939,8 @@ const AdminDashboard = () => {
                   index={msgs.indexOf(message)}
                   _id={message._id}
                   setMessageId={setMessageId}
+                  //setChecked={setChecked}
+                  //checked={checked}
                   n={setNumber()}
                 />
               ))

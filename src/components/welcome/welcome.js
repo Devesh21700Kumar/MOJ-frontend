@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Login from '../login/login';
 import Box from '@material-ui/core/Box';
-import { LinearScale } from '@material-ui/icons';
+import './welcome.css';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -11,26 +11,80 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     background: '#EF4646',
   },
-
-  mid: {
+  Logo: {
+    zIndex: '12',
     position: 'fixed',
-    width: '35vw',
+    width: '37vw',
     height: '25vw',
     left: '12.5vw',
-    bottom: '35vh',
+    bottom: '30vh',
+    background: '#FFFFFF',
+  },
+  hand: {
+    position: 'fixed',
+    width: '17vw',
+    height: '16vw',
+    left: '24.5vw',
+    marginBottom: '2vh',
+    background: '#FFFFFF',
+  },
+  lub: {
+    position: 'fixed',
+    width: '11vw',
+    height: '10vw',
+    left: '29.5vw',
+    top: '68vh',
+    //marginBottom:'-34px',
+    background: '#FFFFFF',
+  },
+  sun: {
+    position: 'fixed',
+    width: '8vw',
+    height: '10vw',
+    left: '2.5vw',
+    top: '3vh',
+    background: '#FFFFFF',
+  },
+  envelope: {
+    position: 'fixed',
+    width: '13vw',
+    height: '10vw',
+    left: '0.5vw',
+    top: '70vh',
+    background: '#FFFFFF',
+  },
+  jump: {
+    position: 'fixed',
+    width: '7vw',
+    height: '10vw',
+    left: '52vw',
+    top: '3vh',
+    background: '#FFFFFF',
+  },
+  nirmaan: {
+    position: 'fixed',
+    width: '10vw',
+    height: '7vw',
+    left: '2.5vw',
+    bottom: '1vh',
+    background: '#FFFFFF',
+  },
+  DevSoc: {
+    position: 'fixed',
+    width: '13.6vmin',
+    height: '10vmin',
+    left: '52vw',
+    bottom: '1vh',
     background: '#FFFFFF',
   },
 
-  message: {
+  smiley: {
     position: 'fixed',
-    left: '20vw',
+    width: '13vmin',
+    height: '13vmin',
+    left: '52vw',
     top: '70vh',
-    fontFamily: 'Raleway',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '2em',
-    textAlign: 'center',
-    color: '#FFFDE8',
+    background: '#FFFFFF',
   },
 
   sidepane: {
@@ -102,10 +156,36 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   '@media (max-width: 470px)': {
-    mid: {
+    Logo: {
       bottom: '70vh',
       left: '30vw',
     },
+    hand: {
+      left: '40%',
+      bottom: '79vh',
+    },
+    jump: {
+      left: '90vw',
+    },
+    lub: {
+      top: '28.8vh',
+      left: '44.5vw',
+    },
+    envelope: {
+      top: '33vh',
+    },
+    smiley: {
+      top: '34vh',
+      left: '87vw',
+    },
+    nirmaan: {
+      top: '42vh',
+    },
+    DevSoc: {
+      left: '87vw',
+      top: '42vh',
+    },
+
     loginBox: {
       fontSize: '1.5em',
       height: '15%',
@@ -148,11 +228,32 @@ export default function Welcome1() {
   return (
     <React.Fragment>
       <div className={classes.main} id="main">
-        <div className={classes.mid} id="mid">
-          Insert Logo here // Temporary Box
+        <div className={classes.Logo} id="mid0">
+          <div className="slideshow0"> </div>
         </div>
-        <div className={classes.message} id="message">
-          Message of Joy
+        <div className={classes.sun} id="mid1">
+          <div className="slideshow1"> </div>
+        </div>
+        <div className={classes.jump} id="mid2">
+          <div className="slideshow2"> </div>
+        </div>
+        <div className={classes.lub} id="mid3">
+          <div className="slideshow3"> </div>
+        </div>
+        <div className={classes.envelope} id="mid4">
+          <div className="slideshow4"> </div>
+        </div>
+        <div className={classes.smiley} id="mid5">
+          <div className="slideshow5"> </div>
+        </div>
+        <div className={classes.hand} id="mid6">
+          <div className="slideshow6"> </div>
+        </div>
+        <div className={classes.nirmaan} id="mid7">
+          <div className="slideshow7"> </div>
+        </div>
+        <div className={classes.DevSoc} id="mid8">
+          <div className="slideshow8"> </div>
         </div>
         <div className={classes.sidepane} id="sidepane">
           <div className={classes.summary} id="summary">
