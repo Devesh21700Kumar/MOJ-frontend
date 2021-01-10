@@ -125,6 +125,10 @@ export default function Profile({ name, bitsId }) {
     history.push('/');
   };
 
+  const handle1 = () => {
+    history.push('/credits');
+  };
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
@@ -171,6 +175,14 @@ export default function Profile({ name, bitsId }) {
               className={classes.typography}
               primary="Logout"
               onClick={handleLogout}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem button>
+            <ListItemText
+              className={classes.typography}
+              primary="Credits"
+              onClick={handle1}
             />
           </ListItem>
         </List>
