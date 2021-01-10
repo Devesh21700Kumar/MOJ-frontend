@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Login from '../login/login';
 import Box from '@material-ui/core/Box';
 import './welcome.css';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     width: '13.6vmin',
     height: '10vmin',
     left: '52vw',
-    bottom: '1vh',
+    bottom: '1.2vh',
     background: '#FFFFFF',
   },
 
@@ -139,6 +140,45 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.25em',
     },
   },
+  '@media (min-width: 1060px)': {
+    loginBox: {
+      fontSize: '1.25em',
+    },
+    summary: {
+      fontSize: '1.25em',
+    },
+    message: {
+      fontSize: '1.25em',
+    },
+    DevSoc: {
+      bottom: '3vh',
+    },
+    smiley: {
+      position: 'fixed',
+      width: '13vmin',
+      height: '13vmin',
+      left: '52vw',
+      top: '66vh',
+      background: '#FFFFFF',
+    },
+    envelope: {
+      position: 'fixed',
+      width: '13vw',
+      height: '10vw',
+      left: '0.5vw',
+      top: '66vh',
+      background: '#FFFFFF',
+    },
+    lub: {
+      position: 'fixed',
+      width: '11vw',
+      height: '10vw',
+      left: '29.5vw',
+      top: '66vh',
+      //marginBottom:'-34px',
+      background: '#FFFFFF',
+    },
+  },
   '@media (max-width: 860px)': {
     loginBox: {
       fontSize: '1em',
@@ -173,16 +213,18 @@ const useStyles = makeStyles((theme) => ({
     },
     envelope: {
       top: '33vh',
+      left: '3.4vw',
     },
     smiley: {
       top: '34vh',
-      left: '87vw',
+      left: '84vw',
     },
     nirmaan: {
       top: '42vh',
+      left: '4.2vw',
     },
     DevSoc: {
-      left: '87vw',
+      left: '82.7vw',
       top: '42vh',
     },
 
@@ -219,11 +261,28 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '9px',
       },
     },
+    /*'@media(max-height: 470px)': {
+      DevSoc:{
+        right: '2.5vw',
+      },
+      nirmaan: {
+        left: '3.5vw',
+      },
+    },*/
   },
 }));
 
 export default function Welcome1() {
   const classes = useStyles();
+  const h1 = () => {
+    <Redirect
+      to={{
+        pathname: '/login',
+        search: '?utm=your+face',
+        state: { referrer: currentLocation },
+      }}
+    />;
+  };
 
   return (
     <React.Fragment>
@@ -253,7 +312,9 @@ export default function Welcome1() {
           <div className="slideshow7"> </div>
         </div>
         <div className={classes.DevSoc} id="mid8">
-          <div className="slideshow8"> </div>
+          <a href="https://devsoc.club/" target="_blank">
+            <div className="slideshow8"> </div>
+          </a>
         </div>
         <div className={classes.sidepane} id="sidepane">
           <div className={classes.summary} id="summary">

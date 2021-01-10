@@ -165,3 +165,18 @@
     transform: scale(0.8);
   }
 }
+
+@media only screen and (min-width: 1060px) {
+  #mid8 {
+    transform: scale(1.25);
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  #mid7 {
+    transform: scale(1.85);
+  }
+  #mid8 {
+    transform: scale(1.25);
+  }
+}
