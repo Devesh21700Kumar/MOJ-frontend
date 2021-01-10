@@ -1,0 +1,87 @@
+.slide0 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  /*background-image: url('./../../imageassets/Devesh.jpeg');*/
+}
+
+#mi0 {
+  border-radius: 30px;
+}
+
+.foot0 {
+  margin-top: 1vh;
+  margin-left: 3vw;
+  font-family: 'Oxygen';
+  font-weight: bold;
+}
+
+.chuck1 {
+  transform: translate(-0.6vh, 74px);
+  z-index: 20;
+}
+
+#kt2 {
+  position: relative;
+}
+
+@media only screen and (max-width: 740px) {
+  #mi0 {
+    transform: scale(0.85);
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  #mi0 {
+    transform: scale(0.85);
+  }
+}
+
+@media only screen and (max-width: 526px) {
+  #mi0 {
+    transform: scale(0.89);
+    margin-left: 4vw;
+  }
+
+  .chuck1 {
+    transform: translate(0.6vh, 70px);
+    z-index: 20;
+  }
+  #kt2 {
+    position: relative;
+    margin-left: 2vw;
+  }
+}
+
+@media only screen and (min-width: 740px) {
+  #mi0 {
+    margin: 10px;
+  }
+}
+
+#kt2::-webkit-scrollbar {
+  /** WebKit */
+  display: none;
+}
+
+#kt2::-webkit-scrollbar {
+  /** WebKit */
+  display: none;
+}
+
+#r::-webkit-scrollbar {
+  /** WebKit */
+  display: none;
+}
+
+.chuck {
+  display: none;
+  transform: translate(-4vh, -2vh);
+  z-index: 2;
+}
