@@ -154,3 +154,14 @@
     margin-top: 41px;
   }
 }
+
+@media only screen and (min-width: 359px) and (max-width: 364.9px) {
+  .ter {
+    margin-top: 69vh;
+  }
+}
+@media only screen and (min-width: 409px) and (max-width: 415px) {
+  .ter {
+    margin-top: 74.6vh;
+  }
+}
