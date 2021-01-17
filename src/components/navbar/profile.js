@@ -97,8 +97,12 @@ const name = 'Nipun Gupta';
 
 export default function Profile({ name, bitsId }) {
   const classes = useStyles();
-  const onLogoutSuccess = (res) => {
-    console.log('Logged out');
+  const onLogoutSuccess = async (res) => {
+    const isTokenExists = await localStorage.getItem('token');
+    if (isTokenExists) {
+      localStorage.removeItem('token');
+    }
+    history.push('/');
   };
 
   const clientId =
@@ -121,8 +125,8 @@ export default function Profile({ name, bitsId }) {
 
   const handleLogout = () => {
     signOut();
-    localStorage.removeItem('token');
-    history.push('/');
+    // localStorage.removeItem('token');
+    // history.push('/');
   };
 
   const handle1 = () => {
