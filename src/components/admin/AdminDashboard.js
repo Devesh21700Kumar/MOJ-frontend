@@ -175,6 +175,11 @@ const useStyles = makeStyles((theme) =>
       textAlign: 'center',
       fontFamily: 'Oxygen, sans serif',
     },
+    footer: {
+      width: '100%',
+      backgroundColor: '#EF4646',
+      height: '10px',
+    },
     '@media(min-width: 320px)': {
       flag: {
         fontSize: '12px',
@@ -1038,6 +1043,7 @@ const AdminDashboard = () => {
           />
         </Box>
       </div>
+      <div className={classes.footer} />
     </div>
   );
 };

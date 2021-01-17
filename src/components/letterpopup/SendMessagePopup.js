@@ -9,7 +9,7 @@ import { IconButton } from '@material-ui/core';
 import './LetterPopup.css';
 import './sendmessage.css';
 import URL from '../util/url';
-import data from '../util/finaldata';
+import data from '../util/newData';
 import List from '@material-ui/core/List';
 import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
