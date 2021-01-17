@@ -1,0 +1,179 @@
+@font-face {
+  font-family: 'Staatliches';
+}
+
+#team-parent {
+  position: relative;
+  width: 90vw;
+  margin-left: -1vw;
+  overflow-x: hidden;
+  background: #fffde8;
+  color: white;
+  font-family: 'Staatliches';
+  min-height: 120vh;
+}
+
+@media only screen and (max-width: 900px) {
+  #team-parent {
+    position: relative;
+    width: 92vw;
+    margin-left: -9vw;
+    overflow-x: hidden;
+    background: #fffde8;
+    color: white;
+    font-family: 'Staatliches';
+    min-height: 120vh;
+  }
+}
+
+#team-parent h1 {
+  font-family: 'Azonix';
+  text-align: center;
+  font-size: 4.5rem;
+  margin: 2rem auto 4rem auto;
+}
+
+div.devs h1 {
+  margin-bottom: 7rem !important;
+}
+
+div.devs .photos > div > div:first-child {
+  width: 300px;
+  height: 300px;
+}
+
+.team {
+  top: 10vh;
+  margin-top: 10vh;
+  width: 90%;
+  margin: auto;
+  font-size: 1.8rem;
+  display: flex;
+  padding-top: 12vh;
+}
+
+.department {
+  min-width: 350px;
+  color: #000000;
+}
+
+.department:hover {
+  color: #ef4646;
+  transition: 150ms ease-in-out;
+  cursor: pointer;
+}
+
+.photos {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  text-align: center;
+  transition: 150ms ease-in-out;
+}
+
+.photos > div {
+  margin-bottom: 2rem;
+}
+
+.photos > div > div:first-child {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  margin-bottom: 4rem;
+  background-size: cover;
+  transform: rotate(100deg);
+  transition: 150ms ease-in-out;
+}
+
+.photos img {
+  max-width: 300px;
+  margin: auto;
+  max-height: 300px;
+  transform: rotate(-100deg);
+  position: relative;
+  transition: 150ms ease-in-out;
+  left: 20px;
+}
+
+.photos > div > div:first-child:hover img {
+  transition-delay: 150ms;
+  transform: rotate(0deg);
+}
+
+.photos > div > div:first-child:hover {
+  transform: rotate(0deg);
+}
+
+@media (max-width: 1400px) {
+  .team {
+    padding-top: 12vh;
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 1150px) {
+  .photos {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  .photos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .team {
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 10vw;
+    padding-left: 4vw;
+    font-size: 1.2rem;
+  }
+  .depart-name {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    text-align: center;
+    margin-bottom: 6rem;
+    grid-column-gap: 3rem;
+  }
+}
+
+@media (max-width: 650px) {
+  #team-parent h1 {
+    font-size: 3.5rem;
+  }
+  .team {
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 1.2rem;
+    margin-left: -2vw;
+  }
+}
+
+.selected {
+  color: #ef4646 !important;
+}
+
+.details {
+  font-family: 'Montserrat';
+  margin-top: -35px;
+  justify-content: space-around;
+}
+
+.details p {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.name {
+  color: #000000;
+  font-size: 2rem !important;
+}
+
+.post {
+  font-weight: bold;
+  color: #000000;
+}

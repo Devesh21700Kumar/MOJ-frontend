@@ -76,7 +76,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   const open1 = Boolean(anchorEl);
   const id = open1 ? 'simple-popover' : undefined;
   const [messageBody, setMessageText] = useState('');
-  const [receiverEmail, setSendToAddress] = useState('');
+  const [receiverEmail, setSendMail] = useState('');
+  const [name,setSendToName]=useState('');
   const [componentEnabled, setComponentEnabled] = useState(enabled);
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
@@ -101,7 +102,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
         ).json();
         if (response.ok) {
           setOpen(true);
-          setSendToAddress('');
+          setSendToName('');
+          setSendMail('');
           setMessageText('');
         } else {
           setOpen(false);
@@ -148,8 +150,9 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   };
   const showme = () => {
     setc3(!c3);
-    setSendToAddress('');
+    setSendToName('');
     setMessageText('');
+    setSendMail('');
   };
   const handleClose2 = () => {
     setc1('none');
@@ -226,11 +229,12 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   <div className="letterpopup-classes-sendToTextFieldWrapper">
                     <TextField
                       className="letterpopup-classes-sendToTextFieldWrapper"
-                      value={receiverEmail}
+                      value={name}
                       onClick={handleClick3}
                       onChange={(e) => {
                         //handleClick2();
-                        setSendToAddress(e.target.value);
+                        setSendToName(e.target.value);
+                        //setSendMail(e.target.value);
                         handleClick2();
                       }}
                       placeholder="Who is this for?"
@@ -249,56 +253,55 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                       (dataset) =>
                         dataset.name
                           .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
+                          .includes(name.toLowerCase()) ||
                         dataset.bitsId
                           .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
+                          .includes(name.toLowerCase()) ||
                         dataset.name.toLowerCase() ===
-                          receiverEmail.toLowerCase() ||
+                          name.toLowerCase() ||
                         checkspace(dataset.name)
                           .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
-                        dataset.email.includes(receiverEmail.toLowerCase())
+                          .includes(name.toLowerCase()) ||
+                        dataset.email.includes(name.toLowerCase())
                     ).length > 0 ? (
                       data
                         .filter(
                           (dataset) =>
                             dataset.name
                               .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
+                              .includes(name.toLowerCase()) ||
                             dataset.bitsId
                               .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
+                              .includes(name.toLowerCase()) ||
                             dataset.name.toLowerCase() ===
-                              receiverEmail.toLowerCase() ||
+                              name.toLowerCase() ||
                             checkspace(dataset.name)
                               .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
-                            dataset.email.includes(receiverEmail.toLowerCase())
+                              .includes(name.toLowerCase()) ||
+                            dataset.email.includes(name.toLowerCase())
                         )
                         .slice(0, 101)
                         .map((person, index) => (
-                          <ListItem button>
+                          <ListItem button onClick={() => {
+                            setSendToName(person.name);
+                            setSendMail(person.email);
+                            handleClose2();
+                          }}>
                             <ListItemText
                               className
                               primary={person.name}
                               secondary={person.email}
-                              onClick={() => {
-                                setSendToAddress(person.email);
-                                handleClose2();
-                              }}
                             />
                           </ListItem>
                         ))
                     ) : (
-                      <ListItem button>
+                      <ListItem button
+                      onClick={() => {
+                        handleClose2();
+                      }}>
                         <ListItemText
                           className
-                          primary="enter correct value to search"
-                          onClick={() => {
-                            setSendToAddress(person.email);
-                            handleClose2();
-                          }}
+                          primary="             "
                         />
                       </ListItem>
                     )}
@@ -338,6 +341,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   variant="outlined"
                   type="submit"
                   style={{
+                    borderRadius:"20px",
+                    color:'white',
                     backgroundColor: '#EF4646',
                   }}
                 >
@@ -402,11 +407,12 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   <div className="letterpopup-classes-sendToTextFieldWrapper1">
                     <TextField
                       className="letterpopup-classes-sendToTextFieldWrapper1"
-                      value={receiverEmail}
+                      value={name}
                       onClick={handleClick3}
                       onChange={(e) => {
                         //handleClick2();
-                        setSendToAddress(e.target.value);
+                        setSendToName(e.target.value)
+                        //setSendMail(e.target.value);
                         handleClick2();
                       }}
                       placeholder="Who is this for?"
@@ -425,44 +431,46 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                       (dataset) =>
                         dataset.name
                           .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
+                          .includes(name.toLowerCase()) ||
                         dataset.bitsId
                           .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
+                          .includes(name.toLowerCase()) ||
                         dataset.name.toLowerCase() ===
-                          receiverEmail.toLowerCase() ||
+                          name.toLowerCase() ||
                         checkspace(dataset.name)
                           .toLowerCase()
-                          .includes(receiverEmail.toLowerCase()) ||
-                        dataset.email.includes(receiverEmail.toLowerCase())
+                          .includes(name.toLowerCase()) ||
+                        dataset.email.includes(name.toLowerCase())
                     ).length > 0 ? (
                       data
                         .filter(
                           (dataset) =>
                             dataset.name
                               .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
+                              .includes(name.toLowerCase()) ||
                             dataset.bitsId
                               .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
+                              .includes(name.toLowerCase()) ||
                             dataset.name.toLowerCase() ===
-                              receiverEmail.toLowerCase() ||
+                              name.toLowerCase() ||
                             checkspace(dataset.name)
                               .toLowerCase()
-                              .includes(receiverEmail.toLowerCase()) ||
-                            dataset.email.includes(receiverEmail.toLowerCase())
+                              .includes(name.toLowerCase()) ||
+                            dataset.email.includes(name.toLowerCase())
                         )
                         .slice(0, 101)
                         .map((person, index) => (
-                          <ListItem button>
+                          <ListItem button
+                          onClick={() => {
+                            setSendToName(person.name);
+                            setSendToMail(person.email);
+                            handleClose2();
+                          }}>
                             <ListItemText
                               className
                               primary={person.name}
                               secondary={person.email}
-                              onClick={() => {
-                                setSendToAddress(person.email);
-                                handleClose2();
-                              }}
+
                             />
                           </ListItem>
                         ))
@@ -470,9 +478,9 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                       <ListItem button>
                         <ListItemText
                           className
-                          primary="enter correct value to search"
+                          primary="           "
                           onClick={() => {
-                            setSendToAddress(person.email);
+                            //setSendToAddress(person.email);
                             handleClose2();
                           }}
                         />
@@ -514,6 +522,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   variant="outlined"
                   type="submit"
                   style={{
+                    borderRadius:'0px',
                     backgroundColor: '#EF4646',
                   }}
                 >

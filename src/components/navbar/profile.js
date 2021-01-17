@@ -183,7 +183,7 @@ export default function Profile({ name, bitsId }) {
             <ListItemText primary={name} secondary={bitsId} />
           </ListItem>
           <Divider />
-          <ListItem button>
+          <ListItem button onClick={handleLogout}>
             <ListItemText
               className={classes.typography}
               primary="Logout"

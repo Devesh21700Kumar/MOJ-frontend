@@ -6,7 +6,7 @@
   left: 0;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-image: url('./../../imageassets/MOJ Logo 1.png');
@@ -20,7 +20,7 @@
   left: 0;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-image: url('./../../imageassets/sun.png');
@@ -34,9 +34,10 @@
   left: 0;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  margin-left: -0.3vh;
   background-image: url('./../../imageassets/hafdfppy 1.png');
 }
 
@@ -48,7 +49,7 @@
   left: 0;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-image: url('./../../imageassets/love 1.png');
@@ -60,6 +61,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  border: 4px solid #ef4646;
   background-size: cover;
   background-color: #ef4646;
   background-position: 50% 50%;
@@ -73,9 +75,10 @@
   position: absolute;
   top: 0;
   left: 0;
+  margin-left: -0.3vh;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-image: url('./../../imageassets/happy 1.png');
@@ -89,7 +92,7 @@
   left: 0;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-image: url('./../../imageassets/hands.png');
@@ -103,7 +106,7 @@
   left: 0;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-image: url('./../../imageassets/nirmaan.png');
@@ -115,9 +118,10 @@
   position: absolute;
   top: 0;
   left: 0;
+  margin-left: -0.3vh;
   background-size: cover;
   background-color: #ef4646;
-  border: 2px solid #ef4646;
+  border: 4px solid #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-image: url('./../../imageassets/DevSoc.png');

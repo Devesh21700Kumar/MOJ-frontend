@@ -158,6 +158,7 @@ export default function Personal({ name, bitsId }, props) {
         };
       })
   );
+  const [fix,setfix]=useState(0);
   const [load, setload] = useState(true);
 
   async function call1() {
@@ -169,7 +170,7 @@ export default function Personal({ name, bitsId }, props) {
       });
       var r = await response.data.data;
       setload(false);
-      //console.log(r);
+      console.log(response);
       setrec([...r].reverse());
     } catch (error) {
       console.error(error.message);
@@ -184,7 +185,6 @@ export default function Personal({ name, bitsId }, props) {
       });
       var r = await response.data.data;
       setload(false);
-      //console.log(r);
       setGet([...r].reverse());
       setrec([...r].reverse());
     } catch (error) {
@@ -219,6 +219,7 @@ export default function Personal({ name, bitsId }, props) {
       setColor('#FFFDE8');
       setColor1('#FB8989');
       call1();
+      setfix(0);
       setGet(rec);
       seti(0);
       setX1('#C4C4C4');
@@ -229,6 +230,7 @@ export default function Personal({ name, bitsId }, props) {
       call1();
       setGet(rec);
       seti(0);
+      setfix(0);
       setX1('#C4C4C4');
       setX2('#C4C4C4');
     }
@@ -242,6 +244,7 @@ export default function Personal({ name, bitsId }, props) {
       setColor1('#FFFDE8');
       setColor('#FB8989');
       seti(0);
+      setfix(1);
       setGet(sent);
       //console.log(sent.length);
       setX1('#C4C4C4');
@@ -252,6 +255,7 @@ export default function Personal({ name, bitsId }, props) {
       setColor('#FB8989');
       setGet(sent);
       seti(0);
+      setfix(1);
       setX1('#C4C4C4');
       setX2('#C4C4C4');
     }
@@ -371,7 +375,7 @@ export default function Personal({ name, bitsId }, props) {
                 ) : (
                   <Data.Provider value={{ get }}>
                     <Data1.Provider value={i}>
-                      <PersonalCards />
+                      <PersonalCards fix={fix} setGet={setGet}/>
                     </Data1.Provider>
                   </Data.Provider>
                 )}
@@ -432,6 +436,8 @@ export default function Personal({ name, bitsId }, props) {
               </Grid>
             </Grid>
           </Box>
+          <div className={classes.tabs} id="top">
+        </div>
         </div>
       </div>
     </Fragment>

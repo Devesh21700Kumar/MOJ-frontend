@@ -6,7 +6,12 @@
   font-style: normal;
   font-weight: bold;
   font-size: 3rem;
-  margin-left: 42px;
+  width: 10vw;
+  margin-left: 49px;
+}
+
+.trux:hover {
+  cursor: pointer;
 }
 @media only screen and (min-width: 1190px) and (max-width: 1800px) {
   .trux {
@@ -68,6 +73,14 @@
   #free2 {
     transform: scale(0.69);
   }
+  .trux {
+    font-family: 'Oxygen';
+    color: #ffffff;
+    font-style: normal;
+    font-weight: bold;
+    width: 50vw;
+    margin-left: 49px;
+  }
 }
 @media only screen and (min-width: 500px) and (max-width: 800px) {
   #free {
@@ -79,8 +92,4 @@
   #free2 {
     transform: scale(0.69);
   }
-}
-
-.hover:hover {
-  cursor: pointer;
 }
