@@ -59,6 +59,12 @@
   }
 }
 
+@media only screen and (max-width: 349px) {
+  .chuck1 {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 740px) {
   #mi0 {
     margin: 10px;
