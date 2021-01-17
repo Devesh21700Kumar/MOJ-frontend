@@ -80,3 +80,7 @@
     transform: scale(0.69);
   }
 }
+
+.hover:hover {
+  cursor: pointer;
+}

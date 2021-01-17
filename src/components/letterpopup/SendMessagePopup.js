@@ -181,7 +181,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
       return (
         <div className="letterpopup-classes-root" style={getCSSVariables()}>
           <div className="letterpopup-classes-cross" onClick={hideMe} />
-          <div className="letterpopup-classes-icon1">
+          <div className="letterpopup-classes-icon1" style={{ display: 'none' }}>
             <LabelImportantIcon
               onClick={showme}
               className="karge"
