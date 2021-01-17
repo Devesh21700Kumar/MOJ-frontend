@@ -183,14 +183,6 @@ export default function Profile({ name, bitsId }) {
             <ListItemText primary={name} secondary={bitsId} />
           </ListItem>
           <Divider />
-          <ListItem button>
-            <ListItemText
-              className={classes.typography}
-              primary="Logout"
-              onClick={handleLogout}
-            />
-          </ListItem>
-          <Divider />
           {location.pathname.match(/home/) ? (
             <ListItem button className={classes.hey} onClick={handle1}>
               <ListItemText
@@ -208,6 +200,14 @@ export default function Profile({ name, bitsId }) {
               />
             </ListItem>
           )}
+          <Divider />
+          <ListItem button>
+            <ListItemText
+              className={classes.typography}
+              primary="Logout"
+              onClick={handleLogout}
+            />
+          </ListItem>
         </List>
         {/* <Typography className={classes.typography}>New notifications</Typography> */}
       </Popover>
