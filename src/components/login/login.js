@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { Route, Redirect, useHistory } from 'react-router-dom';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 
@@ -10,7 +11,12 @@ const clientId =
 
 function Login() {
   let history = useHistory();
-  const onLogoutSuccess = (res) => {
+  const onLogoutSuccess = async (res) => {
+    const isTokenExists = await localStorage.getItem('token');
+    if (isTokenExists) {
+      localStorage.removeItem('token');
+    }
+    history.push('/');
     // console.log('Logged out');
   };
 
@@ -18,6 +24,16 @@ function Login() {
     clientId,
     onLogoutSuccess,
   });
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const isTokenExists = await localStorage.getItem('token');
+  //     console.log(isTokenExists);
+  //     if (isTokenExists) {
+  //       history.push('/home');
+  //     }
+  //   })();
+  // }, []);
 
   const onSuccess = (res) => {
     let accessToken = res.accessToken;
@@ -32,15 +48,15 @@ function Login() {
           access_token: accessToken,
           email: email,
         })
-        .then(function (response) {
-          localStorage.setItem('token', response.data.token);
+        .then(async function (response) {
+          await localStorage.setItem('token', response.data.token);
           var status = response.data.ok;
           if (status) {
-            signOut();
+            // signOut();
             history.push('/home');
           } else {
             signOut();
-            history.push('/');
+            // history.push('/');
           }
         })
         .catch((e) => {
@@ -64,8 +80,8 @@ function Login() {
         onFailure={onFailure}
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
-        uxMode="redirect"
-        redirectUri="https://tender-kilby-a8e96b.netlify.app/home"
+        uxMode="popup"
+        // redirectUri="https://tender-kilby-a8e96b.netlify.app/home"
         // redirectUri="http://localhost:3000/home"
         render={(renderProps) => (
           <div
