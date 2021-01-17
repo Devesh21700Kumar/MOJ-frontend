@@ -4,7 +4,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;
@@ -18,7 +18,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;
@@ -32,7 +32,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;
@@ -46,7 +46,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;
@@ -60,7 +60,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -73,7 +73,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;
@@ -87,7 +87,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;
@@ -101,7 +101,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;
@@ -115,7 +115,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-size: cover;
+  background-size: contain;
   background-color: #ef4646;
   border: 2px solid #ef4646;
   background-position: 50% 50%;

@@ -21,26 +21,27 @@ import '../personal/loader.css';
 const useStyles = makeStyles((theme) => ({
   '@global': {
     '*::-webkit-scrollbar': {
-      width: '4px',
+      width: '10px',
+      backgroundColor: '#FFFDE8',
     },
     '*::-webkit-scrollbar-thumb': {
       backgroundColor: '#EF4646',
-      borderRadius: '0px',
+      borderRadius: '10px',
+      border: '2px solid #FFFDE8',
     },
   },
   root: {
-    backgroundColor: '#fffde8',
+    backgroundColor: '#EF4646',
     width: '100%',
-    flexGrow: '1',
-  },
-  root: {
-    backgroundColor: '#fffde8',
-    flexGrow: 1,
+    overflowX: 'hidden',
   },
   messages: {
     width: '90%',
+    display: 'flex',
+    justifyContent: 'center',
     padding: '10px',
     margin: '0px auto 40px auto',
+    minHeight: '30vh',
   },
   tab: {
     borderRadius: '10px 10px 0 0',
@@ -66,68 +67,137 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#EF4646',
     margin: '0px auto',
   },
+  cA: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  c1: {
+    padding: '2rem 0rem 0rem 4rem',
+    width: '92vw',
+  },
+  c2: {
+    width: '92vw',
+  },
+  fab: {
+    width: '100%',
+    height: '100%',
+    zIndex: 1,
+  },
+  fabButton: {
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    margin: '0rem 2rem 2rem 0rem',
+  },
+  fabButtonIcon: {
+    transform: 'scale(3)',
+  },
   hot: {
     color: '#EF4646',
     fontFamily: 'Oxygen',
     fontWeight: 'bold',
-    fontSize: '3.3vmax',
-    marginLeft: '3.7vw',
+    fontSize: '2.6vmax',
   },
   hot1: {
     fontFamily: 'Oxygen',
     fontWeight: 'bold',
-    fontSize: '2.8vmax',
+    fontSize: '2.2vmax',
   },
   inner: {
     backgroundColor: '#FFFDE8',
-    borderRadius: '20px 20px 0 0',
+    borderRadius: '10px 10px 0 0',
     padding: '1.5rem',
     minHeight: '79.5vh',
     '@media(max-height 900px)': {
       minHeight: '72vh',
     },
   },
-  '@media(min-width: 560px)': {
+  footer: {
+    width: '100%',
+    backgroundColor: '#EF4646',
+    height: '10px',
+  },
+  '@media(min-width: 320px)': {
+    cA: {
+      padding: 0,
+      width: '100%',
+      alignItems: 'center',
+    },
+    c1: {
+      padding: 0,
+      width: 'max-content',
+      textAlign: 'center',
+    },
+    c2: {
+      padding: 0,
+      width: 'max-content',
+      textAlign: 'center',
+    },
     hot: {
-      fontSize: '34px',
+      fontSize: '1.5rem',
     },
     hot1: {
-      fontSize: '28px',
-      marginLeft: '-6.4vw',
+      fontSize: '1rem',
+    },
+    messages: {
+      minHeight: '40vh',
+    },
+    fabButton: {
+      margin: '0rem 1rem 1rem 0rem',
+    },
+    fabButtonIcon: {
+      transform: 'scale(2.5)',
     },
   },
-  '@media(max-width: 560px)': {
-    hot: {
-      fontSize: '20px',
+  '@media(min-width: 360px)': {
+    messages: {
+      minHeight: '45vh',
     },
-    hot1: {
-      fontSize: '16px',
-      marginLeft: '-4.4vw',
-    },
-  },
-  '@media(max-width: 320px)': {
-    hot: {
-      fontSize: '20px',
-    },
-    hot1: {
-      fontSize: '16px',
-      marginLeft: '-2.4vw',
+    fabButtonIcon: {
+      transform: 'scale(3)',
     },
   },
-  '@media(min-width: 920px)': {
-    hot: {
-      marginLeft: '5.2vw',
+  '@media(min-width: 414px)': {
+    messages: {
+      minHeight: '60vh',
     },
-    hot1: {
-      marginLeft: '-6.4vw',
+    fabButton: {
+      margin: '0rem 2rem 2rem 0rem',
+    },
+    fabButtonIcon: {
+      transform: 'scale(3.5)',
     },
   },
-  '@media(min-width: 1200px)': {
+  '@media(min-width: 768px)': {
+    cA: {
+      padding: '0rem 1rem',
+      width: 'max-content',
+      alignItems: 'flex-start',
+    },
+    c1: {
+      width: '92vw',
+      textAlign: 'left',
+    },
+    c2: {
+      width: '92vw',
+    },
     hot: {
-      marginLeft: '6.2vw',
+      paddingLeft: '2rem',
+      fontSize: '2rem',
     },
     hot1: {
-      marginLeft: '-6.9vw',
+      fontSize: '1.5rem',
+    },
+    messages: {
+      minHeight: '50vh',
+    },
+  },
+  '@media(min-width: 1024px)': {
+    messages: {
+      minHeight: '40vh',
+    },
+    hot: {
+      padding: '1rem 0rem 0rem 2rem',
     },
   },
 }));
@@ -169,7 +239,6 @@ export default function Personal({ name, bitsId }, props) {
       });
       var r = await response.data.data;
       setload(false);
-      //console.log(r);
       setrec([...r].reverse());
     } catch (error) {
       console.error(error.message);
@@ -184,7 +253,6 @@ export default function Personal({ name, bitsId }, props) {
       });
       var r = await response.data.data;
       setload(false);
-      //console.log(r);
       setGet([...r].reverse());
       setrec([...r].reverse());
     } catch (error) {
@@ -243,7 +311,6 @@ export default function Personal({ name, bitsId }, props) {
       setColor('#FB8989');
       seti(0);
       setGet(sent);
-      //console.log(sent.length);
       setX1('#C4C4C4');
       setX2('#EF4646');
     } else {
@@ -326,18 +393,18 @@ export default function Personal({ name, bitsId }, props) {
         {/*Welcome message and heading*/}
 
         <div className={classes.mainContent}>
-          <div className="ter">
+          <div className={classes.fab}>
             <IconButton
-              className="ter"
+              className={classes.fabButton}
               onClick={hit}
               style={{ color: '#EF4646' }}
             >
-              <AddCircleIcon className="tera" />
+              <AddCircleIcon className={classes.fabButtonIcon} />
             </IconButton>
           </div>
           <Box className={classes.inner}>
-            <Box display="flex" className="cA">
-              <Box width="35%" className="c1">
+            <Box className={classes.cA}>
+              <Box className={classes.c1}>
                 <Typography className={classes.hot}>
                   Welcome{' '}
                   {userdata.name
@@ -355,7 +422,7 @@ export default function Personal({ name, bitsId }, props) {
                 </Typography>
               </Box>
 
-              <Box width="15%" style={{ textAlign: 'center' }} className="c2">
+              <Box style={{ textAlign: 'center' }} className={classes.c2}>
                 <Typography className={classes.hot1}>Messages</Typography>
               </Box>
             </Box>
@@ -388,7 +455,7 @@ export default function Personal({ name, bitsId }, props) {
               <Grid item style={{ textAlign: 'center' }}>
                 <svg
                   onClick={hc1}
-                  width="48"
+                  width="35"
                   height="23"
                   viewBox="0 0 48 23"
                   fill="none"
@@ -418,7 +485,7 @@ export default function Personal({ name, bitsId }, props) {
               <Grid item style={{ textAlign: 'center' }}>
                 <svg
                   onClick={hc2}
-                  width="48"
+                  width="35"
                   height="23"
                   viewBox="0 0 48 23"
                   fill="none"
@@ -433,6 +500,7 @@ export default function Personal({ name, bitsId }, props) {
             </Grid>
           </Box>
         </div>
+        <div className={classes.footer} />
       </div>
     </Fragment>
   );

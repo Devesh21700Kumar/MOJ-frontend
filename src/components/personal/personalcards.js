@@ -49,23 +49,36 @@ const useStyles = makeStyles((theme) => ({
   krait: {
     marginLeft: '7px',
   },
+  noMessages: {
+    color: '#FC0404',
+    width: '100%',
+    textAlign: 'center',
+    fontFamily: 'Oxygen, sans serif',
+  },
   '@media(max-height: 680px)': {
     Gin: {
       fontSize: '20px',
     },
-    Gin1: {},
   },
   '@media(max-height: 568px)': {
     Gin: {
       fontSize: '20px',
     },
-    Gin1: {},
   },
   '@media(max-height: 750px)': {
     Gin: {
       fontSize: '20px',
     },
-    Gin1: {},
+  },
+  '@media(min-width: 320px)': {
+    noMessages: {
+      fontSize: '1.5rem',
+    },
+  },
+  '@media(min-width: 768px)': {
+    noMessages: {
+      fontSize: '2rem',
+    },
   },
 }));
 
@@ -154,7 +167,7 @@ export default function PersonalCards({ text, index }) {
             </Card>
           ))
       ) : (
-        <h1 className="baxter">No Messages to Display !</h1>
+        <h1 className={classes.noMessages}>No Messages to Display!</h1>
       )}
     </Fragment>
   );

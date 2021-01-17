@@ -53,9 +53,12 @@
 }
 
 .spinwrap {
-  margin-left: 37vw;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0rem;
 }
-@media only screen and (min-width: 1380px) and (max-width: 1510px) {
+/* @media only screen and (min-width: 1380px) and (max-width: 1510px) {
   .spinwrap {
     margin-left: 41vw;
   }
@@ -96,4 +99,4 @@
   .spinwrap {
     margin-left: 38vw;
   }
-}
+} */
