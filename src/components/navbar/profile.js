@@ -1,4 +1,5 @@
 import React from 'react';
+//import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
@@ -105,6 +106,10 @@ export default function Profile({ name, bitsId }) {
     history.push('/');
   };
 
+  /* const [ck,setck]=useState('inline');
+  if (location.pathname.match(/home/)){
+    setck["none"];
+  }*/
   const clientId =
     '125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com';
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -186,21 +191,23 @@ export default function Profile({ name, bitsId }) {
             />
           </ListItem>
           <Divider />
-          <ListItem button>
-            <ListItemText
-              className={classes.typography}
-              primary="Credits"
-              onClick={handle1}
-            />
-          </ListItem>
-          <Divider />
-          <ListItem button className={classes.hey} onClick={handleClick2}>
-            <ListItemText
-              className={classes.typography}
-              primary="Redirect to Home"
-              onClick={handleClick2}
-            />
-          </ListItem>
+          {location.pathname.match(/home/) ? (
+            <ListItem button className={classes.hey} onClick={handle1}>
+              <ListItemText
+                className={classes.typography}
+                primary="Credits"
+                onClick={handle1}
+              />
+            </ListItem>
+          ) : (
+            <ListItem button onClick={handleClick2}>
+              <ListItemText
+                className={classes.typography}
+                primary="Home"
+                onClick={handle1}
+              />
+            </ListItem>
+          )}
         </List>
         {/* <Typography className={classes.typography}>New notifications</Typography> */}
       </Popover>

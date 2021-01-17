@@ -129,3 +129,29 @@
   top: 80%;
   transform: translateX(-50%);
 }
+
+@media only screen and (max-height: 780px) {
+  .letterpopup-classes-message1 {
+    position: relative;
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-50%, -50%);
+    background-size: contain;
+    background-color: rgba(0, 0, 0, 0) !important;
+    border-radius: 30px;
+    width: 90.9vw;
+    height: 83.9vh;
+    max-width: 90.9vw;
+    max-height: 86.9vh;
+    margin-top: -4vh;
+  }
+  .letterpopup-classes-sendButton1 {
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translateX(-50%);
+  }
+  .letterpopup-classes-messageTextField1 {
+    width: 63vw;
+  }
+}
