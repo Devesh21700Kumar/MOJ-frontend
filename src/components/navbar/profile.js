@@ -132,6 +132,10 @@ export default function Profile({ name, bitsId }) {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  const handleClick2 = () => {
+    history.push('/home');
+  };
+
   return (
     <div>
       <MuiThemeProvider theme={theme}>
@@ -183,6 +187,14 @@ export default function Profile({ name, bitsId }) {
               className={classes.typography}
               primary="Credits"
               onClick={handle1}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem button className={classes.hey} onClick={handleClick2}>
+            <ListItemText
+              className={classes.typography}
+              primary="Redirect to Home"
+              onClick={handleClick2}
             />
           </ListItem>
         </List>
