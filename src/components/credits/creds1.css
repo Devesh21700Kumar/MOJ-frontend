@@ -43,18 +43,15 @@ div.devs .photos > div > div:first-child {
 }
 
 .team {
-  top: 10vh;
-  margin-top: 10vh;
-  width: 90%;
+  width: 80%;
   margin: auto;
   font-size: 1.8rem;
   display: flex;
-  padding-top: 12vh;
+  color: #000000;
 }
 
 .department {
   min-width: 350px;
-  color: #000000;
 }
 
 .department:hover {
@@ -81,7 +78,7 @@ div.devs .photos > div > div:first-child {
   margin: auto;
   margin-bottom: 4rem;
   background-size: cover;
-  transform: rotate(100deg);
+
   transition: 150ms ease-in-out;
 }
 
@@ -89,24 +86,22 @@ div.devs .photos > div > div:first-child {
   max-width: 300px;
   margin: auto;
   max-height: 300px;
-  transform: rotate(-100deg);
   position: relative;
   transition: 150ms ease-in-out;
   left: 20px;
 }
 
-.photos > div > div:first-child:hover img {
+/*.photos > div > div:first-child:hover img {
   transition-delay: 150ms;
   transform: rotate(0deg);
 }
 
 .photos > div > div:first-child:hover {
   transform: rotate(0deg);
-}
+}*/
 
 @media (max-width: 1400px) {
   .team {
-    padding-top: 12vh;
     width: 90%;
     margin: auto;
   }
@@ -125,13 +120,12 @@ div.devs .photos > div > div:first-child {
     flex-direction: column;
     justify-content: space-around;
   }
+
   .team {
     flex-direction: column;
     justify-content: space-around;
-    margin-left: 10vw;
-    padding-left: 4vw;
-    font-size: 1.2rem;
   }
+
   .depart-name {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

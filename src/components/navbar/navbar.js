@@ -64,7 +64,7 @@ export default function Navbar({ navHeading, name, bitsId, stats, navtext }) {
           display="flex"
           alignItems="flex-start"
         >
-          <Grid item xs sm md={4} lg={4} >
+          <Grid item xs sm md={4} lg={4}>
             <div onClick={handler1} className="trux" id="free">
               {navtext}
             </div>

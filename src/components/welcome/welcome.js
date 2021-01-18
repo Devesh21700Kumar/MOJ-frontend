@@ -324,7 +324,7 @@ export default function Welcome1() {
             aliquip ex ea commodo consequat.
           </div>
 
-                <Login />
+          <Login />
         </div>
       </div>
     </React.Fragment>

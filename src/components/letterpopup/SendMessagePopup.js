@@ -77,7 +77,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   const id = open1 ? 'simple-popover' : undefined;
   const [messageBody, setMessageText] = useState('');
   const [receiverEmail, setSendMail] = useState('');
-  const [name,setSendToName]=useState('');
+  const [name, setSendToName] = useState('');
   const [componentEnabled, setComponentEnabled] = useState(enabled);
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
@@ -257,8 +257,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                         dataset.bitsId
                           .toLowerCase()
                           .includes(name.toLowerCase()) ||
-                        dataset.name.toLowerCase() ===
-                          name.toLowerCase() ||
+                        dataset.name.toLowerCase() === name.toLowerCase() ||
                         checkspace(dataset.name)
                           .toLowerCase()
                           .includes(name.toLowerCase()) ||
@@ -273,8 +272,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                             dataset.bitsId
                               .toLowerCase()
                               .includes(name.toLowerCase()) ||
-                            dataset.name.toLowerCase() ===
-                              name.toLowerCase() ||
+                            dataset.name.toLowerCase() === name.toLowerCase() ||
                             checkspace(dataset.name)
                               .toLowerCase()
                               .includes(name.toLowerCase()) ||
@@ -282,11 +280,14 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                         )
                         .slice(0, 101)
                         .map((person, index) => (
-                          <ListItem button onClick={() => {
-                            setSendToName(person.name);
-                            setSendMail(person.email);
-                            handleClose2();
-                          }}>
+                          <ListItem
+                            button
+                            onClick={() => {
+                              setSendToName(person.name);
+                              setSendMail(person.email);
+                              handleClose2();
+                            }}
+                          >
                             <ListItemText
                               className
                               primary={person.name}
@@ -295,14 +296,13 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                           </ListItem>
                         ))
                     ) : (
-                      <ListItem button
-                      onClick={() => {
-                        handleClose2();
-                      }}>
-                        <ListItemText
-                          className
-                          primary="             "
-                        />
+                      <ListItem
+                        button
+                        onClick={() => {
+                          handleClose2();
+                        }}
+                      >
+                        <ListItemText className primary="             " />
                       </ListItem>
                     )}
                   </List>
@@ -341,8 +341,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   variant="outlined"
                   type="submit"
                   style={{
-                    borderRadius:"20px",
-                    color:'white',
+                    borderRadius: '20px',
+                    color: 'white',
                     backgroundColor: '#EF4646',
                   }}
                 >
@@ -411,7 +411,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                       onClick={handleClick3}
                       onChange={(e) => {
                         //handleClick2();
-                        setSendToName(e.target.value)
+                        setSendToName(e.target.value);
                         //setSendMail(e.target.value);
                         handleClick2();
                       }}
@@ -435,8 +435,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                         dataset.bitsId
                           .toLowerCase()
                           .includes(name.toLowerCase()) ||
-                        dataset.name.toLowerCase() ===
-                          name.toLowerCase() ||
+                        dataset.name.toLowerCase() === name.toLowerCase() ||
                         checkspace(dataset.name)
                           .toLowerCase()
                           .includes(name.toLowerCase()) ||
@@ -451,8 +450,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                             dataset.bitsId
                               .toLowerCase()
                               .includes(name.toLowerCase()) ||
-                            dataset.name.toLowerCase() ===
-                              name.toLowerCase() ||
+                            dataset.name.toLowerCase() === name.toLowerCase() ||
                             checkspace(dataset.name)
                               .toLowerCase()
                               .includes(name.toLowerCase()) ||
@@ -460,17 +458,18 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                         )
                         .slice(0, 101)
                         .map((person, index) => (
-                          <ListItem button
-                          onClick={() => {
-                            setSendToName(person.name);
-                            setSendToMail(person.email);
-                            handleClose2();
-                          }}>
+                          <ListItem
+                            button
+                            onClick={() => {
+                              setSendToName(person.name);
+                              setSendMail(person.email);
+                              handleClose2();
+                            }}
+                          >
                             <ListItemText
                               className
                               primary={person.name}
                               secondary={person.email}
-
                             />
                           </ListItem>
                         ))
@@ -522,7 +521,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   variant="outlined"
                   type="submit"
                   style={{
-                    borderRadius:'0px',
+                    borderRadius: '0px',
                     backgroundColor: '#EF4646',
                   }}
                 >

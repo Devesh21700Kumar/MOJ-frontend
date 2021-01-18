@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
     fontSize: '0.94rem',
-    fontWeight:'bold',
+    fontWeight: 'bold',
   },
   krait: {
     marginLeft: '7px',
@@ -92,42 +92,43 @@ const useStyles = makeStyles((theme) => ({
       margin: '.8rem 0rem 0 0',
       fontFamily: 'oxygen',
       fontSize: '1.1rem',
-      fontWeight:'bold',
+      fontWeight: 'bold',
     },
-  noMessages: {
-    color: '#FC0404',
-    width: '100%',
-    textAlign: 'center',
-    fontFamily: 'Oxygen, sans serif',
-  },
-  '@media(max-height: 680px)': {
-    Gin: {
-      fontSize: '20px',
-    },
-  },
-  '@media(max-height: 568px)': {
-    Gin: {
-      fontSize: '20px',
-    },
-  },
-  '@media(max-height: 750px)': {
-    Gin: {
-      fontSize: '20px',
-    },
-  },
-  '@media(min-width: 320px)': {
     noMessages: {
-      fontSize: '1.5rem',
+      color: '#FC0404',
+      width: '100%',
+      textAlign: 'center',
+      fontFamily: 'Oxygen, sans serif',
+    },
+    '@media(max-height: 680px)': {
+      Gin: {
+        fontSize: '20px',
+      },
+    },
+    '@media(max-height: 568px)': {
+      Gin: {
+        fontSize: '20px',
+      },
+    },
+    '@media(max-height: 750px)': {
+      Gin: {
+        fontSize: '20px',
+      },
+    },
+    '@media(min-width: 320px)': {
+      noMessages: {
+        fontSize: '1.5rem',
+      },
+    },
+    '@media(min-width: 768px)': {
+      noMessages: {
+        fontSize: '2rem',
+      },
     },
   },
-  '@media(min-width: 768px)': {
-    noMessages: {
-      fontSize: '2rem',
-    },
-  },
-}}));
+}));
 
-export default function PersonalCards({ text, index,fix,setGet }) {
+export default function PersonalCards({ text, index, fix, setGet }) {
   const classes = useStyles();
   const { get } = useContext(Data);
   const i = useContext(Data1);
@@ -159,163 +160,124 @@ export default function PersonalCards({ text, index,fix,setGet }) {
   const [pos, setpos] = useState(0);
   const [vat, setvat] = useState(false);
   //const [read,setRead] = useState(1);
-  const handler1=()=>{
-    async function postRead() {
-      try {
-        console.log(get);
-        const response = await (
-          await fetch(`${URL}/api/level0/markasread`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              token: `${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify({ id:get[pos]._id }),
-          })
-        ).json();
-        if (response.ok) {
-            //setRead(response);
-            console.log(response);
-        } 
-      } catch (error) {
-        console.error(error.message);
-      }
-
-      try {
-        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
-          method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
-        });
-        var r = await response.data.data;
-        //setload(false);
-        //console.log(response);
-        setGet([...r].reverse());
-      } catch (error) {
-        console.error(error.message);
-      }
-    }
-    postRead();
-  };
   const toggleReadMessages = (b) => {
     setvat(b);
   };
-  if(fix==0){
-  return (
-    <Fragment>
-      <ReadMessagePopup
-        messageArray={get.map((obj) => {
-          return [obj.body, obj.date];
-        })}
-        startFrom={pos}
-        enabled={vat}
-        toggleVisibility={toggleReadMessages}
-        key={'ReadMessagePopupKey-' + vat}
-      />
-      {Array.isArray(get) && get.length !== 0 ? (
-        get
-          .slice(i, i + 15 <= get.length ? i + 15 : get.length)
-          .map((text, index) => (
-            <Card
-              className={(text.read==1)?classes.msgCard:classes.msgCard1}
-              raised={true}
-              key={(i / 15) * 15 + index}
-              onClick={() => {
-                toggleReadMessages(true);
-                setpos((i / 15) * 15 + index);
-                handler1();
-              }}
-            >
-              <div className={classes.bitsId}>
-                
-              </div>
-              <div className={classes.Gin}>
-                <p className={(text.read==1)?classes.date:classes.date1}>
-                  {screen.width >= 591
-                    ? screen.width >= 680
-                      ? text.body.slice(0, 43)
-                      : text.body.slice(0, 31)
-                    : text.body.slice(0, 23)}
-                </p>
-              </div>
+  if (fix == 0) {
+    return (
+      <Fragment>
+        <ReadMessagePopup
+          get={get}
+          setGet={setGet}
+          messageArray={get.map((obj) => {
+            return [obj.body, obj.date, obj._id, obj.read];
+          })}
+          startFrom={pos}
+          enabled={vat}
+          toggleVisibility={toggleReadMessages}
+          key={'ReadMessagePopupKey-' + vat}
+        />
+        {Array.isArray(get) && get.length !== 0 ? (
+          get
+            .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+            .map((text, index) => (
+              <Card
+                className={text.read == 1 ? classes.msgCard : classes.msgCard1}
+                raised={true}
+                key={(i / 15) * 15 + index}
+                onClick={async () => {
+                  await setpos((i / 15) * 15 + index);
+                  //await handler1();
+                  await toggleReadMessages(true);
+                }}
+              >
+                <div className={classes.bitsId}></div>
+                <div className={classes.Gin}>
+                  <p className={text.read == 1 ? classes.date : classes.date1}>
+                    {screen.width >= 591
+                      ? screen.width >= 680
+                        ? text.body.slice(0, 43)
+                        : text.body.slice(0, 31)
+                      : text.body.slice(0, 23)}
+                  </p>
+                </div>
 
-              <div className={classes.Gin1}>
-                <Typography variant="h6" edge="start">
-                  <b key="index">
-                    <p className={classes.date}>
-                      {screen.width >= 591
-                        ? screen.width >= 680
-                          ? dateFormatter(text.date).slice(0, 23)
-                          : dateFormatter(text.date).slice(0, 23)
-                        : dateFormatter(text.date).slice(0, 23)}
-                    </p>
-                  </b>
-                </Typography>
-              </div>
-            </Card>
-          ))
-      ) : (
-        <h1 className="baxter">No Messages to Display !</h1>
-      )}
-    </Fragment>
-  );
-      }
-  else{  return (
-    <Fragment>
-      <ReadMessagePopup
-        messageArray={get.map((obj) => {
-          return [obj.body, obj.date];
-        })}
-        startFrom={pos}
-        enabled={vat}
-        toggleVisibility={toggleReadMessages}
-        key={'ReadMessagePopupKey-' + vat}
-      />
-      {Array.isArray(get) && get.length !== 0 ? (
-        get
-          .slice(i, i + 15 <= get.length ? i + 15 : get.length)
-          .map((text, index) => (
-            <Card
-              className={classes.msgCard}
-              raised={true}
-              key={index}
-              onClick={() => {
-                toggleReadMessages(true);
-                setpos((i / 15) * 15 + index);
-                //handler1();
-              }}
-            >
-              <div className={classes.bitsId}>
-                To {text.receiverEmail}
-              </div>
-              <div className={classes.Gin}>
-                <p className={classes.date}>
-                  {screen.width >= 591
-                    ? screen.width >= 680
-                      ? text.body.slice(0, 43)
-                      : text.body.slice(0, 31)
-                    : text.body.slice(0, 23)}
-                </p>
-              </div>
+                <div className={classes.Gin1}>
+                  <Typography variant="h6" edge="start">
+                    <b key="index">
+                      <p className={classes.date}>
+                        {screen.width >= 591
+                          ? screen.width >= 680
+                            ? dateFormatter(text.date).slice(0, 23)
+                            : dateFormatter(text.date).slice(0, 23)
+                          : dateFormatter(text.date).slice(0, 23)}
+                      </p>
+                    </b>
+                  </Typography>
+                </div>
+              </Card>
+            ))
+        ) : (
+          <h1 className="baxter">No Messages to Display !</h1>
+        )}
+      </Fragment>
+    );
+  } else {
+    return (
+      <Fragment>
+        <ReadMessagePopup
+          messageArray={get.map((obj) => {
+            return [obj.body, obj.date];
+          })}
+          startFrom={pos}
+          enabled={vat}
+          toggleVisibility={toggleReadMessages}
+          key={'ReadMessagePopupKey-' + vat}
+        />
+        {Array.isArray(get) && get.length !== 0 ? (
+          get
+            .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+            .map((text, index) => (
+              <Card
+                className={classes.msgCard}
+                raised={true}
+                key={index}
+                onClick={() => {
+                  toggleReadMessages(true);
+                  setpos((i / 15) * 15 + index);
+                  //handler1();
+                }}
+              >
+                <div className={classes.bitsId}>To {text.receiverEmail}</div>
+                <div className={classes.Gin}>
+                  <p className={classes.date}>
+                    {screen.width >= 591
+                      ? screen.width >= 680
+                        ? text.body.slice(0, 43)
+                        : text.body.slice(0, 31)
+                      : text.body.slice(0, 23)}
+                  </p>
+                </div>
 
-              <div className={classes.Gin1}>
-                <Typography variant="h6" edge="start">
-                  <b key="index">
-                    <p className={classes.date}>
-                      {screen.width >= 591
-                        ? screen.width >= 680
-                          ? dateFormatter(text.date).slice(0, 23)
-                          : dateFormatter(text.date).slice(0, 23)
-                        : dateFormatter(text.date).slice(0, 23)}
-                    </p>
-                  </b>
-                </Typography>
-              </div>
-            </Card>
-          ))
-      ) : (
-        <h1 className={classes.noMessages}>No Messages to Display!</h1>
-      )}
-    </Fragment>
-  );
+                <div className={classes.Gin1}>
+                  <Typography variant="h6" edge="start">
+                    <b key="index">
+                      <p className={classes.date}>
+                        {screen.width >= 591
+                          ? screen.width >= 680
+                            ? dateFormatter(text.date).slice(0, 23)
+                            : dateFormatter(text.date).slice(0, 23)
+                          : dateFormatter(text.date).slice(0, 23)}
+                      </p>
+                    </b>
+                  </Typography>
+                </div>
+              </Card>
+            ))
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )}
+      </Fragment>
+    );
   }
 }
