@@ -10,11 +10,13 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     '@global': {
       '*::-webkit-scrollbar': {
-        width: '4px',
+        width: '10px',
+        backgroundColor: '#FFFDE8',
       },
       '*::-webkit-scrollbar-thumb': {
         backgroundColor: '#EF4646',
-        //borderRadius: '10px',
+        borderRight: '3px solid #FFFDE8',
+        borderLeft: '3px solid #FFFDE8',
       },
     },
     root: {

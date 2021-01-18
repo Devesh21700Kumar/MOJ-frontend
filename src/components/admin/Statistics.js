@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) =>
       '*::-webkit-scrollbar-thumb': {
         backgroundColor: '#EF4646',
         borderRight: '3px solid #FFFDE8',
+        borderLeft: '3px solid #FFFDE8',
       },
     },
     root: {
