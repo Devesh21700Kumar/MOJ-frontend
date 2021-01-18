@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'Staatliches';
+  font-family: 'Oxygen';
 }
 
 #team-parent {
@@ -9,7 +9,7 @@
   overflow-x: hidden;
   background: #fffde8;
   color: white;
-  font-family: 'Staatliches';
+  font-family: 'Oxygen';
   min-height: 120vh;
 }
 
@@ -21,7 +21,7 @@
     overflow-x: hidden;
     background: #fffde8;
     color: white;
-    font-family: 'Staatliches';
+    font-family: 'Oxygen';
     min-height: 120vh;
   }
 }
@@ -38,6 +38,11 @@ div.devs h1 {
 }
 
 div.devs .photos > div > div:first-child {
+  width: 300px;
+  height: 300px;
+}
+
+div.devs .photos1 > div > div:first-child {
   width: 300px;
   height: 300px;
 }
@@ -68,7 +73,71 @@ div.devs .photos > div > div:first-child {
   transition: 150ms ease-in-out;
 }
 
+.photos > div > div:first-child:hover {
+  opacity: 0.8;
+}
+.photos > div > div:second-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:third-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:fourth-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:fifth-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:sixth-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:seventh-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:eigth-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:ninth-child:hover {
+  opacity: 0.8;
+}
+
+.photos > div > div:tenth-child:hover {
+  opacity: 0.8;
+}
+
+.photos1 {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  text-align: center;
+  transition: 150ms ease-in-out;
+}
+
+@media only screen and (max-width: 550px) {
+  .photos {
+    margin-top: -100px;
+    transform: scale(0.8);
+    display: grid;
+    margin-left: 8vw;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    text-align: center;
+    transition: 150ms ease-in-out;
+  }
+}
+
 .photos > div {
+  margin-bottom: 2rem;
+}
+
+.photos1 > div {
   margin-bottom: 2rem;
 }
 
@@ -83,6 +152,25 @@ div.devs .photos > div > div:first-child {
 }
 
 .photos img {
+  max-width: 300px;
+  margin: auto;
+  max-height: 300px;
+  position: relative;
+  transition: 150ms ease-in-out;
+  left: 20px;
+}
+
+.photos1 > div > div:first-child {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  margin-bottom: 4rem;
+  background-size: cover;
+
+  transition: 150ms ease-in-out;
+}
+
+.photos1 img {
   max-width: 300px;
   margin: auto;
   max-height: 300px;
@@ -112,18 +200,29 @@ div.devs .photos > div > div:first-child {
     display: flex;
     flex-direction: column;
   }
+
+  .photos1 {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 900px) {
   .photos {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
+  }
+
+  .photos1 {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-around;*/
   }
 
   .team {
     flex-direction: column;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
   }
 
   .depart-name {
@@ -141,7 +240,7 @@ div.devs .photos > div > div:first-child {
   }
   .team {
     flex-direction: column;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
     font-size: 1.2rem;
     margin-left: -2vw;
   }
@@ -154,7 +253,7 @@ div.devs .photos > div > div:first-child {
 .details {
   font-family: 'Montserrat';
   margin-top: -35px;
-  justify-content: space-around;
+  /*justify-content: space-around;*/
 }
 
 .details p {
@@ -170,4 +269,21 @@ div.devs .photos > div > div:first-child {
 .post {
   font-weight: bold;
   color: #000000;
+}
+
+.test {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #ef4646;
+  margin-bottom: 3vh;
+  background: #ffffff;
+  border-radius: 30px;
+}
+
+.test img {
+  min-width: 100%;
+  margin-left: -40.1px;
+  min-height: 100%;
+  width: auto;
+  height: auto;
 }
