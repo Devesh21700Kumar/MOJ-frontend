@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) =>
       '*::-webkit-scrollbar-thumb': {
         backgroundColor: '#EF4646',
         borderRight: '3px solid #FFFDE8',
+        borderLeft: '3px solid #FFFDE8',
       },
     },
     root: {
@@ -331,7 +332,7 @@ const AdminDashboard = () => {
   const [j, setj] = useState(0);
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
 
   const token = localStorage.getItem('token');
 

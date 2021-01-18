@@ -187,6 +187,11 @@ const SingleListItem = ({
     setc1(!c1);
 
     async function assignMessages() {
+      if (!messageId.length) {
+        setErrorMessage('You have not selected any message');
+        setSnackBarOpen(true);
+      }
+
       if (!c1 && messageId.length) {
         const { ok, error } = await (
           await fetch(`${URL}/api/level2/assignMessage`, {
@@ -362,6 +367,8 @@ const AssignCoreMembersPopup = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [notSelected, setNotSelected] = useState('');
+  const [notSelectedSnackBar, setNotSelectedSnackBar] = useState(false);
 
   useEffect(() => {
     async function fetchCoreMembers() {
@@ -383,8 +390,8 @@ const AssignCoreMembersPopup = ({
       setOpen(true);
     } else {
       setOpen(false);
-      setErrorMessage('You have not selected any message');
-      setSnackBarOpen(true);
+      setNotSelected('Select something to assign');
+      setNotSelectedSnackBar(true);
     }
   };
 
@@ -398,6 +405,14 @@ const AssignCoreMembersPopup = ({
     }
 
     setSnackBarOpen(false);
+  };
+
+  const handleNotSelectedSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setNotSelectedSnackBar(false);
   };
 
   const filterSearch = () => {
@@ -474,6 +489,28 @@ const AssignCoreMembersPopup = ({
           </div>
         </Fade>
       </Modal>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        open={notSelectedSnackBar}
+        autoHideDuration={3000}
+        onClose={handleNotSelectedSnackBar}
+        message={notSelected}
+        action={
+          <React.Fragment>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleNotSelectedSnackBar}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
       <Snackbar
         anchorOrigin={{
           vertical: 'top',
