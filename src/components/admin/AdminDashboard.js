@@ -331,7 +331,7 @@ const AdminDashboard = () => {
   const [j, setj] = useState(0);
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
-  // const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -869,6 +869,7 @@ const AdminDashboard = () => {
             <div className={classes.buttons} style={{ display: display }}>
               <AssignCoreMembersPopup
                 messageId={messageId}
+                setMessageId={setMessageId}
                 fetchMessages={fetchMessages}
                 checked25={checked25}
                 setChecked25={setChecked25}
@@ -984,6 +985,7 @@ const AdminDashboard = () => {
               <div className={classes.buttons} style={{ display: display }}>
                 <AssignCoreMembersPopup
                   messageId={messageId}
+                  setMessageId={setMessageId}
                   fetchMessages={fetchMessages}
                   checked25={checked25}
                   setChecked25={setChecked25}

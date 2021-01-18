@@ -218,7 +218,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
               </Card>
             ))
         ) : (
-          <h1 className="baxter">No Messages to Display !</h1>
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
         )}
       </Fragment>
     );
@@ -275,7 +275,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
               </Card>
             ))
         ) : (
-          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+          <div className={classes.noMessages}>No Messages to Display!</div>
         )}
       </Fragment>
     );

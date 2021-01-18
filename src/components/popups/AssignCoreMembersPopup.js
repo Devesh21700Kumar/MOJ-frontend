@@ -167,8 +167,10 @@ const SingleListItem = ({
   bitsId,
   email,
   messageId,
+  setMessageId,
   fetchMessages,
   setSnackBarOpen,
+  setErrorMessage,
   setOpen,
   checked25,
   setChecked25,
@@ -186,7 +188,7 @@ const SingleListItem = ({
 
     async function assignMessages() {
       if (!c1 && messageId.length) {
-        const response = await (
+        const { ok, error } = await (
           await fetch(`${URL}/api/level2/assignMessage`, {
             method: 'POST',
             headers: {
@@ -196,13 +198,20 @@ const SingleListItem = ({
             body: JSON.stringify({ email, messageId }),
           })
         ).json();
-        if (response.ok) {
+        if (ok) {
           setSnackBarOpen(true);
           setOpen(false);
           fetchMessages();
+          setMessageId([]);
           if (checked25) setChecked25(false);
           if (checked50) setChecked50(false);
           if (value) setValue(null);
+        }
+        if (error) {
+          setSnackBarOpen(true);
+          fetchMessages();
+          setErrorMessage(error);
+          setOpen(false);
         }
       } else {
         email = '';
@@ -264,7 +273,9 @@ const NamesList = ({
   searchedData,
   data,
   messageId,
+  setMessageId,
   setSnackBarOpen,
+  setErrorMessage,
   setOpen,
   fetchMessages,
   checked25,
@@ -288,8 +299,10 @@ const NamesList = ({
               email={result.email}
               key={index}
               messageId={messageId}
+              setMessageId={setMessageId}
               fetchMessages={fetchMessages}
               setSnackBarOpen={setSnackBarOpen}
+              setErrorMessage={setErrorMessage}
               setOpen={setOpen}
               checked25={checked25}
               setChecked25={setChecked25}
@@ -310,8 +323,10 @@ const NamesList = ({
               email={result.email}
               key={index}
               messageId={messageId}
+              setMessageId={setMessageId}
               fetchMessages={fetchMessages}
               setSnackBarOpen={setSnackBarOpen}
+              setErrorMessage={setErrorMessage}
               setOpen={setOpen}
               checked25={checked25}
               setChecked25={setChecked25}
@@ -331,6 +346,7 @@ const NamesList = ({
 
 const AssignCoreMembersPopup = ({
   messageId,
+  setMessageId,
   fetchMessages,
   checked25,
   setChecked25,
@@ -345,6 +361,7 @@ const AssignCoreMembersPopup = ({
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     async function fetchCoreMembers() {
@@ -362,7 +379,13 @@ const AssignCoreMembersPopup = ({
   }, [setSearchResults]);
 
   const handleOpen = () => {
-    setOpen(true);
+    if (messageId.length) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+      setErrorMessage('You have not selected any message');
+      setSnackBarOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -434,8 +457,10 @@ const AssignCoreMembersPopup = ({
                   searchedData={filterSearch()}
                   data={searchResults}
                   messageId={messageId}
+                  setMessageId={setMessageId}
                   fetchMessages={fetchMessages}
                   setSnackBarOpen={setSnackBarOpen}
+                  setErrorMessage={setErrorMessage}
                   setOpen={setOpen}
                   checked25={checked25}
                   setChecked25={setChecked25}
@@ -457,7 +482,9 @@ const AssignCoreMembersPopup = ({
         open={snackBarOpen}
         autoHideDuration={3000}
         onClose={handleSnackbarClose}
-        message={`Assigned messages successfully!`}
+        message={
+          errorMessage ? `${errorMessage}` : `Assigned messages successfully!`
+        }
         action={
           <React.Fragment>
             <IconButton
