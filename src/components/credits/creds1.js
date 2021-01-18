@@ -321,7 +321,7 @@ const Team = () => {
 
   if (token === null) return <Redirect to="/" />;
 
-  const [c1,setc1]=useState('photos1');
+  const [c1, setc1] = useState('photos1');
 
   const { name, bitsId } = JSON.parse(atob(token.split('.')[1]));
   return (
@@ -342,38 +342,33 @@ const Team = () => {
           <div id="team-parent">
             <div className="team">
               <div className="depart-name">
-                <div onClick={
-                  handlePics
-                  } className="department">
+                <div onClick={handlePics} className="department">
                   Organizing Committee
                 </div>
-                <div onClick={
-                  handlePics
-                  }  className="department">
+                <div onClick={handlePics} className="department">
                   Council for Student Affairs
                 </div>
-                <div onClick={
-                  handlePics
-                  }  className="department">
+                <div onClick={handlePics} className="department">
                   FrontEnd Team
                 </div>
-                <div onClick={
-                  handlePics
-                  }  className="department">
+                <div onClick={handlePics} className="department">
                   BackEnd Team
-                </div>                
+                </div>
               </div>
-              <div className='photos'>
+              <div className="photos">
                 <div>
-                    <div className="test">
-                        <img src='https://images.unsplash.com/photo-1497906539264-eb74442e37a9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8ZmlyZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60' alt="oye" />
-                    </div>
-                    <div className="details">
-                      <p className="name">Devesh1</p>
-                      <p className="post">oye</p>
-                      <p className="number">hey</p>
-                      <p className="spree-id">u</p>
-                    </div>
+                  <div className="test">
+                    <img
+                      src="https://images.unsplash.com/photo-1497906539264-eb74442e37a9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8ZmlyZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60"
+                      alt="oye"
+                    />
+                  </div>
+                  <div className="details">
+                    <p className="name">Devesh1</p>
+                    <p className="post">oye</p>
+                    <p className="number">hey</p>
+                    <p className="spree-id">u</p>
+                  </div>
                 </div>
               </div>
             </div>
