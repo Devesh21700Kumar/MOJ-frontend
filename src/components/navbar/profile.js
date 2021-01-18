@@ -201,12 +201,8 @@ export default function Profile({ name, bitsId }) {
             </ListItem>
           )}
           <Divider />
-          <ListItem button>
-            <ListItemText
-              className={classes.typography}
-              primary="Logout"
-              onClick={handleLogout}
-            />
+          <ListItem button onClick={handleLogout}>
+            <ListItemText className={classes.typography} primary="Logout" />
           </ListItem>
         </List>
         {/* <Typography className={classes.typography}>New notifications</Typography> */}

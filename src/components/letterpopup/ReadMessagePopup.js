@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import './LetterPopup.css';
+import URL from '../util/url';
+import axios from 'axios';
 
 // message array structure:
 // [
@@ -13,6 +15,8 @@ export default function ReadMessagePopup({
   startFrom,
   messageArray,
   toggleVisibility,
+  setGet,
+  handler1,
 }) {
   const [currentPosition, setCurrentPosition] = useState(startFrom);
   const [componentEnabled, setComponentEnabled] = useState(enabled);
@@ -27,15 +31,162 @@ export default function ReadMessagePopup({
     if (currentPosition == messageArray.length - 1) newPosition = 0;
     else newPosition = currentPosition + 1;
     setCurrentPosition(newPosition);
+    //if(messageArray[currentPosition][3]==0){
+    async function postRead() {
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: messageArray[currentPosition + 1][2] }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+      try {
+        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+          method: 'GET',
+          headers: { token: `${localStorage.getItem('token')}` },
+        });
+        var r = await response.data.data;
+        //setload(false);
+        //console.log(response);
+        setGet([...r].reverse());
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    postRead();
+    //};
   };
   let prevMessage = () => {
     let newPosition;
     if (currentPosition == 0) newPosition = messageArray.length - 1;
     else newPosition = currentPosition - 1;
     setCurrentPosition(newPosition);
+    console.log(messageArray[currentPosition][2]);
+    //if(messageArray[currentPosition][3]==0){
+    async function postRead() {
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: messageArray[currentPosition - 1][2] }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+      try {
+        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+          method: 'GET',
+          headers: { token: `${localStorage.getItem('token')}` },
+        });
+        var r = await response.data.data;
+        //setload(false);
+        //console.log(response);
+        setGet([...r].reverse());
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    postRead();
+
+    //};
   };
   let hideMe = () => {
     toggleVisibility(false);
+    async function postRead() {
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+
+      try {
+        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+          method: 'GET',
+          headers: { token: `${localStorage.getItem('token')}` },
+        });
+        var r = await response.data.data;
+        //setload(false);
+        //console.log(response);
+        setGet([...r].reverse());
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    postRead();
   };
 
   if (componentEnabled)
