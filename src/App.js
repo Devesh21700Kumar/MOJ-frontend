@@ -14,7 +14,7 @@ import ReadMessagePopup from './components/letterpopup/ReadMessagePopup';
 import './App.css';
 import AdminDashboard from './components/admin/AdminDashboard';
 import Statistics from './components/admin/Statistics';
-import Credits from './components/credits/credits';
+//import Credits from './components/credits/credits';
 import Team from '.././src/components/credits/creds1';
 
 function App() {
