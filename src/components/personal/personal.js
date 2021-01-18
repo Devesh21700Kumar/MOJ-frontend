@@ -26,8 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '*::-webkit-scrollbar-thumb': {
       backgroundColor: '#EF4646',
-      borderRadius: '10px',
-      border: '2px solid #FFFDE8',
+      borderRight: '3px solid #FFFDE8',
     },
   },
   root: {
@@ -149,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
       minHeight: '40vh',
     },
     fabButton: {
-      margin: '0rem 2rem 2rem 0rem',
+      margin: '0rem 1rem 1rem 0rem',
     },
     fabButtonIcon: {
       transform: 'scale(2)',

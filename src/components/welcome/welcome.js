@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
       minHeight: '60vh',
       padding: 0,
       gridGap: 0,
-      margin: 'auto',
+      margin: 0,
     },
     sidepane: {
       width: '100vw',
