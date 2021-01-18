@@ -291,7 +291,7 @@ const handlePics = (e) => {
   const details = data.filter((obj) => obj.category == category)[0].details;
   container.innerHTML = '';
   details.map((obj) => {
-    console.log(obj.pic);
+    //console.log(obj.pic);
     const img = require(`./../../imageassets/${obj.pic}.png`);
     //${obj.pic}.png
     container.innerHTML += `
