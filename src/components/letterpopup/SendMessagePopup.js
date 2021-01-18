@@ -521,7 +521,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
                   variant="outlined"
                   type="submit"
                   style={{
-                    borderRadius: '0px',
+                    borderRadius: '20px',
+                    color: 'white',
                     backgroundColor: '#EF4646',
                   }}
                 >
