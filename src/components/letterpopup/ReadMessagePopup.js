@@ -54,7 +54,7 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        try {
+        /*try {
           //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -72,7 +72,7 @@ export default function ReadMessagePopup({
           }
         } catch (error) {
           console.error(error.message);
-        }
+        }*/
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -119,7 +119,7 @@ export default function ReadMessagePopup({
           console.error(error.message);
         }
 
-        try {
+        /*try {
           //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -137,7 +137,7 @@ export default function ReadMessagePopup({
           }
         } catch (error) {
           console.error(error.message);
-        }
+        }*/
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
