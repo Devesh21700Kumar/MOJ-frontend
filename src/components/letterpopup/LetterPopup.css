@@ -224,11 +224,11 @@
 
 @media only screen and (max-width: 711px) {
   .letterpopup-classes-left-arrow {
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(0.6);
     margin-left: 1.2vw;
   }
   .letterpopup-classes-right-arrow {
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(0.6);
     margin-right: 1.2vw;
   }
 }

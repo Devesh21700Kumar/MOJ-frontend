@@ -4,18 +4,31 @@ import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import './personal.css';
+import URL from '../util/url';
 import Typography from '@material-ui/core/Typography';
 import { Data } from '../personal/personal';
 import { Data1 } from '../personal/personal';
 import Button from '@material-ui/core/Button';
 import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
     padding: '15px',
     marginTop: '20px',
     backgroundColor: '#FFD94D',
+    borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
+  },
+  msgCard1: {
+    padding: '15px',
+    marginTop: '20px',
+    backgroundColor: '#FFE171',
     borderRadius: '15px',
     transition: 'all ease-in-out 0.3s',
     '&:hover': {
@@ -44,45 +57,78 @@ const useStyles = makeStyles((theme) => ({
   date: {
     margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
-    fontSize: '1rem',
+    fontSize: '0.7rem',
+  },
+  date1: {
+    margin: '.8rem 0rem 0 0',
+    fontFamily: 'oxygen',
+    fontSize: '0.94rem',
+    fontWeight: 'bold',
   },
   krait: {
     marginLeft: '7px',
   },
-  noMessages: {
-    color: '#FC0404',
-    width: '100%',
-    textAlign: 'center',
-    fontFamily: 'Oxygen, sans serif',
+  bitsId: {
+    fontSize: '12px',
+    fontFamily: 'Oxygen, sans-serif',
+    fontWeight: 700,
+    padding: 0,
+    marginTop: '10px',
   },
-  '@media(max-height: 680px)': {
-    Gin: {
-      fontSize: '20px',
+  '@media(min-width: 780px)': {
+    bitsId: {
+      fontSize: '18px',
+      fontFamily: 'Oxygen, sans-serif',
+      fontWeight: 700,
+      padding: 0,
+      marginTop: '10px',
     },
-  },
-  '@media(max-height: 568px)': {
-    Gin: {
-      fontSize: '20px',
+    date: {
+      margin: '.8rem 0rem 0 0',
+      fontFamily: 'oxygen',
+      fontSize: '0.9rem',
     },
-  },
-  '@media(max-height: 750px)': {
-    Gin: {
-      fontSize: '20px',
+    date1: {
+      margin: '.8rem 0rem 0 0',
+      fontFamily: 'oxygen',
+      fontSize: '1.1rem',
+      fontWeight: 'bold',
     },
-  },
-  '@media(min-width: 320px)': {
     noMessages: {
-      fontSize: '1.5rem',
+      color: '#FC0404',
+      width: '100%',
+      textAlign: 'center',
+      fontFamily: 'Oxygen, sans serif',
     },
-  },
-  '@media(min-width: 768px)': {
-    noMessages: {
-      fontSize: '2rem',
+    '@media(max-height: 680px)': {
+      Gin: {
+        fontSize: '20px',
+      },
+    },
+    '@media(max-height: 568px)': {
+      Gin: {
+        fontSize: '20px',
+      },
+    },
+    '@media(max-height: 750px)': {
+      Gin: {
+        fontSize: '20px',
+      },
+    },
+    '@media(min-width: 320px)': {
+      noMessages: {
+        fontSize: '1.5rem',
+      },
+    },
+    '@media(min-width: 768px)': {
+      noMessages: {
+        fontSize: '2rem',
+      },
     },
   },
 }));
 
-export default function PersonalCards({ text, index }) {
+export default function PersonalCards({ text, index, fix, setGet }) {
   const classes = useStyles();
   const { get } = useContext(Data);
   const i = useContext(Data1);
@@ -113,62 +159,125 @@ export default function PersonalCards({ text, index }) {
   };
   const [pos, setpos] = useState(0);
   const [vat, setvat] = useState(false);
+  //const [read,setRead] = useState(1);
   const toggleReadMessages = (b) => {
     setvat(b);
   };
-  return (
-    <Fragment>
-      <ReadMessagePopup
-        messageArray={get.map((obj) => {
-          return [obj.body, obj.date];
-        })}
-        startFrom={pos}
-        enabled={vat}
-        toggleVisibility={toggleReadMessages}
-        key={'ReadMessagePopupKey-' + vat}
-      />
-      {Array.isArray(get) && get.length !== 0 ? (
-        get
-          .slice(i, i + 15 <= get.length ? i + 15 : get.length)
-          .map((text, index) => (
-            <Card
-              className={classes.msgCard}
-              raised={true}
-              key={index}
-              onClick={() => {
-                toggleReadMessages(true);
-                setpos((i / 15) * 15 + index);
-              }}
-            >
-              <div className={classes.Gin}>
-                <p className={classes.date}>
-                  {`${(i / 15) * 15 + index + 1}.  `}
-                  {screen.width >= 591
-                    ? screen.width >= 680
-                      ? text.body.slice(0, 43)
-                      : text.body.slice(0, 31)
-                    : text.body.slice(0, 23)}
-                </p>
-              </div>
+  if (fix == 0) {
+    return (
+      <Fragment>
+        <ReadMessagePopup
+          get={get}
+          setGet={setGet}
+          messageArray={get.map((obj) => {
+            return [obj.body, obj.date, obj._id, obj.read];
+          })}
+          startFrom={pos}
+          enabled={vat}
+          toggleVisibility={toggleReadMessages}
+          key={'ReadMessagePopupKey-' + vat}
+        />
+        {Array.isArray(get) && get.length !== 0 ? (
+          get
+            .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+            .map((text, index) => (
+              <Card
+                className={text.read == 1 ? classes.msgCard : classes.msgCard1}
+                raised={true}
+                key={(i / 15) * 15 + index}
+                onClick={async () => {
+                  await setpos((i / 15) * 15 + index);
+                  //await handler1();
+                  await toggleReadMessages(true);
+                }}
+              >
+                <div className={classes.bitsId}></div>
+                <div className={classes.Gin}>
+                  <p className={text.read == 1 ? classes.date : classes.date1}>
+                    {screen.width >= 591
+                      ? screen.width >= 680
+                        ? text.body.slice(0, 43)
+                        : text.body.slice(0, 31)
+                      : text.body.slice(0, 23)}
+                  </p>
+                </div>
 
-              <div className={classes.Gin1}>
-                <Typography variant="h6" edge="start">
-                  <b key="index">
-                    <p className={classes.date}>
-                      {screen.width >= 591
-                        ? screen.width >= 680
-                          ? dateFormatter(text.date).slice(0, 23)
-                          : dateFormatter(text.date).slice(0, 23)
-                        : dateFormatter(text.date).slice(0, 23)}
-                    </p>
-                  </b>
-                </Typography>
-              </div>
-            </Card>
-          ))
-      ) : (
-        <h1 className={classes.noMessages}>No Messages to Display!</h1>
-      )}
-    </Fragment>
-  );
+                <div className={classes.Gin1}>
+                  <Typography variant="h6" edge="start">
+                    <b key="index">
+                      <p className={classes.date}>
+                        {screen.width >= 591
+                          ? screen.width >= 680
+                            ? dateFormatter(text.date).slice(0, 23)
+                            : dateFormatter(text.date).slice(0, 23)
+                          : dateFormatter(text.date).slice(0, 23)}
+                      </p>
+                    </b>
+                  </Typography>
+                </div>
+              </Card>
+            ))
+        ) : (
+          <h1 className="baxter">No Messages to Display !</h1>
+        )}
+      </Fragment>
+    );
+  } else {
+    return (
+      <Fragment>
+        <ReadMessagePopup
+          messageArray={get.map((obj) => {
+            return [obj.body, obj.date];
+          })}
+          startFrom={pos}
+          enabled={vat}
+          toggleVisibility={toggleReadMessages}
+          key={'ReadMessagePopupKey-' + vat}
+        />
+        {Array.isArray(get) && get.length !== 0 ? (
+          get
+            .slice(i, i + 15 <= get.length ? i + 15 : get.length)
+            .map((text, index) => (
+              <Card
+                className={classes.msgCard}
+                raised={true}
+                key={index}
+                onClick={() => {
+                  toggleReadMessages(true);
+                  setpos((i / 15) * 15 + index);
+                  //handler1();
+                }}
+              >
+                <div className={classes.bitsId}>To {text.receiverEmail}</div>
+                <div className={classes.Gin}>
+                  <p className={classes.date}>
+                    {screen.width >= 591
+                      ? screen.width >= 680
+                        ? text.body.slice(0, 43)
+                        : text.body.slice(0, 31)
+                      : text.body.slice(0, 23)}
+                  </p>
+                </div>
+
+                <div className={classes.Gin1}>
+                  <Typography variant="h6" edge="start">
+                    <b key="index">
+                      <p className={classes.date}>
+                        {screen.width >= 591
+                          ? screen.width >= 680
+                            ? dateFormatter(text.date).slice(0, 23)
+                            : dateFormatter(text.date).slice(0, 23)
+                          : dateFormatter(text.date).slice(0, 23)}
+                      </p>
+                    </b>
+                  </Typography>
+                </div>
+              </Card>
+            ))
+        ) : (
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
+        )}
+      </Fragment>
+    );
+  }
 }

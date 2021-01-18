@@ -382,9 +382,32 @@ const AdminDashboard = () => {
     setDisplay('flex');
   }
 
-  useEffect(() => {
-    fetchMessages();
-    //await setj(0);
+  useEffect(async () => {
+    const { messages } = await (
+      await fetch(`${URL}/api/level2/unassignedMessages`, {
+        method: 'GET',
+        headers: {
+          token: `${token}`,
+        },
+      })
+    ).json();
+    setMsgs(messages.reverse());
+
+    const { data } = await (
+      await fetch(`${URL}/api/level2/finalapproval`, {
+        method: 'GET',
+        headers: {
+          token: `${token}`,
+        },
+      })
+    ).json();
+    const { approved, denied, yellowflagged } = data;
+    //setf(approved.reverse());
+    setRedFlaggedMsgs(denied.reverse());
+    setYellowFlaggedMsgs(yellowflagged.reverse());
+    setGreenFlaggedMsgs(approved.reverse());
+    setDisplay('flex');
+    setf(approved.reverse());
   }, []);
 
   const handleChange25 = () => {
@@ -627,7 +650,7 @@ const AdminDashboard = () => {
     <div className={classes.root}>
       {/* Tabs */}
       <Navbar
-        navtext="JoGW"
+        navtext="MoJ"
         navHeading="Admin Dashboard"
         name={name}
         bitsId={bitsId}

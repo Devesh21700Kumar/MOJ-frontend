@@ -62,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-evenly',
   },
+  tabs1: {
+    backgroundColor: '#EF4646',
+    padding: '10px 0px 0px 5px',
+    display: 'flex',
+    justifyContent: 'space-evenly',
+  },
   mainContent: {
     width: '100%',
     backgroundColor: '#EF4646',
@@ -85,8 +91,8 @@ const useStyles = makeStyles((theme) => ({
   },
   fabButton: {
     position: 'fixed',
-    bottom: 0,
-    right: 0,
+    bottom: 1,
+    right: 1,
     margin: '0rem 2rem 2rem 0rem',
   },
   fabButtonIcon: {
@@ -115,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     width: '100%',
     backgroundColor: '#EF4646',
-    height: '10px',
+    height: '1px',
   },
   '@media(min-width: 320px)': {
     cA: {
@@ -143,10 +149,10 @@ const useStyles = makeStyles((theme) => ({
       minHeight: '40vh',
     },
     fabButton: {
-      margin: '0rem 1rem 1rem 0rem',
+      margin: '0rem 2rem 2rem 0rem',
     },
     fabButtonIcon: {
-      transform: 'scale(2.5)',
+      transform: 'scale(2)',
     },
   },
   '@media(min-width: 360px)': {
@@ -165,7 +171,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '0rem 2rem 2rem 0rem',
     },
     fabButtonIcon: {
-      transform: 'scale(3.5)',
+      transform: 'scale(3)',
     },
   },
   '@media(min-width: 768px)': {
@@ -228,6 +234,7 @@ export default function Personal({ name, bitsId }, props) {
         };
       })
   );
+  const [fix, setfix] = useState(0);
   const [load, setload] = useState(true);
 
   async function call1() {
@@ -287,6 +294,7 @@ export default function Personal({ name, bitsId }, props) {
       setColor('#FFFDE8');
       setColor1('#FB8989');
       call1();
+      setfix(0);
       setGet(rec);
       seti(0);
       setX1('#C4C4C4');
@@ -297,6 +305,7 @@ export default function Personal({ name, bitsId }, props) {
       call1();
       setGet(rec);
       seti(0);
+      setfix(0);
       setX1('#C4C4C4');
       setX2('#C4C4C4');
     }
@@ -310,6 +319,7 @@ export default function Personal({ name, bitsId }, props) {
       setColor1('#FFFDE8');
       setColor('#FB8989');
       seti(0);
+      setfix(1);
       setGet(sent);
       setX1('#C4C4C4');
       setX2('#EF4646');
@@ -319,6 +329,7 @@ export default function Personal({ name, bitsId }, props) {
       setColor('#FB8989');
       setGet(sent);
       seti(0);
+      setfix(1);
       setX1('#C4C4C4');
       setX2('#C4C4C4');
     }
@@ -399,7 +410,7 @@ export default function Personal({ name, bitsId }, props) {
               onClick={hit}
               style={{ color: '#EF4646' }}
             >
-              <AddCircleIcon className={classes.fabButtonIcon} />
+              <AddCircleIcon className={classes.fabButtonIcon} id="fab" />
             </IconButton>
           </div>
           <Box className={classes.inner}>
@@ -438,7 +449,7 @@ export default function Personal({ name, bitsId }, props) {
                 ) : (
                   <Data.Provider value={{ get }}>
                     <Data1.Provider value={i}>
-                      <PersonalCards />
+                      <PersonalCards fix={fix} setGet={setGet} />
                     </Data1.Provider>
                   </Data.Provider>
                 )}
@@ -499,6 +510,7 @@ export default function Personal({ name, bitsId }, props) {
               </Grid>
             </Grid>
           </Box>
+          <div className={classes.tabs1} id="top"></div>
         </div>
         <div className={classes.footer} />
       </div>
