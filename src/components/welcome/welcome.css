@@ -2,6 +2,6 @@
 .nostyle:visited:not(#exclude) {
   text-decoration: none;
   font-weight: bold;
-  color: #ef4646;
+  color: #03a99d;
   cursor: pointer;
 }
