@@ -122,7 +122,7 @@ function Login() {
           <Button
             onClick={renderProps.onClick}
             disabled={renderProps.disabled}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', textAlign: 'center' }}
             className={classes.loginButton}
           >
             <svg
