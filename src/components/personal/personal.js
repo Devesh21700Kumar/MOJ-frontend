@@ -246,6 +246,7 @@ export default function Personal({ name, bitsId }, props) {
       });
       var r = await response.data.data;
       setload(false);
+      setGet([...r].reverse());
       setrec([...r].reverse());
     } catch (error) {
       console.error(error.message);
