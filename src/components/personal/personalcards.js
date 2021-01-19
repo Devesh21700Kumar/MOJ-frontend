@@ -75,6 +75,12 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     marginTop: '10px',
   },
+  noMessages: {
+    color: '#FC0404',
+    width: '100%',
+    textAlign: 'center',
+    fontFamily: 'Oxygen, sans serif',
+  },
   '@media(min-width: 780px)': {
     bitsId: {
       fontSize: '18px',
@@ -115,13 +121,15 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '20px',
       },
     },
-    '@media(min-width: 320px)': {
+    '@media(max-width: 320px)': {
       noMessages: {
+        color: '#FC0404',
         fontSize: '1.5rem',
       },
     },
-    '@media(min-width: 768px)': {
+    '@media(max-width: 780px)': {
       noMessages: {
+        color: '#FC0404',
         fontSize: '2rem',
       },
     },
@@ -275,7 +283,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
               </Card>
             ))
         ) : (
-          <div className={classes.noMessages}>No Messages to Display!</div>
+          <h1 className={classes.noMessages}>No Messages to Display!</h1>
         )}
       </Fragment>
     );
