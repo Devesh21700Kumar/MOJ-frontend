@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '24px',
-    textAlign: 'right',
+    textAlign: 'left',
     color: '#000000',
   },
   images: {
@@ -272,7 +272,7 @@ const useStyles = makeStyles((theme) => ({
     },
     summary: {
       fontSize: '22px',
-      textAlign: 'right',
+      textAlign: 'left',
     },
   },
 }));
