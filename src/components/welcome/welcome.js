@@ -11,6 +11,7 @@ import devSocLogo from '../../imageassets/DevSoc.png';
 import Logo from '../../imageassets/MOJ Logo 1.png';
 import hands from '../../imageassets/hands.png';
 import love from '../../imageassets/love 1.png';
+import '../welcome/welcome.css';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -323,10 +324,22 @@ export default function Welcome1() {
         <div className={classes.sidepane} id="sidepane">
           <div className={classes.sidepaneContent}>
             <div className={classes.summary} id="summary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Welcome to Message of Joy! Nirmaan, in collaboration with{' '}
+              <b>
+                <a
+                  className="nostyle"
+                  href="https://devsoc.club/"
+                  target="_blank"
+                >
+                  Developers' Society BITS Goa(DevSoc)
+                </a>
+              </b>{' '}
+              is back with one of it's most exquisite events, Message of Joy.
+              Amidst the online semester, here's an opportunity to write a few
+              words to bring a smile on someone's face. So log in now and send
+              personalised, <b>anonymous</b> messages to your friends,
+              classmates and peers from the comfort of your home! (Note: Log in
+              with your BITS email ID)
             </div>
             <div className={classes.loginBox} id="loginBox">
               <Box display="flex">

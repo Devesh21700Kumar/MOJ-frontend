@@ -1,0 +1,7 @@
+.nostyle:link:not(#exclude),
+.nostyle:visited:not(#exclude) {
+  text-decoration: none;
+  font-weight: bold;
+  color: #ef4646;
+  cursor: pointer;
+}
