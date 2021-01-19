@@ -248,7 +248,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   //handler1();
                 }}
               >
-                <div className={classes.bitsId}>To {text.receiverEmail}</div>
+                <div className={classes.bitsId}>To {text.name}</div>
                 <div className={classes.Gin}>
                   <p className={classes.date}>
                     {screen.width >= 591

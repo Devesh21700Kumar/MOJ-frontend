@@ -276,14 +276,29 @@ export default function Personal({ name, bitsId }, props) {
         headers: { token: `${token}` },
       });
       var t = await response.data.data;
+      setGet([...t].reverse());
       setload(false);
       setsent([...t].reverse());
     } catch (error) {
       console.error(error.message);
     }
   }
-  useEffect(() => {
-    call2();
+  useEffect(async () => {
+    // async function call2() {
+    setload(true);
+    try {
+      let response = await axios.get(`${URL}/api/level0/sentmessages`, {
+        method: 'GET',
+        headers: { token: `${token}` },
+      });
+      var t = await response.data.data;
+      //setGet([...t].reverse());
+      setload(false);
+      setsent([...t].reverse());
+    } catch (error) {
+      console.error(error.message);
+    }
+    //}
   }, []);
 
   const [get, setGet] = useState(rec);
@@ -378,6 +393,7 @@ export default function Personal({ name, bitsId }, props) {
     <Fragment>
       <div className={classes.root} id="root">
         <SendMessagePopup
+          call2={call2}
           enabled={enables}
           toggleVisibility={hit}
           key={'SendMessagePopupKey-' + enables}
@@ -418,7 +434,7 @@ export default function Personal({ name, bitsId }, props) {
             <Box className={classes.cA}>
               <Box className={classes.c1}>
                 <Typography className={classes.hot}>
-                  Welcome{' '}
+                  Welcome{', '}
                   {userdata.name
                     .split(' ')
                     .slice(0, 1)

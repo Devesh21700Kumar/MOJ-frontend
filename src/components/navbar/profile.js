@@ -183,7 +183,26 @@ export default function Profile({ name, bitsId }) {
             <ListItemText primary={name} secondary={bitsId} />
           </ListItem>
           <Divider />
-          {location.pathname.match(/home/) ? (
+          {location.pathname.match(/admin/) ||
+          location.pathname.match(/core/) ? (
+            <React.Fragment>
+              <ListItem button onClick={handleClick2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Home"
+                  onClick={handle1}
+                />
+              </ListItem>
+              <Divider />
+              <ListItem button className={classes.hey} onClick={handle1}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Credits"
+                  onClick={handle1}
+                />
+              </ListItem>
+            </React.Fragment>
+          ) : location.pathname.match(/home/) ? (
             <ListItem button className={classes.hey} onClick={handle1}>
               <ListItemText
                 className={classes.typography}
