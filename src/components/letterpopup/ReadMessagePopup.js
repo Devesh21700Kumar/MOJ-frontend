@@ -16,9 +16,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // ]
 const useStyles = makeStyles((theme) => ({
   noMessages: {
-    //margin: 'auto',
-    marginTop: '50vh',
-    marginLeft: '50vw',
+    position: 'absolute',
+    //left: '50vw',
+    //top: '50vh',
+    transform: 'translate(90%, 90%)',
   },
 }));
 
@@ -534,37 +535,45 @@ function SendMessage({
   }, []);*/
   return (
     <div className="letterpopup-classes-root" style={getCSSVariables()}>
-      {spinner ? (
-        <div
-          className={classes.noMessages}
-          //elevation={0}
-          //className="letterpopup-classes-message"
-        >
-          <CircularProgress color="secondary" />
-        </div>
-      ) : (
-        <React.Fragment>
+      <React.Fragment>
+        {spinner ? (
+          <CircularProgress
+            className="letterpopup-classes-cross2"
+            color="#fffbeb"
+          />
+        ) : (
           <div className="letterpopup-classes-cross" onClick={hideMe} />
-          <Paper
-            elevation={0}
-            className="letterpopup-classes-message"
-            style={{ backgroundImage: `url(${img})` }}
-          >
-            <div className="letterpopup-classes-dateTime">
-              {
-                //dateFormatter(messageArray[currentPosition][1])
-              }
+        )}
+
+        <Paper
+          elevation={0}
+          className="letterpopup-classes-message"
+          style={{ backgroundImage: `url(${img})` }}
+        >
+          <div className="letterpopup-classes-dateTime">
+            {
+              //dateFormatter(messageArray[currentPosition][1])
+            }
+          </div>
+          <div className="letterpopup-classes-messageBoxesWrapper">
+            <div className="letterpopup-classes-messageBody">
+              {spinner ? (
+                <div
+                //className={classes.noMessages}
+                //elevation={0}
+                //className="letterpopup-classes-message"
+                ></div>
+              ) : (
+                <React.Fragment>
+                  {messageArray[currentPosition][0]}
+                </React.Fragment>
+              )}
             </div>
-            <div className="letterpopup-classes-messageBoxesWrapper">
-              <div className="letterpopup-classes-messageBody">
-                {messageArray[currentPosition][0]}
-              </div>
-            </div>
-          </Paper>
-          <div className="letterpopup-classes-left-arrow" onClick={prev} />
-          <div className="letterpopup-classes-right-arrow" onClick={next} />
-        </React.Fragment>
-      )}
+          </div>
+        </Paper>
+        <div className="letterpopup-classes-left-arrow" onClick={prev} />
+        <div className="letterpopup-classes-right-arrow" onClick={next} />
+      </React.Fragment>
     </div>
   );
 }
