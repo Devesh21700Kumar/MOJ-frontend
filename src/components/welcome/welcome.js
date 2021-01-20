@@ -305,13 +305,13 @@ export default function Welcome1() {
             <img src={love} alt="love" className={classes.loveImage} />
           </div>
           <div className={classes.empty}></div>
-          <div className={classes.nirman}>
+          <div className={classes.nirman} id="nirman">
             <img src={nirmanLogo} alt="nirman" className={classes.nirmanLogo} />
           </div>
           <div className={classes.empty}></div>
           <div className={classes.empty}></div>
           <div className={classes.empty}></div>
-          <div className={classes.devSoc}>
+          <div className={classes.devSoc} id="devsoc">
             <a href="https://devsoc.club/" target="_blank">
               <img
                 src={devSocLogo}

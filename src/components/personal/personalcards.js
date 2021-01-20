@@ -175,6 +175,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
     return (
       <Fragment>
         <ReadMessagePopup
+          fix={fix}
           get={get}
           setGet={setGet}
           messageArray={get.map((obj) => {
@@ -234,6 +235,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
     return (
       <Fragment>
         <ReadMessagePopup
+          fix={fix}
           messageArray={get.map((obj) => {
             return [obj.body, obj.date];
           })}
@@ -256,7 +258,64 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   //handler1();
                 }}
               >
-                <div className={classes.bitsId}>To {text.name}</div>
+                <div className={classes.bitsId}>
+                  To
+                  {text.name != null
+                    ? ' ' +
+                      text.name
+                        .split(' ')
+                        .slice(0, 1)
+                        .join(' ')
+                        .charAt(0)
+                        .toUpperCase() +
+                      text.name
+                        .split(' ')
+                        .slice(0, 1)
+                        .join(' ')
+                        .toLowerCase()
+                        .slice(1) +
+                      ' ' +
+                      text.name
+                        .split(' ')
+                        .slice(1, 2)
+                        .join(' ')
+                        .charAt(0)
+                        .toUpperCase() +
+                      text.name
+                        .split(' ')
+                        .slice(1, 2)
+                        .join(' ')
+                        .toLowerCase()
+                        .slice(1) +
+                      ' ' +
+                      text.name
+                        .split(' ')
+                        .slice(2, 3)
+                        .join(' ')
+                        .charAt(0)
+                        .toUpperCase() +
+                      text.name
+                        .split(' ')
+                        .slice(2, 3)
+                        .join(' ')
+                        .toLowerCase()
+                        .slice(1) +
+                      ' ' +
+                      text.name
+                        .split(' ')
+                        .slice(3, 4)
+                        .join(' ')
+                        .charAt(0)
+                        .toUpperCase() +
+                      text.name
+                        .split(' ')
+                        .slice(3, 4)
+                        .join(' ')
+                        .toLowerCase()
+                        .slice(1)
+                    : //text.name
+                      console.log('undefined')}
+                </div>
                 <div className={classes.Gin}>
                   <p className={classes.date}>
                     {screen.width >= 591
