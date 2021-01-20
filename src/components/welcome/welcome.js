@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
   devSocLogo: {
     width: 120,
   },
-  '@media(min-width: 320px)': {
+  '@media(min-width: 0px)': {
     main: {
       flexDirection: 'column',
       flexGrow: 1,

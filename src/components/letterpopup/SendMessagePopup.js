@@ -383,6 +383,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                         borderRadius: '20px',
                         color: 'white',
                         backgroundColor: '#EF4646',
+                        border: '1.5px solid black',
                       }}
                     >
                       Send
@@ -566,6 +567,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     borderRadius: '20px',
                     color: 'white',
                     backgroundColor: '#EF4646',
+                    border: '1.5px solid black',
                   }}
                 >
                   Send

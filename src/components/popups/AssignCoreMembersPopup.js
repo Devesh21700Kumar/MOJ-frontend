@@ -177,6 +177,7 @@ const SingleListItem = ({
   checked50,
   setChecked50,
   value,
+  setSpinner,
   setValue,
 }) => {
   const classes = useStyles();
@@ -211,6 +212,10 @@ const SingleListItem = ({
           if (checked25) setChecked25(false);
           if (checked50) setChecked50(false);
           if (value) setValue(null);
+          setSpinner(true);
+          //setTimeout(() => setSpinner(false), 500);
+          //await handleClose();
+          setTimeout(() => setSpinner(false), 500);
         }
         if (error) {
           setSnackBarOpen(true);
@@ -288,6 +293,7 @@ const NamesList = ({
   checked50,
   setChecked50,
   value,
+  setSpinner,
   setValue,
 }) => {
   const classes = useStyles();
@@ -298,6 +304,7 @@ const NamesList = ({
         data.map((result, index) => {
           return (
             <SingleListItem
+              setSpinner={setSpinner}
               index={index}
               name={result.name}
               bitsId={result.bitsId}
@@ -350,6 +357,8 @@ const NamesList = ({
 };
 
 const AssignCoreMembersPopup = ({
+  setSpinner,
+  //fetchMessages,
   messageId,
   setMessageId,
   fetchMessages,
@@ -442,7 +451,14 @@ const AssignCoreMembersPopup = ({
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
-        onClose={handleClose}
+        onClose={async () => {
+          await setSpinner(true);
+          //setTimeout(() => setSpinner(false), 500);
+          //await handleClose();
+          await fetchMessages();
+          await setTimeout(() => setSpinner(false), 500);
+          await handleClose();
+        }}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -452,7 +468,18 @@ const AssignCoreMembersPopup = ({
         <Fade in={open}>
           <div className={classes.paper}>
             <div className={classes.heading}>
-              <CloseIcon onClick={handleClose} className={classes.close} />
+              <CloseIcon
+                onClick={async () => {
+                  await handleClose();
+                  await setSpinner(true);
+                  //setTimeout(() => setSpinner(false), 500);
+                  //await handleClose();
+                  await fetchMessages();
+                  await setTimeout(() => setSpinner(false), 500);
+                  //await handleClose();
+                }}
+                className={classes.close}
+              />
               <h3 style={{ paddingLeft: '2rem' }}>Assign Core Members</h3>
             </div>
             <div className={classes.modalBody}>
@@ -469,6 +496,7 @@ const AssignCoreMembersPopup = ({
               </Paper>
               <Paper className={classes.searchResults}>
                 <NamesList
+                  setSpinner={setSpinner}
                   searchedData={filterSearch()}
                   data={searchResults}
                   messageId={messageId}
