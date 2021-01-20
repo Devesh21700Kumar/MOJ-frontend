@@ -3,6 +3,8 @@ import Paper from '@material-ui/core/Paper';
 import './LetterPopup.css';
 import URL from '../util/url';
 import axios from 'axios';
+import img from './../../imageassets/letter-coloured.svg';
+//const img = require(`./../../imageassets/letter-coloured.svg`);
 
 // message array structure:
 // [
@@ -497,7 +499,11 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
   return (
     <div className="letterpopup-classes-root" style={getCSSVariables()}>
       <div className="letterpopup-classes-cross" onClick={hideMe} />
-      <Paper elevation={0} className="letterpopup-classes-message">
+      <Paper
+        elevation={0}
+        className="letterpopup-classes-message"
+        style={{ backgroundImage: `url(${img})` }}
+      >
         <div className="letterpopup-classes-dateTime">
           {
             //dateFormatter(messageArray[currentPosition][1])

@@ -6,6 +6,12 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import '../credits/credits.css';
 import '../credits/creds1.css';
+import img1 from './../../imageassets/1A.jpeg';
+import img2 from './../../imageassets/2A.jpeg';
+import img3 from './../../imageassets/3A.jpeg';
+import img4 from './../../imageassets/4A.jpeg';
+import img5 from './../../imageassets/5A.jpeg';
+import img6 from './../../imageassets/1B.jpeg';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -156,34 +162,34 @@ const data = [
       {
         pic: 1,
         name: 'Devesh1',
-        number: '1 ',
-        id: 'jjjjjooopp',
-        post: 'jjjjjooopp ',
+        post: 'oye1 ',
+        number: '6969696969',
+        id: 'hey ',
       },
       {
         pic: 2,
         name: 'Devesh1',
-        number: '2',
-        id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'oye1',
+        number: 'hey',
+        id: 'hey',
       },
       {
         pic: 3,
         name: 'Devesh1',
-        number: '3',
-        id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'oye1',
+        number: 'hey',
+        id: 'hey',
       },
       {
         pic: 4,
         name: 'Devesh1',
-        number: '4',
-        id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'oye1',
+        number: 'hey',
+        id: 'hey',
       },
     ],
   },
-  {
+  /*{
     category: 'Council for Student Affairs',
     details: [
       {
@@ -215,34 +221,41 @@ const data = [
         post: 'jjjjjooopp',
       },
     ],
-  },
+  },*/
   {
     category: 'FrontEnd Team',
     details: [
       {
-        pic: 1,
+        pic: img1,
         name: 'Devesh',
-        number: '1 ',
+        number: 'oye ',
         id: 'jjjjjooopp',
         post: 'jjjjjooopp ',
       },
       {
-        pic: 2,
-        name: 'Devesh1',
+        pic: img2,
+        name: 'Rohit',
         number: '2',
         id: 'jjjjjooopp',
         post: 'jjjjjooopp',
       },
       {
-        pic: 3,
-        name: 'Devesh1',
+        pic: img3,
+        name: 'Aviral',
         number: '3',
         id: 'jjjjjooopp',
         post: 'jjjjjooopp',
       },
       {
-        pic: 4,
-        name: 'Devesh1',
+        pic: img4,
+        name: 'Ritvij',
+        number: '4',
+        id: 'jjjjjooopp',
+        post: 'jjjjjooopp',
+      },
+      {
+        pic: img5,
+        name: 'Mayank',
         number: '4',
         id: 'jjjjjooopp',
         post: 'jjjjjooopp',
@@ -253,15 +266,15 @@ const data = [
     category: 'BackEnd Team',
     details: [
       {
-        pic: 1,
-        name: 'Devesh',
+        pic: img6,
+        name: 'Vedant',
         number: '1 ',
         id: 'jjjjjooopp',
         post: 'jjjjjooopp ',
       },
       {
         pic: 2,
-        name: 'Devesh1',
+        name: 'Devesh11',
         number: '2',
         id: 'jjjjjooopp',
         post: 'jjjjjooopp',
@@ -292,13 +305,13 @@ const handlePics = (e) => {
   container.innerHTML = '';
   details.map((obj) => {
     //console.log(obj.pic);
-    const img = require(`./../../imageassets/${obj.pic}.png`);
+    const img = obj.pic;
     //${obj.pic}.png
     container.innerHTML += `
 			<div>
 			<div class="test">
       
-        <img src='https://images.unsplash.com/photo-1497906539264-eb74442e37a9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8ZmlyZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60' alt="oye" />
+      <img src=${img} alt="" />
 			</div>
 			<div class="details">
 				<p class="name">${obj.name}</p>
@@ -342,11 +355,8 @@ const Team = () => {
           <div id="team-parent">
             <div className="team">
               <div className="depart-name">
-                <div onClick={handlePics} className="department">
+                <div onClick={handlePics} className="department selected">
                   Organizing Committee
-                </div>
-                <div onClick={handlePics} className="department">
-                  Council for Student Affairs
                 </div>
                 <div onClick={handlePics} className="department">
                   FrontEnd Team
@@ -359,15 +369,49 @@ const Team = () => {
                 <div>
                   <div className="test">
                     <img
-                      src="https://images.unsplash.com/photo-1497906539264-eb74442e37a9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8ZmlyZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60"
+                      //src={'./../../imageassets/1.jpeg'}
+                      src={'./../../imageassets/1A.jpeg'}
                       alt="oye"
                     />
                   </div>
                   <div className="details">
                     <p className="name">Devesh1</p>
-                    <p className="post">oye</p>
+                    <p className="post">oy1</p>
+                    <p className="number">6969696969</p>
+                    <p className="spree-id">hey</p>
+                  </div>
+                </div>
+                <div>
+                  <div className="test">
+                    <img src={'./../../imageassets/1A.jpeg'} alt="oye" />
+                  </div>
+                  <div className="details">
+                    <p className="name">Devesh1</p>
+                    <p className="post">oye1</p>
                     <p className="number">hey</p>
-                    <p className="spree-id">u</p>
+                    <p className="spree-id">hey</p>
+                  </div>
+                </div>
+                <div>
+                  <div className="test">
+                    <img src={'./../../imageassets/1B.jpeg'} alt="oye" />
+                  </div>
+                  <div className="details">
+                    <p className="name">Devesh1</p>
+                    <p className="post">oye1</p>
+                    <p className="number">hey</p>
+                    <p className="spree-id">hey</p>
+                  </div>
+                </div>
+                <div>
+                  <div className="test">
+                    <img src={'./../../imageassets/1A.jpeg'} alt="oye" />
+                  </div>
+                  <div className="details">
+                    <p className="name">Devesh1</p>
+                    <p className="post">oye1</p>
+                    <p className="number">hey</p>
+                    <p className="spree-id">hey</p>
                   </div>
                 </div>
               </div>

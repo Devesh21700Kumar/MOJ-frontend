@@ -16,6 +16,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import CloseIcon from '@material-ui/icons/Close';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
+import img from './../../imageassets/letter-coloured.svg';
+//import img from '../../imageassets/love 1.png';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
   },
 }));
-export default function SendMessagePopup({ enabled, toggleVisibility }) {
+export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
@@ -80,6 +82,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
   const [name, setSendToName] = useState('');
   const [componentEnabled, setComponentEnabled] = useState(enabled);
   const [open, setOpen] = React.useState(false);
+  //const img = require(`./../../imageassets/letter-coloured.svg`);
   React.useEffect(() => {
     return () => {
       setComponentEnabled(enabled);
@@ -102,6 +105,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
         ).json();
         if (response.ok) {
           setOpen(true);
+          call2();
           setSendToName('');
           setSendMail('');
           setMessageText('');
@@ -195,7 +199,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility }) {
             />
           </div>
           <Paper
-            style={c3 ? { display: 'block' } : { display: 'none' }}
+            style={
+              c3
+                ? { display: 'block', backgroundImage: `url(${img})` }
+                : { display: 'none', backgroundImage: `url(${img})` }
+            }
             elevation={0}
             className="letterpopup-classes-message"
           >

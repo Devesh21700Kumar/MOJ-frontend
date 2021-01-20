@@ -66,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
   flaggedMessage: {
     borderRight: '7px solid #4B4B4B',
   },
+  //nonflaggedMessage:{
+  //borderRight:'none',
+  //},
 }));
 
 const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
@@ -174,7 +177,7 @@ const MessageCard = ({ rollNumber, message, date, id, index }) => {
   return (
     <div>
       <Card className={cardClass} raised={true}>
-        <div className={classes.bitsId}>
+        <div style={{ display: 'none' }} className={classes.bitsId}>
           {index + 1}. To: {rollNumber}
         </div>
         <div>

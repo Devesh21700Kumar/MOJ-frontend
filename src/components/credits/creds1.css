@@ -65,6 +65,15 @@ div.devs .photos1 > div > div:first-child {
   cursor: pointer;
 }
 
+.department-selected {
+  color: #ef4646;
+  min-width: 350px;
+}
+
+.department-selected:hover {
+  cursor: pointer;
+}
+
 .photos {
   display: grid;
   width: 100%;
