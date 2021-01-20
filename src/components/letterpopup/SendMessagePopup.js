@@ -352,7 +352,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     >
                       <TextField
                         multiline
-                        inputProps={{ maxLength: 500 }}
+                        inputProps={{ maxLength: 2000 }}
                         className="letterpopup-classes-messageTextField"
                         value={messageBody}
                         onChange={(e) => {
@@ -535,7 +535,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                 >
                   <TextField
                     multiline
-                    inputProps={{ maxLength: 500 }}
+                    inputProps={{ maxLength: 2000 }}
                     className="letterpopup-classes-messageTextField1"
                     value={messageBody}
                     onChange={(e) => {
