@@ -719,7 +719,10 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue(null);
                     setj(0);
+                    setSpinner(true);
+                    //handleRejection();
                     fetchMessages();
+                    setTimeout(() => setSpinner(false), 500);
                   }}
                   style={{ borderBottom: `3px solid ${redFlag}` }}
                 >
@@ -737,7 +740,10 @@ const AdminDashboard = () => {
                     //setChecked(false);
                     setValue(null);
                     setj(0);
+                    setSpinner(true);
+                    //handleRejection();
                     fetchMessages();
+                    setTimeout(() => setSpinner(false), 500);
                     // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
@@ -756,7 +762,11 @@ const AdminDashboard = () => {
                     setValue(null);
                     //setChecked(false);
                     setj(0);
+                    //fetchMessages();
+                    setSpinner(true);
+                    //handleRejection();
                     fetchMessages();
+                    setTimeout(() => setSpinner(false), 500);
                     // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
