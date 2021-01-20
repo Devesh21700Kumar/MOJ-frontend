@@ -29,6 +29,7 @@ export default function ReadMessagePopup({
   toggleVisibility,
   setGet,
   handler1,
+  fix,
 }) {
   const [currentPosition, setCurrentPosition] = useState(startFrom);
   const [componentEnabled, setComponentEnabled] = useState(enabled);
@@ -48,7 +49,8 @@ export default function ReadMessagePopup({
     if (
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
     ) {
       //console.log(messageArray[currentPosition][3] == 0);
       async function postRead() {
@@ -109,7 +111,8 @@ export default function ReadMessagePopup({
     } else if (
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] == 0 &&
-      messageArray[currentPosition][3] != 0
+      messageArray[currentPosition][3] != 0 &&
+      fix == 0
     ) {
       async function postRead() {
         try {
@@ -169,7 +172,8 @@ export default function ReadMessagePopup({
     } else if (
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
     ) {
       async function postRead() {
         /*try {
@@ -238,7 +242,8 @@ export default function ReadMessagePopup({
     if (
       currentPosition - 1 >= 0 &&
       messageArray[currentPosition - 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
     ) {
       async function postRead() {
         try {
@@ -299,7 +304,8 @@ export default function ReadMessagePopup({
     } else if (
       currentPosition - 1 >= 0 &&
       messageArray[currentPosition - 1][3] == 0 &&
-      messageArray[currentPosition][3] != 0
+      messageArray[currentPosition][3] != 0 &&
+      fix == 0
     ) {
       async function postRead() {
         try {
@@ -359,7 +365,8 @@ export default function ReadMessagePopup({
     } else if (
       currentPosition - 1 >= 0 &&
       messageArray[currentPosition - 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
     ) {
       async function postRead() {
         try {
@@ -420,9 +427,10 @@ export default function ReadMessagePopup({
   };
   let hideMe = () => {
     toggleVisibility(false);
+    if (messageArray[currentPosition][3] == 0 && fix == 0) {
+      async function postRead() {
+        console.log(fix);
 
-    async function postRead() {
-      if (messageArray[currentPosition][3] == 0) {
         try {
           //console.log(get);
           const response = await (
@@ -442,22 +450,23 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-      }
-      try {
-        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
-          method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
-        });
-        var r = await response.data.data;
-        //setload(false);
-        //console.log(response);
-        setGet([...r].reverse());
-      } catch (error) {
-        console.error(error.message);
-      }
-    }
 
-    postRead();
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          //setload(false);
+          //console.log(response);
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+
+      postRead();
+    }
   };
 
   if (componentEnabled)
