@@ -239,6 +239,7 @@ export default function Personal({ name, bitsId }, props) {
 
   async function call1() {
     setload(true);
+    //disabled={load}
     try {
       let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
         method: 'GET',
@@ -276,7 +277,10 @@ export default function Personal({ name, bitsId }, props) {
         headers: { token: `${token}` },
       });
       var t = await response.data.data;
-      setGet([...t].reverse());
+      if (fix == 1) {
+        setGet([...t].reverse());
+      }
+      //setGet([...t].reverse());
       setload(false);
       setsent([...t].reverse());
     } catch (error) {
@@ -405,16 +409,28 @@ export default function Personal({ name, bitsId }, props) {
           <Box
             className={classes.tab}
             style={{ backgroundColor: color }}
-            onClick={boxClick}
+            //onClick={boxClick}
           >
-            <Button className={classes.tabButton}>Inbox</Button>
+            <Button
+              className={classes.tabButton}
+              disabled={load}
+              onClick={boxClick}
+            >
+              Inbox
+            </Button>
           </Box>
           <Box
             className={classes.tab}
             style={{ backgroundColor: color1 }}
-            onClick={boxClick1}
+            //onClick={boxClick1}
           >
-            <Button className={classes.tabButton}>Sent</Button>
+            <Button
+              className={classes.tabButton}
+              disabled={load}
+              onClick={boxClick1}
+            >
+              Sent
+            </Button>
           </Box>
         </div>
 

@@ -11,6 +11,7 @@ import './sendmessage.css';
 import URL from '../util/url';
 import data from '../util/newData';
 import List from '@material-ui/core/List';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchIcon from '@material-ui/icons/Search';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -54,6 +55,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText('#aa11ff'),
     backgroundColor: '#aa11ff',
   },
+  noMessages: {
+    //margin: 'auto',
+    marginTop: '50vh',
+    marginLeft: '50vw',
+  },
   '@media(min-width: 1100px)': {
     menu: {
       marginLeft: theme.spacing(2),
@@ -82,11 +88,13 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const [name, setSendToName] = useState('');
   const [componentEnabled, setComponentEnabled] = useState(enabled);
   const [open, setOpen] = React.useState(false);
+  const [spinner, setSpinner] = useState(true);
   //const img = require(`./../../imageassets/letter-coloured.svg`);
-  React.useEffect(() => {
-    return () => {
-      setComponentEnabled(enabled);
-    };
+  React.useEffect(async () => {
+    //return () => {
+    await setComponentEnabled(enabled);
+    await setTimeout(() => setSpinner(false), 1500);
+    //;
   }, [enabled]);
   let handleSubmit = (e) => {
     e.preventDefault();
@@ -183,6 +191,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     };
   };
 
+  // if(spinner)
+  //return(
+  //<CircularProgress color="secondary" />
+  //)
+  //else{
   if (componentEnabled) {
     if (window.innerWidth > 600) {
       return (
@@ -198,167 +211,178 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
               fontSize="large"
             />
           </div>
-          <Paper
-            style={
-              c3
-                ? { display: 'block', backgroundImage: `url(${img})` }
-                : { display: 'none', backgroundImage: `url(${img})` }
-            }
-            elevation={0}
-            className="letterpopup-classes-message"
-          >
-            <form
-              className="letterpopup-classes-form"
-              noValidate
-              autoComplete="off"
-              onSubmit={handleSubmit}
+          {spinner ? (
+            <div
+              className={classes.noMessages}
+              //elevation={0}
+              //className="letterpopup-classes-message"
             >
-              <div className="letterpopup-classes-messageBoxesWrapper">
-                <div
-                  className="letterpopup-classes-sendTo"
-                  style={{ display: 'flex' }}
-                >
-                  <div style={{ display: c2 }}>
-                    <IconButton
-                      onClick={handleClick}
-                      style={{ marginLeft: '-35%', marginTop: '-14%' }}
-                    >
-                      <SearchIcon />
-                    </IconButton>
+              <CircularProgress color="secondary" />
+            </div>
+          ) : (
+            <Paper
+              style={
+                c3
+                  ? { display: 'block', backgroundImage: `url(${img})` }
+                  : { display: 'none', backgroundImage: `url(${img})` }
+              }
+              elevation={0}
+              className="letterpopup-classes-message"
+            >
+              <form
+                className="letterpopup-classes-form"
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}
+              >
+                <div className="letterpopup-classes-messageBoxesWrapper">
+                  <div
+                    className="letterpopup-classes-sendTo"
+                    style={{ display: 'flex' }}
+                  >
+                    <div style={{ display: c2 }}>
+                      <IconButton
+                        onClick={handleClick}
+                        style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                    </div>
+                    <div style={{ display: c1 }}>
+                      <IconButton
+                        onClick={handleClick}
+                        style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </div>
+                    <div className="letterpopup-classes-sendToTextFieldWrapper">
+                      <TextField
+                        className="letterpopup-classes-sendToTextFieldWrapper"
+                        value={name}
+                        onClick={handleClick3}
+                        onChange={(e) => {
+                          //handleClick2();
+                          setSendToName(e.target.value);
+                          //setSendMail(e.target.value);
+                          handleClick2();
+                        }}
+                        placeholder="Who is this for?"
+                      />
+                    </div>
                   </div>
-                  <div style={{ display: c1 }}>
-                    <IconButton
-                      onClick={handleClick}
-                      style={{ marginLeft: '-35%', marginTop: '-14%' }}
+                  <Paper className={classes.hexap} elevation={3}>
+                    <List
+                      style={{ display: c1 }}
+                      elevation={3}
+                      component="nav"
+                      className={classes.hexap}
+                      aria-label="notifications"
                     >
-                      <CloseIcon />
-                    </IconButton>
-                  </div>
-                  <div className="letterpopup-classes-sendToTextFieldWrapper">
+                      {data.filter(
+                        (dataset) =>
+                          dataset.name
+                            .toLowerCase()
+                            .includes(name.toLowerCase()) ||
+                          dataset.bitsId
+                            .toLowerCase()
+                            .includes(name.toLowerCase()) ||
+                          dataset.name.toLowerCase() === name.toLowerCase() ||
+                          checkspace(dataset.name)
+                            .toLowerCase()
+                            .includes(name.toLowerCase()) ||
+                          dataset.email.includes(name.toLowerCase())
+                      ).length > 0 ? (
+                        data
+                          .filter(
+                            (dataset) =>
+                              dataset.name
+                                .toLowerCase()
+                                .includes(name.toLowerCase()) ||
+                              dataset.bitsId
+                                .toLowerCase()
+                                .includes(name.toLowerCase()) ||
+                              dataset.name.toLowerCase() ===
+                                name.toLowerCase() ||
+                              checkspace(dataset.name)
+                                .toLowerCase()
+                                .includes(name.toLowerCase()) ||
+                              dataset.email.includes(name.toLowerCase())
+                          )
+                          .slice(0, 101)
+                          .map((person, index) => (
+                            <ListItem
+                              button
+                              onClick={() => {
+                                setSendToName(person.name);
+                                setSendMail(person.email);
+                                handleClose2();
+                              }}
+                            >
+                              <ListItemText
+                                className
+                                primary={person.name}
+                                secondary={person.email}
+                              />
+                            </ListItem>
+                          ))
+                      ) : (
+                        <ListItem
+                          button
+                          onClick={() => {
+                            handleClose2();
+                          }}
+                        >
+                          <ListItemText className primary="             " />
+                        </ListItem>
+                      )}
+                    </List>
+                  </Paper>
+                  <div
+                    style={{ display: c2 }}
+                    className="letterpopup-classes-messageBody"
+                  >
                     <TextField
-                      className="letterpopup-classes-sendToTextFieldWrapper"
-                      value={name}
-                      onClick={handleClick3}
+                      multiline
+                      inputProps={{ maxLength: 500 }}
+                      className="letterpopup-classes-messageTextField"
+                      value={messageBody}
                       onChange={(e) => {
-                        //handleClick2();
-                        setSendToName(e.target.value);
-                        //setSendMail(e.target.value);
-                        handleClick2();
+                        setMessageText(e.target.value);
                       }}
-                      placeholder="Who is this for?"
+                      variant="outlined"
+                      rows={
+                        // screen.width > 550
+                        //   ? screen.width > 900
+                        //     ? calculateTextAreaRows() + 0.2
+                        //     : calculateTextAreaRows() + 3.2
+                        //   : screen.width > 330
+                        //   ? calculateTextAreaRows() + 6.1
+                        //   : calculateTextAreaRows() + 4.1
+                        calculateTextAreaRows()
+                      }
                     />
                   </div>
                 </div>
-                <Paper className={classes.hexap} elevation={3}>
-                  <List
-                    style={{ display: c1 }}
-                    elevation={3}
-                    component="nav"
-                    className={classes.hexap}
-                    aria-label="notifications"
-                  >
-                    {data.filter(
-                      (dataset) =>
-                        dataset.name
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.bitsId
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.name.toLowerCase() === name.toLowerCase() ||
-                        checkspace(dataset.name)
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.email.includes(name.toLowerCase())
-                    ).length > 0 ? (
-                      data
-                        .filter(
-                          (dataset) =>
-                            dataset.name
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.bitsId
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.name.toLowerCase() === name.toLowerCase() ||
-                            checkspace(dataset.name)
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.email.includes(name.toLowerCase())
-                        )
-                        .slice(0, 101)
-                        .map((person, index) => (
-                          <ListItem
-                            button
-                            onClick={() => {
-                              setSendToName(person.name);
-                              setSendMail(person.email);
-                              handleClose2();
-                            }}
-                          >
-                            <ListItemText
-                              className
-                              primary={person.name}
-                              secondary={person.email}
-                            />
-                          </ListItem>
-                        ))
-                    ) : (
-                      <ListItem
-                        button
-                        onClick={() => {
-                          handleClose2();
-                        }}
-                      >
-                        <ListItemText className primary="             " />
-                      </ListItem>
-                    )}
-                  </List>
-                </Paper>
                 <div
                   style={{ display: c2 }}
-                  className="letterpopup-classes-messageBody"
+                  className="letterpopup-classes-sendButton"
                 >
-                  <TextField
-                    multiline
-                    inputProps={{ maxLength: 500 }}
-                    className="letterpopup-classes-messageTextField"
-                    value={messageBody}
-                    onChange={(e) => {
-                      setMessageText(e.target.value);
-                    }}
+                  <Button
                     variant="outlined"
-                    rows={
-                      // screen.width > 550
-                      //   ? screen.width > 900
-                      //     ? calculateTextAreaRows() + 0.2
-                      //     : calculateTextAreaRows() + 3.2
-                      //   : screen.width > 330
-                      //   ? calculateTextAreaRows() + 6.1
-                      //   : calculateTextAreaRows() + 4.1
-                      calculateTextAreaRows()
-                    }
-                  />
+                    type="submit"
+                    style={{
+                      borderRadius: '20px',
+                      color: 'white',
+                      backgroundColor: '#EF4646',
+                    }}
+                  >
+                    Send
+                  </Button>
                 </div>
-              </div>
-              <div
-                style={{ display: c2 }}
-                className="letterpopup-classes-sendButton"
-              >
-                <Button
-                  variant="outlined"
-                  type="submit"
-                  style={{
-                    borderRadius: '20px',
-                    color: 'white',
-                    backgroundColor: '#EF4646',
-                  }}
-                >
-                  Send
-                </Button>
-              </div>
-            </form>
-          </Paper>
+              </form>
+            </Paper>
+          )}
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               Message Sent successfully!!
@@ -548,4 +572,5 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
       );
     }
   } else return <div />;
+  //}
 }

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import './LetterPopup.css';
 import URL from '../util/url';
 import axios from 'axios';
 import img from './../../imageassets/letter-coloured.svg';
+import CircularProgress from '@material-ui/core/CircularProgress';
 //const img = require(`./../../imageassets/letter-coloured.svg`);
 
 // message array structure:
@@ -12,6 +14,14 @@ import img from './../../imageassets/letter-coloured.svg';
 //      [message, dateTime],
 //      [message, dateTime], ...
 // ]
+const useStyles = makeStyles((theme) => ({
+  noMessages: {
+    //margin: 'auto',
+    marginTop: '50vh',
+    marginLeft: '50vw',
+  },
+}));
+
 export default function ReadMessagePopup({
   enabled,
   startFrom,
@@ -22,10 +32,12 @@ export default function ReadMessagePopup({
 }) {
   const [currentPosition, setCurrentPosition] = useState(startFrom);
   const [componentEnabled, setComponentEnabled] = useState(enabled);
-  React.useEffect(() => {
-    return () => {
-      setComponentEnabled(enabled);
-    };
+  const [spinner, setSpinner] = useState(true);
+  React.useEffect(async () => {
+    //return () => {
+    await setComponentEnabled(enabled);
+    await setTimeout(() => setSpinner(false), 1500);
+    //;
   }, [enabled]);
 
   let nextMessage = () => {
@@ -451,6 +463,7 @@ export default function ReadMessagePopup({
   if (componentEnabled)
     return (
       <SendMessage
+        spinner={spinner}
         messageArray={messageArray}
         currentPosition={currentPosition}
         next={nextMessage}
@@ -461,7 +474,15 @@ export default function ReadMessagePopup({
   else return <></>;
 }
 
-function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
+function SendMessage({
+  messageArray,
+  currentPosition,
+  next,
+  prev,
+  hideMe,
+  spinner,
+}) {
+  const classes = useStyles();
   const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
     var day =
@@ -487,7 +508,6 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
     });
     return day + month + year + time;
   };
-
   let presentViewportWidth = window.innerWidth;
   let presentViewportHeight = window.innerHeight;
   const getCSSVariables = () => {
@@ -496,27 +516,46 @@ function SendMessage({ messageArray, currentPosition, next, prev, hideMe }) {
       '--this-height-var': `${presentViewportHeight}px`,
     };
   };
+  /*const [ spinner, setSpinner ] = useState(true);
+  React.useEffect(async() => {
+    //return () => {
+      //await setComponentEnabled(enabled);
+      await setTimeout(() => setSpinner(false), 1500);
+    //;
+  }, []);*/
   return (
     <div className="letterpopup-classes-root" style={getCSSVariables()}>
-      <div className="letterpopup-classes-cross" onClick={hideMe} />
-      <Paper
-        elevation={0}
-        className="letterpopup-classes-message"
-        style={{ backgroundImage: `url(${img})` }}
-      >
-        <div className="letterpopup-classes-dateTime">
-          {
-            //dateFormatter(messageArray[currentPosition][1])
-          }
+      {spinner ? (
+        <div
+          className={classes.noMessages}
+          //elevation={0}
+          //className="letterpopup-classes-message"
+        >
+          <CircularProgress color="secondary" />
         </div>
-        <div className="letterpopup-classes-messageBoxesWrapper">
-          <div className="letterpopup-classes-messageBody">
-            {messageArray[currentPosition][0]}
-          </div>
-        </div>
-      </Paper>
-      <div className="letterpopup-classes-left-arrow" onClick={prev} />
-      <div className="letterpopup-classes-right-arrow" onClick={next} />
+      ) : (
+        <React.Fragment>
+          <div className="letterpopup-classes-cross" onClick={hideMe} />
+          <Paper
+            elevation={0}
+            className="letterpopup-classes-message"
+            style={{ backgroundImage: `url(${img})` }}
+          >
+            <div className="letterpopup-classes-dateTime">
+              {
+                //dateFormatter(messageArray[currentPosition][1])
+              }
+            </div>
+            <div className="letterpopup-classes-messageBoxesWrapper">
+              <div className="letterpopup-classes-messageBody">
+                {messageArray[currentPosition][0]}
+              </div>
+            </div>
+          </Paper>
+          <div className="letterpopup-classes-left-arrow" onClick={prev} />
+          <div className="letterpopup-classes-right-arrow" onClick={next} />
+        </React.Fragment>
+      )}
     </div>
   );
 }
