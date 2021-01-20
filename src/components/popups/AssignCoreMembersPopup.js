@@ -17,7 +17,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
 import URL from '../util/url';
 
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     '@global': {
@@ -164,7 +163,6 @@ const useStyles = makeStyles((theme) =>
 
 const SingleListItem = ({
   index,
-  setSpinner,
   name,
   bitsId,
   email,
@@ -189,12 +187,6 @@ const SingleListItem = ({
     setc1(!c1);
 
     async function assignMessages() {
-      //useEffect(async () => {
-        //return () => {
-        //await setComponentEnabled(enabled);
-        //await setTimeout(() => setSpinner(false), 1500);
-        //;
-      //}, [enabled]);
       if (!messageId.length) {
         setErrorMessage('You have not selected any message');
         setSnackBarOpen(true);
@@ -216,7 +208,6 @@ const SingleListItem = ({
           setOpen(false);
           fetchMessages();
           setMessageId([]);
-          setTimeout(() => setSpinner(false), 1500);
           if (checked25) setChecked25(false);
           if (checked50) setChecked50(false);
           if (value) setValue(null);
@@ -285,7 +276,6 @@ const SingleListItem = ({
 
 const NamesList = ({
   searchedData,
-  setSpinner,
   data,
   messageId,
   setMessageId,
@@ -308,7 +298,6 @@ const NamesList = ({
         data.map((result, index) => {
           return (
             <SingleListItem
-              setSpinner={setSpinner}
               index={index}
               name={result.name}
               bitsId={result.bitsId}
@@ -333,7 +322,6 @@ const NamesList = ({
         searchedData.map((result, index) => {
           return (
             <SingleListItem
-              setSpinner={setSpinner}
               index={index}
               name={result.name}
               bitsId={result.bitsId}
@@ -362,7 +350,6 @@ const NamesList = ({
 };
 
 const AssignCoreMembersPopup = ({
-  setSpinner,
   messageId,
   setMessageId,
   fetchMessages,
@@ -482,7 +469,6 @@ const AssignCoreMembersPopup = ({
               </Paper>
               <Paper className={classes.searchResults}>
                 <NamesList
-                  setSpinner={setSpinner}
                   searchedData={filterSearch()}
                   data={searchResults}
                   messageId={messageId}
