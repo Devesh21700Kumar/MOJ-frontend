@@ -34,6 +34,22 @@
   z-index: 110;
 }
 
+.letterpopup-classes-cross2 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 1.2rem;
+  margin-right: 1.2rem;
+  color: #fffbeb;
+  width: 3rem;
+  height: 3rem;
+  background-size: contain;
+
+  cursor: pointer;
+
+  z-index: 110;
+}
+
 .letterpopup-classes-message {
   position: absolute;
   left: 50vw;
