@@ -16,6 +16,7 @@ import Navbar from '../navbar/navbar';
 import MessageCard from './MessageCard';
 import AssignCoreMembersPopup from '../popups/AssignCoreMembersPopup';
 import URL from '../util/url';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -332,6 +333,7 @@ const AdminDashboard = () => {
   const [j, setj] = useState(0);
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
+  const [spinner, setSpinner] = useState(false);
   // const [checked, setChecked] = useState(false);
 
   const token = localStorage.getItem('token');
@@ -673,6 +675,8 @@ const AdminDashboard = () => {
             setj(0);
             fetchMessages();
             setc3(false);
+            setSpinner(true);
+            setTimeout(() => setSpinner(false), 500);
           }}
         >
           <Button className={classes.tabButton}>Pending Messages</Button>
@@ -691,6 +695,8 @@ const AdminDashboard = () => {
             setj(0);
             fetchMessages();
             setc3(true);
+            setSpinner(true);
+            setTimeout(() => setSpinner(false), 500);
           }}
         >
           <Button className={classes.tabButton}>Final Approval</Button>
@@ -858,7 +864,12 @@ const AdminDashboard = () => {
                     variant="contained"
                     className={classes.approveButton}
                     size="large"
-                    onClick={handleApproval}
+                    onClick={async () => {
+                      await setSpinner(true);
+                      await handleApproval();
+                      await fetchMessages();
+                      await setTimeout(() => setSpinner(false), 500);
+                    }}
                   >
                     Approve
                   </Button>
@@ -869,6 +880,8 @@ const AdminDashboard = () => {
           {tabColor1 === '#FFFDE8' && msgs.length ? (
             <div className={classes.buttons} style={{ display: display }}>
               <AssignCoreMembersPopup
+                fetchMessages={fetchMessages}
+                setSpinner={setSpinner}
                 messageId={messageId}
                 setMessageId={setMessageId}
                 fetchMessages={fetchMessages}
@@ -882,101 +895,127 @@ const AdminDashboard = () => {
             </div>
           ) : null}
           <div className={classes.messages}>
-            {redFlag === red ? (
-              redFlaggedMsgs.length > 0 ? (
-                redFlaggedMsgs
-                  .slice(
-                    j,
-                    j + 50 <= redFlaggedMsgs.length
-                      ? j + 50
-                      : redFlaggedMsgs.length
-                  )
-                  .map((message, index) => (
-                    <MessageCard
-                      bitsId={message.receiverId}
-                      body={message.body}
-                      date={dateFormatter(message.date)}
-                      key={redFlaggedMsgs.indexOf(message)}
-                      index={redFlaggedMsgs.indexOf(message)}
-                      _id={message._id}
-                      setMessageId={setMessageId}
-                      //setChecked={setChecked}
-                      //checked={checked}
-                      n={setNumber()}
-                    />
-                  ))
+            {!spinner ? (
+              redFlag === red ? (
+                redFlaggedMsgs.length > 0 ? (
+                  redFlaggedMsgs
+                    .slice(
+                      j,
+                      j + 50 <= redFlaggedMsgs.length
+                        ? j + 50
+                        : redFlaggedMsgs.length
+                    )
+                    .map((message, index) => (
+                      <MessageCard
+                        fetchMessages={fetchMessages}
+                        bitsId={message.receiverId}
+                        body={message.body}
+                        date={dateFormatter(message.date)}
+                        key={redFlaggedMsgs.indexOf(message)}
+                        index={redFlaggedMsgs.indexOf(message)}
+                        _id={message._id}
+                        setMessageId={setMessageId}
+                        //setChecked={setChecked}
+                        //checked={checked}
+                        n={setNumber()}
+                      />
+                    ))
+                ) : (
+                  <h1 className={classes.noMessages}>
+                    No Messages to Display!
+                  </h1>
+                )
+              ) : greenFlag === green ? (
+                greenFlaggedMsgs.length > 0 ? (
+                  greenFlaggedMsgs
+                    .slice(
+                      j,
+                      j + 50 <= greenFlaggedMsgs.length
+                        ? j + 50
+                        : greenFlaggedMsgs.length
+                    )
+                    .map((message, index) => (
+                      <MessageCard
+                        bitsId={message.receiverId}
+                        body={message.body}
+                        // checked={checked}
+                        date={dateFormatter(message.date)}
+                        key={greenFlaggedMsgs.indexOf(message)}
+                        index={greenFlaggedMsgs.indexOf(message)}
+                        _id={message._id}
+                        setMessageId={setMessageId}
+                        //setChecked={setChecked}
+                        n={setNumber()}
+                      />
+                    ))
+                ) : (
+                  <h1 className={classes.noMessages}>
+                    No Messages to Display!
+                  </h1>
+                )
+              ) : yellowFlag === yellow ? (
+                yellowFlaggedMsgs.length > 0 ? (
+                  yellowFlaggedMsgs
+                    .slice(
+                      j,
+                      j + 50 <= yellowFlaggedMsgs.length
+                        ? j + 50
+                        : yellowFlaggedMsgs.length
+                    )
+                    .map((message, index) => (
+                      <MessageCard
+                        bitsId={message.receiverId}
+                        body={message.body}
+                        //checked={checked}
+                        date={dateFormatter(message.date)}
+                        key={yellowFlaggedMsgs.indexOf(message)}
+                        index={yellowFlaggedMsgs.indexOf(message)}
+                        _id={message._id}
+                        setMessageId={setMessageId}
+                        //setChecked={setChecked}
+                        n={setNumber()}
+                      />
+                    ))
+                ) : (
+                  <h1 className={classes.noMessages}>
+                    No Messages to Display!
+                  </h1>
+                )
+              ) : msgs.length !== 0 ? (
+                msgs.map((message, index) => (
+                  <MessageCard
+                    bitsId={message.receiverId}
+                    body={message.body}
+                    date={dateFormatter(message.date)}
+                    key={msgs.indexOf(message)}
+                    index={msgs.indexOf(message)}
+                    _id={message._id}
+                    setMessageId={setMessageId}
+                    //setChecked={setChecked}
+                    //checked={checked}
+                    n={setNumber()}
+                  />
+                ))
               ) : (
                 <h1 className={classes.noMessages}>No Messages to Display!</h1>
               )
-            ) : greenFlag === green ? (
-              greenFlaggedMsgs.length > 0 ? (
-                greenFlaggedMsgs
-                  .slice(
-                    j,
-                    j + 50 <= greenFlaggedMsgs.length
-                      ? j + 50
-                      : greenFlaggedMsgs.length
-                  )
-                  .map((message, index) => (
-                    <MessageCard
-                      bitsId={message.receiverId}
-                      body={message.body}
-                      // checked={checked}
-                      date={dateFormatter(message.date)}
-                      key={greenFlaggedMsgs.indexOf(message)}
-                      index={greenFlaggedMsgs.indexOf(message)}
-                      _id={message._id}
-                      setMessageId={setMessageId}
-                      //setChecked={setChecked}
-                      n={setNumber()}
-                    />
-                  ))
-              ) : (
-                <h1 className={classes.noMessages}>No Messages to Display!</h1>
-              )
-            ) : yellowFlag === yellow ? (
-              yellowFlaggedMsgs.length > 0 ? (
-                yellowFlaggedMsgs
-                  .slice(
-                    j,
-                    j + 50 <= yellowFlaggedMsgs.length
-                      ? j + 50
-                      : yellowFlaggedMsgs.length
-                  )
-                  .map((message, index) => (
-                    <MessageCard
-                      bitsId={message.receiverId}
-                      body={message.body}
-                      //checked={checked}
-                      date={dateFormatter(message.date)}
-                      key={yellowFlaggedMsgs.indexOf(message)}
-                      index={yellowFlaggedMsgs.indexOf(message)}
-                      _id={message._id}
-                      setMessageId={setMessageId}
-                      //setChecked={setChecked}
-                      n={setNumber()}
-                    />
-                  ))
-              ) : (
-                <h1 className={classes.noMessages}>No Messages to Display!</h1>
-              )
-            ) : msgs.length !== 0 ? (
-              msgs.map((message, index) => (
-                <MessageCard
-                  bitsId={message.receiverId}
-                  body={message.body}
-                  date={dateFormatter(message.date)}
-                  key={msgs.indexOf(message)}
-                  index={msgs.indexOf(message)}
-                  _id={message._id}
-                  setMessageId={setMessageId}
-                  //setChecked={setChecked}
-                  //checked={checked}
-                  n={setNumber()}
-                />
-              ))
             ) : (
-              <h1 className={classes.noMessages}>No Messages to Display!</h1>
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{ minHeight: '40vh' }}
+              >
+                <Grid item xs={3}>
+                  <CircularProgress
+                    className={classes.centre}
+                    //className="letterpopup-classes-cross2"
+                    color="#fffbeb"
+                  />
+                </Grid>
+              </Grid>
             )}
           </div>
 
@@ -985,6 +1024,8 @@ const AdminDashboard = () => {
             msgs.length ? (
               <div className={classes.buttons} style={{ display: display }}>
                 <AssignCoreMembersPopup
+                  fetchMessages={fetchMessages}
+                  setSpinner={setSpinner}
                   messageId={messageId}
                   setMessageId={setMessageId}
                   fetchMessages={fetchMessages}
@@ -1003,7 +1044,12 @@ const AdminDashboard = () => {
                 variant="contained"
                 className={classes.rejectButton}
                 size="large"
-                onClick={handleRejection}
+                onClick={async () => {
+                  await setSpinner(true);
+                  await handleRejection();
+                  await fetchMessages();
+                  await setTimeout(() => setSpinner(false), 500);
+                }}
               >
                 Reject
               </Button>
@@ -1029,7 +1075,12 @@ const AdminDashboard = () => {
                 variant="contained"
                 className={classes.approveButton}
                 size="large"
-                onClick={handleApproval}
+                onClick={async () => {
+                  await setSpinner(true);
+                  await handleApproval();
+                  await fetchMessages();
+                  await setTimeout(() => setSpinner(false), 500);
+                }}
               >
                 Approve
               </Button>

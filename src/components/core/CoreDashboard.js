@@ -16,6 +16,8 @@ import {
 } from '@material-ui/icons';
 import axios from 'axios';
 import MessageCard from './MessageCard';
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -149,6 +151,7 @@ const Dashboard = () => {
   const userInfo = JSON.parse(atob(token.split('.')[1]));
   const [msgs, setMsgs] = useState({});
   const [msgPage, setMsgPage] = useState(0);
+  const [spinner, setSpinner] = useState(false);
   const handleChangePage = (goToNext) => {
     if (goToNext) {
       if (msgPage < Math.ceil(msgs.length / 10) - 1) {
@@ -225,28 +228,54 @@ const Dashboard = () => {
       <div className={classes.pageBar}>
         <Box component="span" className={classes.tabBox}>
           <div className={classes.tabButton}>Messages to review</div>
-          <IconButton className={classes.refreshButton} onClick={fetchMessages}>
+          <IconButton
+            className={classes.refreshButton}
+            onClick={async () => {
+              await setSpinner(true);
+              await setTimeout(() => setSpinner(false), 1500);
+              await fetchMessages();
+            }}
+          >
             <CachedRounded />
           </IconButton>
         </Box>
         <Paginator />
       </div>
       <Container>
-        {Array.isArray(msgs) && msgs.length !== 0 ? (
-          msgs
-            .slice(msgPage * 10, msgPage * 10 + 10)
-            .map((message, index) => (
-              <MessageCard
-                rollNumber={message.receiverId}
-                message={message.body}
-                date={dateFormatter(message.date)}
-                id={message._id}
-                key={msgPage * 10 + index}
-                index={msgPage * 10 + index}
-              />
-            ))
+        {!spinner ? (
+          Array.isArray(msgs) && msgs.length !== 0 ? (
+            msgs
+              .slice(msgPage * 10, msgPage * 10 + 10)
+              .map((message, index) => (
+                <MessageCard
+                  rollNumber={message.receiverId}
+                  message={message.body}
+                  date={dateFormatter(message.date)}
+                  id={message._id}
+                  key={msgPage * 10 + index}
+                  index={msgPage * 10 + index}
+                />
+              ))
+          ) : (
+            <h1 className={classes.noMessages}>No Messages Left to Review</h1>
+          )
         ) : (
-          <h1 className={classes.noMessages}>No Messages Left to Review</h1>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+          >
+            <Grid item xs={3}>
+              <CircularProgress
+                className={classes.centre}
+                //className="letterpopup-classes-cross2"
+                color="#fffbeb"
+              />
+            </Grid>
+          </Grid>
         )}
       </Container>
       <Paginator className={classes.bottomPaginator} />
