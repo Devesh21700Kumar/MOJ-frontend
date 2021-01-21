@@ -13,6 +13,7 @@ import img4 from './../../imageassets/4A.jpeg';
 import img5 from './../../imageassets/5A.jpeg';
 import img6 from './../../imageassets/1B.jpeg';
 import img7 from './../../imageassets/2B.jpeg';
+import img8 from './../../imageassets/3B.jpeg';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -281,7 +282,7 @@ const data = [
         post: 'https://github.com/V-T-Soorea',
       },
       {
-        pic: 3,
+        pic: img8,
         name: 'Gaurav Sharad Dotiya',
         number: 'Developer',
         id: 'jjjjjooopp',
