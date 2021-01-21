@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     margin: 0,
-    padding: '5px',
     fontFamily: 'Raleway',
     fontWeight: 500,
     fontStyle: 'normal',
