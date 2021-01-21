@@ -301,8 +301,8 @@ const handlePics = (e) => {
     //console.log(obj.pic);
     const img = obj.pic;
     //${obj.pic}.png
-    if(obj.post!="1"){
-    container.innerHTML += `
+    if (obj.post != '1') {
+      container.innerHTML += `
 			<div>
 			<div class="test">
       <a href=${obj.post} target="_blank">
@@ -315,7 +315,7 @@ const handlePics = (e) => {
 			</div>
 		</div>
     `;
-    }else{
+    } else {
       container.innerHTML += `
 			<div>
 			<div class="test">
