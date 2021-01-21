@@ -12,6 +12,7 @@ import img3 from './../../imageassets/3A.jpeg';
 import img4 from './../../imageassets/4A.jpeg';
 import img5 from './../../imageassets/5A.jpeg';
 import img6 from './../../imageassets/1B.jpeg';
+import img7 from './../../imageassets/2B.jpeg';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -162,28 +163,28 @@ const data = [
       {
         pic: 1,
         name: 'Devesh1',
-        post: 'oye1 ',
+        post: '1',
         number: '6969696969',
         id: 'hey ',
       },
       {
         pic: 2,
         name: 'Devesh1',
-        post: 'oye1',
+        post: '1',
         number: 'hey',
         id: 'hey',
       },
       {
         pic: 3,
         name: 'Devesh1',
-        post: 'oye1',
+        post: '1',
         number: 'hey',
         id: 'hey',
       },
       {
         pic: 4,
         name: 'Devesh1',
-        post: 'oye1',
+        post: '1',
         number: 'hey',
         id: 'hey',
       },
@@ -227,38 +228,38 @@ const data = [
     details: [
       {
         pic: img1,
-        name: 'Devesh',
-        number: 'oye ',
+        name: 'Devesh Kumar',
+        number: 'Lead Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp ',
+        post: 'https://github.com/Devesh21700Kumar',
       },
       {
         pic: img2,
-        name: 'Rohit',
-        number: '2',
+        name: 'Rohit Rahul Mundada',
+        number: 'Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'https://github.com/Rohit-Mundada',
       },
       {
         pic: img3,
-        name: 'Aviral',
-        number: '3',
+        name: 'Aviral Kumar Goel',
+        number: 'Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'https://github.com/Aviral09',
       },
       {
         pic: img4,
-        name: 'Ritvij',
-        number: '4',
+        name: 'Ritvij Kumar Sharma',
+        number: 'Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'https://github.com/ritvij14',
       },
       {
         pic: img5,
-        name: 'Mayank',
-        number: '4',
+        name: 'Mayank Mathur',
+        number: 'Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'https://github.com/Mynk-9',
       },
     ],
   },
@@ -267,31 +268,24 @@ const data = [
     details: [
       {
         pic: img6,
-        name: 'Vedant',
-        number: '1 ',
+        name: 'Vedant Sachin Bang',
+        number: 'Lead Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp ',
+        post: 'https://github.com/VedantBang',
       },
       {
-        pic: 2,
-        name: 'Devesh11',
-        number: '2',
+        pic: img7,
+        name: 'Vishnu Teja Soorea',
+        number: 'Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'https://github.com/V-T-Soorea',
       },
       {
         pic: 3,
-        name: 'Devesh1',
-        number: '3',
+        name: 'Gaurav Sharad Dotiya',
+        number: 'Developer',
         id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
-      },
-      {
-        pic: 4,
-        name: 'Devesh1',
-        number: '4',
-        id: 'jjjjjooopp',
-        post: 'jjjjjooopp',
+        post: 'https://github.com/grv1',
       },
     ],
   },
@@ -307,20 +301,33 @@ const handlePics = (e) => {
     //console.log(obj.pic);
     const img = obj.pic;
     //${obj.pic}.png
+    if(obj.post!="1"){
     container.innerHTML += `
 			<div>
 			<div class="test">
-      
+      <a href=${obj.post} target="_blank">
+      <img src=${img} alt="" />
+      </a>
+			</div>
+			<div class="details">
+				<p class="name">${obj.name}</p>
+        <p class="number">${obj.number}</p>
+			</div>
+		</div>
+    `;
+    }else{
+      container.innerHTML += `
+			<div>
+			<div class="test">
       <img src=${img} alt="" />
 			</div>
 			<div class="details">
 				<p class="name">${obj.name}</p>
-				<p class="post">${obj.post}</p>
-				<p class="number">${obj.number}</p>
-				<p class="spree-id">${obj.id}</p>
+        <p class="number">${obj.number}</p>
 			</div>
 		</div>
-		`;
+    `;
+    }
   });
 
   //--------------handle color of selected category----------
@@ -376,9 +383,7 @@ const Team = () => {
                   </div>
                   <div className="details">
                     <p className="name">Devesh1</p>
-                    <p className="post">oy1</p>
                     <p className="number">6969696969</p>
-                    <p className="spree-id">hey</p>
                   </div>
                 </div>
                 <div>
@@ -387,9 +392,7 @@ const Team = () => {
                   </div>
                   <div className="details">
                     <p className="name">Devesh1</p>
-                    <p className="post">oye1</p>
                     <p className="number">hey</p>
-                    <p className="spree-id">hey</p>
                   </div>
                 </div>
                 <div>
@@ -398,9 +401,7 @@ const Team = () => {
                   </div>
                   <div className="details">
                     <p className="name">Devesh1</p>
-                    <p className="post">oye1</p>
                     <p className="number">hey</p>
-                    <p className="spree-id">hey</p>
                   </div>
                 </div>
                 <div>
