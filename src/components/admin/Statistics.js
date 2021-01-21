@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ButtonBase } from '@material-ui/core';
+import { ButtonBase, Card, Grid } from '@material-ui/core';
 import CsvDownload from 'react-json-to-csv';
 import Navbar from '../navbar/navbar';
 import URL from '../util/url';
@@ -34,6 +34,31 @@ const useStyles = makeStyles((theme) =>
     },
     stat: {
       fontFamily: 'Oxygen, sans-serif',
+    },
+    coreStats: {
+      fontFamily: 'Oxygen',
+      margin: '10px 0px',
+    },
+    msgCard: {
+      padding: '15px',
+      marginTop: '20px',
+      backgroundColor: '#FFD94D',
+      borderRadius: '15px',
+      transition: 'all ease-in-out 0.3s',
+      '&:hover': {
+        cursor: 'pointer',
+        transform: 'translateY(-2px)',
+      },
+    },
+    content: {
+      fontSize: '14px',
+      fontFamily: 'Oxygen, sans-serif',
+      fontWeight: 700,
+      padding: 0,
+      marginTop: '10px',
+    },
+    coreName: {
+      fontSize: '12px',
     },
     inactive: {
       backgroundColor: '#4CBC14',
@@ -79,12 +104,37 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+const CoreCard = ({
+  name,
+  pending,
+  greenflagged,
+  redflagged,
+  yellowflagged,
+}) => {
+  const classes = useStyles();
+
+  return (
+    <Grid item xs={12} sm={6} md={3}>
+      <Card className={classes.msgCard} raised={true}>
+        <div className={classes.content}>
+          Name: <span className={classes.coreName}>{name}</span>
+        </div>
+        <div className={classes.content}>Pending: {pending}</div>
+        <div className={classes.content}>Green Flagged: {greenflagged}</div>
+        <div className={classes.content}>Red Flagged: {redflagged}</div>
+        <div className={classes.content}>Yellow Flagged: {yellowflagged}</div>
+      </Card>
+    </Grid>
+  );
+};
+
 const Statistics = () => {
   const classes = useStyles();
   const [total, setTotal] = useState('');
   const [pending, setPending] = useState('');
   const [delivered, setDelivered] = useState('');
   const [rejected, setRejected] = useState('');
+  const [coreStats, setCoreStats] = useState([]);
   const [inactiveUsers, setInactiveUsers] = useState({});
   const token = localStorage.getItem('token');
 
@@ -93,7 +143,7 @@ const Statistics = () => {
   const { name, bitsId } = JSON.parse(atob(token.split('.')[1]));
 
   async function fetchStatistics() {
-    const { total, pending, delivered, rejected } = await (
+    const { total, pending, delivered, rejected, corestats } = await (
       await fetch(`${URL}/api/level2/statistics`, {
         method: 'GET',
         headers: { token: `${token}` },
@@ -103,6 +153,7 @@ const Statistics = () => {
     setPending(pending);
     setDelivered(delivered);
     setRejected(rejected);
+    setCoreStats(corestats.sort((a, b) => a.name.localeCompare(b.name)));
   }
 
   async function fetchInactiveUsers() {
@@ -148,6 +199,26 @@ const Statistics = () => {
             Total Rejected Messages:{' '}
             <span style={{ color: '#FC0404' }}>{rejected}</span>
           </h1>
+          <h1 className={classes.coreStats}>Core Stats:</h1>
+          <Grid container spacing={3} style={{ paddingBottom: '2rem' }}>
+            {coreStats.map(
+              (
+                { name, pending, greenflagged, redflagged, yellowflagged },
+                index
+              ) => {
+                return (
+                  <CoreCard
+                    key={index}
+                    name={name}
+                    pending={pending}
+                    greenflagged={greenflagged}
+                    redflagged={redflagged}
+                    yellowflagged={yellowflagged}
+                  />
+                );
+              }
+            )}
+          </Grid>
           {inactiveUsers.length > 0 ? (
             <ButtonBase className={classes.inactiveOuter}>
               <CsvDownload
