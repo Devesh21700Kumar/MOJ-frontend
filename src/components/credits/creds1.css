@@ -1,302 +1,111 @@
-@font-face {
-  font-family: 'Oxygen';
-}
-
 #team-parent {
-  position: relative;
-  width: 90vw;
-  margin-left: -1vw;
-  overflow-x: hidden;
-  background: #fffde8;
-  color: white;
-  font-family: 'Oxygen';
-  min-height: 120vh;
-}
-
-@media only screen and (max-width: 900px) {
-  #team-parent {
-    position: relative;
-    width: 92vw;
-    margin-left: -9vw;
-    overflow-x: hidden;
-    background: #fffde8;
-    color: white;
-    font-family: 'Oxygen';
-    min-height: 120vh;
-  }
-}
-
-#team-parent h1 {
-  font-family: 'Azonix';
-  text-align: center;
-  font-size: 4.5rem;
-  margin: 2rem auto 4rem auto;
-}
-
-div.devs h1 {
-  margin-bottom: 7rem !important;
-}
-
-div.devs .photos > div > div:first-child {
-  width: 300px;
-  height: 300px;
-}
-
-div.devs .photos1 > div > div:first-child {
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 20px;
 }
 
 .team {
-  width: 80%;
+  width: 90%;
   margin: auto;
-  font-size: 1.8rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+}
+
+.depart-name {
+  width: 100%;
   display: flex;
-  color: #000000;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .department {
-  font-weight: bold;
-  min-width: 350px;
-}
-
-.department:hover {
-  color: #ef4646;
-  transition: 150ms ease-in-out;
-  cursor: pointer;
-}
-
-.department-selected {
-  color: #ef4646;
-  font-weight: bold;
-  min-width: 350px;
-}
-
-.department-selected:hover {
-  cursor: pointer;
-}
-
-.photos {
-  display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  text-align: center;
-  transition: 150ms ease-in-out;
-}
-
-.photos > div > div:hover {
-  transform: translateX(2px);
-  opacity: 0.8;
-}
-
-/*.photos > div > div:second-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:third-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:fourth-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:fifth-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:sixth-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:seventh-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:eigth-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:ninth-child:hover {
-  opacity: 0.8;
-}
-
-.photos > div > div:tenth-child:hover {
-  opacity: 0.8;
-}*/
-
-.photos1 {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  text-align: center;
-  transition: 150ms ease-in-out;
-}
-
-@media only screen and (max-width: 550px) {
-  .photos {
-    margin-top: -200px;
-    transform: scale(0.8);
-    display: grid;
-    margin-left: 8vw;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    text-align: center;
-    transition: 150ms ease-in-out;
-  }
-}
-
-.photos > div {
-  margin-bottom: 2rem;
-}
-
-.photos1 > div {
-  margin-bottom: 2rem;
-}
-
-.photos > div > div:first-child {
-  width: 300px;
-  height: 300px;
-  margin: auto;
-  margin-bottom: 4rem;
-  background-size: cover;
-
-  transition: 150ms ease-in-out;
-}
-
-.photos img {
-  max-width: 300px;
-  margin: auto;
-  max-height: 300px;
-  position: relative;
-  transition: 150ms ease-in-out;
-  left: 20px;
-}
-
-.photos1 > div > div:first-child {
-  width: 300px;
-  height: 300px;
-  margin: auto;
-  margin-bottom: 4rem;
-  background-size: cover;
-
-  transition: 150ms ease-in-out;
-}
-
-.photos1 img {
-  max-width: 300px;
-  margin: auto;
-  max-height: 300px;
-  position: relative;
-  transition: 150ms ease-in-out;
-  left: 20px;
-}
-
-/*.photos > div > div:first-child:hover img {
-  transition-delay: 150ms;
-  transform: rotate(0deg);
-}
-
-.photos > div > div:first-child:hover {
-  transform: rotate(0deg);
-}*/
-
-@media (max-width: 1400px) {
-  .team {
-    width: 90%;
-    margin: auto;
-  }
-}
-
-@media (max-width: 1150px) {
-  .photos {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .photos1 {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 900px) {
-  .photos {
-    display: flex;
-    flex-direction: column;
-    /*justify-content: space-around;*/
-  }
-
-  .photos1 {
-    display: flex;
-    flex-direction: column;
-    /*justify-content: space-around;*/
-  }
-
-  .team {
-    flex-direction: column;
-    /*justify-content: space-around;*/
-  }
-
-  .depart-name {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    text-align: center;
-    margin-bottom: 6rem;
-    grid-column-gap: 3rem;
-  }
-}
-
-@media (max-width: 650px) {
-  #team-parent h1 {
-    font-size: 3.5rem;
-  }
-  .team {
-    flex-direction: column;
-    /*justify-content: space-around;*/
-    font-size: 1.2rem;
-    margin-left: -2vw;
-  }
+  font-size: 2rem;
+  font-family: 'Oxygen';
+  font-weight: 800;
+  cursor: pointer;
+  margin: 5px 0px;
 }
 
 .selected {
-  color: #ef4646 !important;
+  color: #fc0404;
+}
+
+.photos {
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+}
+
+.photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 250px;
+  border-radius: 30px;
+  border: 3px solid #fc0404;
 }
 
 .details {
-  font-family: 'Montserrat';
-  margin-top: -35px;
-  /*justify-content: space-around;*/
-}
-
-.details p {
-  margin-bottom: 0;
-  font-size: 1rem;
+  width: 100%;
+  text-align: center;
 }
 
 .name {
-  color: #000000;
-  font-size: 2rem !important;
+  font-size: 1.5rem;
+  font-family: 'Raleway';
+  font-weight: 600;
+  margin: 20px 0px 10px 0px;
 }
 
-.post {
+.number {
+  font-family: 'Oxygen';
   font-weight: bold;
-  color: #000000;
+  font-size: 14px;
+  margin: 0;
 }
 
-.test {
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #ef4646;
-  margin-bottom: 3vh;
-  background: #ffffff;
-  border-radius: 30px;
+@media (max-width: 768px) {
+  .team {
+    grid-template-columns: auto;
+  }
+  .photos {
+    grid-template-columns: auto auto;
+    margin-top: 20px;
+  }
 }
 
-.test img {
-  min-width: 100%;
-  margin-left: -40.1px;
-  min-height: 100%;
-  width: auto;
-  height: auto;
+@media (max-width: 640px) {
+  .team {
+    grid-template-columns: auto;
+  }
+  .depart-name {
+    width: max-content;
+  }
+  .department {
+    font-size: 1.3rem;
+    width: max-content;
+  }
+  .photos {
+    grid-template-columns: auto;
+  }
+  .image {
+    width: 250px;
+  }
+}
+
+@media (max-width: 320px) {
+  .image {
+    width: 200px;
+  }
 }
