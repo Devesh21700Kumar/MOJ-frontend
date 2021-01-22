@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +19,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import CloseIcon from '@material-ui/icons/Close';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import img from './../../imageassets/letter-coloured.svg';
+import axios from 'axios';
+import { SettingsOverscan } from '@material-ui/icons';
 //import img from '../../imageassets/love 1.png';
 
 function Alert(props) {
@@ -90,6 +93,12 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const [componentEnabled, setComponentEnabled] = useState(enabled);
   const [open, setOpen] = React.useState(false);
   const [spinner, setSpinner] = useState(true);
+  const [over, setOver] = useState(false);
+  const [r, setr] = useState(40);
+  const token = localStorage.getItem('token');
+  const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
+  //console.log(data1.slice(0,100));
+  if (token === null) return <Redirect to="/" />;
   //const img = require(`./../../imageassets/letter-coloured.svg`);
   React.useEffect(async () => {
     //return () => {
@@ -97,6 +106,35 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     await setTimeout(() => setSpinner(false), 1500);
     //;
   }, [enabled]);
+  useEffect(async () => {
+    try {
+      let response = await axios.get(`${URL}/api/level0/remainquant`, {
+        method: 'GET',
+        headers: { token: `${token}` },
+      });
+      var t = await response.data.remaining;
+      setr(t);
+      if (t == 0) {
+        setOver(true);
+      }
+      //console.log(t);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }, []);
+  async function getremain() {
+    try {
+      let response = await axios.get(`${URL}/api/level0/remainquant`, {
+        method: 'GET',
+        headers: { token: `${token}` },
+      });
+      var t = await response.data.remaining;
+      setr(t);
+      //console.log(t);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
   let handleSubmit = (e) => {
     e.preventDefault();
     const date = Date.now();
@@ -118,8 +156,12 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           setSendToName('');
           setSendMail('');
           setMessageText('');
+          getremain('');
         } else {
           setOpen(false);
+          if (r == 0) {
+            setOver(true);
+          }
         }
       } catch (error) {
         console.error(error.message);
@@ -148,6 +190,13 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     }
 
     setOpen(false);
+  };
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOver(false);
   };
   const [c1, setc1] = useState('none');
   const [c2, setc2] = useState('inline');
@@ -183,6 +232,21 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
   }
 
+  /*function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+         next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}*/
+
   let presentViewportWidth = window.innerWidth;
   let presentViewportHeight = window.innerHeight;
   const getCSSVariables = () => {
@@ -198,7 +262,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   //)
   //else{
   if (componentEnabled) {
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 760) {
       return (
         <div className="letterpopup-classes-root" style={getCSSVariables()}>
           {spinner ? (
@@ -287,7 +351,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                         className={classes.hexap}
                         aria-label="notifications"
                       >
-                        {data.filter(
+                        {data1.filter(
                           (dataset) =>
                             dataset.name
                               .toLowerCase()
@@ -301,7 +365,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                               .includes(name.toLowerCase()) ||
                             dataset.email.includes(name.toLowerCase())
                         ).length > 0 ? (
-                          data
+                          data1
                             .filter(
                               (dataset) =>
                                 dataset.name
@@ -399,6 +463,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
               Message Sent successfully!!
             </Alert>
           </Snackbar>
+          <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+            <Alert onClose={handleClose1} severity="error">
+              Daily message limit of 40 exhausted
+            </Alert>
+          </Snackbar>
         </div>
       );
     } else {
@@ -470,7 +539,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     className={classes.hexap}
                     aria-label="notifications"
                   >
-                    {data.filter(
+                    {data1.filter(
                       (dataset) =>
                         dataset.name
                           .toLowerCase()
@@ -484,7 +553,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                           .includes(name.toLowerCase()) ||
                         dataset.email.includes(name.toLowerCase())
                     ).length > 0 ? (
-                      data
+                      data1
                         .filter(
                           (dataset) =>
                             dataset.name
@@ -578,6 +647,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               Message Sent successfully!!
+            </Alert>
+          </Snackbar>
+          <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+            <Alert onClose={handleClose1} severity="error">
+              Daily message limit of 40 exhausted
             </Alert>
           </Snackbar>
         </div>
