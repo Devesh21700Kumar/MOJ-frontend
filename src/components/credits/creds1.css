@@ -56,6 +56,7 @@ div.devs .photos1 > div > div:first-child {
 }
 
 .department {
+  font-weight: bold;
   min-width: 350px;
 }
 
@@ -67,6 +68,7 @@ div.devs .photos1 > div > div:first-child {
 
 .department-selected {
   color: #ef4646;
+  font-weight: bold;
   min-width: 350px;
 }
 
@@ -82,10 +84,12 @@ div.devs .photos1 > div > div:first-child {
   transition: 150ms ease-in-out;
 }
 
-.photos > div > div:first-child:hover {
+.photos > div > div:hover {
+  transform: translateX(2px);
   opacity: 0.8;
 }
-.photos > div > div:second-child:hover {
+
+/*.photos > div > div:second-child:hover {
   opacity: 0.8;
 }
 
@@ -119,7 +123,7 @@ div.devs .photos1 > div > div:first-child {
 
 .photos > div > div:tenth-child:hover {
   opacity: 0.8;
-}
+}*/
 
 .photos1 {
   display: grid;
@@ -131,7 +135,7 @@ div.devs .photos1 > div > div:first-child {
 
 @media only screen and (max-width: 550px) {
   .photos {
-    margin-top: -100px;
+    margin-top: -200px;
     transform: scale(0.8);
     display: grid;
     margin-left: 8vw;

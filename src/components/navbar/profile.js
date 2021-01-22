@@ -184,7 +184,8 @@ export default function Profile({ name, bitsId }) {
           </ListItem>
           <Divider />
           {location.pathname.match(/admin/) ||
-          location.pathname.match(/core/) ? (
+          location.pathname.match(/core/) ||
+          location.pathname.match(/stats/) ? (
             <React.Fragment>
               <ListItem button onClick={handleClick2}>
                 <ListItemText

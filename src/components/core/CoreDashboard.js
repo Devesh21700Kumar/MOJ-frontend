@@ -176,7 +176,7 @@ const Dashboard = () => {
           <ChevronLeftRounded />
         </IconButton>
         <p className={classes.paginatorText}>
-          {msgPage * 10 + 1} -
+          {msgs.length == 0 ? 0 : msgPage * 10 + 1} -
           {(msgPage + 1) * 10 > msgs.length ? msgs.length : msgPage * 10 + 10}{' '}
           of {msgs.length}
         </p>
@@ -232,8 +232,10 @@ const Dashboard = () => {
             className={classes.refreshButton}
             onClick={async () => {
               await setSpinner(true);
-              await setTimeout(() => setSpinner(false), 1500);
               await fetchMessages();
+              await handleChangePage();
+              await setTimeout(() => setSpinner(false), 1500);
+              //await fetchMessages();
             }}
           >
             <CachedRounded />
@@ -272,7 +274,7 @@ const Dashboard = () => {
               <CircularProgress
                 className={classes.centre}
                 //className="letterpopup-classes-cross2"
-                color="#fffbeb"
+                style={{ color: '#ef4646' }}
               />
             </Grid>
           </Grid>

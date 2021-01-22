@@ -878,6 +878,15 @@ const AdminDashboard = () => {
                       await setSpinner(true);
                       await handleApproval();
                       await fetchMessages();
+                      if (greenFlag === green) {
+                        await setf(green);
+                      }
+                      if (yellowFlag === yellow) {
+                        await setf(yellow);
+                      }
+                      if (redFlag === red) {
+                        await setf(red);
+                      }
                       await setTimeout(() => setSpinner(false), 500);
                     }}
                   >
@@ -1022,7 +1031,7 @@ const AdminDashboard = () => {
                   <CircularProgress
                     className={classes.centre}
                     //className="letterpopup-classes-cross2"
-                    color="#fffbeb"
+                    style={{ color: '#ef4646' }}
                   />
                 </Grid>
               </Grid>
@@ -1058,6 +1067,15 @@ const AdminDashboard = () => {
                   await setSpinner(true);
                   await handleRejection();
                   await fetchMessages();
+                  if (greenFlag === green) {
+                    await setf(green);
+                  }
+                  if (yellowFlag === yellow) {
+                    await setf(yellow);
+                  }
+                  if (redFlag === red) {
+                    await setf(red);
+                  }
                   await setTimeout(() => setSpinner(false), 500);
                 }}
               >
@@ -1089,6 +1107,15 @@ const AdminDashboard = () => {
                   await setSpinner(true);
                   await handleApproval();
                   await fetchMessages();
+                  if (greenFlag === green) {
+                    await setf(green);
+                  }
+                  if (yellowFlag === yellow) {
+                    await setf(yellow);
+                  }
+                  if (redFlag === red) {
+                    await setf(red);
+                  }
                   await setTimeout(() => setSpinner(false), 500);
                 }}
               >
