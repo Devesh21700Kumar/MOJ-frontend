@@ -113,6 +113,7 @@ function Login() {
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
         uxMode="popup"
+        redirectUri="https://jogw.netlify.app/home"
         render={(renderProps) => (
           <Button
             onClick={renderProps.onClick}
