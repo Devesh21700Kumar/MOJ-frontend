@@ -104,7 +104,7 @@ const Team = () => {
                   }}
                   className="department selected"
                 >
-                  Organizing Committee
+                  Coordinators
                 </div>
                 <div
                   onClick={(e) => {
