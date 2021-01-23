@@ -414,7 +414,7 @@ const AssignCoreMembersPopup = ({
   }
 
   const handleOpen = () => {
-    if (messageId.length) {
+    if (messageId.length != null && messageId.length) {
       setOpen(true);
     } else {
       setOpen(false);
@@ -494,6 +494,7 @@ const AssignCoreMembersPopup = ({
                   await setSpinner(true);
                   //setTimeout(() => setSpinner(false), 500);
                   //await handleClose();
+                  await setMessageId([]);
                   await fetchCoreMembers();
                   await fetchMessages();
                   await setTimeout(() => setSpinner(false), 500);

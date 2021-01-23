@@ -531,15 +531,19 @@ const AdminDashboard = () => {
     else return value;
   };
 
+  const null1 = [];
+
   const hc1 = () => {
     if (j > 50) {
       setj(j - 50);
       setValue(null);
+      setMessageId(null1);
       if (checked25) setChecked25(!checked25);
       if (checked50) setChecked50(!checked50);
     } else if (j <= 50) {
       setj(0);
       setValue(null);
+      setMessageId(null1);
       if (checked25) setChecked25(!checked25);
       if (checked50) setChecked50(!checked50);
     }
@@ -549,21 +553,25 @@ const AdminDashboard = () => {
     if (j + 50 < f.length - 50) {
       setj(j + 50);
       setValue(null);
+      setMessageId(null1);
       if (checked25) setChecked25(!checked25);
       if (checked50) setChecked50(!checked50);
     } else if (f.length - (j + 50) < 50 && f.length - (j + 50) > 0) {
       setj(j + 50);
       setValue(null);
+      setMessageId(null1);
       if (checked25) setChecked25(!checked25);
       if (checked50) setChecked50(!checked50);
     } else if (j + 50 == f.length - 50) {
       setj(j + 50);
       setValue(null);
+      setMessageId(null1);
       if (checked25) setChecked25(!checked25);
       if (checked50) setChecked50(!checked50);
     } else {
       setj(j);
       setValue(null);
+      setMessageId(null1);
       if (checked25) setChecked25(!checked25);
       if (checked50) setChecked50(!checked50);
     }
@@ -674,6 +682,7 @@ const AdminDashboard = () => {
             setValue(null);
             setj(0);
             fetchMessages();
+            setMessageId(null1);
             setc3(false);
             setSpinner(true);
             setTimeout(() => setSpinner(false), 500);
@@ -690,6 +699,7 @@ const AdminDashboard = () => {
             setGreenFlag(green);
             setChecked25(false);
             setChecked50(false);
+            setMessageId(null1);
             setf(greenFlaggedMsgs);
             setValue(null);
             setj(0);
@@ -718,6 +728,7 @@ const AdminDashboard = () => {
                     setChecked25(false);
                     setChecked50(false);
                     setValue(null);
+                    setMessageId(null1);
                     setj(0);
                     setSpinner(true);
                     //handleRejection();
@@ -735,6 +746,7 @@ const AdminDashboard = () => {
                     setYellowFlag(yellow);
                     setRedFlag('transparent');
                     setGreenFlag('transparent');
+                    setMessageId(null1);
                     setChecked25(false);
                     setChecked50(false);
                     //setChecked(false);
@@ -760,6 +772,7 @@ const AdminDashboard = () => {
                     setChecked25(false);
                     setChecked50(false);
                     setValue(null);
+                    setMessageId(null1);
                     //setChecked(false);
                     setj(0);
                     //fetchMessages();
