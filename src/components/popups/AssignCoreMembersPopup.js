@@ -176,6 +176,7 @@ const SingleListItem = ({
   setChecked25,
   checked50,
   setChecked50,
+  fetchCoreMembers,
   value,
   setSpinner,
   setValue,
@@ -207,19 +208,22 @@ const SingleListItem = ({
         if (ok) {
           setSnackBarOpen(true);
           setOpen(false);
-          fetchMessages();
+          //fetchMessages();
           setMessageId([]);
           if (checked25) setChecked25(false);
           if (checked50) setChecked50(false);
           if (value) setValue(null);
-          setSpinner(true);
+          await setSpinner(true);
+          await fetchMessages();
+          await fetchCoreMembers();
           //setTimeout(() => setSpinner(false), 500);
           //await handleClose();
-          setTimeout(() => setSpinner(false), 500);
+          await setTimeout(() => setSpinner(false), 500);
         }
         if (error) {
           setSnackBarOpen(true);
           fetchMessages();
+          fetchCoreMembers();
           setErrorMessage(error);
           setOpen(false);
         }
@@ -282,6 +286,7 @@ const SingleListItem = ({
 const NamesList = ({
   searchedData,
   data,
+  fetchCoreMembers,
   messageId,
   setMessageId,
   setSnackBarOpen,
@@ -304,6 +309,7 @@ const NamesList = ({
         data.map((result, index) => {
           return (
             <SingleListItem
+              fetchCoreMembers={fetchCoreMembers}
               setSpinner={setSpinner}
               index={index}
               name={result.name}
@@ -329,6 +335,8 @@ const NamesList = ({
         searchedData.map((result, index) => {
           return (
             <SingleListItem
+              fetchCoreMembers={fetchCoreMembers}
+              setSpinner={setSpinner}
               index={index}
               name={result.name}
               bitsId={result.bitsId}
@@ -394,8 +402,19 @@ const AssignCoreMembersPopup = ({
     fetchCoreMembers();
   }, [setSearchResults]);
 
+  async function fetchCoreMembers() {
+    const { members } = await (
+      await fetch(`${URL}/api/level2/coreMembers`, {
+        method: 'GET',
+        headers: { token: `${localStorage.getItem('token')}` },
+      })
+    ).json();
+
+    setSearchResults(members);
+  }
+
   const handleOpen = () => {
-    if (messageId.length) {
+    if (messageId.length != null && messageId.length) {
       setOpen(true);
     } else {
       setOpen(false);
@@ -455,6 +474,7 @@ const AssignCoreMembersPopup = ({
           await setSpinner(true);
           //setTimeout(() => setSpinner(false), 500);
           //await handleClose();
+          await fetchCoreMembers();
           await fetchMessages();
           await setTimeout(() => setSpinner(false), 500);
           await handleClose();
@@ -474,6 +494,10 @@ const AssignCoreMembersPopup = ({
                   await setSpinner(true);
                   //setTimeout(() => setSpinner(false), 500);
                   //await handleClose();
+                  await setChecked25(false);
+                  await setChecked50(false);
+                  await setMessageId([]);
+                  await fetchCoreMembers();
                   await fetchMessages();
                   await setTimeout(() => setSpinner(false), 500);
                   //await handleClose();
@@ -496,6 +520,7 @@ const AssignCoreMembersPopup = ({
               </Paper>
               <Paper className={classes.searchResults}>
                 <NamesList
+                  fetchCoreMembers={fetchCoreMembers}
                   setSpinner={setSpinner}
                   searchedData={filterSearch()}
                   data={searchResults}
