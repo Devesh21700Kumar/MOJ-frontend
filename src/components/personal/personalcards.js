@@ -217,9 +217,9 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                       <p className={classes.date}>
                         {screen.width >= 591
                           ? screen.width >= 680
-                            ? dateFormatter(text.date).slice(0, 23)
-                            : dateFormatter(text.date).slice(0, 23)
-                          : dateFormatter(text.date).slice(0, 23)}
+                            ? dateFormatter(text.date)
+                            : dateFormatter(text.date)
+                          : dateFormatter(text.date)}
                       </p>
                     </b>
                   </Typography>
@@ -332,9 +332,9 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                       <p className={classes.date}>
                         {screen.width >= 591
                           ? screen.width >= 680
-                            ? dateFormatter(text.date).slice(0, 23)
-                            : dateFormatter(text.date).slice(0, 23)
-                          : dateFormatter(text.date).slice(0, 23)}
+                            ? dateFormatter(text.date)
+                            : dateFormatter(text.date)
+                          : dateFormatter(text.date)}
                       </p>
                     </b>
                   </Typography>
