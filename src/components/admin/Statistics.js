@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ButtonBase, Card, Grid } from '@material-ui/core';
+import { Card, Grid } from '@material-ui/core';
 import CsvDownload from 'react-json-to-csv';
 import Navbar from '../navbar/navbar';
 import URL from '../util/url';
@@ -72,9 +72,14 @@ const useStyles = makeStyles((theme) =>
       fontWeight: 'bold',
       fontFamily: 'Oxygen',
       outline: 'none',
-    },
-    inactiveOuter: {
-      borderRadius: '30px',
+      transition: 'all ease-in-out 0.3s',
+      '&:hover': {
+        backgroundColor: '#5CDE1B',
+        transform: 'translateY(-2px)',
+      },
+      '&:active': {
+        transform: 'scale(0.99)',
+      },
     },
     '@media(min-width: 320px)': {
       stat: {
@@ -220,15 +225,13 @@ const Statistics = () => {
             )}
           </Grid>
           {inactiveUsers.length > 0 ? (
-            <ButtonBase className={classes.inactiveOuter}>
-              <CsvDownload
-                data={inactiveUsers}
-                className={classes.inactive}
-                filename="inactive_users.csv"
-              >
-                Download CSV File of Inactive Users
-              </CsvDownload>
-            </ButtonBase>
+            <CsvDownload
+              data={inactiveUsers}
+              className={classes.inactive}
+              filename="inactive_users.csv"
+            >
+              Download CSV File of Inactive Users
+            </CsvDownload>
           ) : null}
         </div>
       </div>

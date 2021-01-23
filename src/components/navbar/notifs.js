@@ -116,7 +116,7 @@ export default function Notifs() {
             >
               <ListItemText
                 className={classes.typography}
-                primary="Redirect to Admin"
+                primary="Go to Admin"
                 onClick={handleClick0}
               />
             </ListItem>
@@ -130,7 +130,7 @@ export default function Notifs() {
             >
               <ListItemText
                 className={classes.typography}
-                primary="Redirect to Core"
+                primary="Go to Core"
                 onClick={handleClick1}
               />
             </ListItem>
@@ -138,7 +138,7 @@ export default function Notifs() {
             <ListItem button className={classes.hey} onClick={handleClick2}>
               <ListItemText
                 className={classes.typography}
-                primary="Redirect to Home"
+                primary="Go to Home"
                 onClick={handleClick2}
               />
             </ListItem>

@@ -34,11 +34,6 @@
 .letterpopup-classes-root.letterpopup-classes-disabled1 {
   visibility: hidden;
 }
-.letterpopup-classes-form1 {
-  position: absolute;
-  height: 100%;
-  height: -webkit-fill-available;
-}
 
 .letterpopup-classes-cross1 {
   position: fixed;
@@ -87,86 +82,53 @@
 .search1 {
   margin-left: -3.5vw;
 }
-.letterpopup-classes-sendToTextField1 {
-  width: 120%;
-}
+
 .letterpopup-classes-message1 {
-  position: relative;
-  left: 50vw;
-  top: 50vh;
-  transform: translate(-50%, -50%);
-  background-size: contain;
-  background-color: rgba(0, 0, 0, 0) !important;
+  padding-top: 100px;
+  margin: auto;
   border-radius: 30px;
-  width: 90.9vw;
-  height: 86.9vh;
-  max-width: 90.9vw;
-  max-height: 86.9vh;
+  width: 100vw;
+  height: max-content;
 }
 .letterpopup-classes-form1 {
   position: initial;
   background-color: #fffde8;
   box-shadow: 5px 5px 2px rgb(66, 85, 72);
   border-radius: 18px;
-  height: 100%;
-  height: -webkit-fill-available;
+  padding: 30px;
+  width: max-content;
+  height: max-content;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.letterpopup-classes-messageBoxesWrapper1 {
-  position: relative;
-  height: 80%;
-  top: 29%;
-  left: 20%;
-  width: 60%;
-}
+
+.letterpopup-classes-messageBoxesWrapper1,
+.letterpopup-classes-sendTo1,
+.letterpopup-classes-sendToTextField1,
+.letterpopup-classes-messageBody1,
+.letterpopup-classes-messageTextField1,
 .letterpopup-classes-sendButton1 {
-  position: absolute;
-  left: 50%;
-  top: 80%;
-  transform: translateX(-50%);
-}
-
-.letterpopup-classes-sendTo1 {
-  position: relative;
-  margin-top: 3rem;
-}
-
-.letterpopup-classes-sendToTextField1 {
   width: 100%;
+  margin: auto !important;
 }
 
-.letterpopup-classes-messageTextField1 {
-  width: 60vw;
+.letterpopup-classes-messageBoxesWrapper1 {
+  width: 100%;
+  padding-bottom: 20px;
 }
 
 .letterpopup-classes-sendButton1 {
-  position: absolute;
-  left: 50%;
-  top: 80%;
-  transform: translateX(-50%);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (max-height: 780px) {
   .letterpopup-classes-message1 {
-    position: relative;
-    left: 50vw;
-    top: 50vh;
-    transform: translate(-50%, -50%);
-    background-size: contain;
     background-color: rgba(0, 0, 0, 0) !important;
     border-radius: 30px;
-    width: 90.9vw;
-    height: 83.9vh;
-    max-width: 90.9vw;
-    max-height: 86.9vh;
-    margin-top: -4vh;
-  }
-  .letterpopup-classes-sendButton1 {
-    position: absolute;
-    left: 50%;
-    top: 90%;
-    transform: translateX(-50%);
-  }
-  .letterpopup-classes-messageTextField1 {
-    width: 63vw;
   }
 }

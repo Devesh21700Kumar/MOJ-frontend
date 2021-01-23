@@ -20,8 +20,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import img from './../../imageassets/letter-coloured.svg';
 import axios from 'axios';
-import { SettingsOverscan } from '@material-ui/icons';
-//import img from '../../imageassets/love 1.png';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -77,7 +75,8 @@ const useStyles = makeStyles((theme) => ({
   },
   hexap: {
     maxHeight: '40vh',
-    width: '49vw',
+    width: 'max-content',
+    maxWidth: '300px',
     overflowY: 'scroll',
     overflowX: 'hidden',
   },
@@ -97,15 +96,16 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const [r, setr] = useState(40);
   const token = localStorage.getItem('token');
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
-  //console.log(data1.slice(0,100));
+  const [presentViewportWidth, setPresentViewPortWidth] = useState(0);
+  const [presentViewportHeight, setPresentViewPortHeight] = useState(0);
+
   if (token === null) return <Redirect to="/" />;
-  //const img = require(`./../../imageassets/letter-coloured.svg`);
+
   React.useEffect(async () => {
-    //return () => {
     await setComponentEnabled(enabled);
     await setTimeout(() => setSpinner(false), 1500);
-    //;
   }, [enabled]);
+
   useEffect(async () => {
     try {
       let response = await axios.get(`${URL}/api/level0/remainquant`, {
@@ -122,6 +122,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
       console.error(error.message);
     }
   }, []);
+
   async function getremain() {
     try {
       let response = await axios.get(`${URL}/api/level0/remainquant`, {
@@ -135,6 +136,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
       console.error(error.message);
     }
   }
+
   let handleSubmit = (e) => {
     e.preventDefault();
     const date = Date.now();
@@ -169,21 +171,25 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     }
     postMessage();
   };
+
   let calculateTextAreaRows = () => {
     let rows = 0;
     if (screen.width > 768) rows = parseInt((screen.height * 7.5) / 1080);
     else rows = parseInt((screen.height * 2) / 768);
     return rows;
   };
+
   let calculateTextAreaRows1 = () => {
     let rows = 0;
     if (screen.width > 768) rows = parseInt((screen.height * 7.5) / 1080);
     else rows = parseInt((screen.height * 2) / 768);
     return rows;
   };
+
   let hideMe = () => {
     toggleVisibility();
   };
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -191,6 +197,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
 
     setOpen(false);
   };
+
   const handleClose1 = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -198,9 +205,11 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
 
     setOver(false);
   };
+
   const [c1, setc1] = useState('none');
   const [c2, setc2] = useState('inline');
   const [c3, setc3] = useState(true);
+
   const handleClick = () => {
     if (c1 == 'none' && c2 == 'inline') {
       setc1('inline');
@@ -210,24 +219,29 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
       setc2('inline');
     }
   };
+
   const showme = () => {
     setc3(!c3);
     setSendToName('');
     setMessageText('');
     setSendMail('');
   };
+
   const handleClose2 = () => {
     setc1('none');
     setc2('inline');
   };
+
   const handleClick2 = () => {
     setc1('inline');
     setc2('none');
   };
+
   const handleClick3 = () => {
     setc1('inline');
     setc2('none');
   };
+
   function checkspace(dat) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
   }
@@ -246,21 +260,17 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
         return result * sortOrder;
     }
 }*/
+  useEffect(() => {
+    setPresentViewPortWidth(window.innerWidth);
+    setPresentViewPortHeight(window.innerHeight);
+  }, [presentViewportWidth, presentViewportHeight]);
 
-  let presentViewportWidth = window.innerWidth;
-  let presentViewportHeight = window.innerHeight;
   const getCSSVariables = () => {
     return {
       '--this-width-var': `${presentViewportWidth}px`,
       '--this-height-var': `${presentViewportHeight}px`,
     };
   };
-
-  // if(spinner)
-  //return(
-  //<CircularProgress color="secondary" />
-  //)
-  //else{
   if (componentEnabled) {
     if (window.innerWidth > 760) {
       return (
@@ -268,7 +278,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           {spinner ? (
             <CircularProgress
               className="letterpopup-classes-cross2"
-              color="#fffbeb"
+              style={{ color: '#fffbeb' }}
             />
           ) : (
             <div className="letterpopup-classes-cross" onClick={hideMe} />
@@ -294,11 +304,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
             className="letterpopup-classes-message"
           >
             {spinner ? (
-              <div
-              //className={classes.noMessages}
-              //elevation={0}
-              //className="letterpopup-classes-message"
-              ></div>
+              <div></div>
             ) : (
               <React.Fragment>
                 <form
@@ -345,7 +351,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     </div>
                     <Paper className={classes.hexap} elevation={3}>
                       <List
-                        style={{ display: c1 }}
+                        style={{ display: c1, width: '100%' }}
                         elevation={3}
                         component="nav"
                         className={classes.hexap}
@@ -384,6 +390,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                             .slice(0, 101)
                             .map((person, index) => (
                               <ListItem
+                                key={index}
                                 button
                                 onClick={() => {
                                   setSendToName(person.name);
@@ -392,7 +399,6 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                                 }}
                               >
                                 <ListItemText
-                                  className
                                   primary={person.name}
                                   secondary={person.email}
                                 />
@@ -405,7 +411,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                               handleClose2();
                             }}
                           >
-                            <ListItemText className primary="             " />
+                            <ListItemText primary="          " />
                           </ListItem>
                         )}
                       </List>
@@ -571,6 +577,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                         .slice(0, 101)
                         .map((person, index) => (
                           <ListItem
+                            key={index}
                             button
                             onClick={() => {
                               setSendToName(person.name);
@@ -579,7 +586,6 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                             }}
                           >
                             <ListItemText
-                              className
                               primary={person.name}
                               secondary={person.email}
                             />
@@ -588,10 +594,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     ) : (
                       <ListItem button>
                         <ListItemText
-                          className
                           primary="           "
                           onClick={() => {
-                            //setSendToAddress(person.email);
                             handleClose2();
                           }}
                         />
@@ -637,6 +641,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     color: 'white',
                     backgroundColor: '#EF4646',
                     border: '1.5px solid black',
+                    margin: 'auto',
                   }}
                 >
                   Send
@@ -658,5 +663,4 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
       );
     }
   } else return <div />;
-  //}
 }
