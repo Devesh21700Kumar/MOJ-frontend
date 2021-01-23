@@ -416,16 +416,18 @@ const AdminDashboard = () => {
 
   const handleChange25 = () => {
     if (checked50) setChecked50(!checked50);
-
+    setMessageId([]);
     setValue(null);
     setChecked25(!checked25);
     if (!checked25) {
       if (redFlag === red) {
+        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
         }
       } else if (yellowFlag === yellow) {
+        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
@@ -434,6 +436,7 @@ const AdminDashboard = () => {
             ]);
         }
       } else if (greenFlag === green) {
+        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
@@ -442,6 +445,7 @@ const AdminDashboard = () => {
             ]);
         }
       } else {
+        setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
@@ -453,7 +457,7 @@ const AdminDashboard = () => {
 
   const handleChange50 = () => {
     if (checked25) setChecked25(!checked25);
-
+    setMessageId([]);
     setValue(null);
     setChecked50(!checked50);
     if (!checked50) {
