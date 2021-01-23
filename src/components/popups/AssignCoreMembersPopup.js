@@ -494,6 +494,8 @@ const AssignCoreMembersPopup = ({
                   await setSpinner(true);
                   //setTimeout(() => setSpinner(false), 500);
                   //await handleClose();
+                  await setChecked25(false);
+                  await setChecked50(false);
                   await setMessageId([]);
                   await fetchCoreMembers();
                   await fetchMessages();
