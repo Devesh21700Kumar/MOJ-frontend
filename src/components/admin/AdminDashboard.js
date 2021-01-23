@@ -416,6 +416,12 @@ const AdminDashboard = () => {
 
   const handleChange25 = () => {
     if (checked50) setChecked50(!checked50);
+    if (checked25 && !checked50) {
+      setChecked25(!checked25);
+      setMessageId([]);
+      setSpinner(true);
+      setTimeout(() => setSpinner(false), 500);
+    }
     setMessageId([]);
     setValue(null);
     setChecked25(!checked25);
@@ -457,6 +463,12 @@ const AdminDashboard = () => {
 
   const handleChange50 = () => {
     if (checked25) setChecked25(!checked25);
+    if (!checked25 && checked50) {
+      setChecked50(!checked25);
+      setMessageId([]);
+      setSpinner(true);
+      setTimeout(() => setSpinner(false), 500);
+    }
     setMessageId([]);
     setValue(null);
     setChecked50(!checked50);
