@@ -84,6 +84,8 @@
 }
 
 .letterpopup-classes-message1 {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border-radius: 30px;
   padding-top: 100px;
   margin: auto;
   border-radius: 30px;
@@ -124,11 +126,4 @@
   display: flex !important;
   justify-content: center;
   align-items: center;
-}
-
-@media only screen and (max-height: 780px) {
-  .letterpopup-classes-message1 {
-    background-color: rgba(0, 0, 0, 0) !important;
-    border-radius: 30px;
-  }
 }
