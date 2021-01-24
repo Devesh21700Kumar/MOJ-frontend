@@ -98,6 +98,30 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [presentViewportWidth, setPresentViewPortWidth] = useState(0);
   const [presentViewportHeight, setPresentViewPortHeight] = useState(0);
+  const [isLive, setIsLive] = useState();
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  async function isWebsiteLive() {
+    const { ok, error } = await (
+      await fetch(`${URL}/api/level0/islive`, {
+        method: 'GET',
+        headers: { token: `${token}` },
+      })
+    ).json();
+
+    if (ok) {
+      setIsLive(ok);
+    } else if (error) {
+      setIsLive(0);
+      setErrorMessage(error);
+      setErrorOpen(true);
+    }
+  }
+
+  useEffect(() => {
+    isWebsiteLive();
+  }, [isLive, errorMessage]);
 
   if (token === null) return <Redirect to="/" />;
 
@@ -139,6 +163,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
 
   let handleSubmit = (e) => {
     e.preventDefault();
+    isWebsiteLive();
     const date = Date.now();
     async function postMessage() {
       try {
@@ -204,6 +229,14 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     }
 
     setOver(false);
+  };
+
+  const handleErrorClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setErrorOpen(false);
   };
 
   const [c1, setc1] = useState('none');
@@ -454,6 +487,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                         color: 'white',
                         backgroundColor: '#EF4646',
                         border: '1.5px solid black',
+                        display: isLive ? 'block' : 'none',
                       }}
                     >
                       Send
@@ -463,6 +497,16 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
               </React.Fragment>
             )}
           </Paper>
+
+          <Snackbar
+            open={errorOpen}
+            autoHideDuration={2000}
+            onClose={handleErrorClose}
+          >
+            <Alert onClose={handleErrorClose} severity="error">
+              {errorMessage}
+            </Alert>
+          </Snackbar>
 
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
@@ -642,6 +686,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     backgroundColor: '#EF4646',
                     border: '1.5px solid black',
                     margin: 'auto',
+                    display: isLive ? 'block' : 'none',
                   }}
                 >
                   Send
@@ -649,6 +694,17 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
               </div>
             </form>
           </Paper>
+
+          <Snackbar
+            open={errorOpen}
+            autoHideDuration={2000}
+            onClose={handleErrorClose}
+          >
+            <Alert onClose={handleErrorClose} severity="error">
+              {errorMessage}
+            </Alert>
+          </Snackbar>
+
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               Message Sent successfully!!

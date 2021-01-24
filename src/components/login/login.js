@@ -68,7 +68,7 @@ function Login() {
 
   const onSuccess = (res) => {
     let accessToken = res.accessToken;
-    console.log(accessToken)
+    console.log(accessToken);
     let email = res.profileObj.email;
     let str = email.match(/@goa.bits-pilani.ac.in/i);
     if (str === null) {

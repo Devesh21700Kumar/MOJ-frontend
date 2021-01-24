@@ -334,7 +334,8 @@ const AdminDashboard = () => {
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
   const [spinner, setSpinner] = useState(false);
-  // const [checked, setChecked] = useState(false);
+  const [c3, setc3] = useState(false);
+  const [isLive, setIsLive] = useState();
 
   const token = localStorage.getItem('token');
 
@@ -504,43 +505,6 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    if (checked25) setChecked25(!checked25);
-    if (checked50) setChecked50(!checked50);
-
-    if (value) {
-      if (redFlag === red) {
-        for (let i = 0; i < value; i++) {
-          if (redFlaggedMsgs[i])
-            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
-        }
-      } else if (yellowFlag === yellow) {
-        for (let i = 0; i < value; i++) {
-          if (yellowFlaggedMsgs[i])
-            setMessageId((messageId) => [
-              ...messageId,
-              yellowFlaggedMsgs[i]._id,
-            ]);
-        }
-      } else if (greenFlag === green) {
-        for (let i = 0; i < value; i++) {
-          if (greenFlaggedMsgs[i])
-            setMessageId((messageId) => [
-              ...messageId,
-              greenFlaggedMsgs[i]._id,
-            ]);
-        }
-      } else {
-        for (let i = 0; i < value; i++) {
-          if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
-        }
-      }
-    } else {
-      setMessageId([]);
-    }
-  };
-
   const setNumber = () => {
     if (checked25) return 25;
     else if (checked50) return 50;
@@ -661,19 +625,46 @@ const AdminDashboard = () => {
     postApprovedMessages();
   };
 
-  const getMaxNumber = () => {
-    if (redFlag === red) {
-      return redFlaggedMsgs.length;
-    } else if (yellowFlag === yellow) {
-      return yellowFlaggedMsgs.length;
-    } else if (greenFlag === green) {
-      return greenFlaggedMsgs.length;
-    } else {
-      return msgs.length;
+  useEffect(() => {
+    (async () => {
+      const { ok } = await (
+        await fetch(`${URL}/api/level0/islive`, {
+          method: 'GET',
+          headers: { token: `${token}` },
+        })
+      ).json();
+
+      if (ok) setIsLive(ok);
+    })();
+  }, [isLive]);
+
+  const handleEnable = () => {
+    let lock;
+    async function lockWebsite() {
+      if (isLive) {
+        lock = 0;
+        const { ok } = await (
+          await fetch(`${URL}/api/level2/lock/${lock}`, {
+            method: 'GET',
+            headers: { token: `${token}` },
+          })
+        ).json();
+        setIsLive(!ok);
+      } else {
+        lock = 1;
+        const { ok } = await (
+          await fetch(`${URL}/api/level2/lock/${lock}`, {
+            method: 'GET',
+            headers: { token: `${token}` },
+          })
+        ).json();
+        setIsLive(ok);
+      }
     }
+
+    lockWebsite();
   };
 
-  const [c3, setc3] = useState(false);
   return (
     <div className={classes.root}>
       {/* Tabs */}
@@ -806,7 +797,13 @@ const AdminDashboard = () => {
             )}
             <div className={classes.select} style={{ display: display }}>
               <Grid item xs className={classes.subtitle1}>
-                Select
+                <Button
+                  className={classes.approveButton}
+                  variant="contained"
+                  onClick={handleEnable}
+                >
+                  {isLive ? 'Disable' : 'Enable'} Send
+                </Button>
               </Grid>
               <Grid item xs className={classes.subtitle2}>
                 First 25
