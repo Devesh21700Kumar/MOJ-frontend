@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import Divider from '@material-ui/core/Divider';
 import { IconButton } from '@material-ui/core';
 import './LetterPopup.css';
 import './sendmessage.css';
@@ -93,7 +94,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const [open, setOpen] = React.useState(false);
   const [spinner, setSpinner] = useState(true);
   const [over, setOver] = useState(false);
-  const [r, setr] = useState(40);
+  const [r, setr] = useState();
   const token = localStorage.getItem('token');
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [presentViewportWidth, setPresentViewPortWidth] = useState(0);
@@ -103,6 +104,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
 
   React.useEffect(async () => {
     await setComponentEnabled(enabled);
+    await getremain();
     await setTimeout(() => setSpinner(false), 1500);
   }, [enabled]);
 
@@ -283,15 +285,26 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           ) : (
             <div className="letterpopup-classes-cross" onClick={hideMe} />
           )}
-          <div
-            className="letterpopup-classes-icon1"
-            style={{ display: 'none' }}
-          >
-            <LabelImportantIcon
-              onClick={showme}
-              className="karge"
-              fontSize="large"
-            />
+          <div className="letterpopup-classes-icon1" style={{}}>
+            <Paper>
+              <List>
+                <ListItem
+                  style={{
+                    display: !messageBody.length > 0 ? 'none' : 'inline',
+                  }}
+                >
+                  {2000 - messageBody.length} characters remaining
+                </ListItem>
+                <Divider />
+                <ListItem
+                  style={{
+                    display: messageBody.length > 0 ? 'none' : 'inline',
+                  }}
+                >
+                  {r} daily messages remaining
+                </ListItem>
+              </List>
+            </Paper>
           </div>
 
           <Paper
@@ -480,15 +493,26 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
       return (
         <div className="letterpopup-classes-root1">
           <div className="letterpopup-classes-cross1" onClick={hideMe} />
-          <div
-            className="letterpopup-classes-icon1"
-            style={{ display: 'none' }}
-          >
-            <LabelImportantIcon
-              onClick={showme}
-              className="karge"
-              fontSize="large"
-            />
+          <div className="letterpopup-classes-icon1" style={{}}>
+            <Paper>
+              <List>
+                <ListItem
+                  style={{
+                    display: !messageBody.length > 0 ? 'none' : 'inline',
+                  }}
+                >
+                  {2000 - messageBody.length} characters remaining
+                </ListItem>
+                <Divider />
+                <ListItem
+                  style={{
+                    display: messageBody.length > 0 ? 'none' : 'inline',
+                  }}
+                >
+                  {r} daily messages remaining
+                </ListItem>
+              </List>
+            </Paper>
           </div>
           <Paper
             style={c3 ? { display: 'block' } : { display: 'none' }}
