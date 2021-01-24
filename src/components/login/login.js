@@ -97,11 +97,11 @@ function Login() {
           }
         })
         .catch((e) => {
+          // console.log(e);
           addToast('Please try again later.', {
             appearance: 'error',
             autoDismiss: true,
           });
-          // console.log(e);
         });
     }
   };
