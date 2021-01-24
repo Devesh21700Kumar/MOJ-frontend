@@ -68,6 +68,7 @@ function Login() {
 
   const onSuccess = (res) => {
     let accessToken = res.accessToken;
+    console.log(accessToken)
     let email = res.profileObj.email;
     let str = email.match(/@goa.bits-pilani.ac.in/i);
     if (str === null) {
@@ -91,7 +92,7 @@ function Login() {
           }
         })
         .catch((e) => {
-          console.log(e)
+          console.log(e);
           alert('Please try again later');
           // console.log(e);
         });
