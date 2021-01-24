@@ -38,8 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const clientId =
-  '125310704983-vdns6gu4872lcp00dssddhvaaocbgv3j.apps.googleusercontent.com';
+const clientId = process.env.REACT_APP_CLIENT_ID;
 
 function Login() {
   const classes = useStyles();
@@ -76,7 +75,7 @@ function Login() {
       alert('Please signin using BITSmail only!');
     } else {
       axios
-        .post('https://jogwbackend.herokuapp.com/api/user/oauthlogin', {
+        .post(`${process.env.REACT_APP_BACKEND_URL}/api/user/oauthlogin`, {
           access_token: accessToken,
           email: email,
         })
@@ -113,7 +112,7 @@ function Login() {
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
         uxMode="popup"
-        redirectUri="https://jogw.netlify.app/home"
+        redirectUri={process.env.REACT_APP_REDIRECT_URI}
         render={(renderProps) => (
           <Button
             onClick={renderProps.onClick}

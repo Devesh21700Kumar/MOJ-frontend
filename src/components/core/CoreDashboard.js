@@ -140,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const API_URL = 'https://jogwbackend.herokuapp.com/api/level1';
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/level1`;
 
 const Dashboard = () => {
   const classes = useStyles();
