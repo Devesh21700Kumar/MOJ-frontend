@@ -91,6 +91,7 @@ function Login() {
           }
         })
         .catch((e) => {
+          console.log(e)
           alert('Please try again later');
           // console.log(e);
         });
