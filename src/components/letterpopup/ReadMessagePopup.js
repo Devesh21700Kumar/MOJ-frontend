@@ -71,7 +71,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -90,7 +90,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -132,7 +132,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -212,7 +212,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -263,7 +263,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -283,7 +283,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -325,7 +325,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -386,7 +386,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -446,7 +446,7 @@ export default function ReadMessagePopup({
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
