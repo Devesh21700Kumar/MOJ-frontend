@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { Button } from '@material-ui/core';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 
 const useStyles = makeStyles((theme) => ({
   loginButton: {
@@ -65,15 +66,19 @@ function Login() {
   //     }
   //   })();
   // }, []);
+  const { addToast } = useToasts();
 
   const onSuccess = (res) => {
     let accessToken = res.accessToken;
-    console.log(accessToken)
     let email = res.profileObj.email;
     let str = email.match(/@goa.bits-pilani.ac.in/i);
     if (str === null) {
       signOut();
-      alert('Please signin using BITSmail only!');
+      // alert('Please signin using BITSmail only!');
+      addToast('Please signin using BITSmail only!', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
     } else {
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/api/user/oauthlogin`, {
@@ -92,8 +97,10 @@ function Login() {
           }
         })
         .catch((e) => {
-          console.log(e);
-          alert('Please try again later');
+          addToast('Please try again later.', {
+            appearance: 'error',
+            autoDismiss: true,
+          });
           // console.log(e);
         });
     }
