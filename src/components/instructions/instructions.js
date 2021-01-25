@@ -100,8 +100,8 @@ const instructions = () => {
               <li>
                 <h3>
                   3).Click on The Sent Tab to view your sent messages and the
-                  Inbox tab to view the messages you have received
-                  You will receive messages only after approval as they will ve verified..
+                  Inbox tab to view the messages you have received.
+                  You will receive messages only after approval as they will be verified..
                   so avoid NSFW content in the Message
                 </h3>
               </li>
