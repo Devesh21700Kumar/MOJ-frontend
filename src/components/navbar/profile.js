@@ -128,9 +128,9 @@ export default function Profile({ name, bitsId }) {
     setAnchorEl(null);
   };
 
-  const handle2 =()=>{
+  const handle2 = () => {
     history.push('/instructions');
-  }
+  };
 
   const handleLogout = () => {
     signOut();
@@ -216,13 +216,13 @@ export default function Profile({ name, bitsId }) {
             </React.Fragment>
           ) : location.pathname.match(/home/) ? (
             <React.Fragment>
-            <ListItem button className={classes.hey} onClick={handle1}>
-              <ListItemText
-                className={classes.typography}
-                primary="Credits"
-                //onClick={handle1}
-              />
-            </ListItem>
+              <ListItem button className={classes.hey} onClick={handle1}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Credits"
+                  //onClick={handle1}
+                />
+              </ListItem>
               <Divider />
               <ListItem button className={classes.hey} onClick={handle2}>
                 <ListItemText
@@ -230,34 +230,35 @@ export default function Profile({ name, bitsId }) {
                   primary="instructions"
                   //onClick={handle1}
                 />
-              </ListItem>    
-              </React.Fragment>        
-          ) : location.pathname.match(/instructions/) ? 
-          <React.Fragment>
-          <ListItem button className={classes.hey} onClick={handleClick2}>
-              <ListItemText
-                className={classes.typography}
-                primary="Home"
-                //onClick={handle1}
-              />
-            </ListItem>
-              <Divider />   
-            <ListItem button className={classes.hey} onClick={handle1}>       
-            <ListItemText
-              className={classes.typography}
-              primary="Credits"
-              //onClick={handle1}
-            />
-          </ListItem>   
-            </React.Fragment>   : (
+              </ListItem>
+            </React.Fragment>
+          ) : location.pathname.match(/instructions/) ? (
             <React.Fragment>
-            <ListItem button onClick={handleClick2}>
-              <ListItemText
-                className={classes.typography}
-                primary="Home"
-                //onClick={handle1}
-              />
-            </ListItem>
+              <ListItem button className={classes.hey} onClick={handleClick2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Home"
+                  //onClick={handle1}
+                />
+              </ListItem>
+              <Divider />
+              <ListItem button className={classes.hey} onClick={handle1}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Credits"
+                  //onClick={handle1}
+                />
+              </ListItem>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <ListItem button onClick={handleClick2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Home"
+                  //onClick={handle1}
+                />
+              </ListItem>
               <Divider />
               <ListItem button className={classes.hey} onClick={handle2}>
                 <ListItemText
@@ -265,8 +266,8 @@ export default function Profile({ name, bitsId }) {
                   primary="instructions"
                   //onClick={handle1}
                 />
-              </ListItem>    
-              </React.Fragment>             
+              </ListItem>
+            </React.Fragment>
           )}
           <Divider />
           <ListItem button onClick={handleLogout}>
