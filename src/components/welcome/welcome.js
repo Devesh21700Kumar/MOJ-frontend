@@ -307,7 +307,16 @@ export default function Welcome1() {
           </div>
           <div className={classes.empty}></div>
           <div className={classes.nirman} id="nirman">
-            <img src={nirmanLogo} alt="nirman" className={classes.nirmanLogo} />
+            <a
+              href="https://instagram.com/nirmaangoa?igshid=5bld8fkffclm"
+              target="_blank"
+            >
+              <img
+                src={nirmanLogo}
+                alt="nirman"
+                className={classes.nirmanLogo}
+              />
+            </a>
           </div>
           <div className={classes.empty}></div>
           <div className={classes.empty}></div>

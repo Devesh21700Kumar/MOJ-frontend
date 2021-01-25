@@ -99,6 +99,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [presentViewportWidth, setPresentViewPortWidth] = useState(0);
   const [presentViewportHeight, setPresentViewPortHeight] = useState(0);
+  const [disableSend, setDisableSend] = useState(false);
 
   if (token === null) return <Redirect to="/" />;
 
@@ -144,6 +145,8 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     const date = Date.now();
     async function postMessage() {
       try {
+        setDisableSend(true);
+
         const response = await (
           await fetch(`${URL}/api/level0/sendmessage`, {
             method: 'POST',
@@ -155,6 +158,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           })
         ).json();
         if (response.ok) {
+          setDisableSend(false);
           setOpen(true);
           call2();
           setSendToName('');
@@ -162,12 +166,14 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           setMessageText('');
           getremain('');
         } else {
+          setDisableSend(false);
           setOpen(false);
           if (r == 0) {
             setOver(true);
           }
         }
       } catch (error) {
+        setDisableSend(false);
         console.error(error.message);
       }
     }
@@ -428,16 +434,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                           setMessageText(e.target.value);
                         }}
                         variant="outlined"
-                        rows={
-                          // screen.width > 550
-                          //   ? screen.width > 900
-                          //     ? calculateTextAreaRows() + 0.2
-                          //     : calculateTextAreaRows() + 3.2
-                          //   : screen.width > 330
-                          //   ? calculateTextAreaRows() + 6.1
-                          //   : calculateTextAreaRows() + 4.1
-                          calculateTextAreaRows()
-                        }
+                        rows={calculateTextAreaRows()}
                       />
                     </div>
                   </div>
@@ -446,6 +443,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     className="letterpopup-classes-sendButton"
                   >
                     <Button
+                      disabled={disableSend}
                       variant="outlined"
                       type="submit"
                       style={{
@@ -644,6 +642,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                 className="letterpopup-classes-sendButton1"
               >
                 <Button
+                  disabled={disableSend}
                   variant="outlined"
                   type="submit"
                   style={{
