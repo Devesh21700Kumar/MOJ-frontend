@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  InputBase,
-  Snackbar,
-} from '@material-ui/core';
+import { Box, Button, Grid, IconButton, Snackbar } from '@material-ui/core';
 import { ChevronLeftRounded, ChevronRightRounded } from '@material-ui/icons';
 import CloseIcon from '@material-ui/icons/Close';
 import { Redirect } from 'react-router-dom';
@@ -379,7 +372,6 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    //setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -406,7 +398,6 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    //setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -427,13 +418,11 @@ const AdminDashboard = () => {
     setChecked25(!checked25);
     if (!checked25) {
       if (redFlag === red) {
-        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
         }
       } else if (yellowFlag === yellow) {
-        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
@@ -442,7 +431,6 @@ const AdminDashboard = () => {
             ]);
         }
       } else if (greenFlag === green) {
-        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
@@ -588,7 +576,6 @@ const AdminDashboard = () => {
         setSnackBarOpen(true);
         fetchMessages();
         setValue(null);
-        //setChecked(false);
         setChecked25(false);
         setChecked50(false);
       }
@@ -616,7 +603,6 @@ const AdminDashboard = () => {
         fetchMessages();
         setValue(null);
         setChecked25(false);
-        //setChecked(false);
         setChecked50(false);
       }
     }
@@ -697,7 +683,6 @@ const AdminDashboard = () => {
                     setMessageId(null1);
                     setj(0);
                     setSpinner(true);
-                    //handleRejection();
                     fetchMessages();
                     setTimeout(() => setSpinner(false), 500);
                   }}
@@ -715,14 +700,11 @@ const AdminDashboard = () => {
                     setMessageId(null1);
                     setChecked25(false);
                     setChecked50(false);
-                    //setChecked(false);
                     setValue(null);
                     setj(0);
                     setSpinner(true);
-                    //handleRejection();
                     fetchMessages();
                     setTimeout(() => setSpinner(false), 500);
-                    // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
                 >
@@ -739,14 +721,10 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue(null);
                     setMessageId(null1);
-                    //setChecked(false);
                     setj(0);
-                    //fetchMessages();
                     setSpinner(true);
-                    //handleRejection();
                     fetchMessages();
                     setTimeout(() => setSpinner(false), 500);
-                    // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
                 >
@@ -908,15 +886,12 @@ const AdminDashboard = () => {
                     .map((message, index) => (
                       <MessageCard
                         fetchMessages={fetchMessages}
-                        bitsId={message.receiverId}
                         body={message.body}
                         date={dateFormatter(message.date)}
                         key={redFlaggedMsgs.indexOf(message)}
                         index={redFlaggedMsgs.indexOf(message)}
                         _id={message._id}
                         setMessageId={setMessageId}
-                        //setChecked={setChecked}
-                        //checked={checked}
                         n={setNumber()}
                       />
                     ))
@@ -934,17 +909,14 @@ const AdminDashboard = () => {
                         ? j + 50
                         : greenFlaggedMsgs.length
                     )
-                    .map((message, index) => (
+                    .map((message) => (
                       <MessageCard
-                        bitsId={message.receiverId}
                         body={message.body}
-                        // checked={checked}
                         date={dateFormatter(message.date)}
                         key={greenFlaggedMsgs.indexOf(message)}
                         index={greenFlaggedMsgs.indexOf(message)}
                         _id={message._id}
                         setMessageId={setMessageId}
-                        //setChecked={setChecked}
                         n={setNumber()}
                       />
                     ))
@@ -962,17 +934,14 @@ const AdminDashboard = () => {
                         ? j + 50
                         : yellowFlaggedMsgs.length
                     )
-                    .map((message, index) => (
+                    .map((message) => (
                       <MessageCard
-                        bitsId={message.receiverId}
                         body={message.body}
-                        //checked={checked}
                         date={dateFormatter(message.date)}
                         key={yellowFlaggedMsgs.indexOf(message)}
                         index={yellowFlaggedMsgs.indexOf(message)}
                         _id={message._id}
                         setMessageId={setMessageId}
-                        //setChecked={setChecked}
                         n={setNumber()}
                       />
                     ))
@@ -982,17 +951,14 @@ const AdminDashboard = () => {
                   </h1>
                 )
               ) : msgs.length !== 0 ? (
-                msgs.map((message, index) => (
+                msgs.map((message) => (
                   <MessageCard
-                    bitsId={message.receiverId}
                     body={message.body}
                     date={dateFormatter(message.date)}
                     key={msgs.indexOf(message)}
                     index={msgs.indexOf(message)}
                     _id={message._id}
                     setMessageId={setMessageId}
-                    //setChecked={setChecked}
-                    //checked={checked}
                     n={setNumber()}
                   />
                 ))
@@ -1011,7 +977,6 @@ const AdminDashboard = () => {
                 <Grid item xs={3}>
                   <CircularProgress
                     className={classes.centre}
-                    //className="letterpopup-classes-cross2"
                     style={{ color: '#ef4646' }}
                   />
                 </Grid>
