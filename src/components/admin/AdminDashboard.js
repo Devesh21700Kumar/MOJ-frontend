@@ -335,7 +335,6 @@ const AdminDashboard = () => {
   const [display, setDisplay] = useState('none');
   const [spinner, setSpinner] = useState(false);
   const [c3, setc3] = useState(false);
-  // const [isLive, setIsLive] = useState();
 
   const token = localStorage.getItem('token');
 
@@ -625,46 +624,6 @@ const AdminDashboard = () => {
     postApprovedMessages();
   };
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const { ok } = await (
-  //       await fetch(`${URL}/api/level0/islive`, {
-  //         method: 'GET',
-  //         headers: { token: `${token}` },
-  //       })
-  //     ).json();
-
-  //     if (ok) setIsLive(ok);
-  //   })();
-  // }, [isLive]);
-
-  // const handleEnable = () => {
-  //   let lock;
-  //   async function lockWebsite() {
-  //     if (isLive) {
-  //       lock = 0;
-  //       const { ok } = await (
-  //         await fetch(`${URL}/api/level2/lock/${lock}`, {
-  //           method: 'GET',
-  //           headers: { token: `${token}` },
-  //         })
-  //       ).json();
-  //       setIsLive(!ok);
-  //     } else {
-  //       lock = 1;
-  //       const { ok } = await (
-  //         await fetch(`${URL}/api/level2/lock/${lock}`, {
-  //           method: 'GET',
-  //           headers: { token: `${token}` },
-  //         })
-  //       ).json();
-  //       setIsLive(ok);
-  //     }
-  //   }
-
-  //   lockWebsite();
-  // };
-
   return (
     <div className={classes.root}>
       {/* Tabs */}
@@ -798,13 +757,6 @@ const AdminDashboard = () => {
             <div className={classes.select} style={{ display: display }}>
               <Grid item xs className={classes.subtitle1}>
                 Select
-                {/* <Button
-                  className={classes.approveButton}
-                  variant="contained"
-                  onClick={handleEnable}
-                >
-                  {isLive ? 'Disable' : 'Enable'} Send
-                </Button> */}
               </Grid>
               <Grid item xs className={classes.subtitle2}>
                 First 25
@@ -812,6 +764,7 @@ const AdminDashboard = () => {
                   <svg
                     onClick={handleChange25}
                     display={!checked25 ? 'block' : 'none'}
+                    style={{ cursor: 'pointer' }}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
@@ -855,6 +808,7 @@ const AdminDashboard = () => {
                   <svg
                     onClick={handleChange50}
                     display={!checked50 ? 'block' : 'none'}
+                    style={{ cursor: 'pointer' }}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
