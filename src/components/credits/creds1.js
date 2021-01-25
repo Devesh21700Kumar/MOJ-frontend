@@ -9,7 +9,7 @@ import Navbar from '../navbar/navbar';
 import '../credits/creds1.css';
 import img1 from './../../imageassets/1A.jpeg';
 import img2 from './../../imageassets/2A.jpeg';
-import img3 from './../../imageassets/3A.jpeg';
+import img3 from './../../imageassets/3A.jpg';
 import img4 from './../../imageassets/4A.jpeg';
 import img5 from './../../imageassets/5A.jpeg';
 import img6 from './../../imageassets/1B.jpeg';
