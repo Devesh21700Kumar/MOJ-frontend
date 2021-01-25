@@ -141,7 +141,6 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    isWebsiteLive();
     const date = Date.now();
     async function postMessage() {
       try {
