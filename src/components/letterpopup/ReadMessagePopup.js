@@ -49,8 +49,8 @@ export default function ReadMessagePopup({
     setCurrentPosition(newPosition);
     if (
       currentPosition + 1 < messageArray.length &&
-      messageArray[currentPosition + 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0 &&
+      messageArray[currentPosition + 1][2] == 0 &&
+      messageArray[currentPosition][2] == 0 &&
       fix == 0
     ) {
       //console.log(messageArray[currentPosition][3] == 0);
@@ -65,7 +65,7 @@ export default function ReadMessagePopup({
                 token: `${localStorage.getItem('token')}`,
               },
               body: JSON.stringify({
-                id: messageArray[currentPosition + 1][2],
+                id: messageArray[currentPosition + 1][1],
               }),
             })
           ).json();
@@ -85,7 +85,7 @@ export default function ReadMessagePopup({
                 'Content-Type': 'application/json',
                 token: `${localStorage.getItem('token')}`,
               },
-              body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+              body: JSON.stringify({ id: messageArray[currentPosition][1] }),
             })
           ).json();
           if (response.ok) {
@@ -111,8 +111,8 @@ export default function ReadMessagePopup({
       postRead();
     } else if (
       currentPosition + 1 < messageArray.length &&
-      messageArray[currentPosition + 1][3] == 0 &&
-      messageArray[currentPosition][3] != 0 &&
+      messageArray[currentPosition + 1][2] == 0 &&
+      messageArray[currentPosition][2] != 0 &&
       fix == 0
     ) {
       async function postRead() {
@@ -126,7 +126,7 @@ export default function ReadMessagePopup({
                 token: `${localStorage.getItem('token')}`,
               },
               body: JSON.stringify({
-                id: messageArray[currentPosition + 1][2],
+                id: messageArray[currentPosition + 1][1],
               }),
             })
           ).json();
@@ -172,8 +172,8 @@ export default function ReadMessagePopup({
       postRead();
     } else if (
       currentPosition + 1 < messageArray.length &&
-      messageArray[currentPosition + 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0 &&
+      messageArray[currentPosition + 1][2] != 0 &&
+      messageArray[currentPosition][2] == 0 &&
       fix == 0
     ) {
       async function postRead() {
@@ -242,8 +242,8 @@ export default function ReadMessagePopup({
     //console.log(messageArray[currentPosition][2]);
     if (
       currentPosition - 1 >= 0 &&
-      messageArray[currentPosition - 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0 &&
+      messageArray[currentPosition - 1][2] == 0 &&
+      messageArray[currentPosition][2] == 0 &&
       fix == 0
     ) {
       async function postRead() {
@@ -257,7 +257,7 @@ export default function ReadMessagePopup({
                 token: `${localStorage.getItem('token')}`,
               },
               body: JSON.stringify({
-                id: messageArray[currentPosition - 1][2],
+                id: messageArray[currentPosition - 1][1],
               }),
             })
           ).json();
@@ -278,7 +278,7 @@ export default function ReadMessagePopup({
                 'Content-Type': 'application/json',
                 token: `${localStorage.getItem('token')}`,
               },
-              body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+              body: JSON.stringify({ id: messageArray[currentPosition][1] }),
             })
           ).json();
           if (response.ok) {
@@ -304,8 +304,8 @@ export default function ReadMessagePopup({
       postRead();
     } else if (
       currentPosition - 1 >= 0 &&
-      messageArray[currentPosition - 1][3] == 0 &&
-      messageArray[currentPosition][3] != 0 &&
+      messageArray[currentPosition - 1][2] == 0 &&
+      messageArray[currentPosition][2] != 0 &&
       fix == 0
     ) {
       async function postRead() {
@@ -319,7 +319,7 @@ export default function ReadMessagePopup({
                 token: `${localStorage.getItem('token')}`,
               },
               body: JSON.stringify({
-                id: messageArray[currentPosition - 1][2],
+                id: messageArray[currentPosition - 1][1],
               }),
             })
           ).json();
@@ -365,8 +365,8 @@ export default function ReadMessagePopup({
       postRead();
     } else if (
       currentPosition - 1 >= 0 &&
-      messageArray[currentPosition - 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0 &&
+      messageArray[currentPosition - 1][2] != 0 &&
+      messageArray[currentPosition][2] == 0 &&
       fix == 0
     ) {
       async function postRead() {
@@ -380,7 +380,7 @@ export default function ReadMessagePopup({
                 token: `${localStorage.getItem('token')}`,
               },
               body: JSON.stringify({
-                id: messageArray[currentPosition][2],
+                id: messageArray[currentPosition][1],
               }),
             })
           ).json();
@@ -428,7 +428,7 @@ export default function ReadMessagePopup({
   };
   let hideMe = () => {
     toggleVisibility(false);
-    if (messageArray[currentPosition][3] == 0 && fix == 0) {
+    if (messageArray[currentPosition][2] == 0 && fix == 0) {
       async function postRead() {
         //console.log(fix);
 
@@ -441,7 +441,7 @@ export default function ReadMessagePopup({
                 'Content-Type': 'application/json',
                 token: `${localStorage.getItem('token')}`,
               },
-              body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+              body: JSON.stringify({ id: messageArray[currentPosition][1] }),
             })
           ).json();
           if (response.ok) {
@@ -493,7 +493,7 @@ function SendMessage({
   spinner,
 }) {
   const classes = useStyles();
-  const dateFormatter = (timestamp) => {
+  /*const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
     var day =
       date.getDate() == 1
@@ -517,7 +517,7 @@ function SendMessage({
       hour12: true,
     });
     return day + month + year + time;
-  };
+  };*/
   let presentViewportWidth = window.innerWidth;
   let presentViewportHeight = window.innerHeight;
   const getCSSVariables = () => {
@@ -539,7 +539,7 @@ function SendMessage({
         {spinner ? (
           <CircularProgress
             className="letterpopup-classes-cross2"
-            color="#fffbeb"
+            style={{ color: '#fffbeb' }}
           />
         ) : (
           <div className="letterpopup-classes-cross" onClick={hideMe} />

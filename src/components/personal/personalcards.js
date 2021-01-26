@@ -15,7 +15,7 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
-    padding: '15px',
+    padding: '8px 15px 15px 15px',
     marginTop: '20px',
     backgroundColor: '#FFD94D',
     borderRadius: '15px',
@@ -140,7 +140,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
   const classes = useStyles();
   const { get } = useContext(Data);
   const i = useContext(Data1);
-  const dateFormatter = (timestamp) => {
+  /*const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
     var day =
       date.getDate() == 1
@@ -164,7 +164,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
       hour12: true,
     });
     return day + month + year + time;
-  };
+  };*/
   const [pos, setpos] = useState(0);
   const [vat, setvat] = useState(false);
   //const [read,setRead] = useState(1);
@@ -179,7 +179,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
           get={get}
           setGet={setGet}
           messageArray={get.map((obj) => {
-            return [obj.body, obj.date, obj._id, obj.read];
+            return [obj.body, obj._id, obj.read];
           })}
           startFrom={pos}
           enabled={vat}
@@ -205,9 +205,10 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <p className={text.read == 1 ? classes.date : classes.date1}>
                     {screen.width >= 591
                       ? screen.width >= 680
-                        ? text.body.slice(0, 43)
-                        : text.body.slice(0, 31)
-                      : text.body.slice(0, 23)}
+                        ? text.body.slice(0, 72)
+                        : text.body.slice(0, 44)
+                      : text.body.slice(0, 30)}
+                    <b>.....</b>
                   </p>
                 </div>
 
@@ -215,11 +216,12 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <Typography variant="h6" edge="start">
                     <b key="index">
                       <p className={classes.date}>
-                        {screen.width >= 591
+                        {/*screen.width >= 591
                           ? screen.width >= 680
                             ? dateFormatter(text.date)
                             : dateFormatter(text.date)
-                          : dateFormatter(text.date)}
+                          : dateFormatter(text.date)
+                        */}
                       </p>
                     </b>
                   </Typography>
@@ -237,7 +239,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
         <ReadMessagePopup
           fix={fix}
           messageArray={get.map((obj) => {
-            return [obj.body, obj.date];
+            return [obj.body];
           })}
           startFrom={pos}
           enabled={vat}
@@ -323,6 +325,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                         ? text.body.slice(0, 43)
                         : text.body.slice(0, 31)
                       : text.body.slice(0, 23)}
+                    <b>.....</b>
                   </p>
                 </div>
 
@@ -330,11 +333,12 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <Typography variant="h6" edge="start">
                     <b key="index">
                       <p className={classes.date}>
-                        {screen.width >= 591
+                        {/*screen.width >= 591
                           ? screen.width >= 680
                             ? dateFormatter(text.date)
                             : dateFormatter(text.date)
-                          : dateFormatter(text.date)}
+                          : dateFormatter(text.date)
+                        */}
                       </p>
                     </b>
                   </Typography>

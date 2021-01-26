@@ -21,6 +21,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import img from './../../imageassets/letter-coloured.svg';
 import axios from 'axios';
+import MailIcon from '@material-ui/icons/Mail';
+import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -99,6 +101,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [presentViewportWidth, setPresentViewPortWidth] = useState(0);
   const [presentViewportHeight, setPresentViewPortHeight] = useState(0);
+  const [disableSend, setDisableSend] = useState(false);
 
   if (token === null) return <Redirect to="/" />;
 
@@ -143,7 +146,9 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     e.preventDefault();
     const date = Date.now();
     async function postMessage() {
+      //setDisableSend(true);
       try {
+        setDisableSend(true);
         const response = await (
           await fetch(`${URL}/api/level0/sendmessage`, {
             method: 'POST',
@@ -155,6 +160,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           })
         ).json();
         if (response.ok) {
+          setDisableSend(false);
           setOpen(true);
           call2();
           setSendToName('');
@@ -162,12 +168,14 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           setMessageText('');
           getremain('');
         } else {
+          setDisableSend(false);
           setOpen(false);
           if (r == 0) {
             setOver(true);
           }
         }
       } catch (error) {
+        setDisableSend(false);
         console.error(error.message);
       }
     }
@@ -248,20 +256,6 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
   }
 
-  /*function dynamicSort(property) {
-    var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-         next line works with strings and numbers, 
-         * and you may want to customize it to your needs
-         
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}*/
   useEffect(() => {
     setPresentViewPortWidth(window.innerWidth);
     setPresentViewPortHeight(window.innerHeight);
@@ -287,23 +281,32 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           )}
           <div className="letterpopup-classes-icon1" style={{}}>
             <Paper>
-              <List>
-                <ListItem
-                  style={{
-                    display: !messageBody.length > 0 ? 'none' : 'inline',
-                  }}
-                >
-                  {2000 - messageBody.length} characters remaining
-                </ListItem>
-                <Divider />
-                <ListItem
-                  style={{
-                    display: messageBody.length > 0 ? 'none' : 'inline',
-                  }}
-                >
-                  {r} daily messages remaining
-                </ListItem>
-              </List>
+              <div
+                style={{
+                  display: !messageBody.length > 0 ? 'none' : 'inline',
+                }}
+              >
+                <IconButton>
+                  <SortByAlphaIcon
+                    style={{ paddingRight: '1rem', color: '#EF4646' }}
+                  />
+                  {2000 - messageBody.length}
+                </IconButton>
+              </div>
+              {/*<Divider/>*/}
+              <div
+                style={{
+                  display: messageBody.length > 0 ? 'none' : 'inline',
+                }}
+              >
+                <IconButton>
+                  <MailIcon
+                    style={{ paddingRight: '1rem', color: '#EF4646' }}
+                  />
+                  {''}
+                  {r}
+                </IconButton>
+              </div>
             </Paper>
           </div>
 
@@ -442,16 +445,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                           setMessageText(e.target.value);
                         }}
                         variant="outlined"
-                        rows={
-                          // screen.width > 550
-                          //   ? screen.width > 900
-                          //     ? calculateTextAreaRows() + 0.2
-                          //     : calculateTextAreaRows() + 3.2
-                          //   : screen.width > 330
-                          //   ? calculateTextAreaRows() + 6.1
-                          //   : calculateTextAreaRows() + 4.1
-                          calculateTextAreaRows()
-                        }
+                        rows={calculateTextAreaRows()}
                       />
                     </div>
                   </div>
@@ -462,6 +456,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                     <Button
                       variant="outlined"
                       type="submit"
+                      disabled={disableSend}
                       style={{
                         borderRadius: '20px',
                         color: 'white',
@@ -495,23 +490,32 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           <div className="letterpopup-classes-cross1" onClick={hideMe} />
           <div className="letterpopup-classes-icon1" style={{}}>
             <Paper>
-              <List>
-                <ListItem
-                  style={{
-                    display: !messageBody.length > 0 ? 'none' : 'inline',
-                  }}
-                >
-                  {2000 - messageBody.length} characters remaining
-                </ListItem>
-                <Divider />
-                <ListItem
-                  style={{
-                    display: messageBody.length > 0 ? 'none' : 'inline',
-                  }}
-                >
-                  {r} daily messages remaining
-                </ListItem>
-              </List>
+              <div
+                style={{
+                  display: !messageBody.length > 0 ? 'none' : 'inline',
+                }}
+              >
+                <IconButton>
+                  <SortByAlphaIcon
+                    style={{ paddingRight: '1rem', color: '#EF4646' }}
+                  />
+                  {2000 - messageBody.length}
+                </IconButton>
+              </div>
+              {/*<Divider/>*/}
+              <div
+                style={{
+                  display: messageBody.length > 0 ? 'none' : 'inline',
+                }}
+              >
+                <IconButton>
+                  <MailIcon
+                    style={{ paddingRight: '1rem', color: '#EF4646' }}
+                  />
+                  {''}
+                  {r}
+                </IconButton>
+              </div>
             </Paper>
           </div>
           <Paper
@@ -660,6 +664,7 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                 <Button
                   variant="outlined"
                   type="submit"
+                  disabled={disableSend}
                   style={{
                     borderRadius: '20px',
                     color: 'white',
