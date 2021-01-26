@@ -218,19 +218,19 @@ export default function Personal({ name, bitsId }, props) {
   const [rec, setrec] = useState(
     Array(0).fill({
       body: 'Lorem Ipsum BTits simply dummy.',
-      //date: '28th Dec 2020, 2:31 a.m.',
+      date: '28th Dec 2020, 2:31 a.m.',
     })
   );
   const [sent, setsent] = useState(
     Array(0)
       .fill({
         body: 'Lorem Ipsum is simply dummy.',
-        //date: ' 28th Dec 2020, 2:31 a.m.',
+        date: ' 28th Dec 2020, 2:31 a.m.',
       })
       .map((obj) => {
         return {
           body: obj.body + Math.random(),
-          //date: obj.data + Math.random(),
+          date: obj.data + Math.random(),
         };
       })
   );

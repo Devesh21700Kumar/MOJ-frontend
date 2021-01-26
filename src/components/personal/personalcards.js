@@ -15,6 +15,17 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
+    padding: '15px',
+    marginTop: '20px',
+    backgroundColor: '#FFD94D',
+    borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
+  },
+  msgCardR: {
     padding: '8px 15px 15px 15px',
     marginTop: '20px',
     backgroundColor: '#FFD94D',
@@ -140,7 +151,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
   const classes = useStyles();
   const { get } = useContext(Data);
   const i = useContext(Data1);
-  /*const dateFormatter = (timestamp) => {
+  const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
     var day =
       date.getDate() == 1
@@ -164,7 +175,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
       hour12: true,
     });
     return day + month + year + time;
-  };*/
+  };
   const [pos, setpos] = useState(0);
   const [vat, setvat] = useState(false);
   //const [read,setRead] = useState(1);
@@ -179,7 +190,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
           get={get}
           setGet={setGet}
           messageArray={get.map((obj) => {
-            return [obj.body, obj._id, obj.read];
+            return [obj.body, obj.date, obj._id, obj.read];
           })}
           startFrom={pos}
           enabled={vat}
@@ -191,7 +202,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
             .slice(i, i + 15 <= get.length ? i + 15 : get.length)
             .map((text, index) => (
               <Card
-                className={text.read == 1 ? classes.msgCard : classes.msgCard1}
+                className={text.read == 1 ? classes.msgCardR : classes.msgCard1}
                 raised={true}
                 key={(i / 15) * 15 + index}
                 onClick={async () => {
@@ -239,7 +250,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
         <ReadMessagePopup
           fix={fix}
           messageArray={get.map((obj) => {
-            return [obj.body];
+            return [obj.body, obj.date];
           })}
           startFrom={pos}
           enabled={vat}
@@ -333,12 +344,11 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <Typography variant="h6" edge="start">
                     <b key="index">
                       <p className={classes.date}>
-                        {/*screen.width >= 591
+                        {screen.width >= 591
                           ? screen.width >= 680
                             ? dateFormatter(text.date)
                             : dateFormatter(text.date)
-                          : dateFormatter(text.date)
-                        */}
+                          : dateFormatter(text.date)}
                       </p>
                     </b>
                   </Typography>
