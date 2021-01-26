@@ -1,0 +1,18 @@
+#parent {
+  overflow-wrap: break-word;
+  font-family: 'Oxygen';
+  color: '#FFFDE8';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+}
+
+#list {
+  float: left;
+  font-family: 'Oxygen';
+}

@@ -128,6 +128,10 @@ export default function Profile({ name, bitsId }) {
     setAnchorEl(null);
   };
 
+  const handle2 = () => {
+    history.push('/instructions');
+  };
+
   const handleLogout = () => {
     signOut();
     // localStorage.removeItem('token');
@@ -187,11 +191,11 @@ export default function Profile({ name, bitsId }) {
           location.pathname.match(/core/) ||
           location.pathname.match(/stats/) ? (
             <React.Fragment>
-              <ListItem button onClick={handleClick2}>
+              <ListItem className={classes.hey} button onClick={handleClick2}>
                 <ListItemText
                   className={classes.typography}
                   primary="Home"
-                  onClick={handle1}
+                  //onClick={handle1}
                 />
               </ListItem>
               <Divider />
@@ -199,26 +203,71 @@ export default function Profile({ name, bitsId }) {
                 <ListItemText
                   className={classes.typography}
                   primary="Credits"
-                  onClick={handle1}
+                  //onClick={handle1}
+                />
+              </ListItem>
+              <Divider />
+              <ListItem button className={classes.hey} onClick={handle2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="instructions"
                 />
               </ListItem>
             </React.Fragment>
           ) : location.pathname.match(/home/) ? (
-            <ListItem button className={classes.hey} onClick={handle1}>
-              <ListItemText
-                className={classes.typography}
-                primary="Credits"
-                onClick={handle1}
-              />
-            </ListItem>
+            <React.Fragment>
+              <ListItem button className={classes.hey} onClick={handle1}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Credits"
+                  //onClick={handle1}
+                />
+              </ListItem>
+              <Divider />
+              <ListItem button className={classes.hey} onClick={handle2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="instructions"
+                  //onClick={handle1}
+                />
+              </ListItem>
+            </React.Fragment>
+          ) : location.pathname.match(/instructions/) ? (
+            <React.Fragment>
+              <ListItem button className={classes.hey} onClick={handleClick2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Home"
+                  //onClick={handle1}
+                />
+              </ListItem>
+              <Divider />
+              <ListItem button className={classes.hey} onClick={handle1}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Credits"
+                  //onClick={handle1}
+                />
+              </ListItem>
+            </React.Fragment>
           ) : (
-            <ListItem button onClick={handleClick2}>
-              <ListItemText
-                className={classes.typography}
-                primary="Home"
-                onClick={handle1}
-              />
-            </ListItem>
+            <React.Fragment>
+              <ListItem button onClick={handleClick2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="Home"
+                  //onClick={handle1}
+                />
+              </ListItem>
+              <Divider />
+              <ListItem button className={classes.hey} onClick={handle2}>
+                <ListItemText
+                  className={classes.typography}
+                  primary="instructions"
+                  //onClick={handle1}
+                />
+              </ListItem>
+            </React.Fragment>
           )}
           <Divider />
           <ListItem button onClick={handleLogout}>
