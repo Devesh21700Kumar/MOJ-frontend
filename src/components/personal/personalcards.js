@@ -182,6 +182,57 @@ export default function PersonalCards({ text, index, fix, setGet }) {
   const toggleReadMessages = (b) => {
     setvat(b);
   };
+
+  async function postRead(i, index) {
+    console.log(get[(i / 15) * 15 + index].read);
+    if (get[(i / 15) * 15 + index].read == 0) {
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: get[(i / 15) * 15 + index]._id }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          //console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+      try {
+        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+          method: 'GET',
+          headers: { token: `${localStorage.getItem('token')}` },
+        });
+        var r = await response.data.data;
+        //setload(false);
+        //console.log(response);
+        setGet([...r].reverse());
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+
+    try {
+      let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+        method: 'GET',
+        headers: { token: `${localStorage.getItem('token')}` },
+      });
+      var r = await response.data.data;
+      //setload(false);
+      //console.log(response);
+      setGet([...r].reverse());
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   if (fix == 0) {
     return (
       <Fragment>
@@ -207,7 +258,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                 key={(i / 15) * 15 + index}
                 onClick={async () => {
                   await setpos((i / 15) * 15 + index);
-                  //await handler1();
+                  await postRead(i, index);
                   await toggleReadMessages(true);
                 }}
               >
@@ -265,10 +316,9 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                 className={classes.msgCard}
                 raised={true}
                 key={index}
-                onClick={() => {
-                  toggleReadMessages(true);
-                  setpos((i / 15) * 15 + index);
-                  //handler1();
+                onClick={async () => {
+                  await setpos((i / 15) * 15 + index);
+                  await toggleReadMessages(true);
                 }}
               >
                 <div className={classes.bitsId}>
