@@ -6,19 +6,10 @@ import URL from '../util/url';
 import axios from 'axios';
 import img from './../../imageassets/letter-coloured.svg';
 import CircularProgress from '@material-ui/core/CircularProgress';
-//const img = require(`./../../imageassets/letter-coloured.svg`);
 
-// message array structure:
-// [
-//      [message, dateTime],
-//      [message, dateTime],
-//      [message, dateTime], ...
-// ]
 const useStyles = makeStyles((theme) => ({
   noMessages: {
     position: 'absolute',
-    //left: '50vw',
-    //top: '50vh',
     transform: 'translate(90%, 90%)',
   },
 }));
@@ -42,6 +33,8 @@ export default function ReadMessagePopup({
     //;
   }, [enabled]);
 
+  //---Next----//
+
   let nextMessage = () => {
     let newPosition;
     if (currentPosition == messageArray.length - 1) newPosition = 0;
@@ -53,10 +46,8 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0 &&
       fix == 0
     ) {
-      //console.log(messageArray[currentPosition][3] == 0);
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -70,14 +61,11 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
         }
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -89,8 +77,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -101,8 +87,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -117,7 +101,6 @@ export default function ReadMessagePopup({
     ) {
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -131,14 +114,30 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
         }
-        /*try {
-          //console.log(get);
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition + 1 < messageArray.length &&
+      messageArray[currentPosition + 1][3] != 0 &&
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -150,12 +149,153 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition + 1 == messageArray.length &&
+      messageArray[0][3] != 0 &&
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+            })
+          ).json();
+          if (response.ok) {
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition + 1 == messageArray.length &&
+      messageArray[0][3] == 0 &&
+      messageArray[currentPosition][3] != 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({ id: messageArray[0][2] }),
+            })
+          ).json();
+          if (response.ok) {
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition + 1 == messageArray.length &&
+      messageArray[0][3] == 0 &&
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({
+                id: messageArray[0][2],
+              }),
+            })
+          ).json();
+          if (response.ok) {
             console.log(response);
           }
         } catch (error) {
           console.error(error.message);
-        }*/
+        }
+        try {
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({ id: messageArray[currentPosition][2] }),
+            })
+          ).json();
+          if (response.ok) {
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition + 1 == messageArray.length &&
+      messageArray[0][3] != 0 &&
+      messageArray[currentPosition][3] != 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -173,50 +313,10 @@ export default function ReadMessagePopup({
     } else if (
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0 &&
+      messageArray[currentPosition][3] != 0 &&
       fix == 0
     ) {
       async function postRead() {
-        /*try {
-          //console.log(get);
-          const response = await (
-            await fetch(`${URL}/api/level0/markasread`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                token: `${localStorage.getItem('token')}`,
-              },
-              body: JSON.stringify({
-                id: messageArray[currentPosition + 1][2],
-              }),
-            })
-          ).json();
-          if (response.ok) {
-            //setRead(response);
-            console.log(response);
-          }
-        } catch (error) {
-          console.error(error.message);
-        }*/
-        try {
-          //console.log(get);
-          const response = await (
-            await fetch(`${URL}/api/level0/markasread`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                token: `${localStorage.getItem('token')}`,
-              },
-              body: JSON.stringify({ id: messageArray[currentPosition][2] }),
-            })
-          ).json();
-          if (response.ok) {
-            //setRead(response);
-            //console.log(response);
-          }
-        } catch (error) {
-          console.error(error.message);
-        }
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -233,6 +333,8 @@ export default function ReadMessagePopup({
       postRead();
     }
   };
+
+  //---Prev----//
 
   let prevMessage = () => {
     let newPosition;
@@ -330,25 +432,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        /*try {
-          //console.log(get);
-          const response = await (
-            await fetch(`${URL}/api/level0/markasread`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                token: `${localStorage.getItem('token')}`,
-              },
-              body: JSON.stringify({ id: messageArray[currentPosition][2] }),
-            })
-          ).json();
-          if (response.ok) {
-            //setRead(response);
-            console.log(response);
-          }
-        } catch (error) {
-          console.error(error.message);
-        }*/
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -391,7 +474,28 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        /*try {
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          //setload(false);
+          //console.log(response);
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition == 0 &&
+      messageArray[messageArray.length - 1][3] == 0 &&
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
           //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -400,16 +504,224 @@ export default function ReadMessagePopup({
                 'Content-Type': 'application/json',
                 token: `${localStorage.getItem('token')}`,
               },
-              body: JSON.stringify({ id: messageArray[currentPosition-1][2] }),
+              body: JSON.stringify({
+                id: messageArray[messageArray.length - 1][2],
+              }),
             })
           ).json();
           if (response.ok) {
             //setRead(response);
-            console.log(response);
+            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
-        }*/
+        }
+
+        try {
+          //console.log(get);
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({ id: messageArray[0][2] }),
+            })
+          ).json();
+          if (response.ok) {
+            //setRead(response);
+            //console.log(response);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          //setload(false);
+          //console.log(response);
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition == 0 &&
+      messageArray[messageArray.length - 1][3] != 0 &&
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
+          //console.log(get);
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({ id: messageArray[0][2] }),
+            })
+          ).json();
+          if (response.ok) {
+            //setRead(response);
+            //console.log(response);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          //setload(false);
+          //console.log(response);
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition == 0 &&
+      messageArray[messageArray.length - 1][3] == 0 &&
+      messageArray[currentPosition][3] != 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
+          //console.log(get);
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({
+                id: messageArray[messageArray.length - 1][2],
+              }),
+            })
+          ).json();
+          if (response.ok) {
+            //setRead(response);
+            //console.log(response);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          //setload(false);
+          //console.log(response);
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition == 0 &&
+      messageArray[messageArray.length - 1][3] != 0 &&
+      messageArray[currentPosition][3] != 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          //setload(false);
+          //console.log(response);
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition == 0 &&
+      messageArray[messageArray.length - 1][3] == 0 &&
+      messageArray[currentPosition][3] == 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
+        try {
+          //console.log(get);
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({
+                id: messageArray[messageArray.length - 1][2],
+              }),
+            })
+          ).json();
+          if (response.ok) {
+            //setRead(response);
+            //console.log(response);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+
+        try {
+          //console.log(get);
+          const response = await (
+            await fetch(`${URL}/api/level0/markasread`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                token: `${localStorage.getItem('token')}`,
+              },
+              body: JSON.stringify({ id: messageArray[0][2] }),
+            })
+          ).json();
+          if (response.ok) {
+            //setRead(response);
+            //console.log(response);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+        try {
+          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+            method: 'GET',
+            headers: { token: `${localStorage.getItem('token')}` },
+          });
+          var r = await response.data.data;
+          //setload(false);
+          //console.log(response);
+          setGet([...r].reverse());
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      postRead();
+    } else if (
+      currentPosition == 0 &&
+      messageArray[currentPosition - 1][3] != 0 &&
+      messageArray[currentPosition][3] != 0 &&
+      fix == 0
+    ) {
+      async function postRead() {
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -426,6 +738,9 @@ export default function ReadMessagePopup({
       postRead();
     }
   };
+
+  //---HideMe----//
+
   let hideMe = () => {
     toggleVisibility(false);
     if (messageArray[currentPosition][3] == 0 && fix == 0) {
@@ -539,7 +854,7 @@ function SendMessage({
         {spinner ? (
           <CircularProgress
             className="letterpopup-classes-cross2"
-            color="#fffbeb"
+            style={{ color: '#fffbeb' }}
           />
         ) : (
           <div className="letterpopup-classes-cross" onClick={hideMe} />

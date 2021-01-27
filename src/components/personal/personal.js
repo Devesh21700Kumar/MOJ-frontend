@@ -398,6 +398,9 @@ export default function Personal({ name, bitsId }, props) {
       <div className={classes.root} id="root">
         <SendMessagePopup
           call2={call2}
+          setX2={setX2}
+          get={get}
+          fix={fix}
           enabled={enables}
           toggleVisibility={hit}
           key={'SendMessagePopupKey-' + enables}
