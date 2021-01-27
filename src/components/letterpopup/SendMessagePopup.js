@@ -84,7 +84,14 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
   },
 }));
-export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
+export default function SendMessagePopup({
+  enabled,
+  toggleVisibility,
+  call2,
+  get,
+  fix,
+  setX2,
+}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
@@ -163,6 +170,9 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
           setDisableSend(false);
           setOpen(true);
           call2();
+          if (fix == 1 && get.length > 0 && get.length % 15 == 0) {
+            setX2('#EF4646');
+          }
           setSendToName('');
           setSendMail('');
           setMessageText('');
