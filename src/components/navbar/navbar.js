@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar({ navHeading, name, bitsId, stats, navtext }) {
   const classes = useStyles();
   if (navHeading == null) {
-    navHeading = 'DashBoard';
+    navHeading = 'Dashboard';
   }
   let history = useHistory();
 

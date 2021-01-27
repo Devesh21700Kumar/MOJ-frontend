@@ -307,7 +307,16 @@ export default function Welcome1() {
           </div>
           <div className={classes.empty}></div>
           <div className={classes.nirman} id="nirman">
-            <img src={nirmanLogo} alt="nirman" className={classes.nirmanLogo} />
+            <a
+              href="https://instagram.com/nirmaangoa?igshid=5bld8fkffclm"
+              target="_blank"
+            >
+              <img
+                src={nirmanLogo}
+                alt="nirman"
+                className={classes.nirmanLogo}
+              />
+            </a>
           </div>
           <div className={classes.empty}></div>
           <div className={classes.empty}></div>
@@ -325,7 +334,18 @@ export default function Welcome1() {
         <div className={classes.sidepane} id="sidepane">
           <div className={classes.sidepaneContent}>
             <div className={classes.summary} id="summary">
-              Welcome to Message of Joy! Nirmaan, in collaboration with{' '}
+              Welcome to Message of Joy!{' '}
+              <b>
+                <a
+                  className="nostyle"
+                  href="https://instagram.com/nirmaangoa?igshid=5bld8fkffclm"
+                  target="_blank"
+                  style={{ color: '#003C78' }}
+                >
+                  Nirmaan
+                </a>
+              </b>
+              , in collaboration with{' '}
               <b>
                 <a
                   className="nostyle"

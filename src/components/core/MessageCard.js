@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
       transform: 'translateY(-2px)',
     },
   },
-  bitsId: {
+  index: {
     fontSize: '18px',
     fontFamily: 'Oxygen, sans-serif',
     fontWeight: 700,
@@ -94,7 +94,7 @@ const postApproval = async (id, approval, flag) => {
   }
 };
 
-const MessageCard = ({ rollNumber, message, date, id, index }) => {
+const MessageCard = ({ message, date, id, index }) => {
   const classes = useStyles();
   // State variables
   const [open, setOpen] = useState(false);
@@ -177,12 +177,10 @@ const MessageCard = ({ rollNumber, message, date, id, index }) => {
   return (
     <div>
       <Card className={cardClass} raised={true}>
-        <div style={{ display: 'none' }} className={classes.bitsId}>
-          {index + 1}. To: {rollNumber}
-        </div>
         <div>
           <div className={classes.cardContent}>
             <div>
+              <span className={classes.index}>{index + 1}. </span>
               {!showPrimaryText
                 ? message.length > 450
                   ? `${message.substr(0, 450)}...`
