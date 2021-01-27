@@ -248,6 +248,20 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
   }
 
+  /*function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+         next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}*/
   useEffect(() => {
     setPresentViewPortWidth(window.innerWidth);
     setPresentViewPortHeight(window.innerHeight);
@@ -428,7 +442,16 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
                           setMessageText(e.target.value);
                         }}
                         variant="outlined"
-                        rows={calculateTextAreaRows()}
+                        rows={
+                          // screen.width > 550
+                          //   ? screen.width > 900
+                          //     ? calculateTextAreaRows() + 0.2
+                          //     : calculateTextAreaRows() + 3.2
+                          //   : screen.width > 330
+                          //   ? calculateTextAreaRows() + 6.1
+                          //   : calculateTextAreaRows() + 4.1
+                          calculateTextAreaRows()
+                        }
                       />
                     </div>
                   </div>
@@ -650,7 +673,6 @@ export default function SendMessagePopup({ enabled, toggleVisibility, call2 }) {
               </div>
             </form>
           </Paper>
-
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               Message Sent successfully!!
