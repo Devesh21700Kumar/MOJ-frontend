@@ -25,6 +25,17 @@ const useStyles = makeStyles((theme) => ({
       transform: 'translateY(-2px)',
     },
   },
+  msgCardR: {
+    padding: '8px 15px 15px 15px',
+    marginTop: '20px',
+    backgroundColor: '#FFD94D',
+    borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
+  },
   msgCard1: {
     padding: '15px',
     marginTop: '20px',
@@ -171,6 +182,56 @@ export default function PersonalCards({ text, index, fix, setGet }) {
   const toggleReadMessages = (b) => {
     setvat(b);
   };
+
+  async function postRead(i, index) {
+    if (get[(i / 15) * 15 + index].read == 0) {
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: get[(i / 15) * 15 + index]._id }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          //console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+      try {
+        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+          method: 'GET',
+          headers: { token: `${localStorage.getItem('token')}` },
+        });
+        var r = await response.data.data;
+        //setload(false);
+        //console.log(response);
+        setGet([...r].reverse());
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+
+    try {
+      let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+        method: 'GET',
+        headers: { token: `${localStorage.getItem('token')}` },
+      });
+      var r = await response.data.data;
+      //setload(false);
+      //console.log(response);
+      setGet([...r].reverse());
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   if (fix == 0) {
     return (
       <Fragment>
@@ -191,13 +252,14 @@ export default function PersonalCards({ text, index, fix, setGet }) {
             .slice(i, i + 15 <= get.length ? i + 15 : get.length)
             .map((text, index) => (
               <Card
-                className={text.read == 1 ? classes.msgCard : classes.msgCard1}
+                className={text.read == 1 ? classes.msgCardR : classes.msgCard1}
                 raised={true}
                 key={(i / 15) * 15 + index}
                 onClick={async () => {
                   await setpos((i / 15) * 15 + index);
-                  //await handler1();
                   await toggleReadMessages(true);
+                  await postRead(i, index);
+                  //await toggleReadMessages(true);
                 }}
               >
                 <div className={classes.bitsId}></div>
@@ -205,9 +267,10 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <p className={text.read == 1 ? classes.date : classes.date1}>
                     {screen.width >= 591
                       ? screen.width >= 680
-                        ? text.body.slice(0, 43)
-                        : text.body.slice(0, 31)
-                      : text.body.slice(0, 23)}
+                        ? text.body.slice(0, 72)
+                        : text.body.slice(0, 44)
+                      : text.body.slice(0, 30)}
+                    <b>.....</b>
                   </p>
                 </div>
 
@@ -215,11 +278,12 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <Typography variant="h6" edge="start">
                     <b key="index">
                       <p className={classes.date}>
-                        {screen.width >= 591
+                        {/*screen.width >= 591
                           ? screen.width >= 680
                             ? dateFormatter(text.date)
                             : dateFormatter(text.date)
-                          : dateFormatter(text.date)}
+                          : dateFormatter(text.date)
+                        */}
                       </p>
                     </b>
                   </Typography>
@@ -252,10 +316,9 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                 className={classes.msgCard}
                 raised={true}
                 key={index}
-                onClick={() => {
-                  toggleReadMessages(true);
-                  setpos((i / 15) * 15 + index);
-                  //handler1();
+                onClick={async () => {
+                  await setpos((i / 15) * 15 + index);
+                  await toggleReadMessages(true);
                 }}
               >
                 <div className={classes.bitsId}>
@@ -323,6 +386,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                         ? text.body.slice(0, 43)
                         : text.body.slice(0, 31)
                       : text.body.slice(0, 23)}
+                    <b>.....</b>
                   </p>
                 </div>
 

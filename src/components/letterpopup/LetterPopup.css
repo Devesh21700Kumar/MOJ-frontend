@@ -224,7 +224,7 @@
   visibility: hidden;
 }
 
-.letterpopup-classes-icon1 {
+/*.letterpopup-classes-icon1 {
   position: fixed;
   left: 0;
   top: 0;
@@ -233,7 +233,7 @@
   margin-left: 1.2rem;
   color: #fffbeb;
   padding-top: 3px;
-}
+}*/
 
 @media only screen and (max-width: 711px) {
   .letterpopup-classes-left-arrow {

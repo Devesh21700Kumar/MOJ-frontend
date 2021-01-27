@@ -87,34 +87,73 @@ const instructions = () => {
             <ol>
               <li>
                 <h3>
-                  1).Click on the Profile Button on the Navbar to Route to all
+                  1). Login using your BITS ID (It's a BITSian event only!)
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  2). Messages can be sent at the <b>given time slot</b> only.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  3). The website is set in such a way that none of us from the
+                  organising committee can see who is sending the message.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  4). So that implies if you want the recipient to know who you
+                  are, write your name at the end.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  5). You can send up to <b>40 messages a day</b> to anyone you
+                  want to.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  6). There is a <b>2000 characters limit</b> for a message.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  7). To ensure no negativity is delivered,{' '}
+                  <b>all the messages will be screened</b> by our team, so
+                  please be patient if the message is not delivered as soon as
+                  you have sent it.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  8). Click on the Profile Button on the Navbar to Route to all
                   the pages like Credits and Home
                 </h3>
               </li>
               <li>
                 <h3>
-                  2).To return to Home You can click on The MOJ text on the
+                  9). To return to Home You can click on The MOJ text on the
                   Navbar of the page
                 </h3>
               </li>
               <li>
                 <h3>
-                  3).Click on The Sent Tab to view your sent messages and the
-                  Inbox tab to view the messages you have received. You will
-                  receive messages only after approval as they will be
-                  verified.. so avoid NSFW content in the Message
+                  10). Click on The Sent Tab to view your sent messages and the
+                  Inbox tab to view the messages you have received.
                 </h3>
               </li>
               <li>
                 <h3>
-                  4).Click on the respective message cards/Boxes in Each tab to
-                  open the letter and read the complete Message of Joy
+                  11). Click on the respective message cards/Boxes in Each tab
+                  to open the letter and read the complete Message of Joy
                 </h3>
               </li>
               <li>
                 <h3>
-                  5).Click on The Icon with the add symbol in between to open a
-                  send message popup to send a new message..
+                  12). Click on The Icon with the add symbol in between to open
+                  a send message popup to send a new message..
                   <br></br>
                   You can search the names of the people present in the database
                   through the auto search functions while simultaneously typing
@@ -123,22 +162,36 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  6).You will have a limit of sending 40 messages a day and each
-                  message can have at most 2000 characters. You can view the
-                  remaining daily messages and characters remaining after you
-                  open up the send letter popup
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  7).Click on the Logos of the Clubs in the Login panel to
+                  13). Click on the Logos of the Clubs in the Login panel to
                   discover special stuff..
                 </h3>
               </li>
               <li>
                 <h3>
-                  8).lastly.. do not forget to checkout The Credits Page and do
-                  send those fellow peeps some messages of Joy
+                  14). For daily updates, do follow{' '}
+                  <a
+                    href="https://www.instagram.com/devsocbitsgoa/?hl=en"
+                    className="nostyle"
+                    target="_blank"
+                  >
+                    DevSoc (@devsocbitsgoa)
+                  </a>{' '}
+                  and{' '}
+                  <a
+                    href="https://www.instagram.com/nirmaangoa/?hl=en"
+                    className="nostyle"
+                    target="_blank"
+                  >
+                    Nirmaan (@nirmaangoa)
+                  </a>{' '}
+                  instagram pages.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  15). Lastly.. do not forget to checkout The Credits Page and
+                  do send those fellow peeps who have worked so hard for about
+                  2.5 months on the website some messages of Joy
                 </h3>
               </li>
             </ol>
