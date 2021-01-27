@@ -1,10 +1,16 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { GoogleLogin, useGoogleLogout } from 'react-google-login';
 import { Button } from '@material-ui/core';
-import { ToastProvider, useToasts } from 'react-toast-notifications';
+import React from 'react';
+import { Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   loginButton: {
@@ -41,7 +47,11 @@ const useStyles = makeStyles((theme) => ({
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
+var state = { value: true };
+
 function Login() {
+  const [open, setOpen] = useState(false);
+  const [over, setOver] = useState(false);
   const classes = useStyles();
   let history = useHistory();
   const onLogoutSuccess = async (res) => {
@@ -66,7 +76,41 @@ function Login() {
   //     }
   //   })();
   // }, []);
-  const { addToast } = useToasts();
+
+  useEffect(() => async () => {
+    {
+      const isTokenExists = await localStorage.getItem('token');
+      if (!isTokenExists) {
+        state = { value: false };
+      }
+    }
+  });
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOver(false);
+  };
+
+  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+    <Alert onClose={handleClose} severity="error">
+      Please signin using BITSmail only!
+    </Alert>
+  </Snackbar>;
+
+  <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+    <Alert onClose={handleClose1} severity="error">
+      Please try again later.
+    </Alert>
+  </Snackbar>;
 
   const onSuccess = (res) => {
     let accessToken = res.accessToken;
@@ -75,10 +119,7 @@ function Login() {
     if (str === null) {
       signOut();
       // alert('Please signin using BITSmail only!');
-      addToast('Please signin using BITSmail only!', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
+      setOpen(true);
     } else {
       axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/api/user/oauthlogin`, {
@@ -97,10 +138,7 @@ function Login() {
           }
         })
         .catch((e) => {
-          addToast('Please try again later.', {
-            appearance: 'error',
-            autoDismiss: true,
-          });
+          setOver(true);
           // console.log(e);
         });
     }
@@ -122,6 +160,7 @@ function Login() {
         isSignedIn={true}
         uxMode="popup"
         redirectUri={process.env.REACT_APP_REDIRECT_URI}
+        disabled={state.value}
         render={(renderProps) => (
           <Button
             onClick={renderProps.onClick}
