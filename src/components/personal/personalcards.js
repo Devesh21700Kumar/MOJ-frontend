@@ -257,8 +257,9 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                 key={(i / 15) * 15 + index}
                 onClick={async () => {
                   await setpos((i / 15) * 15 + index);
-                  await postRead(i, index);
                   await toggleReadMessages(true);
+                  await postRead(i, index);
+                  //await toggleReadMessages(true);
                 }}
               >
                 <div className={classes.bitsId}></div>
