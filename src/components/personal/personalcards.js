@@ -184,7 +184,6 @@ export default function PersonalCards({ text, index, fix, setGet }) {
   };
 
   async function postRead(i, index) {
-    console.log(get[(i / 15) * 15 + index].read);
     if (get[(i / 15) * 15 + index].read == 0) {
       try {
         //console.log(get);
