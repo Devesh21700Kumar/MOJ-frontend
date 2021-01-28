@@ -166,10 +166,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition + 1 == messageArray.length &&
       messageArray[0][3] != 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
@@ -201,10 +201,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition + 1 == messageArray.length &&
       messageArray[0][3] == 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
@@ -236,10 +236,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition + 1 == messageArray.length &&
       messageArray[0][3] == 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
@@ -290,10 +290,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition + 1 == messageArray.length &&
       messageArray[0][3] != 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
@@ -311,10 +311,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] != 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
@@ -551,10 +551,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition == 0 &&
       messageArray[messageArray.length - 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
@@ -591,10 +591,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition == 0 &&
       messageArray[messageArray.length - 1][3] == 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
@@ -633,10 +633,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition == 0 &&
       messageArray[messageArray.length - 1][3] != 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
@@ -654,10 +654,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition == 0 &&
       messageArray[messageArray.length - 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
@@ -716,10 +716,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition == 0 &&
       messageArray[currentPosition - 1][3] != 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
