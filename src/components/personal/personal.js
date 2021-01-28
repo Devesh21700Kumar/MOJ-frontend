@@ -216,26 +216,6 @@ export default function Personal() {
   const token = localStorage.getItem('token');
   if (token === null) return <Redirect to="/" />;
 
-  const [rec, setrec] = useState(
-    Array(0).fill({
-      body: 'Lorem Ipsum BTits simply dummy.',
-      date: '28th Dec 2020, 2:31 a.m.',
-    })
-  );
-
-  const [sent, setsent] = useState(
-    Array(0)
-      .fill({
-        body: 'Lorem Ipsum is simply dummy.',
-        date: ' 28th Dec 2020, 2:31 a.m.',
-      })
-      .map((obj) => {
-        return {
-          body: obj.body + Math.random(),
-          date: obj.data + Math.random(),
-        };
-      })
-  );
   const [fix, setfix] = useState(0);
   const [load, setload] = useState(true);
   const [count, setcount] = useState();
@@ -285,17 +265,16 @@ export default function Personal() {
     }
   }
 
-  const [get, setGet] = useState(rec);
+  const [get, setGet] = useState([]);
 
   const [color, setColor] = useState('#FFFDE8');
 
   const inboxClick = () => {
-    if (rec.length >= 15) {
+    if (get.length >= 15) {
       setColor('#FFFDE8');
       setColor1('#FB8989');
       call1();
       setfix(0);
-      setGet(rec);
       seti(0);
       setX1('#C4C4C4');
       setX2('#EF4646');
@@ -303,7 +282,6 @@ export default function Personal() {
       setColor('#FFFDE8');
       setColor1('#FB8989');
       call1();
-      setGet(rec);
       seti(0);
       setfix(0);
       setX1('#C4C4C4');
@@ -314,20 +292,18 @@ export default function Personal() {
   const [color1, setColor1] = useState('#FB8989');
 
   const sendClick = () => {
-    if (sent.length >= 15) {
+    if (get.length >= 15) {
       call2();
       setColor1('#FFFDE8');
       setColor('#FB8989');
       seti(0);
       setfix(1);
-      setGet(sent);
       setX1('#C4C4C4');
       setX2('#EF4646');
     } else {
       call2();
       setColor1('#FFFDE8');
       setColor('#FB8989');
-      setGet(sent);
       seti(0);
       setfix(1);
       setX1('#C4C4C4');
