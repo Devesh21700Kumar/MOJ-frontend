@@ -310,14 +310,7 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
                 <div className={classes.Gin1}>
                   <Typography variant="h6" edge="start">
                     <b key="index">
-                      <p className={classes.date}>
-                        {/*screen.width >= 591
-                          ? screen.width >= 680
-                            ? dateFormatter(text.date)
-                            : dateFormatter(text.date)
-                          : dateFormatter(text.date)
-                        */}
-                      </p>
+                      <p className={classes.date}></p>
                     </b>
                   </Typography>
                 </div>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
+import _, { debounce } from 'lodash';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -110,6 +110,7 @@ export default function SendMessagePopup({
   const token = localStorage.getItem('token');
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [disableSend, setDisableSend] = useState(false);
+  const [searchList, setSearchList] = useState([]);
 
   if (token === null) return <Redirect to="/" />;
 
@@ -132,6 +133,29 @@ export default function SendMessagePopup({
     }
   }
 
+  const getSearchList = async (name) => {
+    const res = await axios.post(
+      `${URL}/api/level0/search`,
+      {
+        query: name,
+      },
+      {
+        headers: { token },
+      }
+    );
+    setSearchList(res.data.data);
+  };
+
+  const debouncedGetSearchList = useCallback(
+    _.debounce((name) => getSearchList(name), 500),
+    []
+  );
+
+  useEffect(() => {
+    if (!name) return;
+    debouncedGetSearchList(name);
+  }, [name]);
+
   let handleSubmit = (e) => {
     e.preventDefault();
     const date = Date.now();
@@ -152,7 +176,8 @@ export default function SendMessagePopup({
         if (response.ok) {
           setDisableSend(false);
           setOpen(true);
-          call2();
+          if (fix === 1) call2();
+          else call1();
           if (fix == 1 && get.length > 0 && get.length % 15 == 0) {
             setX2('#EF4646');
           }
@@ -248,10 +273,6 @@ export default function SendMessagePopup({
     setc2('none');
   };
 
-  function checkspace(dat) {
-    return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
-  }
-
   if (componentEnabled) {
     if (window.innerWidth > 760) {
       return (
@@ -312,7 +333,6 @@ export default function SendMessagePopup({
                   className="letterpopup-classes-form"
                   noValidate
                   autoComplete="off"
-                  onSubmit={handleSubmit}
                 >
                   <div className="letterpopup-classes-messageBoxesWrapper">
                     <div
@@ -341,9 +361,7 @@ export default function SendMessagePopup({
                           value={name}
                           onClick={handleClick3}
                           onChange={(e) => {
-                            //handleClick2();
                             setSendToName(e.target.value);
-                            //setSendMail(e.target.value);
                             handleClick2();
                           }}
                           placeholder="Who is this for?"
@@ -358,63 +376,22 @@ export default function SendMessagePopup({
                         className={classes.hexap}
                         aria-label="notifications"
                       >
-                        {data1.filter(
-                          (dataset) =>
-                            dataset.name
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.bitsId
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.name.toLowerCase() === name.toLowerCase() ||
-                            checkspace(dataset.name)
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.email.includes(name.toLowerCase())
-                        ).length > 0 ? (
-                          data1
-                            .filter(
-                              (dataset) =>
-                                dataset.name
-                                  .toLowerCase()
-                                  .includes(name.toLowerCase()) ||
-                                dataset.bitsId
-                                  .toLowerCase()
-                                  .includes(name.toLowerCase()) ||
-                                dataset.name.toLowerCase() ===
-                                  name.toLowerCase() ||
-                                checkspace(dataset.name)
-                                  .toLowerCase()
-                                  .includes(name.toLowerCase()) ||
-                                dataset.email.includes(name.toLowerCase())
-                            )
-                            .slice(0, 101)
-                            .map((person, index) => (
-                              <ListItem
-                                key={index}
-                                button
-                                onClick={() => {
-                                  setSendToName(person.name);
-                                  setSendMail(person.email);
-                                  handleClose2();
-                                }}
-                              >
-                                <ListItemText
-                                  primary={person.name}
-                                  secondary={person.email}
-                                />
-                              </ListItem>
-                            ))
-                        ) : (
+                        {searchList.map((person, index) => (
                           <ListItem
+                            key={index}
                             button
                             onClick={() => {
+                              setSendToName(person.name);
+                              setSendMail(person.email);
                               handleClose2();
                             }}
                           >
-                            <ListItemText primary="          " />
+                            <ListItemText
+                              primary={person.name}
+                              secondary={person.email}
+                            />
                           </ListItem>
-                        )}
+                        ))}
                       </List>
                     </Paper>
                     <div
@@ -448,6 +425,7 @@ export default function SendMessagePopup({
                         backgroundColor: '#EF4646',
                         border: '1.5px solid black',
                       }}
+                      onClick={handleSubmit}
                     >
                       Send
                     </Button>
@@ -521,7 +499,6 @@ export default function SendMessagePopup({
               className="letterpopup-classes-form1"
               noValidate
               autoComplete="off"
-              onSubmit={handleSubmit}
             >
               <div className="letterpopup-classes-messageBoxesWrapper1">
                 <div
@@ -550,9 +527,7 @@ export default function SendMessagePopup({
                       value={name}
                       onClick={handleClick3}
                       onChange={(e) => {
-                        //handleClick2();
                         setSendToName(e.target.value);
-                        //setSendMail(e.target.value);
                         handleClick2();
                       }}
                       placeholder="Who is this for?"
@@ -567,62 +542,22 @@ export default function SendMessagePopup({
                     className={classes.hexap}
                     aria-label="notifications"
                   >
-                    {data1.filter(
-                      (dataset) =>
-                        dataset.name
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.bitsId
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.name.toLowerCase() === name.toLowerCase() ||
-                        checkspace(dataset.name)
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.email.includes(name.toLowerCase())
-                    ).length > 0 ? (
-                      data1
-                        .filter(
-                          (dataset) =>
-                            dataset.name
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.bitsId
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.name.toLowerCase() === name.toLowerCase() ||
-                            checkspace(dataset.name)
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.email.includes(name.toLowerCase())
-                        )
-                        .slice(0, 101)
-                        .map((person, index) => (
-                          <ListItem
-                            key={index}
-                            button
-                            onClick={() => {
-                              setSendToName(person.name);
-                              setSendMail(person.email);
-                              handleClose2();
-                            }}
-                          >
-                            <ListItemText
-                              primary={person.name}
-                              secondary={person.email}
-                            />
-                          </ListItem>
-                        ))
-                    ) : (
-                      <ListItem button>
+                    {searchList.map((person, index) => (
+                      <ListItem
+                        key={index}
+                        button
+                        onClick={() => {
+                          setSendToName(person.name);
+                          setSendMail(person.email);
+                          handleClose2();
+                        }}
+                      >
                         <ListItemText
-                          primary="           "
-                          onClick={() => {
-                            handleClose2();
-                          }}
+                          primary={person.name}
+                          secondary={person.email}
                         />
                       </ListItem>
-                    )}
+                    ))}
                   </List>
                 </Paper>
                 <div
@@ -666,6 +601,7 @@ export default function SendMessagePopup({
                     border: '1.5px solid black',
                     margin: 'auto',
                   }}
+                  onClick={handleSubmit}
                 >
                   Send
                 </Button>
