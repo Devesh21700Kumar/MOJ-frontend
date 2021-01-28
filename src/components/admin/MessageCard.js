@@ -15,12 +15,11 @@ const useStyles = makeStyles((theme) => ({
       transform: 'translateY(-2px)',
     },
   },
-  bitsId: {
+  index: {
     fontSize: '18px',
     fontFamily: 'Oxygen, sans-serif',
     fontWeight: 700,
     padding: 0,
-    marginTop: '10px',
   },
   cardContent: {
     margin: 0,
@@ -75,16 +74,7 @@ const useStyles = makeStyles((theme) => ({
 const red = '#EF4646';
 const grey = '#9D9D9D';
 
-const MessageCard = ({
-  bitsId,
-  body,
-  date,
-  index,
-  _id,
-  setMessageId,
-  n,
-  done,
-}) => {
+const MessageCard = ({ body, date, index, _id, setMessageId, n }) => {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -109,12 +99,10 @@ const MessageCard = ({
 
   return (
     <Card className={classes.msgCard} raised={true} onClick={handleClick}>
-      <div className={classes.bitsId}>
-        {index + 1}. To: {bitsId}
-      </div>
       <div>
         <div className={classes.cardContent}>
           <div>
+            <span className={classes.index}>{index + 1}. </span>
             {!showPrimaryText
               ? body.length > 80
                 ? `${body.substr(0, 80)}...`
@@ -144,7 +132,7 @@ const MessageCard = ({
             <IconButton classes={{ root: classes.iconButton }}>
               <CheckCircleOutlineIcon
                 style={{
-                  color: index < changeToInt(n) || checked || done ? red : grey,
+                  color: index < changeToInt(n) || checked ? red : grey,
                   fontSize: '45px',
                 }}
               />

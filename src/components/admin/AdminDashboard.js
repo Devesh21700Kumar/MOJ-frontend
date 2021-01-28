@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  InputBase,
-  Snackbar,
-} from '@material-ui/core';
+import { Box, Button, Grid, IconButton, Snackbar } from '@material-ui/core';
 import { ChevronLeftRounded, ChevronRightRounded } from '@material-ui/icons';
 import CloseIcon from '@material-ui/icons/Close';
 import { Redirect } from 'react-router-dom';
@@ -334,7 +327,7 @@ const AdminDashboard = () => {
   const [f, setf] = useState(greenFlaggedMsgs);
   const [display, setDisplay] = useState('none');
   const [spinner, setSpinner] = useState(false);
-  // const [checked, setChecked] = useState(false);
+  const [c3, setc3] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -379,7 +372,6 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    //setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -406,7 +398,6 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    //setf(approved.reverse());
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -427,13 +418,11 @@ const AdminDashboard = () => {
     setChecked25(!checked25);
     if (!checked25) {
       if (redFlag === red) {
-        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
         }
       } else if (yellowFlag === yellow) {
-        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
@@ -442,7 +431,6 @@ const AdminDashboard = () => {
             ]);
         }
       } else if (greenFlag === green) {
-        //setMessageId([]);
         for (let i = 0; i < 25; i++) {
           if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
@@ -496,43 +484,6 @@ const AdminDashboard = () => {
         }
       } else {
         for (let i = 0; i < 50; i++) {
-          if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
-        }
-      }
-    } else {
-      setMessageId([]);
-    }
-  };
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    if (checked25) setChecked25(!checked25);
-    if (checked50) setChecked50(!checked50);
-
-    if (value) {
-      if (redFlag === red) {
-        for (let i = 0; i < value; i++) {
-          if (redFlaggedMsgs[i])
-            setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
-        }
-      } else if (yellowFlag === yellow) {
-        for (let i = 0; i < value; i++) {
-          if (yellowFlaggedMsgs[i])
-            setMessageId((messageId) => [
-              ...messageId,
-              yellowFlaggedMsgs[i]._id,
-            ]);
-        }
-      } else if (greenFlag === green) {
-        for (let i = 0; i < value; i++) {
-          if (greenFlaggedMsgs[i])
-            setMessageId((messageId) => [
-              ...messageId,
-              greenFlaggedMsgs[i]._id,
-            ]);
-        }
-      } else {
-        for (let i = 0; i < value; i++) {
           if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }
@@ -625,7 +576,6 @@ const AdminDashboard = () => {
         setSnackBarOpen(true);
         fetchMessages();
         setValue(null);
-        //setChecked(false);
         setChecked25(false);
         setChecked50(false);
       }
@@ -653,7 +603,6 @@ const AdminDashboard = () => {
         fetchMessages();
         setValue(null);
         setChecked25(false);
-        //setChecked(false);
         setChecked50(false);
       }
     }
@@ -661,19 +610,6 @@ const AdminDashboard = () => {
     postApprovedMessages();
   };
 
-  const getMaxNumber = () => {
-    if (redFlag === red) {
-      return redFlaggedMsgs.length;
-    } else if (yellowFlag === yellow) {
-      return yellowFlaggedMsgs.length;
-    } else if (greenFlag === green) {
-      return greenFlaggedMsgs.length;
-    } else {
-      return msgs.length;
-    }
-  };
-
-  const [c3, setc3] = useState(false);
   return (
     <div className={classes.root}>
       {/* Tabs */}
@@ -747,7 +683,6 @@ const AdminDashboard = () => {
                     setMessageId(null1);
                     setj(0);
                     setSpinner(true);
-                    //handleRejection();
                     fetchMessages();
                     setTimeout(() => setSpinner(false), 500);
                   }}
@@ -765,14 +700,11 @@ const AdminDashboard = () => {
                     setMessageId(null1);
                     setChecked25(false);
                     setChecked50(false);
-                    //setChecked(false);
                     setValue(null);
                     setj(0);
                     setSpinner(true);
-                    //handleRejection();
                     fetchMessages();
                     setTimeout(() => setSpinner(false), 500);
-                    // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${yellowFlag}` }}
                 >
@@ -789,14 +721,10 @@ const AdminDashboard = () => {
                     setChecked50(false);
                     setValue(null);
                     setMessageId(null1);
-                    //setChecked(false);
                     setj(0);
-                    //fetchMessages();
                     setSpinner(true);
-                    //handleRejection();
                     fetchMessages();
                     setTimeout(() => setSpinner(false), 500);
-                    // console.log(checked);
                   }}
                   style={{ borderBottom: `3px solid ${greenFlag}` }}
                 >
@@ -814,6 +742,7 @@ const AdminDashboard = () => {
                   <svg
                     onClick={handleChange25}
                     display={!checked25 ? 'block' : 'none'}
+                    style={{ cursor: 'pointer' }}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
@@ -857,6 +786,7 @@ const AdminDashboard = () => {
                   <svg
                     onClick={handleChange50}
                     display={!checked50 ? 'block' : 'none'}
+                    style={{ cursor: 'pointer' }}
                     width="2rem"
                     height="2rem"
                     viewBox="0 0 37 37"
@@ -956,15 +886,12 @@ const AdminDashboard = () => {
                     .map((message, index) => (
                       <MessageCard
                         fetchMessages={fetchMessages}
-                        bitsId={message.receiverId}
                         body={message.body}
                         date={dateFormatter(message.date)}
                         key={redFlaggedMsgs.indexOf(message)}
                         index={redFlaggedMsgs.indexOf(message)}
                         _id={message._id}
                         setMessageId={setMessageId}
-                        //setChecked={setChecked}
-                        //checked={checked}
                         n={setNumber()}
                       />
                     ))
@@ -982,17 +909,14 @@ const AdminDashboard = () => {
                         ? j + 50
                         : greenFlaggedMsgs.length
                     )
-                    .map((message, index) => (
+                    .map((message) => (
                       <MessageCard
-                        bitsId={message.receiverId}
                         body={message.body}
-                        // checked={checked}
                         date={dateFormatter(message.date)}
                         key={greenFlaggedMsgs.indexOf(message)}
                         index={greenFlaggedMsgs.indexOf(message)}
                         _id={message._id}
                         setMessageId={setMessageId}
-                        //setChecked={setChecked}
                         n={setNumber()}
                       />
                     ))
@@ -1010,17 +934,14 @@ const AdminDashboard = () => {
                         ? j + 50
                         : yellowFlaggedMsgs.length
                     )
-                    .map((message, index) => (
+                    .map((message) => (
                       <MessageCard
-                        bitsId={message.receiverId}
                         body={message.body}
-                        //checked={checked}
                         date={dateFormatter(message.date)}
                         key={yellowFlaggedMsgs.indexOf(message)}
                         index={yellowFlaggedMsgs.indexOf(message)}
                         _id={message._id}
                         setMessageId={setMessageId}
-                        //setChecked={setChecked}
                         n={setNumber()}
                       />
                     ))
@@ -1030,17 +951,14 @@ const AdminDashboard = () => {
                   </h1>
                 )
               ) : msgs.length !== 0 ? (
-                msgs.map((message, index) => (
+                msgs.map((message) => (
                   <MessageCard
-                    bitsId={message.receiverId}
                     body={message.body}
                     date={dateFormatter(message.date)}
                     key={msgs.indexOf(message)}
                     index={msgs.indexOf(message)}
                     _id={message._id}
                     setMessageId={setMessageId}
-                    //setChecked={setChecked}
-                    //checked={checked}
                     n={setNumber()}
                   />
                 ))
@@ -1059,7 +977,6 @@ const AdminDashboard = () => {
                 <Grid item xs={3}>
                   <CircularProgress
                     className={classes.centre}
-                    //className="letterpopup-classes-cross2"
                     style={{ color: '#ef4646' }}
                   />
                 </Grid>

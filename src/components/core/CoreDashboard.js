@@ -250,7 +250,6 @@ const Dashboard = () => {
               .slice(msgPage * 10, msgPage * 10 + 10)
               .map((message, index) => (
                 <MessageCard
-                  rollNumber={message.receiverId}
                   message={message.body}
                   date={dateFormatter(message.date)}
                   id={message._id}

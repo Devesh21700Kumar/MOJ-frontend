@@ -12,10 +12,22 @@ import Button from '@material-ui/core/Button';
 import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
 import axios from 'axios';
+import { sum } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
     padding: '15px',
+    marginTop: '20px',
+    backgroundColor: '#FFD94D',
+    borderRadius: '15px',
+    transition: 'all ease-in-out 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'translateY(-2px)',
+    },
+  },
+  msgCardR: {
+    padding: '8px 15px 15px 15px',
     marginTop: '20px',
     backgroundColor: '#FFD94D',
     borderRadius: '15px',
@@ -136,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersonalCards({ text, index, fix, setGet }) {
+export default function PersonalCards({ text, index, fix, setGet, setload }) {
   const classes = useStyles();
   const { get } = useContext(Data);
   const i = useContext(Data1);
@@ -171,12 +183,84 @@ export default function PersonalCards({ text, index, fix, setGet }) {
   const toggleReadMessages = (b) => {
     setvat(b);
   };
+  function displayname(x) {
+    var y = '';
+    for (var i = 0; i < 3; i++) {
+      var y =
+        y +
+        x
+          .split(' ')
+          .slice(i, i + 1)
+          .join(' ')
+          .charAt(0)
+          .toUpperCase() +
+        x
+          .split(' ')
+          .slice(i, i + 1)
+          .join(' ')
+          .toLowerCase()
+          .slice(1) +
+        ' ';
+    }
+    return y;
+  }
+
+  async function postRead(i, index) {
+    if (get[(i / 15) * 15 + index].read == 0) {
+      try {
+        //console.log(get);
+        const response = await (
+          await fetch(`${URL}/api/level0/markasread`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              token: `${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({ id: get[(i / 15) * 15 + index]._id }),
+          })
+        ).json();
+        if (response.ok) {
+          //setRead(response);
+          //console.log(response);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+      try {
+        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+          method: 'GET',
+          headers: { token: `${localStorage.getItem('token')}` },
+        });
+        var r = await response.data.data;
+        //setload(false);
+        //console.log(response);
+        setGet([...r].reverse());
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+
+    try {
+      let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
+        method: 'GET',
+        headers: { token: `${localStorage.getItem('token')}` },
+      });
+      var r = await response.data.data;
+      //setload(false);
+      //console.log(response);
+      setGet([...r].reverse());
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   if (fix == 0) {
     return (
       <Fragment>
         <ReadMessagePopup
           fix={fix}
           get={get}
+          setload={setload}
           setGet={setGet}
           messageArray={get.map((obj) => {
             return [obj.body, obj.date, obj._id, obj.read];
@@ -191,13 +275,14 @@ export default function PersonalCards({ text, index, fix, setGet }) {
             .slice(i, i + 15 <= get.length ? i + 15 : get.length)
             .map((text, index) => (
               <Card
-                className={text.read == 1 ? classes.msgCard : classes.msgCard1}
+                className={text.read == 1 ? classes.msgCardR : classes.msgCard1}
                 raised={true}
                 key={(i / 15) * 15 + index}
                 onClick={async () => {
                   await setpos((i / 15) * 15 + index);
-                  //await handler1();
                   await toggleReadMessages(true);
+                  await postRead(i, index);
+                  //await toggleReadMessages(true);
                 }}
               >
                 <div className={classes.bitsId}></div>
@@ -205,9 +290,10 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <p className={text.read == 1 ? classes.date : classes.date1}>
                     {screen.width >= 591
                       ? screen.width >= 680
-                        ? text.body.slice(0, 43)
-                        : text.body.slice(0, 31)
-                      : text.body.slice(0, 23)}
+                        ? text.body.slice(0, 72)
+                        : text.body.slice(0, 44)
+                      : text.body.slice(0, 30)}
+                    <b>.....</b>
                   </p>
                 </div>
 
@@ -215,11 +301,12 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                   <Typography variant="h6" edge="start">
                     <b key="index">
                       <p className={classes.date}>
-                        {screen.width >= 591
+                        {/*screen.width >= 591
                           ? screen.width >= 680
                             ? dateFormatter(text.date)
                             : dateFormatter(text.date)
-                          : dateFormatter(text.date)}
+                          : dateFormatter(text.date)
+                        */}
                       </p>
                     </b>
                   </Typography>
@@ -236,6 +323,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
       <Fragment>
         <ReadMessagePopup
           fix={fix}
+          setload={setload}
           messageArray={get.map((obj) => {
             return [obj.body, obj.date];
           })}
@@ -252,69 +340,17 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                 className={classes.msgCard}
                 raised={true}
                 key={index}
-                onClick={() => {
-                  toggleReadMessages(true);
-                  setpos((i / 15) * 15 + index);
-                  //handler1();
+                onClick={async () => {
+                  await setpos((i / 15) * 15 + index);
+                  await toggleReadMessages(true);
                 }}
               >
                 <div className={classes.bitsId}>
                   To
                   {text.name != null
-                    ? ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(0, 1)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(0, 1)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1) +
-                      ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(1, 2)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(1, 2)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1) +
-                      ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(2, 3)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(2, 3)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1) +
-                      ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(3, 4)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(3, 4)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1)
+                    ? ' ' + displayname(text.name)
                     : //text.name
-                      console.log('undefined')}
+                      ' ' + displayname('somebody')}
                 </div>
                 <div className={classes.Gin}>
                   <p className={classes.date}>
@@ -323,6 +359,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                         ? text.body.slice(0, 43)
                         : text.body.slice(0, 31)
                       : text.body.slice(0, 23)}
+                    <b>.....</b>
                   </p>
                 </div>
 

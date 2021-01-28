@@ -398,6 +398,10 @@ export default function Personal({ name, bitsId }, props) {
       <div className={classes.root} id="root">
         <SendMessagePopup
           call2={call2}
+          setload={setload}
+          setX2={setX2}
+          get={get}
+          fix={fix}
           enabled={enables}
           toggleVisibility={hit}
           key={'SendMessagePopupKey-' + enables}
@@ -482,7 +486,11 @@ export default function Personal({ name, bitsId }, props) {
                 ) : (
                   <Data.Provider value={{ get }}>
                     <Data1.Provider value={i}>
-                      <PersonalCards fix={fix} setGet={setGet} />
+                      <PersonalCards
+                        fix={fix}
+                        setGet={setGet}
+                        setload={setload}
+                      />
                     </Data1.Provider>
                   </Data.Provider>
                 )}
