@@ -833,23 +833,9 @@ function SendMessage({
     });
     return day + month + year + time;
   };
-  let presentViewportWidth = window.innerWidth;
-  let presentViewportHeight = window.innerHeight;
-  const getCSSVariables = () => {
-    return {
-      '--this-width-var': `${presentViewportWidth}px`,
-      '--this-height-var': `${presentViewportHeight}px`,
-    };
-  };
-  /*const [ spinner, setSpinner ] = useState(true);
-  React.useEffect(async() => {
-    //return () => {
-      //await setComponentEnabled(enabled);
-      await setTimeout(() => setSpinner(false), 1500);
-    //;
-  }, []);*/
+
   return (
-    <div className="letterpopup-classes-root" style={getCSSVariables()}>
+    <div className="letterpopup-classes-root">
       <React.Fragment>
         {spinner ? (
           <CircularProgress

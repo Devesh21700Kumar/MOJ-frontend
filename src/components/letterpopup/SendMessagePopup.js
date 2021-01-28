@@ -106,8 +106,6 @@ export default function SendMessagePopup({
   const [r, setr] = useState();
   const token = localStorage.getItem('token');
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
-  const [presentViewportWidth, setPresentViewPortWidth] = useState(0);
-  const [presentViewportHeight, setPresentViewPortHeight] = useState(0);
   const [disableSend, setDisableSend] = useState(false);
 
   if (token === null) return <Redirect to="/" />;
@@ -266,21 +264,10 @@ export default function SendMessagePopup({
     return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
   }
 
-  useEffect(() => {
-    setPresentViewPortWidth(window.innerWidth);
-    setPresentViewPortHeight(window.innerHeight);
-  }, [presentViewportWidth, presentViewportHeight]);
-
-  const getCSSVariables = () => {
-    return {
-      '--this-width-var': `${presentViewportWidth}px`,
-      '--this-height-var': `${presentViewportHeight}px`,
-    };
-  };
   if (componentEnabled) {
     if (window.innerWidth > 760) {
       return (
-        <div className="letterpopup-classes-root" style={getCSSVariables()}>
+        <div className="letterpopup-classes-root">
           {spinner ? (
             <CircularProgress
               className="letterpopup-classes-cross2"
