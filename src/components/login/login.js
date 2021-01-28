@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
-
 function Login() {
   const [open, setOpen] = useState(false);
   const [over, setOver] = useState(false);
