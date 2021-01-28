@@ -12,7 +12,6 @@ import Logo from '../../imageassets/MOJ Logo 1.png';
 import hands from '../../imageassets/hands.png';
 import love from '../../imageassets/love 1.png';
 import '../welcome/welcome.css';
-import { ToastProvider } from 'react-toast-notifications';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -365,9 +364,7 @@ export default function Welcome1() {
             <div className={classes.loginBox} id="loginBox">
               <Box display="flex">
                 <Box className={classes.crack}>
-                  <ToastProvider>
-                    <Login />
-                  </ToastProvider>
+                  <Login />
                 </Box>
               </Box>
             </div>
