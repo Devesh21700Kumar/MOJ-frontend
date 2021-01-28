@@ -47,6 +47,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -91,7 +92,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -104,6 +104,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -132,7 +133,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -145,6 +145,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -171,7 +172,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -184,6 +184,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -210,7 +211,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -223,6 +223,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -249,7 +250,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -262,6 +262,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -307,7 +308,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -320,6 +320,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -330,7 +331,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -353,6 +353,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -398,7 +399,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -411,6 +411,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -439,7 +440,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -452,6 +452,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -480,7 +481,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -493,6 +493,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -538,7 +539,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -551,6 +551,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -577,7 +578,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -590,6 +590,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
@@ -618,7 +619,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -631,6 +631,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -641,7 +642,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -654,6 +654,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           //console.log(get);
           const response = await (
@@ -700,7 +701,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
@@ -713,6 +713,7 @@ export default function ReadMessagePopup({
       messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
+        await setSpinner(true);
         try {
           let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
             method: 'GET',
@@ -723,7 +724,6 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-        await setSpinner(true);
         await setTimeout(() => {
           setSpinner(false);
         }, 500);
