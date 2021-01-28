@@ -27,10 +27,8 @@ export default function ReadMessagePopup({
   const [componentEnabled, setComponentEnabled] = useState(enabled);
   const [spinner, setSpinner] = useState(true);
   React.useEffect(async () => {
-    //return () => {
     await setComponentEnabled(enabled);
     await setTimeout(() => setSpinner(false), 1500);
-    //;
   }, [enabled]);
 
   //---Next----//
@@ -41,10 +39,10 @@ export default function ReadMessagePopup({
     else newPosition = currentPosition + 1;
     setCurrentPosition(newPosition);
     if (
+      fix == 0 &&
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
@@ -94,10 +92,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] == 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
@@ -131,10 +129,10 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition + 1 < messageArray.length &&
       messageArray[currentPosition + 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
@@ -302,8 +300,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -323,8 +319,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -341,16 +335,14 @@ export default function ReadMessagePopup({
     if (currentPosition == 0) newPosition = messageArray.length - 1;
     else newPosition = currentPosition - 1;
     setCurrentPosition(newPosition);
-    //console.log(messageArray[currentPosition][2]);
     if (
+      fix == 0 &&
       currentPosition - 1 >= 0 &&
       messageArray[currentPosition - 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -364,15 +356,12 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
         }
 
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -384,8 +373,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -396,8 +383,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -405,14 +390,13 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition - 1 >= 0 &&
       messageArray[currentPosition - 1][3] == 0 &&
-      messageArray[currentPosition][3] != 0 &&
-      fix == 0
+      messageArray[currentPosition][3] != 0
     ) {
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -426,8 +410,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -438,8 +420,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -447,14 +427,13 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition - 1 >= 0 &&
       messageArray[currentPosition - 1][3] != 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -468,8 +447,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -480,8 +457,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -489,14 +464,13 @@ export default function ReadMessagePopup({
       }
       postRead();
     } else if (
+      fix == 0 &&
       currentPosition == 0 &&
       messageArray[messageArray.length - 1][3] == 0 &&
-      messageArray[currentPosition][3] == 0 &&
-      fix == 0
+      messageArray[currentPosition][3] == 0
     ) {
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -510,15 +484,12 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
         }
 
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -530,8 +501,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -542,8 +511,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -558,7 +525,6 @@ export default function ReadMessagePopup({
     ) {
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -570,8 +536,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -582,8 +546,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -598,7 +560,6 @@ export default function ReadMessagePopup({
     ) {
       async function postRead() {
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -612,8 +573,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -624,8 +583,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -645,8 +602,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -675,15 +630,12 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
         }
 
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -695,8 +647,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -707,8 +657,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -728,8 +676,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -745,10 +691,7 @@ export default function ReadMessagePopup({
     toggleVisibility(false);
     if (messageArray[currentPosition][3] == 0 && fix == 0) {
       async function postRead() {
-        //console.log(fix);
-
         try {
-          //console.log(get);
           const response = await (
             await fetch(`${URL}/api/level0/markasread`, {
               method: 'POST',
@@ -760,8 +703,6 @@ export default function ReadMessagePopup({
             })
           ).json();
           if (response.ok) {
-            //setRead(response);
-            //console.log(response);
           }
         } catch (error) {
           console.error(error.message);
@@ -773,8 +714,6 @@ export default function ReadMessagePopup({
             headers: { token: `${localStorage.getItem('token')}` },
           });
           var r = await response.data.data;
-          //setload(false);
-          //console.log(response);
           setGet([...r].reverse());
         } catch (error) {
           console.error(error.message);
@@ -808,32 +747,6 @@ function SendMessage({
   spinner,
 }) {
   const classes = useStyles();
-  /*const dateFormatter = (timestamp) => {
-    var date = new Date(timestamp);
-    var day =
-      date.getDate() == 1
-        ? date.getDate() + 'st  '
-        : date.getDate() == 2
-        ? date.getDate() + 'nd  '
-        : date.getDate() == 3
-        ? date.getDate() + 'rd  '
-        : date.getDate() == 21
-        ? date.getDate() + 'st  '
-        : date.getDate() == 22
-        ? date.getDate() + 'nd  '
-        : date.getDate() == 23
-        ? date.getDate() + 'rd  '
-        : date.getDate() + 'th ';
-    var month = date.toLocaleString('default', { month: 'short' }) + ' ';
-    var year = date.getFullYear() + ', ';
-    var time = date.toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    });
-    return day + month + year + time;
-  };*/
-
   return (
     <div className="letterpopup-classes-root">
       <React.Fragment>
@@ -851,19 +764,11 @@ function SendMessage({
           className="letterpopup-classes-message"
           style={{ backgroundImage: `url(${img})` }}
         >
-          <div className="letterpopup-classes-dateTime">
-            {
-              //dateFormatter(messageArray[currentPosition][1])
-            }
-          </div>
+          <div className="letterpopup-classes-dateTime">{}</div>
           <div className="letterpopup-classes-messageBoxesWrapper">
             <div className="letterpopup-classes-messageBody">
               {spinner ? (
-                <div
-                //className={classes.noMessages}
-                //elevation={0}
-                //className="letterpopup-classes-message"
-                ></div>
+                <div></div>
               ) : (
                 <React.Fragment>
                   {messageArray[currentPosition][0]}
