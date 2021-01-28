@@ -47,11 +47,10 @@ const useStyles = makeStyles((theme) => ({
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
-var state = { value: true };
-
 function Login() {
   const [open, setOpen] = useState(false);
   const [over, setOver] = useState(false);
+  const [state, setLog] = useState(false);
   const classes = useStyles();
   let history = useHistory();
   const onLogoutSuccess = async (res) => {
@@ -81,7 +80,7 @@ function Login() {
     {
       const isTokenExists = await localStorage.getItem('token');
       if (!isTokenExists) {
-        state = { value: false };
+        setLog(true);
       }
     }
   });
@@ -99,18 +98,6 @@ function Login() {
     }
     setOver(false);
   };
-
-  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-    <Alert onClose={handleClose} severity="error">
-      Please signin using BITSmail only!
-    </Alert>
-  </Snackbar>;
-
-  <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
-    <Alert onClose={handleClose1} severity="error">
-      Please try again later.
-    </Alert>
-  </Snackbar>;
 
   const onSuccess = (res) => {
     let accessToken = res.accessToken;
@@ -160,7 +147,7 @@ function Login() {
         isSignedIn={true}
         uxMode="popup"
         redirectUri={process.env.REACT_APP_REDIRECT_URI}
-        disabled={state.value}
+        disabled={state}
         render={(renderProps) => (
           <Button
             onClick={renderProps.onClick}
@@ -196,6 +183,18 @@ function Login() {
           </Button>
         )}
       />
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Please signin using BITSmail only!
+        </Alert>
+      </Snackbar>
+      ;
+      <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="error">
+          Please try again later.
+        </Alert>
+      </Snackbar>
+      ;
     </div>
   );
 }
