@@ -91,6 +91,8 @@ export default function SendMessagePopup({
   get,
   fix,
   setX2,
+  count,
+  setcount,
   setload,
 }) {
   const classes = useStyles();
@@ -104,7 +106,7 @@ export default function SendMessagePopup({
   const [open, setOpen] = React.useState(false);
   const [spinner, setSpinner] = useState(true);
   const [over, setOver] = useState(false);
-  const [r, setr] = useState();
+  const [Opendown, setOpendown] = useState(false);
   const token = localStorage.getItem('token');
   const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [disableSend, setDisableSend] = useState(false);
@@ -115,24 +117,7 @@ export default function SendMessagePopup({
     await setComponentEnabled(enabled);
     await getremain();
     await setTimeout(() => setSpinner(false), 1500);
-  }, [enabled]);
-
-  useEffect(async () => {
-    try {
-      let response = await axios.get(`${URL}/api/level0/remainquant`, {
-        method: 'GET',
-        headers: { token: `${token}` },
-      });
-      var t = await response.data.remaining;
-      setr(t);
-      if (t == 0) {
-        setOver(true);
-      }
-      //console.log(t);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }, []);
+  });
 
   async function getremain() {
     try {
@@ -140,9 +125,8 @@ export default function SendMessagePopup({
         method: 'GET',
         headers: { token: `${token}` },
       });
-      var t = await response.data.remaining;
-      setr(t);
-      //console.log(t);
+      var remaining = await response.data.remaining;
+      setcount(remaining);
     } catch (error) {
       console.error(error.message);
     }
@@ -175,12 +159,15 @@ export default function SendMessagePopup({
           setSendToName('');
           setSendMail('');
           setMessageText('');
-          getremain('');
+          getremain();
         } else {
           setDisableSend(false);
           setOpen(false);
-          if (r == 0) {
+          if (count == 0) {
             setOver(true);
+          }
+          if (response.disabled == true) {
+            setOpendown(true);
           }
         }
       } catch (error) {
@@ -206,10 +193,6 @@ export default function SendMessagePopup({
   };
 
   let hideMe = async () => {
-    await setload(true);
-    await setTimeout(() => {
-      setload(false);
-    }, 800);
     await toggleVisibility();
   };
 
@@ -306,7 +289,7 @@ export default function SendMessagePopup({
                     style={{ paddingRight: '1rem', color: '#EF4646' }}
                   />
                   {''}
-                  {r}
+                  {count}
                 </IconButton>
               </div>
             </Paper>
@@ -479,6 +462,15 @@ export default function SendMessagePopup({
               Message Sent successfully!!
             </Alert>
           </Snackbar>
+          <Snackbar
+            open={Opendown}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert onClose={handleClose} severity="error">
+              Send Message Functionality is disabled by admin
+            </Alert>
+          </Snackbar>
           <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
             <Alert onClose={handleClose1} severity="error">
               Daily message limit of 40 exhausted
@@ -515,7 +507,7 @@ export default function SendMessagePopup({
                     style={{ paddingRight: '1rem', color: '#EF4646' }}
                   />
                   {''}
-                  {r}
+                  {count}
                 </IconButton>
               </div>
             </Paper>
@@ -683,6 +675,15 @@ export default function SendMessagePopup({
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
               Message Sent successfully!!
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={Opendown}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert onClose={handleClose} severity="error">
+              Send Message Functionality is disabled by admin
             </Alert>
           </Snackbar>
           <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>

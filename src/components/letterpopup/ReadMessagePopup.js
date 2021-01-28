@@ -415,10 +415,6 @@ export default function ReadMessagePopup({
       }
       postRead();
     }
-    await setload(true);
-    await setTimeout(() => {
-      setload(false);
-    }, 500);
     await toggleVisibility(false);
   };
 

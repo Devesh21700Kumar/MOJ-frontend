@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     fontFamily: 'Raleway, sans-serif',
     fontSize: '17px',
-    fontWeight: '400',
+    fontWeight: 500,
   },
   cardFooter: {
     display: 'flex',
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '30px 15px 0 0',
     fontStyle: 'italic',
     fontFamily: 'Roboto, sans-serif',
-    fontWeight: 700,
+    fontWeight: 400,
   },
   iconButton: {
     padding: 0,

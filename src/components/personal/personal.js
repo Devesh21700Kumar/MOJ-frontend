@@ -236,6 +236,7 @@ export default function Personal({ name, bitsId }, props) {
   );
   const [fix, setfix] = useState(0);
   const [load, setload] = useState(true);
+  const [count, setcount] = useState();
 
   async function call1() {
     setload(true);
@@ -303,6 +304,22 @@ export default function Personal({ name, bitsId }, props) {
       console.error(error.message);
     }
     //}
+  }, []);
+
+  useEffect(async () => {
+    try {
+      let response = await axios.get(`${URL}/api/level0/remainquant`, {
+        method: 'GET',
+        headers: { token: `${token}` },
+      });
+      var t = await response.data.remaining;
+      setcount(t);
+      if (t == 0) {
+        setOver(true);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   }, []);
 
   const [get, setGet] = useState(rec);
@@ -397,6 +414,8 @@ export default function Personal({ name, bitsId }, props) {
     <Fragment>
       <div className={classes.root} id="root">
         <SendMessagePopup
+          count={count}
+          setcount={setcount}
           call2={call2}
           setload={setload}
           setX2={setX2}
