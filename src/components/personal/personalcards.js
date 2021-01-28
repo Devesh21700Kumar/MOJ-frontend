@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersonalCards({ text, index, fix, setGet }) {
+export default function PersonalCards({ text, index, fix, setGet, setload }) {
   const classes = useStyles();
   const { get } = useContext(Data);
   const i = useContext(Data1);
@@ -260,6 +260,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
         <ReadMessagePopup
           fix={fix}
           get={get}
+          setload={setload}
           setGet={setGet}
           messageArray={get.map((obj) => {
             return [obj.body, obj.date, obj._id, obj.read];
@@ -322,6 +323,7 @@ export default function PersonalCards({ text, index, fix, setGet }) {
       <Fragment>
         <ReadMessagePopup
           fix={fix}
+          setload={setload}
           messageArray={get.map((obj) => {
             return [obj.body, obj.date];
           })}

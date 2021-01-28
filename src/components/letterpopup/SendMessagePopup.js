@@ -91,6 +91,7 @@ export default function SendMessagePopup({
   get,
   fix,
   setX2,
+  setload,
 }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -204,8 +205,12 @@ export default function SendMessagePopup({
     return rows;
   };
 
-  let hideMe = () => {
-    toggleVisibility();
+  let hideMe = async () => {
+    await setload(true);
+    await setTimeout(() => {
+      setload(false);
+    }, 800);
+    await toggleVisibility();
   };
 
   const handleClose = (event, reason) => {

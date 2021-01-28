@@ -6,6 +6,7 @@ import URL from '../util/url';
 import axios from 'axios';
 import img from './../../imageassets/letter-coloured.svg';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { set } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   noMessages: {
@@ -22,6 +23,7 @@ export default function ReadMessagePopup({
   setGet,
   handler1,
   fix,
+  setload,
 }) {
   const [currentPosition, setCurrentPosition] = useState(startFrom);
   const [componentEnabled, setComponentEnabled] = useState(enabled);
@@ -89,6 +91,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -126,6 +132,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -161,6 +171,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -196,6 +210,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -231,6 +249,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -285,6 +307,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -304,25 +330,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
-      }
-      postRead();
-    } else if (
-      fix == 0 &&
-      currentPosition + 1 < messageArray.length &&
-      messageArray[currentPosition + 1][3] != 0 &&
-      messageArray[currentPosition][3] != 0
-    ) {
-      async function postRead() {
-        try {
-          let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
-            method: 'GET',
-            headers: { token: `${localStorage.getItem('token')}` },
-          });
-          var r = await response.data.data;
-          setGet([...r].reverse());
-        } catch (error) {
-          console.error(error.message);
-        }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     }
@@ -387,6 +398,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -424,6 +439,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -461,6 +480,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -515,6 +538,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -550,6 +577,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -587,6 +618,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -606,6 +641,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -661,6 +700,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     } else if (
@@ -680,6 +723,10 @@ export default function ReadMessagePopup({
         } catch (error) {
           console.error(error.message);
         }
+        await setSpinner(true);
+        await setTimeout(() => {
+          setSpinner(false);
+        }, 500);
       }
       postRead();
     }
@@ -687,8 +734,7 @@ export default function ReadMessagePopup({
 
   //---HideMe----//
 
-  let hideMe = () => {
-    toggleVisibility(false);
+  let hideMe = async () => {
     if (messageArray[currentPosition][3] == 0 && fix == 0) {
       async function postRead() {
         try {
@@ -722,11 +768,17 @@ export default function ReadMessagePopup({
 
       postRead();
     }
+    await setload(true);
+    await setTimeout(() => {
+      setload(false);
+    }, 500);
+    await toggleVisibility(false);
   };
 
   if (componentEnabled)
     return (
       <SendMessage
+        setload={setload}
         spinner={spinner}
         messageArray={messageArray}
         currentPosition={currentPosition}
@@ -745,6 +797,7 @@ function SendMessage({
   prev,
   hideMe,
   spinner,
+  setload,
 }) {
   const classes = useStyles();
   return (
@@ -777,8 +830,14 @@ function SendMessage({
             </div>
           </div>
         </Paper>
-        <div className="letterpopup-classes-left-arrow" onClick={prev} />
-        <div className="letterpopup-classes-right-arrow" onClick={next} />
+        <div
+          className="letterpopup-classes-left-arrow"
+          onClick={spinner ? null : prev}
+        />
+        <div
+          className="letterpopup-classes-right-arrow"
+          onClick={spinner ? null : next}
+        />
       </React.Fragment>
     </div>
   );
