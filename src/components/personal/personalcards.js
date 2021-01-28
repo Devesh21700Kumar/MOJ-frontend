@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import ReadMessagePopup from '../letterpopup/ReadMessagePopup';
 import SendMessagePopup from '../letterpopup/SendMessagePopup';
 import axios from 'axios';
+import { sum } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   msgCard: {
@@ -182,6 +183,27 @@ export default function PersonalCards({ text, index, fix, setGet }) {
   const toggleReadMessages = (b) => {
     setvat(b);
   };
+  function displayname(x) {
+    var y = '';
+    for (var i = 0; i < 3; i++) {
+      var y =
+        y +
+        x
+          .split(' ')
+          .slice(i, i + 1)
+          .join(' ')
+          .charAt(0)
+          .toUpperCase() +
+        x
+          .split(' ')
+          .slice(i, i + 1)
+          .join(' ')
+          .toLowerCase()
+          .slice(1) +
+        ' ';
+    }
+    return y;
+  }
 
   async function postRead(i, index) {
     if (get[(i / 15) * 15 + index].read == 0) {
@@ -324,60 +346,9 @@ export default function PersonalCards({ text, index, fix, setGet }) {
                 <div className={classes.bitsId}>
                   To
                   {text.name != null
-                    ? ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(0, 1)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(0, 1)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1) +
-                      ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(1, 2)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(1, 2)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1) +
-                      ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(2, 3)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(2, 3)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1) +
-                      ' ' +
-                      text.name
-                        .split(' ')
-                        .slice(3, 4)
-                        .join(' ')
-                        .charAt(0)
-                        .toUpperCase() +
-                      text.name
-                        .split(' ')
-                        .slice(3, 4)
-                        .join(' ')
-                        .toLowerCase()
-                        .slice(1)
+                    ? ' ' + displayname(text.name)
                     : //text.name
-                      console.log('undefined')}
+                      ' ' + displayname('somebody')}
                 </div>
                 <div className={classes.Gin}>
                   <p className={classes.date}>
