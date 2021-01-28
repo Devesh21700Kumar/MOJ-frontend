@@ -187,13 +187,6 @@ const instructions = () => {
                   instagram pages.
                 </h3>
               </li>
-              <li>
-                <h3>
-                  15). Lastly.. do not forget to checkout The Credits Page and
-                  do send those fellow peeps who have worked so hard for about
-                  2.5 months on the website some messages of Joy
-                </h3>
-              </li>
             </ol>
           </div>
         </Box>

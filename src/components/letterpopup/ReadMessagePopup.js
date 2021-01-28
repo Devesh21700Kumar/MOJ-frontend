@@ -808,7 +808,7 @@ function SendMessage({
   spinner,
 }) {
   const classes = useStyles();
-  const dateFormatter = (timestamp) => {
+  /*const dateFormatter = (timestamp) => {
     var date = new Date(timestamp);
     var day =
       date.getDate() == 1
@@ -832,7 +832,7 @@ function SendMessage({
       hour12: true,
     });
     return day + month + year + time;
-  };
+  };*/
 
   return (
     <div className="letterpopup-classes-root">
