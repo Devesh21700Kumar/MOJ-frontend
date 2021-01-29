@@ -30,7 +30,7 @@ export default function ReadMessagePopup({
   const [spinner, setSpinner] = useState(true);
   React.useEffect(async () => {
     await setComponentEnabled(enabled);
-    await setTimeout(() => setSpinner(false), 1500);
+    await setTimeout(() => setSpinner(false), 300);
   }, [enabled]);
 
   //---Next----//
@@ -466,9 +466,9 @@ function SendMessage({
               {spinner ? (
                 <div></div>
               ) : (
-                <React.Fragment>
+                <div style={{ whiteSpace: 'pre-line' }}>
                   {messageArray[currentPosition][0]}
-                </React.Fragment>
+                </div>
               )}
             </div>
           </div>
