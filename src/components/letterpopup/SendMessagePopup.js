@@ -245,6 +245,14 @@ export default function SendMessagePopup({
     setOver(false);
   };
 
+  const handleCloseSiteDisabled = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpendown(false);
+  };
+
   const [c1, setc1] = useState('none');
   const [c2, setc2] = useState('inline');
   const [c3, setc3] = useState(true);
@@ -451,9 +459,9 @@ export default function SendMessagePopup({
           <Snackbar
             open={Opendown}
             autoHideDuration={6000}
-            onClose={handleClose}
+            onClose={handleCloseSiteDisabled}
           >
-            <Alert onClose={handleClose} severity="error">
+            <Alert onClose={handleCloseSiteDisabled} severity="error">
               Send Message Functionality is disabled by admin
             </Alert>
           </Snackbar>
@@ -624,9 +632,9 @@ export default function SendMessagePopup({
           <Snackbar
             open={Opendown}
             autoHideDuration={6000}
-            onClose={handleClose}
+            onClose={handleCloseSiteDisabled}
           >
-            <Alert onClose={handleClose} severity="error">
+            <Alert onClose={handleCloseSiteDisabled} severity="error">
               Send Message Functionality is disabled by admin
             </Alert>
           </Snackbar>
