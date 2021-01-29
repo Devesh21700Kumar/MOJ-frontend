@@ -33,7 +33,7 @@ export default function ReadMessagePopup({
     await setTimeout(() => setSpinner(false), 300);
   }, [enabled]);
 
-  //---Next----//
+  //----Next----//
 
   async function getback() {
     try {
