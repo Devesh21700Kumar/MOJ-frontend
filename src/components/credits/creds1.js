@@ -18,6 +18,9 @@ import img8 from './../../imageassets/3B.jpeg';
 import img9 from './../../imageassets/1C.jpeg';
 import img10 from './../../imageassets/2C.jpeg';
 import img11 from './../../imageassets/3C.jpeg';
+import img12 from './../../imageassets/4C.jpeg';
+import img13 from './../../imageassets/5C.jpeg';
+import img14 from './../../imageassets/6C.jpeg';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -233,6 +236,120 @@ const Team = () => {
                           <IconButton>
                             <a
                               href="https://www.instagram.com/arjunbajpai2000/?hl=en "
+                              target="_blank"
+                              style={{ color: '#8a3ab9' }}
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img12} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Arpit Bhardwaj</p>
+                        <p className="number">Web Dev Head</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/arpitbhardwaj24"
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.linkedin.com/in/arpit-bhardwaj-3a170a121/"
+                              target="_blank"
+                              style={{ color: '#0e76a8' }}
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.instagram.com/maybe_arpit/"
+                              target="_blank"
+                              style={{ color: '#8a3ab9' }}
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img13} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Sarvesh Shinde</p>
+                        <p className="number">Head of Operations</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/Sarvesh67"
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.linkedin.com/in/sarvesh67/"
+                              target="_blank"
+                              style={{ color: '#0e76a8' }}
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.instagram.com/_sarvesh67/"
+                              target="_blank"
+                              style={{ color: '#8a3ab9' }}
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img14} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Anshuman Singh</p>
+                        <p className="number">Game Dev Head</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/MysteriousAcadia"
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.linkedin.com/in/notanshuman/"
+                              target="_blank"
+                              style={{ color: '#0e76a8' }}
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.instagram.com/notanshuman/"
                               target="_blank"
                               style={{ color: '#8a3ab9' }}
                             >
