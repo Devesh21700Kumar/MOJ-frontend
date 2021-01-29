@@ -87,7 +87,7 @@ const instructions = () => {
             <ol>
               <li>
                 <h3>
-                  1). Login using your{' '}
+                  1) Login using your{' '}
                   <b style={{ color: '#EF4646' }}>
                     BITS ID (It's a BITSian event only!)
                   </b>
@@ -95,12 +95,12 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  2). Messages can be sent at the <b>given time slot</b> only.
+                  2) Messages can be sent at the <b>given time slot</b> only.
                 </h3>
               </li>
               <li>
                 <h3>
-                  3). The website is set in such a way that none of us from the
+                  3) The website is set in such a way that none of us from the
                   organising committee can see who is sending the message. So
                   that{' '}
                   <b style={{ color: '#EF4646' }}>
@@ -111,21 +111,21 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  4). You can send up to{' '}
+                  4) You can send up to{' '}
                   <b style={{ color: '#EF4646' }}>40 messages a day</b> to
                   anyone you want to.
                 </h3>
               </li>
               <li>
                 <h3>
-                  5). There is a{' '}
+                  5) There is a{' '}
                   <b style={{ color: '#EF4646' }}>2000 characters limit</b> for
                   a message.
                 </h3>
               </li>
               <li>
                 <h3>
-                  6). To ensure no negativity is delivered,{' '}
+                  6) To ensure no negativity is delivered,{' '}
                   <b style={{ color: '#EF4646' }}>
                     all the messages will be screened
                   </b>{' '}
@@ -135,25 +135,19 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  7). Click on the Profile Button on the Navbar to Route to all
+                  7) Click on the Profile Button on the Navbar to Route to all
                   the pages like Credits and Home
                 </h3>
               </li>
               <li>
                 <h3>
-                  8). To return to Home You can click on The MOJ text on the
-                  Navbar of the page
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  9). Click on The Sent Tab to view your sent messages and the
+                  8) Click on The Sent Tab to view your sent messages and the
                   Inbox tab to view the messages you have received.
                 </h3>
               </li>
               <li>
                 <h3>
-                  10). Click on the{' '}
+                  9) Click on the{' '}
                   <b style={{ color: '#EF4646' }}>
                     respective message cards/Boxes in Each tab to open the
                     letter
@@ -163,7 +157,7 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  11). Click on{' '}
+                  10) Click on{' '}
                   <b style={{ color: '#EF4646' }}>
                     the Icon with the add symbol in between
                   </b>{' '}
@@ -176,7 +170,14 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  12). For daily updates, do follow{' '}
+                  11) <b style={{ color: '#EF4646' }}>Do not send any links</b>{' '}
+                  in the msg, it will straightaway be rejected, and you will
+                  unnecessarily exhaust your daily message limit.
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  12) For daily updates, do follow{' '}
                   <a
                     href="https://www.instagram.com/devsocbitsgoa/?hl=en"
                     className="nostyle"
@@ -187,7 +188,7 @@ const instructions = () => {
                   and{' '}
                   <a
                     href="https://www.instagram.com/nirmaangoa/?hl=en"
-                    className="nostyle"
+                    className="nostyle1"
                     target="_blank"
                   >
                     Nirmaan (@nirmaangoa)

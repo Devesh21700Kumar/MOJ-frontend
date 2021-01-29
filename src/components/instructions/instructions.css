@@ -24,3 +24,11 @@ li {
   color: #03a99d;
   cursor: pointer;
 }
+
+.nostyle1:link:not(#exclude),
+.nostyle1:visited:not(#exclude) {
+  text-decoration: none;
+  font-weight: bold;
+  color: orange;
+  cursor: pointer;
+}
