@@ -95,7 +95,8 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  2) Messages can be sent at the <b>given time slot</b> only.
+                  2) Messages can be sent at the{' '}
+                  <b style={{ color: '#EF4646' }}>given time slot</b> only.
                 </h3>
               </li>
               <li>
@@ -135,27 +136,14 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  7) Click on{' '}
-                  <b style={{ color: '#EF4646' }}>
-                    the Icon with the add symbol
-                  </b>{' '}
-                  to open a send message popup to send a new message..
-                  <br></br>
-                  You can search the names of the people present in the database
-                  through the auto search functions while simultaneously typing
-                  in the "who is it for" textfield
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  8) <b style={{ color: '#EF4646' }}>Do not send any links</b>{' '}
+                  7) <b style={{ color: '#EF4646' }}>Do not send any links</b>{' '}
                   in the msg, it will straightaway be rejected, and you will
                   unnecessarily exhaust your daily message limit.
                 </h3>
               </li>
               <li>
                 <h3>
-                  9) For daily updates, do follow{' '}
+                  8) For daily updates, do follow{' '}
                   <a
                     href="https://www.instagram.com/devsocbitsgoa/?hl=en"
                     className="nostyle"
