@@ -87,7 +87,10 @@ const instructions = () => {
             <ol>
               <li>
                 <h3>
-                  1). Login using your BITS ID (It's a BITSian event only!)
+                  1). Login using your{' '}
+                  <b style={{ color: '#EF4646' }}>
+                    BITS ID (It's a BITSian event only!)
+                  </b>
                 </h3>
               </li>
               <li>
@@ -98,62 +101,73 @@ const instructions = () => {
               <li>
                 <h3>
                   3). The website is set in such a way that none of us from the
-                  organising committee can see who is sending the message.
+                  organising committee can see who is sending the message. So
+                  that{' '}
+                  <b style={{ color: '#EF4646' }}>
+                    implies if you want the recipient to know who you are
+                  </b>
+                  , write your name at the end.
                 </h3>
               </li>
               <li>
                 <h3>
-                  4). So that implies if you want the recipient to know who you
-                  are, write your name at the end.
+                  4). You can send up to{' '}
+                  <b style={{ color: '#EF4646' }}>40 messages a day</b> to
+                  anyone you want to.
                 </h3>
               </li>
               <li>
                 <h3>
-                  5). You can send up to <b>40 messages a day</b> to anyone you
-                  want to.
+                  5). There is a{' '}
+                  <b style={{ color: '#EF4646' }}>2000 characters limit</b> for
+                  a message.
                 </h3>
               </li>
               <li>
                 <h3>
-                  6). There is a <b>2000 characters limit</b> for a message.
+                  6). To ensure no negativity is delivered,{' '}
+                  <b style={{ color: '#EF4646' }}>
+                    all the messages will be screened
+                  </b>{' '}
+                  by our team, so please be patient if the message is not
+                  delivered as soon as you have sent it.
                 </h3>
               </li>
               <li>
                 <h3>
-                  7). To ensure no negativity is delivered,{' '}
-                  <b>all the messages will be screened</b> by our team, so
-                  please be patient if the message is not delivered as soon as
-                  you have sent it.
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  8). Click on the Profile Button on the Navbar to Route to all
+                  7). Click on the Profile Button on the Navbar to Route to all
                   the pages like Credits and Home
                 </h3>
               </li>
               <li>
                 <h3>
-                  9). To return to Home You can click on The MOJ text on the
+                  8). To return to Home You can click on The MOJ text on the
                   Navbar of the page
                 </h3>
               </li>
               <li>
                 <h3>
-                  10). Click on The Sent Tab to view your sent messages and the
+                  9). Click on The Sent Tab to view your sent messages and the
                   Inbox tab to view the messages you have received.
                 </h3>
               </li>
               <li>
                 <h3>
-                  11). Click on the respective message cards/Boxes in Each tab
-                  to open the letter and read the complete Message of Joy
+                  10). Click on the{' '}
+                  <b style={{ color: '#EF4646' }}>
+                    respective message cards/Boxes in Each tab to open the
+                    letter
+                  </b>{' '}
+                  and read the complete Message of Joy
                 </h3>
               </li>
               <li>
                 <h3>
-                  12). Click on The Icon with the add symbol in between to open
-                  a send message popup to send a new message..
+                  11). Click on{' '}
+                  <b style={{ color: '#EF4646' }}>
+                    the Icon with the add symbol in between
+                  </b>{' '}
+                  to open a send message popup to send a new message..
                   <br></br>
                   You can search the names of the people present in the database
                   through the auto search functions while simultaneously typing
@@ -162,13 +176,7 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  13). Click on the Logos of the Clubs in the Login panel to
-                  discover special stuff..
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  14). For daily updates, do follow{' '}
+                  12). For daily updates, do follow{' '}
                   <a
                     href="https://www.instagram.com/devsocbitsgoa/?hl=en"
                     className="nostyle"
