@@ -135,31 +135,9 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  7) Click on the Profile Button on the Navbar to Route to all
-                  the pages like Credits and Home
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  8) Click on The Sent Tab to view your sent messages and the
-                  Inbox tab to view the messages you have received.
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  9) Click on the{' '}
+                  7) Click on{' '}
                   <b style={{ color: '#EF4646' }}>
-                    respective message cards/Boxes in Each tab to open the
-                    letter
-                  </b>{' '}
-                  and read the complete Message of Joy
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  10) Click on{' '}
-                  <b style={{ color: '#EF4646' }}>
-                    the Icon with the add symbol in between
+                    the Icon with the add symbol
                   </b>{' '}
                   to open a send message popup to send a new message..
                   <br></br>
@@ -170,14 +148,14 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  11) <b style={{ color: '#EF4646' }}>Do not send any links</b>{' '}
+                  8) <b style={{ color: '#EF4646' }}>Do not send any links</b>{' '}
                   in the msg, it will straightaway be rejected, and you will
                   unnecessarily exhaust your daily message limit.
                 </h3>
               </li>
               <li>
                 <h3>
-                  12) For daily updates, do follow{' '}
+                  9) For daily updates, do follow{' '}
                   <a
                     href="https://www.instagram.com/devsocbitsgoa/?hl=en"
                     className="nostyle"
