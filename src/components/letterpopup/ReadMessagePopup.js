@@ -466,9 +466,9 @@ function SendMessage({
               {spinner ? (
                 <div></div>
               ) : (
-                <React.Fragment>
+                <div style={{ whiteSpace: 'pre-line' }}>
                   {messageArray[currentPosition][0]}
-                </React.Fragment>
+                </div>
               )}
             </div>
           </div>

@@ -78,12 +78,14 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'oxygen',
     fontSize: '0.8rem',
     fontWeight: 600,
+    whiteSpace: 'pre-line',
   },
   date1: {
     margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
     fontSize: '0.94rem',
     fontWeight: 'bold',
+    whiteSpace: 'pre-line',
   },
   krait: {
     marginLeft: '7px',
@@ -239,16 +241,6 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
       } catch (error) {
         console.error(error.message);
       }
-      try {
-        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
-          method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
-        });
-        var r = await response.data.data;
-        setGet([...r].reverse());
-      } catch (error) {
-        console.error(error.message);
-      }
     }
 
     try {
@@ -300,10 +292,15 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
                   >
                     {screen.width >= 591
                       ? screen.width >= 680
-                        ? text.body.slice(0, 72)
+                        ? text.body.length > 72 - 3
+                          ? text.body.slice(0, 72) + '...'
+                          : text.body.slice(0, 72)
+                        : text.body.length > 44 - 3
+                        ? text.body.slice(0, 44) + '...'
                         : text.body.slice(0, 44)
+                      : text.body.length > 30 - 3
+                      ? text.body.slice(0, 30) + '...'
                       : text.body.slice(0, 30)}
-                    <b>.....</b>
                   </p>
                 </div>
 
@@ -359,10 +356,15 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
                   <p className={classes.msgtxt}>
                     {screen.width >= 591
                       ? screen.width >= 680
-                        ? text.body.slice(0, 43)
+                        ? text.body.length > 43 - 3
+                          ? text.body.slice(0, 43) + '...'
+                          : text.body.slice(0, 43)
+                        : text.body.length > 31 - 3
+                        ? text.body.slice(0, 31) + '...'
                         : text.body.slice(0, 31)
+                      : text.body.length > 23 - 3
+                      ? text.body.slice(0, 23) + '...'
                       : text.body.slice(0, 23)}
-                    <b>.....</b>
                   </p>
                 </div>
 
