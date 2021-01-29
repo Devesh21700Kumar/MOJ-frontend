@@ -101,7 +101,8 @@ const instructions = () => {
               </li>
               <li>
                 <h3>
-                  3) The website is set in such a way that none of us from the
+                  3) The website is set in such a way that{' '}
+                  <b style={{ color: '#EF4646' }}>none</b> of us from the
                   organising committee can see who is sending the message. So
                   that{' '}
                   <b style={{ color: '#EF4646' }}>
