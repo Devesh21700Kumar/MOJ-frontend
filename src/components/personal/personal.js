@@ -243,6 +243,10 @@ export default function Personal() {
         headers: { token: `${token}` },
       });
       var r = await response.data.data;
+      if (r>=15){
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      }
       setGet([...r].reverse());
       setload(false);
     } catch (error) {
@@ -258,6 +262,10 @@ export default function Personal() {
         headers: { token: `${token}` },
       });
       var t = await response.data.data;
+      if (r>=15){
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      }
       setGet([...t].reverse());
       setload(false);
     } catch (error) {
@@ -285,7 +293,7 @@ export default function Personal() {
       seti(0);
       setfix(0);
       setX1('#C4C4C4');
-      setX2('#C4C4C4');
+      setX2('#EF4646');
     }
   };
 
