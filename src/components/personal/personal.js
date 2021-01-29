@@ -424,81 +424,89 @@ export default function Personal() {
                 <Typography className={classes.hot1}>Messages</Typography>
               </Box>
             </Box>
-            <div className={classes.messages}>
-              <Container>
-                {load ? (
+
+            {load ? (
+              <div className={classes.messages}>
+                <Container>
                   <div className="spinwrap">
                     <div className="spinner">
                       <div></div>
                       <div></div>
                     </div>
                   </div>
-                ) : (
-                  <Data.Provider value={{ get }}>
-                    <Data1.Provider value={i}>
-                      <PersonalCards
-                        fix={fix}
-                        setGet={setGet}
-                        setload={setload}
-                      />
-                    </Data1.Provider>
-                  </Data.Provider>
-                )}
-              </Container>
-            </div>
+                </Container>
+              </div>
+            ) : (
+              <Fragment>
+                <div className={classes.messages}>
+                  <Container>
+                    <Data.Provider value={{ get }}>
+                      <Data1.Provider value={i}>
+                        <PersonalCards
+                          fix={fix}
+                          setGet={setGet}
+                          setload={setload}
+                        />
+                      </Data1.Provider>
+                    </Data.Provider>
+                  </Container>
+                </div>
 
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              display="flex"
-              alignItems="center"
-            >
-              <Grid item style={{ textAlign: 'center' }}>
-                <svg
-                  onClick={hc1}
-                  width="35"
-                  height="23"
-                  viewBox="0 0 48 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  display="flex"
+                  alignItems="center"
                 >
-                  <path
-                    d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
-                    fill={x1}
-                  />
-                </svg>
-              </Grid>
-              <Grid item style={{ textAlign: 'center' }}>
-                <Button
-                  className="ken"
-                  style={{
-                    fontWeight: '700',
-                    textTransform: 'none',
-                    fontFamily: 'Oxygen',
-                    margin: '1vw',
-                  }}
-                >
-                  Showing {get.length > 0 ? i + 1 : i}-
-                  {i + 15 < get.length ? i + 15 : get.length} of {get.length}
-                </Button>
-              </Grid>
-              <Grid item style={{ textAlign: 'center' }}>
-                <svg
-                  onClick={hc2}
-                  width="35"
-                  height="23"
-                  viewBox="0 0 48 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
-                    fill={get.length > 15 ? x2 : x1}
-                  />
-                </svg>
-              </Grid>
-            </Grid>
+                  <Grid item style={{ textAlign: 'center' }}>
+                    <svg
+                      onClick={hc1}
+                      width="35"
+                      height="23"
+                      viewBox="0 0 48 23"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
+                        fill={x1}
+                      />
+                    </svg>
+                  </Grid>
+                  <Grid item style={{ textAlign: 'center' }}>
+                    <Button
+                      className="ken"
+                      style={{
+                        fontWeight: '700',
+                        textTransform: 'none',
+                        fontFamily: 'Oxygen',
+                        margin: '1vw',
+                      }}
+                    >
+                      Showing {get.length > 0 ? i + 1 : i}-
+                      {i + 15 < get.length ? i + 15 : get.length} of{' '}
+                      {get.length}
+                    </Button>
+                  </Grid>
+                  <Grid item style={{ textAlign: 'center' }}>
+                    <svg
+                      onClick={hc2}
+                      width="35"
+                      height="23"
+                      viewBox="0 0 48 23"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
+                        fill={get.length > 15 ? x2 : x1}
+                      />
+                    </svg>
+                  </Grid>
+                </Grid>
+              </Fragment>
+            )}
           </Box>
           <div className={classes.tabs1} id="top"></div>
         </div>
