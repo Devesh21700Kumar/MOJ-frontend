@@ -231,6 +231,9 @@ export default function Personal() {
       if (r.length > 15) {
         setX1('#C4C4C4');
         setX2('#EF4646');
+      } else {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
       }
       setGet([...r].reverse());
       setload(false);
@@ -248,6 +251,9 @@ export default function Personal() {
       });
       var r = await response.data.data;
       if (r.length > 15) {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      } else {
         setX1('#C4C4C4');
         setX2('#EF4646');
       }
@@ -269,6 +275,9 @@ export default function Personal() {
       if (t.length > 15) {
         setX1('#C4C4C4');
         setX2('#EF4646');
+      } else {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
       }
       setGet([...t].reverse());
       setload(false);
@@ -282,45 +291,21 @@ export default function Personal() {
   const [color, setColor] = useState('#FFFDE8');
 
   const inboxClick = () => {
-    if (get.length >= 15) {
-      setColor('#FFFDE8');
-      setColor1('#FB8989');
-      call1();
-      setfix(0);
-      seti(0);
-      setX1('#C4C4C4');
-      setX2('#EF4646');
-    } else {
-      setColor('#FFFDE8');
-      setColor1('#FB8989');
-      call1();
-      seti(0);
-      setfix(0);
-      setX1('#C4C4C4');
-      setX2('#EF4646');
-    }
+    setColor('#FFFDE8');
+    setColor1('#FB8989');
+    call1();
+    setfix(0);
+    seti(0);
   };
 
   const [color1, setColor1] = useState('#FB8989');
 
   const sendClick = () => {
-    if (get.length >= 15) {
-      call2();
-      setColor1('#FFFDE8');
-      setColor('#FB8989');
-      seti(0);
-      setfix(1);
-      setX1('#C4C4C4');
-      setX2('#EF4646');
-    } else {
-      call2();
-      setColor1('#FFFDE8');
-      setColor('#FB8989');
-      seti(0);
-      setfix(1);
-      setX1('#C4C4C4');
-      setX2('#C4C4C4');
-    }
+    call2();
+    setColor1('#FFFDE8');
+    setColor('#FB8989');
+    seti(0);
+    setfix(1);
   };
   const [i, seti] = useState(0);
   const [x1, setX1] = useState('#C4C4C4');

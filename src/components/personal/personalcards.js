@@ -110,7 +110,6 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 700,
       padding: 0,
       marginTop: '10px',
-      fontWeight: 400,
     },
     msgtxt: {
       margin: '.8rem 0rem 0 0',

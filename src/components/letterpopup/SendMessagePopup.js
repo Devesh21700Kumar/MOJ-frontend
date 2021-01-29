@@ -196,6 +196,7 @@ export default function SendMessagePopup({
         } else {
           setDisableSend(false);
           setOpen(false);
+
           if (count == 0) {
             setOver(true);
           }
@@ -465,7 +466,11 @@ export default function SendMessagePopup({
               Send Message Functionality is disabled by admin
             </Alert>
           </Snackbar>
-          <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+          <Snackbar
+            open={count == 0}
+            autoHideDuration={6000}
+            onClose={handleClose1}
+          >
             <Alert onClose={handleClose1} severity="error">
               Daily message limit of 40 exhausted
             </Alert>
@@ -638,7 +643,11 @@ export default function SendMessagePopup({
               Send Message Functionality is disabled by admin
             </Alert>
           </Snackbar>
-          <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+          <Snackbar
+            open={count == 0}
+            autoHideDuration={6000}
+            onClose={handleClose1}
+          >
             <Alert onClose={handleClose1} severity="error">
               Daily message limit of 40 exhausted
             </Alert>
