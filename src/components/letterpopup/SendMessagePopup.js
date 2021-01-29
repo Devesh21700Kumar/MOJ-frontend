@@ -143,7 +143,11 @@ export default function SendMessagePopup({
         headers: { token },
       }
     );
-    setSearchList(res.data.data);
+    // console.log(res.data.data);
+    const sortedArr = res.data.data.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    setSearchList(sortedArr);
   };
 
   const debouncedGetSearchList = useCallback(
@@ -158,6 +162,7 @@ export default function SendMessagePopup({
 
   let handleSubmit = (e) => {
     e.preventDefault();
+    if (!messageBody || !receiverEmail) return;
     const date = Date.now();
     async function postMessage() {
       //setDisableSend(true);
@@ -177,7 +182,6 @@ export default function SendMessagePopup({
           setDisableSend(false);
           setOpen(true);
           if (fix === 1) call2();
-          else call1();
           if (fix == 1 && get.length > 0 && get.length % 15 == 0) {
             setX2('#EF4646');
           }
