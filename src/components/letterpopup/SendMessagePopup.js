@@ -168,16 +168,20 @@ export default function SendMessagePopup({
       //setDisableSend(true);
       try {
         setDisableSend(true);
-        const response = await (
-          await fetch(`${URL}/api/level0/sendmessage`, {
-            method: 'POST',
+        let response = await axios.post(
+          `${URL}/api/level0/sendmessage`,
+          {
+            messageBody,
+            receiverEmail,
+            date,
+          },
+          {
             headers: {
-              'Content-Type': 'application/json',
-              token: `${localStorage.getItem('token')}`,
+              token,
             },
-            body: JSON.stringify({ messageBody, receiverEmail, date }),
-          })
-        ).json();
+          }
+        );
+        response = response.data;
         if (response.ok) {
           setDisableSend(false);
           setOpen(true);
