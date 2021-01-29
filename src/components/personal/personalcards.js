@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   msgCard1: {
-    padding: '15px',
+    padding: '8px 15px 15px 15px',
     marginTop: '20px',
     backgroundColor: '#FFE171',
     borderRadius: '15px',
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
     fontSize: '0.8rem',
-    fontWeight: 600,
+    fontWeight: 500,
     whiteSpace: 'pre-line',
   },
   date1: {
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   bitsId: {
     fontSize: '12px',
     fontFamily: 'Oxygen, sans-serif',
-    fontWeight: 400,
+    fontWeight: 700,
     padding: 0,
     marginTop: '10px',
   },
@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '.8rem 0rem 0 0',
       fontFamily: 'oxygen',
       fontSize: '1.1rem',
-      fontWeight: 600,
+      fontWeight: 500,
     },
     date: {
       margin: '.8rem 0rem 0 0',
