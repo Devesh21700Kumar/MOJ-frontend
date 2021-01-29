@@ -30,7 +30,7 @@ export default function ReadMessagePopup({
   const [spinner, setSpinner] = useState(true);
   React.useEffect(async () => {
     await setComponentEnabled(enabled);
-    await setTimeout(() => setSpinner(false), 1500);
+    await setTimeout(() => setSpinner(false), 300);
   }, [enabled]);
 
   //---Next----//

@@ -117,8 +117,8 @@ export default function SendMessagePopup({
   React.useEffect(async () => {
     await setComponentEnabled(enabled);
     await getremain();
-    await setTimeout(() => setSpinner(false), 1500);
-  });
+    await setTimeout(() => setSpinner(false), 300);
+  }, []);
 
   async function getremain() {
     try {
