@@ -208,52 +208,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Personal({ name, bitsId }, props) {
+export default function Personal() {
   window.history.replaceState(null, null, '/home');
-  const classes = useStyles();
-  const token = localStorage.getItem('token');
 
+  const classes = useStyles();
+
+  const token = localStorage.getItem('token');
   if (token === null) return <Redirect to="/" />;
 
-  const [rec, setrec] = useState(
-    Array(0).fill({
-      body: 'Lorem Ipsum BTits simply dummy.',
-      date: '28th Dec 2020, 2:31 a.m.',
-    })
-  );
-  const [sent, setsent] = useState(
-    Array(0)
-      .fill({
-        body: 'Lorem Ipsum is simply dummy.',
-        date: ' 28th Dec 2020, 2:31 a.m.',
-      })
-      .map((obj) => {
-        return {
-          body: obj.body + Math.random(),
-          date: obj.data + Math.random(),
-        };
-      })
-  );
   const [fix, setfix] = useState(0);
   const [load, setload] = useState(true);
   const [count, setcount] = useState();
 
   async function call1() {
     setload(true);
-    //disabled={load}
     try {
       let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
         method: 'GET',
         headers: { token: `${token}` },
       });
       var r = await response.data.data;
-      setload(false);
       setGet([...r].reverse());
-      setrec([...r].reverse());
+      setload(false);
     } catch (error) {
       console.error(error.message);
     }
   }
+
   useEffect(async () => {
     setload(true);
     try {
@@ -262,9 +243,8 @@ export default function Personal({ name, bitsId }, props) {
         headers: { token: `${token}` },
       });
       var r = await response.data.data;
-      setload(false);
       setGet([...r].reverse());
-      setrec([...r].reverse());
+      setload(false);
     } catch (error) {
       console.error(error.message);
     }
@@ -278,61 +258,23 @@ export default function Personal({ name, bitsId }, props) {
         headers: { token: `${token}` },
       });
       var t = await response.data.data;
-      if (fix == 1) {
-        setGet([...t].reverse());
-      }
-      //setGet([...t].reverse());
+      setGet([...t].reverse());
       setload(false);
-      setsent([...t].reverse());
     } catch (error) {
       console.error(error.message);
     }
   }
-  useEffect(async () => {
-    // async function call2() {
-    setload(true);
-    try {
-      let response = await axios.get(`${URL}/api/level0/sentmessages`, {
-        method: 'GET',
-        headers: { token: `${token}` },
-      });
-      var t = await response.data.data;
-      //setGet([...t].reverse());
-      setload(false);
-      setsent([...t].reverse());
-    } catch (error) {
-      console.error(error.message);
-    }
-    //}
-  }, []);
 
-  useEffect(async () => {
-    try {
-      let response = await axios.get(`${URL}/api/level0/remainquant`, {
-        method: 'GET',
-        headers: { token: `${token}` },
-      });
-      var t = await response.data.remaining;
-      setcount(t);
-      if (t == 0) {
-        setOver(true);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  }, []);
-
-  const [get, setGet] = useState(rec);
+  const [get, setGet] = useState([]);
 
   const [color, setColor] = useState('#FFFDE8');
 
-  const boxClick = () => {
-    if (rec.length >= 15) {
+  const inboxClick = () => {
+    if (get.length >= 15) {
       setColor('#FFFDE8');
       setColor1('#FB8989');
       call1();
       setfix(0);
-      setGet(rec);
       seti(0);
       setX1('#C4C4C4');
       setX2('#EF4646');
@@ -340,7 +282,6 @@ export default function Personal({ name, bitsId }, props) {
       setColor('#FFFDE8');
       setColor1('#FB8989');
       call1();
-      setGet(rec);
       seti(0);
       setfix(0);
       setX1('#C4C4C4');
@@ -350,21 +291,19 @@ export default function Personal({ name, bitsId }, props) {
 
   const [color1, setColor1] = useState('#FB8989');
 
-  const boxClick1 = () => {
-    if (sent.length >= 15) {
+  const sendClick = () => {
+    if (get.length >= 15) {
       call2();
       setColor1('#FFFDE8');
       setColor('#FB8989');
       seti(0);
       setfix(1);
-      setGet(sent);
       setX1('#C4C4C4');
       setX2('#EF4646');
     } else {
       call2();
       setColor1('#FFFDE8');
       setColor('#FB8989');
-      setGet(sent);
       seti(0);
       setfix(1);
       setX1('#C4C4C4');
@@ -374,7 +313,9 @@ export default function Personal({ name, bitsId }, props) {
   const [i, seti] = useState(0);
   const [x1, setX1] = useState('#C4C4C4');
   const [x2, setX2] = useState('#EF4646');
+
   const userdata = JSON.parse(window.atob(token.split('.')[1]));
+
   const hc1 = (e) => {
     if (i > 15) {
       seti(i - 15);
@@ -406,7 +347,8 @@ export default function Personal({ name, bitsId }, props) {
     }
   };
   const [enables, setEnables] = useState(false);
-  const hit = () => {
+
+  const addIconClick = () => {
     setEnables(!enables);
   };
 
@@ -422,35 +364,27 @@ export default function Personal({ name, bitsId }, props) {
           get={get}
           fix={fix}
           enabled={enables}
-          toggleVisibility={hit}
+          toggleVisibility={addIconClick}
           key={'SendMessagePopupKey-' + enables}
         />
         <div className="nav1">
           <Navbar navtext="MoJ" name={userdata.name} bitsId={userdata.bitsId} />
         </div>
         <div className={classes.tabs} id="top">
-          <Box
-            className={classes.tab}
-            style={{ backgroundColor: color }}
-            //onClick={boxClick}
-          >
+          <Box className={classes.tab} style={{ backgroundColor: color }}>
             <Button
               className={classes.tabButton}
               disabled={load}
-              onClick={boxClick}
+              onClick={inboxClick}
             >
               Inbox
             </Button>
           </Box>
-          <Box
-            className={classes.tab}
-            style={{ backgroundColor: color1 }}
-            //onClick={boxClick1}
-          >
+          <Box className={classes.tab} style={{ backgroundColor: color1 }}>
             <Button
               className={classes.tabButton}
               disabled={load}
-              onClick={boxClick1}
+              onClick={sendClick}
             >
               Sent
             </Button>
@@ -463,7 +397,7 @@ export default function Personal({ name, bitsId }, props) {
           <div className={classes.fab}>
             <IconButton
               className={classes.fabButton}
-              onClick={hit}
+              onClick={addIconClick}
               style={{ color: '#EF4646' }}
             >
               <AddCircleIcon className={classes.fabButtonIcon} id="fab" />
@@ -473,7 +407,7 @@ export default function Personal({ name, bitsId }, props) {
             <Box className={classes.cA}>
               <Box className={classes.c1}>
                 <Typography className={classes.hot}>
-                  Welcome{', '}
+                  Welcome{' '}
                   {userdata.name
                     .split(' ')
                     .slice(0, 1)
@@ -545,7 +479,6 @@ export default function Personal({ name, bitsId }, props) {
                     fontWeight: '700',
                     textTransform: 'none',
                     fontFamily: 'Oxygen',
-                    //fontSize: '2.2vh',
                     margin: '1vw',
                   }}
                 >
