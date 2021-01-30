@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import './search.css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const theme = createMuiTheme({
   props: {
@@ -86,9 +86,14 @@ const Stats = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { permissionLevel } = JSON.parse(
-    atob(localStorage.getItem('token').split('.')[1])
+  const token = localStorage.getItem('token');
+  if (token === null) return <Redirect to="/" />;
+
+  const { permissionLevel, name, bitsId } = JSON.parse(
+    atob(token.split('.')[1])
   );
+
+  if (permissionLevel !== 2) return <Redirect to="/home" />;
 
   return (
     <MuiThemeProvider theme={theme}>

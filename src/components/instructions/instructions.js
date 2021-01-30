@@ -3,6 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Box, IconButton } from '@material-ui/core';
 import Navbar from '../navbar/navbar';
 import '../instructions/instructions.css';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({

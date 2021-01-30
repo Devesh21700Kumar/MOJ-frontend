@@ -4,6 +4,7 @@ import { Box, IconButton } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import { Redirect } from 'react-router-dom';
 
 import Navbar from '../navbar/navbar';
 import '../credits/creds1.css';
