@@ -93,7 +93,7 @@ const Stats = () => {
     atob(token.split('.')[1])
   );
 
-  if (permissionLevel !== 2) return <Redirect to="/home" />;
+  if (permissionLevel < 1) return <Redirect to="/home" />;
 
   return (
     <MuiThemeProvider theme={theme}>
