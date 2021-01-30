@@ -11,7 +11,6 @@ import { IconButton } from '@material-ui/core';
 import './LetterPopup.css';
 import './sendmessage.css';
 import URL from '../util/url';
-import data from '../util/newData';
 import List from '@material-ui/core/List';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchIcon from '@material-ui/icons/Search';
@@ -108,7 +107,6 @@ export default function SendMessagePopup({
   const [over, setOver] = useState(false);
   const [Opendown, setOpendown] = useState(false);
   const token = localStorage.getItem('token');
-  const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [disableSend, setDisableSend] = useState(false);
   const [searchList, setSearchList] = useState([]);
 
