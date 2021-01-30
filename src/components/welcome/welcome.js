@@ -12,6 +12,9 @@ import Logo from '../../imageassets/MOJ Logo 1.png';
 import hands from '../../imageassets/hands.png';
 import love from '../../imageassets/love 1.png';
 import '../welcome/welcome.css';
+import HelpIcon from '@material-ui/icons/Help';
+import IconButton from '@material-ui/core/IconButton';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -279,6 +282,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Welcome1() {
   const classes = useStyles();
+  let history = useHistory();
+  const addIconClick = () => {
+    history.push('/instructionslanding');
+  };
 
   return (
     <React.Fragment>
@@ -363,11 +370,17 @@ export default function Welcome1() {
                 {' '}
                 (Note: Log in with your BITS email ID)
               </b>
+              <br></br>
             </div>
             <div className={classes.loginBox} id="loginBox">
               <Box display="flex">
                 <Box className={classes.crack}>
                   <Login />
+                </Box>
+                <Box className={classes.crack}>
+                  <IconButton onClick={addIconClick}>
+                    <HelpIcon className={classes.fabButtonIcon1} />
+                  </IconButton>
                 </Box>
               </Box>
             </div>
