@@ -174,6 +174,11 @@ const instructions = () => {
                       devsocbpgc@gmail.com{' '}
                     </a>
                     <br></br>
+                    <b style={{ color: '#EF4646' }}>
+                      Ishant: +91 99969 41700
+                      <br></br>
+                      Samesh: +91 88925 40106
+                    </b>
                   </b>
                 </h3>
               </li>
