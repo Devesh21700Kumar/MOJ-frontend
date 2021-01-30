@@ -21,6 +21,11 @@ import img11 from './../../imageassets/3C.jpeg';
 import img12 from './../../imageassets/4C.jpeg';
 import img13 from './../../imageassets/5C.jpeg';
 import img14 from './../../imageassets/6C.jpeg';
+import img15 from './../../imageassets/1D.jpeg';
+import img16 from './../../imageassets/2D.jpeg';
+import img17 from './../../imageassets/3D.jpeg';
+import img18 from './../../imageassets/4D.jpeg';
+import img19 from './../../imageassets/5D.jpeg';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -126,6 +131,15 @@ const Team = () => {
                   className="department"
                 >
                   BackEnd Team
+                </div>
+                <div
+                  onClick={(e) => {
+                    handlepics(e);
+                    setval(3);
+                  }}
+                  className="department"
+                >
+                  Design Team
                 </div>
               </div>
               <div className="photos">
@@ -548,7 +562,7 @@ const Team = () => {
                       </div>
                     </div>
                   </React.Fragment>
-                ) : (
+                ) : val == 2 ? (
                   <React.Fragment>
                     <div className="photo">
                       <div className="test">
@@ -600,7 +614,11 @@ const Team = () => {
                             </a>
                           </IconButton>
                           <IconButton>
-                            <a style={{ color: '#0e76a8' }} href="#">
+                            <a
+                              style={{ color: '#0e76a8' }}
+                              target="_blank"
+                              href="http://linkedin.com/in/vishnu-soorea-82a7ba204"
+                            >
                               <LinkedInIcon />
                             </a>
                           </IconButton>
@@ -644,6 +662,194 @@ const Team = () => {
                           <IconButton>
                             <a
                               href="https://www.instagram.com/gauravdotiya/?hl=en "
+                              target="_blank"
+                              style={{ color: '#8a3ab9' }}
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img15} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Nipun Gupta</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/nipuN1831"
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.linkedin.com/in/nipun-gupta-a88432192/ "
+                              target="_blank"
+                              style={{ color: '#0e76a8' }}
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              style={{ color: '#8a3ab9' }}
+                              href="https://www.instagram.com/gupta._.nipun/?hl=en"
+                              target="_blank"
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img16} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Himanshu Jain</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/HimanshuJ41N "
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              style={{ color: '#0e76a8' }}
+                              href="https://www.linkedin.com/in/himanshu-jain-18a85a1b1/"
+                              target="_blank"
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.instagram.com/himanshu_1337/?hl=en"
+                              target="_blank"
+                              style={{ color: '#8a3ab9' }}
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img17} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Rishabh Singh</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/rishabh-hub "
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.linkedin.com/in/rishabh-singh-a1726b1a6/ "
+                              target="_blank"
+                              style={{ color: '#0e76a8' }}
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.instagram.com/rishabh_r.s/ "
+                              target="_blank"
+                              style={{ color: '#8a3ab9' }}
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img18} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Ayush Sharma</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/ayush-sharma2601 "
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.linkedin.com/in/ayush-sharma-07a571197/detail/photo/ "
+                              target="_blank"
+                              style={{ color: '#0e76a8' }}
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.instagram.com/ayush___2001/?hl=en "
+                              target="_blank"
+                              style={{ color: '#8a3ab9' }}
+                            >
+                              <InstagramIcon />
+                            </a>
+                          </IconButton>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="photo">
+                      <div className="test">
+                        <img src={img19} className="image" />
+                      </div>
+                      <div className="details">
+                        <p className="name">Umang Sinha</p>
+                        <div>
+                          <IconButton>
+                            <a
+                              style={{ color: 'black' }}
+                              href="https://github.com/umang-sinha "
+                              target="_blank"
+                            >
+                              <GitHubIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.linkedin.com/in/umang-sinha/ "
+                              target="_blank"
+                              style={{ color: '#0e76a8' }}
+                            >
+                              <LinkedInIcon />
+                            </a>
+                          </IconButton>
+                          <IconButton>
+                            <a
+                              href="https://www.instagram.com/umang__._/?hl=en "
                               target="_blank"
                               style={{ color: '#8a3ab9' }}
                             >
