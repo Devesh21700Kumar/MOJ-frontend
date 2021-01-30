@@ -88,10 +88,8 @@ const instructions = () => {
             <ol>
               <li>
                 <h3>
-                  1) Login using your{' '}
-                  <b style={{ color: '#EF4646' }}>
-                    BITS ID (It's a BITSian event only!)
-                  </b>
+                  1){' '}
+                  <b style={{ color: '#EF4646' }}>It's a BITSian only event!</b>
                 </h3>
               </li>
               <li>
@@ -167,15 +165,25 @@ const instructions = () => {
               <li>
                 <h3>
                   9) For any technical issues drop a mail at{' '}
-                  <b style={{ color: '#EF4646' }}> devsocbpgc@gmail.com </b>
-                  or call{' '}
-                  <b style={{ color: '#EF4646' }}>
-                    +91 99969 41700 (Ishant Gupta)
-                  </b>{' '}
-                  or{' '}
-                  <b style={{ color: '#EF4646' }}>
-                    +91 88925 40106 (Samesh Lakhotia)
+                  <b>
+                    <a
+                      href="mailto:devsocbpgc@gmail.com"
+                      className="nostyle"
+                      target="_blank"
+                    >
+                      {' '}
+                      devsocbpgc@gmail.com{' '}
+                    </a>
+                    <br></br>
                   </b>
+                </h3>
+              </li>
+              <li>
+                <h3>
+                  10) For any event related issue, contact: <br></br>
+                  <b style={{ color: '#EF4646' }}>
+                    +91 95949 12008 - Manleen
+                  </b>{' '}
                 </h3>
               </li>
             </ol>
