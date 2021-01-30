@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Box, IconButton } from '@material-ui/core';
-import Navbar from '../navbar/navbar';
+import { Box } from '@material-ui/core';
 import '../instructions/instructions.css';
-import { Redirect } from 'react-router-dom';
+import Navbar1 from '../navbar/navbar1';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -52,24 +52,11 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const instructions = () => {
+const instructionsland = () => {
   const classes = useStyles();
-  const token = localStorage.getItem('token');
-
-  if (token === null) return <Redirect to="/" />;
-
-  const { name, bitsId } = JSON.parse(atob(token.split('.')[1]));
   return (
     <div className={classes.root} id="r">
-      {/* Tabs */}
-      <Navbar
-        navtext="MoJ"
-        navHeading="Instructions"
-        name={name}
-        bitsId={bitsId}
-        stats={true}
-      />
-
+      <Navbar1 stats={true} />
       {/* Main Content */}
 
       <div className={classes.inner}>
@@ -198,4 +185,4 @@ const instructions = () => {
   );
 };
 
-export default instructions;
+export default instructionsland;

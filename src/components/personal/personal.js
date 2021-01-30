@@ -208,51 +208,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Personal({ name, bitsId }, props) {
+export default function Personal() {
   window.history.replaceState(null, null, '/home');
-  const classes = useStyles();
-  const token = localStorage.getItem('token');
 
+  const classes = useStyles();
+
+  const token = localStorage.getItem('token');
   if (token === null) return <Redirect to="/" />;
 
-  const [rec, setrec] = useState(
-    Array(0).fill({
-      body: 'Lorem Ipsum BTits simply dummy.',
-      date: '28th Dec 2020, 2:31 a.m.',
-    })
-  );
-  const [sent, setsent] = useState(
-    Array(0)
-      .fill({
-        body: 'Lorem Ipsum is simply dummy.',
-        date: ' 28th Dec 2020, 2:31 a.m.',
-      })
-      .map((obj) => {
-        return {
-          body: obj.body + Math.random(),
-          date: obj.data + Math.random(),
-        };
-      })
-  );
   const [fix, setfix] = useState(0);
   const [load, setload] = useState(true);
+  const [count, setcount] = useState();
 
   async function call1() {
     setload(true);
-    //disabled={load}
     try {
       let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
         method: 'GET',
         headers: { token: `${token}` },
       });
       var r = await response.data.data;
-      setload(false);
+      if (r.length > 15) {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      } else {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      }
       setGet([...r].reverse());
-      setrec([...r].reverse());
+      setload(false);
     } catch (error) {
       console.error(error.message);
     }
   }
+
   useEffect(async () => {
     setload(true);
     try {
@@ -261,9 +250,15 @@ export default function Personal({ name, bitsId }, props) {
         headers: { token: `${token}` },
       });
       var r = await response.data.data;
-      setload(false);
+      if (r.length > 15) {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      } else {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      }
       setGet([...r].reverse());
-      setrec([...r].reverse());
+      setload(false);
     } catch (error) {
       console.error(error.message);
     }
@@ -277,87 +272,47 @@ export default function Personal({ name, bitsId }, props) {
         headers: { token: `${token}` },
       });
       var t = await response.data.data;
-      if (fix == 1) {
-        setGet([...t].reverse());
+      if (t.length > 15) {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
+      } else {
+        setX1('#C4C4C4');
+        setX2('#EF4646');
       }
-      //setGet([...t].reverse());
+      setGet([...t].reverse());
       setload(false);
-      setsent([...t].reverse());
     } catch (error) {
       console.error(error.message);
     }
   }
-  useEffect(async () => {
-    // async function call2() {
-    setload(true);
-    try {
-      let response = await axios.get(`${URL}/api/level0/sentmessages`, {
-        method: 'GET',
-        headers: { token: `${token}` },
-      });
-      var t = await response.data.data;
-      //setGet([...t].reverse());
-      setload(false);
-      setsent([...t].reverse());
-    } catch (error) {
-      console.error(error.message);
-    }
-    //}
-  }, []);
 
-  const [get, setGet] = useState(rec);
+  const [get, setGet] = useState([]);
 
   const [color, setColor] = useState('#FFFDE8');
 
-  const boxClick = () => {
-    if (rec.length >= 15) {
-      setColor('#FFFDE8');
-      setColor1('#FB8989');
-      call1();
-      setfix(0);
-      setGet(rec);
-      seti(0);
-      setX1('#C4C4C4');
-      setX2('#EF4646');
-    } else {
-      setColor('#FFFDE8');
-      setColor1('#FB8989');
-      call1();
-      setGet(rec);
-      seti(0);
-      setfix(0);
-      setX1('#C4C4C4');
-      setX2('#C4C4C4');
-    }
+  const inboxClick = () => {
+    setColor('#FFFDE8');
+    setColor1('#FB8989');
+    call1();
+    setfix(0);
+    seti(0);
   };
 
   const [color1, setColor1] = useState('#FB8989');
 
-  const boxClick1 = () => {
-    if (sent.length >= 15) {
-      call2();
-      setColor1('#FFFDE8');
-      setColor('#FB8989');
-      seti(0);
-      setfix(1);
-      setGet(sent);
-      setX1('#C4C4C4');
-      setX2('#EF4646');
-    } else {
-      call2();
-      setColor1('#FFFDE8');
-      setColor('#FB8989');
-      setGet(sent);
-      seti(0);
-      setfix(1);
-      setX1('#C4C4C4');
-      setX2('#C4C4C4');
-    }
+  const sendClick = () => {
+    call2();
+    setColor1('#FFFDE8');
+    setColor('#FB8989');
+    seti(0);
+    setfix(1);
   };
   const [i, seti] = useState(0);
   const [x1, setX1] = useState('#C4C4C4');
   const [x2, setX2] = useState('#EF4646');
+
   const userdata = JSON.parse(window.atob(token.split('.')[1]));
+
   const hc1 = (e) => {
     if (i > 15) {
       seti(i - 15);
@@ -389,7 +344,8 @@ export default function Personal({ name, bitsId }, props) {
     }
   };
   const [enables, setEnables] = useState(false);
-  const hit = () => {
+
+  const addIconClick = () => {
     setEnables(!enables);
   };
 
@@ -397,41 +353,35 @@ export default function Personal({ name, bitsId }, props) {
     <Fragment>
       <div className={classes.root} id="root">
         <SendMessagePopup
+          count={count}
+          setcount={setcount}
           call2={call2}
           setload={setload}
           setX2={setX2}
           get={get}
           fix={fix}
           enabled={enables}
-          toggleVisibility={hit}
+          toggleVisibility={addIconClick}
           key={'SendMessagePopupKey-' + enables}
         />
         <div className="nav1">
           <Navbar navtext="MoJ" name={userdata.name} bitsId={userdata.bitsId} />
         </div>
         <div className={classes.tabs} id="top">
-          <Box
-            className={classes.tab}
-            style={{ backgroundColor: color }}
-            //onClick={boxClick}
-          >
+          <Box className={classes.tab} style={{ backgroundColor: color }}>
             <Button
               className={classes.tabButton}
               disabled={load}
-              onClick={boxClick}
+              onClick={inboxClick}
             >
               Inbox
             </Button>
           </Box>
-          <Box
-            className={classes.tab}
-            style={{ backgroundColor: color1 }}
-            //onClick={boxClick1}
-          >
+          <Box className={classes.tab} style={{ backgroundColor: color1 }}>
             <Button
               className={classes.tabButton}
               disabled={load}
-              onClick={boxClick1}
+              onClick={sendClick}
             >
               Sent
             </Button>
@@ -444,7 +394,7 @@ export default function Personal({ name, bitsId }, props) {
           <div className={classes.fab}>
             <IconButton
               className={classes.fabButton}
-              onClick={hit}
+              onClick={addIconClick}
               style={{ color: '#EF4646' }}
             >
               <AddCircleIcon className={classes.fabButtonIcon} id="fab" />
@@ -454,7 +404,7 @@ export default function Personal({ name, bitsId }, props) {
             <Box className={classes.cA}>
               <Box className={classes.c1}>
                 <Typography className={classes.hot}>
-                  Welcome{', '}
+                  Welcome{' '}
                   {userdata.name
                     .split(' ')
                     .slice(0, 1)
@@ -474,82 +424,89 @@ export default function Personal({ name, bitsId }, props) {
                 <Typography className={classes.hot1}>Messages</Typography>
               </Box>
             </Box>
-            <div className={classes.messages}>
-              <Container>
-                {load ? (
+
+            {load ? (
+              <div className={classes.messages}>
+                <Container>
                   <div className="spinwrap">
                     <div className="spinner">
                       <div></div>
                       <div></div>
                     </div>
                   </div>
-                ) : (
-                  <Data.Provider value={{ get }}>
-                    <Data1.Provider value={i}>
-                      <PersonalCards
-                        fix={fix}
-                        setGet={setGet}
-                        setload={setload}
-                      />
-                    </Data1.Provider>
-                  </Data.Provider>
-                )}
-              </Container>
-            </div>
+                </Container>
+              </div>
+            ) : (
+              <Fragment>
+                <div className={classes.messages}>
+                  <Container>
+                    <Data.Provider value={{ get }}>
+                      <Data1.Provider value={i}>
+                        <PersonalCards
+                          fix={fix}
+                          setGet={setGet}
+                          setload={setload}
+                        />
+                      </Data1.Provider>
+                    </Data.Provider>
+                  </Container>
+                </div>
 
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              display="flex"
-              alignItems="center"
-            >
-              <Grid item style={{ textAlign: 'center' }}>
-                <svg
-                  onClick={hc1}
-                  width="35"
-                  height="23"
-                  viewBox="0 0 48 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  display="flex"
+                  alignItems="center"
                 >
-                  <path
-                    d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
-                    fill={x1}
-                  />
-                </svg>
-              </Grid>
-              <Grid item style={{ textAlign: 'center' }}>
-                <Button
-                  className="ken"
-                  style={{
-                    fontWeight: '700',
-                    textTransform: 'none',
-                    fontFamily: 'Oxygen',
-                    //fontSize: '2.2vh',
-                    margin: '1vw',
-                  }}
-                >
-                  Showing {get.length > 0 ? i + 1 : i}-
-                  {i + 15 < get.length ? i + 15 : get.length} of {get.length}
-                </Button>
-              </Grid>
-              <Grid item style={{ textAlign: 'center' }}>
-                <svg
-                  onClick={hc2}
-                  width="35"
-                  height="23"
-                  viewBox="0 0 48 23"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
-                    fill={get.length > 15 ? x2 : x1}
-                  />
-                </svg>
-              </Grid>
-            </Grid>
+                  <Grid item style={{ textAlign: 'center' }}>
+                    <svg
+                      onClick={hc1}
+                      width="35"
+                      height="23"
+                      viewBox="0 0 48 23"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5.46392e-07 11.5L47.25 22.3253L47.25 0.674681L5.46392e-07 11.5Z"
+                        fill={x1}
+                      />
+                    </svg>
+                  </Grid>
+                  <Grid item style={{ textAlign: 'center' }}>
+                    <Button
+                      className="ken"
+                      style={{
+                        fontWeight: '700',
+                        textTransform: 'none',
+                        fontFamily: 'Oxygen',
+                        margin: '1vw',
+                      }}
+                    >
+                      Showing {get.length > 0 ? i + 1 : i}-
+                      {i + 15 < get.length ? i + 15 : get.length} of{' '}
+                      {get.length}
+                    </Button>
+                  </Grid>
+                  <Grid item style={{ textAlign: 'center' }}>
+                    <svg
+                      onClick={hc2}
+                      width="35"
+                      height="23"
+                      viewBox="0 0 48 23"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M48 11.5L0.749999 22.3253L0.75 0.674681L48 11.5Z"
+                        fill={get.length > 15 ? x2 : x1}
+                      />
+                    </svg>
+                  </Grid>
+                </Grid>
+              </Fragment>
+            )}
           </Box>
           <div className={classes.tabs1} id="top"></div>
         </div>

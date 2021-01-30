@@ -4,6 +4,7 @@ import { Card, Grid } from '@material-ui/core';
 import CsvDownload from 'react-json-to-csv';
 import Navbar from '../navbar/navbar';
 import URL from '../util/url';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -145,7 +146,11 @@ const Statistics = () => {
 
   if (token === null) return <Redirect to="/" />;
 
-  const { name, bitsId } = JSON.parse(atob(token.split('.')[1]));
+  const { permissionLevel, name, bitsId } = JSON.parse(
+    atob(token.split('.')[1])
+  );
+
+  if (permissionLevel !== 2) return <Redirect to="/home" />;
 
   async function fetchStatistics() {
     const { total, pending, delivered, rejected, corestats } = await (

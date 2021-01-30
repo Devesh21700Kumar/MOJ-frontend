@@ -1104,7 +1104,6 @@ const AdminDashboard = () => {
           />
         </Box>
       </div>
-      <div className={classes.footer} />
     </div>
   );
 };

@@ -101,7 +101,7 @@ const MessageCard = ({ body, date, index, _id, setMessageId, n }) => {
     <Card className={classes.msgCard} raised={true} onClick={handleClick}>
       <div>
         <div className={classes.cardContent}>
-          <div>
+          <div style={{ whiteSpace: 'pre-line' }}>
             <span className={classes.index}>{index + 1}. </span>
             {!showPrimaryText
               ? body.length > 80

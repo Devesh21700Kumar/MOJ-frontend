@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
+import _, { debounce } from 'lodash';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +11,6 @@ import { IconButton } from '@material-ui/core';
 import './LetterPopup.css';
 import './sendmessage.css';
 import URL from '../util/url';
-import data from '../util/newData';
 import List from '@material-ui/core/List';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchIcon from '@material-ui/icons/Search';
@@ -91,6 +90,8 @@ export default function SendMessagePopup({
   get,
   fix,
   setX2,
+  count,
+  setcount,
   setload,
 }) {
   const classes = useStyles();
@@ -104,34 +105,17 @@ export default function SendMessagePopup({
   const [open, setOpen] = React.useState(false);
   const [spinner, setSpinner] = useState(true);
   const [over, setOver] = useState(false);
-  const [r, setr] = useState();
+  const [Opendown, setOpendown] = useState(false);
   const token = localStorage.getItem('token');
-  const data1 = data.sort((a, b) => (a.name > b.name ? 1 : -1));
   const [disableSend, setDisableSend] = useState(false);
+  const [searchList, setSearchList] = useState([]);
 
   if (token === null) return <Redirect to="/" />;
 
   React.useEffect(async () => {
     await setComponentEnabled(enabled);
     await getremain();
-    await setTimeout(() => setSpinner(false), 1500);
-  }, [enabled]);
-
-  useEffect(async () => {
-    try {
-      let response = await axios.get(`${URL}/api/level0/remainquant`, {
-        method: 'GET',
-        headers: { token: `${token}` },
-      });
-      var t = await response.data.remaining;
-      setr(t);
-      if (t == 0) {
-        setOver(true);
-      }
-      //console.log(t);
-    } catch (error) {
-      console.error(error.message);
-    }
+    await setTimeout(() => setSpinner(false), 300);
   }, []);
 
   async function getremain() {
@@ -140,47 +124,82 @@ export default function SendMessagePopup({
         method: 'GET',
         headers: { token: `${token}` },
       });
-      var t = await response.data.remaining;
-      setr(t);
-      //console.log(t);
+      var remaining = await response.data.remaining;
+      setcount(remaining);
     } catch (error) {
       console.error(error.message);
     }
   }
 
+  const getSearchList = async (name) => {
+    const res = await axios.post(
+      `${URL}/api/level0/search`,
+      {
+        query: name,
+      },
+      {
+        headers: { token },
+      }
+    );
+    // console.log(res.data.data);
+    const sortedArr = res.data.data.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    setSearchList(sortedArr);
+  };
+
+  const debouncedGetSearchList = useCallback(
+    _.debounce((name) => getSearchList(name), 500),
+    []
+  );
+
+  useEffect(() => {
+    if (!name) return;
+    debouncedGetSearchList(name);
+  }, [name]);
+
   let handleSubmit = (e) => {
     e.preventDefault();
+    if (!messageBody || !receiverEmail) return;
     const date = Date.now();
     async function postMessage() {
       //setDisableSend(true);
       try {
         setDisableSend(true);
-        const response = await (
-          await fetch(`${URL}/api/level0/sendmessage`, {
-            method: 'POST',
+        let response = await axios.post(
+          `${URL}/api/level0/sendmessage`,
+          {
+            messageBody,
+            receiverEmail,
+            date,
+          },
+          {
             headers: {
-              'Content-Type': 'application/json',
-              token: `${localStorage.getItem('token')}`,
+              token,
             },
-            body: JSON.stringify({ messageBody, receiverEmail, date }),
-          })
-        ).json();
+          }
+        );
+        response = response.data;
         if (response.ok) {
           setDisableSend(false);
           setOpen(true);
-          call2();
+          if (fix === 1) call2();
           if (fix == 1 && get.length > 0 && get.length % 15 == 0) {
             setX2('#EF4646');
           }
           setSendToName('');
           setSendMail('');
           setMessageText('');
-          getremain('');
+          getremain();
         } else {
           setDisableSend(false);
           setOpen(false);
-          if (r == 0) {
+
+          if (count == 0) {
             setOver(true);
+          }
+          if (response.disabled == true) {
+            setOpendown(true);
           }
         }
       } catch (error) {
@@ -206,10 +225,6 @@ export default function SendMessagePopup({
   };
 
   let hideMe = async () => {
-    await setload(true);
-    await setTimeout(() => {
-      setload(false);
-    }, 800);
     await toggleVisibility();
   };
 
@@ -227,6 +242,14 @@ export default function SendMessagePopup({
     }
 
     setOver(false);
+  };
+
+  const handleCloseSiteDisabled = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpendown(false);
   };
 
   const [c1, setc1] = useState('none');
@@ -265,10 +288,6 @@ export default function SendMessagePopup({
     setc2('none');
   };
 
-  function checkspace(dat) {
-    return (dat = dat.split(/\s+/)[0].concat(' ', dat.split(/\s+/)[1]));
-  }
-
   if (componentEnabled) {
     if (window.innerWidth > 760) {
       return (
@@ -306,7 +325,7 @@ export default function SendMessagePopup({
                     style={{ paddingRight: '1rem', color: '#EF4646' }}
                   />
                   {''}
-                  {r}
+                  {count}
                 </IconButton>
               </div>
             </Paper>
@@ -329,7 +348,6 @@ export default function SendMessagePopup({
                   className="letterpopup-classes-form"
                   noValidate
                   autoComplete="off"
-                  onSubmit={handleSubmit}
                 >
                   <div className="letterpopup-classes-messageBoxesWrapper">
                     <div
@@ -358,9 +376,7 @@ export default function SendMessagePopup({
                           value={name}
                           onClick={handleClick3}
                           onChange={(e) => {
-                            //handleClick2();
                             setSendToName(e.target.value);
-                            //setSendMail(e.target.value);
                             handleClick2();
                           }}
                           placeholder="Who is this for?"
@@ -375,63 +391,22 @@ export default function SendMessagePopup({
                         className={classes.hexap}
                         aria-label="notifications"
                       >
-                        {data1.filter(
-                          (dataset) =>
-                            dataset.name
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.bitsId
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.name.toLowerCase() === name.toLowerCase() ||
-                            checkspace(dataset.name)
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.email.includes(name.toLowerCase())
-                        ).length > 0 ? (
-                          data1
-                            .filter(
-                              (dataset) =>
-                                dataset.name
-                                  .toLowerCase()
-                                  .includes(name.toLowerCase()) ||
-                                dataset.bitsId
-                                  .toLowerCase()
-                                  .includes(name.toLowerCase()) ||
-                                dataset.name.toLowerCase() ===
-                                  name.toLowerCase() ||
-                                checkspace(dataset.name)
-                                  .toLowerCase()
-                                  .includes(name.toLowerCase()) ||
-                                dataset.email.includes(name.toLowerCase())
-                            )
-                            .slice(0, 101)
-                            .map((person, index) => (
-                              <ListItem
-                                key={index}
-                                button
-                                onClick={() => {
-                                  setSendToName(person.name);
-                                  setSendMail(person.email);
-                                  handleClose2();
-                                }}
-                              >
-                                <ListItemText
-                                  primary={person.name}
-                                  secondary={person.email}
-                                />
-                              </ListItem>
-                            ))
-                        ) : (
+                        {searchList.map((person, index) => (
                           <ListItem
+                            key={index}
                             button
                             onClick={() => {
+                              setSendToName(person.name);
+                              setSendMail(person.email);
                               handleClose2();
                             }}
                           >
-                            <ListItemText primary="          " />
+                            <ListItemText
+                              primary={person.name}
+                              secondary={person.email}
+                            />
                           </ListItem>
-                        )}
+                        ))}
                       </List>
                     </Paper>
                     <div
@@ -465,6 +440,7 @@ export default function SendMessagePopup({
                         backgroundColor: '#EF4646',
                         border: '1.5px solid black',
                       }}
+                      onClick={handleSubmit}
                     >
                       Send
                     </Button>
@@ -479,7 +455,20 @@ export default function SendMessagePopup({
               Message Sent successfully!!
             </Alert>
           </Snackbar>
-          <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+          <Snackbar
+            open={Opendown}
+            autoHideDuration={6000}
+            onClose={handleCloseSiteDisabled}
+          >
+            <Alert onClose={handleCloseSiteDisabled} severity="error">
+              Send Message Functionality is disabled by admin
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={count == 0}
+            autoHideDuration={6000}
+            onClose={handleClose1}
+          >
             <Alert onClose={handleClose1} severity="error">
               Daily message limit of 40 exhausted
             </Alert>
@@ -515,7 +504,7 @@ export default function SendMessagePopup({
                     style={{ paddingRight: '1rem', color: '#EF4646' }}
                   />
                   {''}
-                  {r}
+                  {count}
                 </IconButton>
               </div>
             </Paper>
@@ -529,7 +518,6 @@ export default function SendMessagePopup({
               className="letterpopup-classes-form1"
               noValidate
               autoComplete="off"
-              onSubmit={handleSubmit}
             >
               <div className="letterpopup-classes-messageBoxesWrapper1">
                 <div
@@ -558,9 +546,7 @@ export default function SendMessagePopup({
                       value={name}
                       onClick={handleClick3}
                       onChange={(e) => {
-                        //handleClick2();
                         setSendToName(e.target.value);
-                        //setSendMail(e.target.value);
                         handleClick2();
                       }}
                       placeholder="Who is this for?"
@@ -575,62 +561,22 @@ export default function SendMessagePopup({
                     className={classes.hexap}
                     aria-label="notifications"
                   >
-                    {data1.filter(
-                      (dataset) =>
-                        dataset.name
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.bitsId
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.name.toLowerCase() === name.toLowerCase() ||
-                        checkspace(dataset.name)
-                          .toLowerCase()
-                          .includes(name.toLowerCase()) ||
-                        dataset.email.includes(name.toLowerCase())
-                    ).length > 0 ? (
-                      data1
-                        .filter(
-                          (dataset) =>
-                            dataset.name
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.bitsId
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.name.toLowerCase() === name.toLowerCase() ||
-                            checkspace(dataset.name)
-                              .toLowerCase()
-                              .includes(name.toLowerCase()) ||
-                            dataset.email.includes(name.toLowerCase())
-                        )
-                        .slice(0, 101)
-                        .map((person, index) => (
-                          <ListItem
-                            key={index}
-                            button
-                            onClick={() => {
-                              setSendToName(person.name);
-                              setSendMail(person.email);
-                              handleClose2();
-                            }}
-                          >
-                            <ListItemText
-                              primary={person.name}
-                              secondary={person.email}
-                            />
-                          </ListItem>
-                        ))
-                    ) : (
-                      <ListItem button>
+                    {searchList.map((person, index) => (
+                      <ListItem
+                        key={index}
+                        button
+                        onClick={() => {
+                          setSendToName(person.name);
+                          setSendMail(person.email);
+                          handleClose2();
+                        }}
+                      >
                         <ListItemText
-                          primary="           "
-                          onClick={() => {
-                            handleClose2();
-                          }}
+                          primary={person.name}
+                          secondary={person.email}
                         />
                       </ListItem>
-                    )}
+                    ))}
                   </List>
                 </Paper>
                 <div
@@ -674,6 +620,7 @@ export default function SendMessagePopup({
                     border: '1.5px solid black',
                     margin: 'auto',
                   }}
+                  onClick={handleSubmit}
                 >
                   Send
                 </Button>
@@ -685,7 +632,20 @@ export default function SendMessagePopup({
               Message Sent successfully!!
             </Alert>
           </Snackbar>
-          <Snackbar open={over} autoHideDuration={6000} onClose={handleClose1}>
+          <Snackbar
+            open={Opendown}
+            autoHideDuration={6000}
+            onClose={handleCloseSiteDisabled}
+          >
+            <Alert onClose={handleCloseSiteDisabled} severity="error">
+              Send Message Functionality is disabled by admin
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={count == 0}
+            autoHideDuration={6000}
+            onClose={handleClose1}
+          >
             <Alert onClose={handleClose1} severity="error">
               Daily message limit of 40 exhausted
             </Alert>

@@ -210,7 +210,7 @@ export default function Profile({ name, bitsId }) {
               <ListItem button className={classes.hey} onClick={handle2}>
                 <ListItemText
                   className={classes.typography}
-                  primary="instructions"
+                  primary="Instructions"
                 />
               </ListItem>
             </React.Fragment>
@@ -227,7 +227,7 @@ export default function Profile({ name, bitsId }) {
               <ListItem button className={classes.hey} onClick={handle2}>
                 <ListItemText
                   className={classes.typography}
-                  primary="instructions"
+                  primary="Instructions"
                   //onClick={handle1}
                 />
               </ListItem>
@@ -263,7 +263,7 @@ export default function Profile({ name, bitsId }) {
               <ListItem button className={classes.hey} onClick={handle2}>
                 <ListItemText
                   className={classes.typography}
-                  primary="instructions"
+                  primary="Instructions"
                   //onClick={handle1}
                 />
               </ListItem>

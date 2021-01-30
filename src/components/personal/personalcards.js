@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   msgCard1: {
-    padding: '15px',
+    padding: '8px 15px 15px 15px',
     marginTop: '20px',
     backgroundColor: '#FFE171',
     borderRadius: '15px',
@@ -70,12 +70,22 @@ const useStyles = makeStyles((theme) => ({
     margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
     fontSize: '0.7rem',
+    fontStyle: 'italic',
+    fontWeight: 300,
+  },
+  msgtxt: {
+    margin: '.8rem 0rem 0 0',
+    fontFamily: 'oxygen',
+    fontSize: '0.8rem',
+    fontWeight: 500,
+    whiteSpace: 'pre-line',
   },
   date1: {
     margin: '.8rem 0rem 0 0',
     fontFamily: 'oxygen',
     fontSize: '0.94rem',
     fontWeight: 'bold',
+    whiteSpace: 'pre-line',
   },
   krait: {
     marginLeft: '7px',
@@ -101,10 +111,18 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
       marginTop: '10px',
     },
+    msgtxt: {
+      margin: '.8rem 0rem 0 0',
+      fontFamily: 'oxygen',
+      fontSize: '1.1rem',
+      fontWeight: 500,
+    },
     date: {
       margin: '.8rem 0rem 0 0',
       fontFamily: 'oxygen',
+      fontStyle: 'italic',
       fontSize: '0.9rem',
+      fontWeight: 300,
     },
     date1: {
       margin: '.8rem 0rem 0 0',
@@ -179,7 +197,6 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
   };
   const [pos, setpos] = useState(0);
   const [vat, setvat] = useState(false);
-  //const [read,setRead] = useState(1);
   const toggleReadMessages = (b) => {
     setvat(b);
   };
@@ -208,7 +225,6 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
   async function postRead(i, index) {
     if (get[(i / 15) * 15 + index].read == 0) {
       try {
-        //console.log(get);
         const response = await (
           await fetch(`${URL}/api/level0/markasread`, {
             method: 'POST',
@@ -220,21 +236,7 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
           })
         ).json();
         if (response.ok) {
-          //setRead(response);
-          //console.log(response);
         }
-      } catch (error) {
-        console.error(error.message);
-      }
-      try {
-        let response = await axios.get(`${URL}/api/level0/receivedmessages`, {
-          method: 'GET',
-          headers: { token: `${localStorage.getItem('token')}` },
-        });
-        var r = await response.data.data;
-        //setload(false);
-        //console.log(response);
-        setGet([...r].reverse());
       } catch (error) {
         console.error(error.message);
       }
@@ -246,8 +248,6 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
         headers: { token: `${localStorage.getItem('token')}` },
       });
       var r = await response.data.data;
-      //setload(false);
-      //console.log(response);
       setGet([...r].reverse());
     } catch (error) {
       console.error(error.message);
@@ -282,32 +282,31 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
                   await setpos((i / 15) * 15 + index);
                   await toggleReadMessages(true);
                   await postRead(i, index);
-                  //await toggleReadMessages(true);
                 }}
               >
                 <div className={classes.bitsId}></div>
                 <div className={classes.Gin}>
-                  <p className={text.read == 1 ? classes.date : classes.date1}>
+                  <p
+                    className={text.read == 1 ? classes.msgtxt : classes.date1}
+                  >
                     {screen.width >= 591
                       ? screen.width >= 680
-                        ? text.body.slice(0, 72)
+                        ? text.body.length > 72 - 3
+                          ? text.body.slice(0, 72) + '...'
+                          : text.body.slice(0, 72)
+                        : text.body.length > 44 - 3
+                        ? text.body.slice(0, 44) + '...'
                         : text.body.slice(0, 44)
+                      : text.body.length > 30 - 3
+                      ? text.body.slice(0, 30) + '...'
                       : text.body.slice(0, 30)}
-                    <b>.....</b>
                   </p>
                 </div>
 
                 <div className={classes.Gin1}>
                   <Typography variant="h6" edge="start">
                     <b key="index">
-                      <p className={classes.date}>
-                        {/*screen.width >= 591
-                          ? screen.width >= 680
-                            ? dateFormatter(text.date)
-                            : dateFormatter(text.date)
-                          : dateFormatter(text.date)
-                        */}
-                      </p>
+                      <p className={classes.date}></p>
                     </b>
                   </Typography>
                 </div>
@@ -353,27 +352,30 @@ export default function PersonalCards({ text, index, fix, setGet, setload }) {
                       ' ' + displayname('somebody')}
                 </div>
                 <div className={classes.Gin}>
-                  <p className={classes.date}>
+                  <p className={classes.msgtxt}>
                     {screen.width >= 591
                       ? screen.width >= 680
-                        ? text.body.slice(0, 43)
+                        ? text.body.length > 43 - 3
+                          ? text.body.slice(0, 43) + '...'
+                          : text.body.slice(0, 43)
+                        : text.body.length > 31 - 3
+                        ? text.body.slice(0, 31) + '...'
                         : text.body.slice(0, 31)
+                      : text.body.length > 23 - 3
+                      ? text.body.slice(0, 23) + '...'
                       : text.body.slice(0, 23)}
-                    <b>.....</b>
                   </p>
                 </div>
 
                 <div className={classes.Gin1}>
                   <Typography variant="h6" edge="start">
-                    <b key="index">
-                      <p className={classes.date}>
-                        {screen.width >= 591
-                          ? screen.width >= 680
-                            ? dateFormatter(text.date)
-                            : dateFormatter(text.date)
-                          : dateFormatter(text.date)}
-                      </p>
-                    </b>
+                    <p className={classes.date}>
+                      {screen.width >= 591
+                        ? screen.width >= 680
+                          ? dateFormatter(text.date)
+                          : dateFormatter(text.date)
+                        : dateFormatter(text.date)}
+                    </p>
                   </Typography>
                 </div>
               </Card>
