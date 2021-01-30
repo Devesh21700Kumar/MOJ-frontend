@@ -17,6 +17,7 @@ import Statistics from './components/admin/Statistics';
 //import Credits from './components/credits/credits';
 import Team from '.././src/components/credits/creds1';
 import instructions from '.././src/components/instructions/instructions';
+import instructionsland from '../src/components/instructions/instructionslanding';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/stats" component={Statistics} />
         <Route exact path="/credits" component={Team} />
         <Route exact path="/instructions" component={instructions} />
+        <Route exact path="/instructionslanding" component={instructionsland} />
       </Switch>
     </Router>
   );

@@ -12,6 +12,9 @@ import Logo from '../../imageassets/MOJ Logo 1.png';
 import hands from '../../imageassets/hands.png';
 import love from '../../imageassets/love 1.png';
 import '../welcome/welcome.css';
+import HelpIcon from '@material-ui/icons/Help';
+import IconButton from '@material-ui/core/IconButton';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -279,6 +282,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Welcome1() {
   const classes = useStyles();
+  let history = useHistory();
+  const addIconClick = () => {
+    history.push('/instructionslanding');
+  };
 
   return (
     <React.Fragment>
@@ -358,13 +365,22 @@ export default function Welcome1() {
               Amidst the online semester, here's an opportunity to write a few
               words to bring a smile on someone's face. So log in now and send
               personalised, <b>anonymous</b> messages to your friends,
-              classmates and peers from the comfort of your home! (Note: Log in
-              with your BITS email ID)
+              classmates and peers from the comfort of your home!{' '}
+              <b style={{ color: '#EF4646' }}>
+                {' '}
+                (Note: Log in with your BITS email ID)
+              </b>
+              <br></br>
             </div>
             <div className={classes.loginBox} id="loginBox">
               <Box display="flex">
                 <Box className={classes.crack}>
                   <Login />
+                </Box>
+                <Box className={classes.crack}>
+                  <IconButton onClick={addIconClick}>
+                    <HelpIcon className={classes.fabButtonIcon1} />
+                  </IconButton>
                 </Box>
               </Box>
             </div>

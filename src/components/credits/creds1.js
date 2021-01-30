@@ -228,7 +228,7 @@ const Team = () => {
                       </div>
                       <div className="details">
                         <p className="name">Arjun Bajpai</p>
-                        <p className="number">Android & Design Head</p>
+                        <p className="number">Mobile Dev & Design Head</p>
                         <div>
                           <IconButton>
                             <a

@@ -50,3 +50,9 @@
     margin-top: -22vh;
   }
 }
+
+@media only screen and (max-width: 430px) {
+  #fab {
+    transform: scale(0.8);
+  }
+}
