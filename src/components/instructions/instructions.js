@@ -164,6 +164,20 @@ const instructions = () => {
                   instagram pages.
                 </h3>
               </li>
+              <li>
+                <h3>
+                  9) For any technical issues drop a mail at{' '}
+                  <b style={{ color: '#EF4646' }}> devsocbpgc@gmail.com </b>
+                  or call{' '}
+                  <b style={{ color: '#EF4646' }}>
+                    +91 99969 41700 (Ishant Gupta)
+                  </b>{' '}
+                  or{' '}
+                  <b style={{ color: '#EF4646' }}>
+                    +91 88925 40106 (Samesh Lakhotia)
+                  </b>
+                </h3>
+              </li>
             </ol>
           </div>
         </Box>

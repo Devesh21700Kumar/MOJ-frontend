@@ -358,8 +358,11 @@ export default function Welcome1() {
               Amidst the online semester, here's an opportunity to write a few
               words to bring a smile on someone's face. So log in now and send
               personalised, <b>anonymous</b> messages to your friends,
-              classmates and peers from the comfort of your home! (Note: Log in
-              with your BITS email ID)
+              classmates and peers from the comfort of your home!{' '}
+              <b style={{ color: '#EF4646' }}>
+                {' '}
+                (Note: Log in with your BITS email ID)
+              </b>
             </div>
             <div className={classes.loginBox} id="loginBox">
               <Box display="flex">
