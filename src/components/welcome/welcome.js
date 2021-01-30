@@ -224,6 +224,9 @@ const useStyles = makeStyles((theme) => ({
     summary: {
       fontSize: '20px',
     },
+    crack: {
+      marginTop: '8px',
+    },
   },
   '@media(min-width: 1024px)': {
     main: {
@@ -365,7 +368,7 @@ export default function Welcome1() {
               Amidst the online semester, here's an opportunity to write a few
               words to bring a smile on someone's face. So log in now and send
               personalised, <b>anonymous</b> messages to your friends,
-              classmates and peers from the comfort of your home!{' '}
+              classmates and peers from the comfort of your home! <br></br>
               <b style={{ color: '#EF4646' }}>
                 {' '}
                 (Note: Log in with your BITS email ID)
@@ -374,11 +377,14 @@ export default function Welcome1() {
             </div>
             <div className={classes.loginBox} id="loginBox">
               <Box display="flex">
-                <Box className={classes.crack}>
+                <Box>
                   <Login />
                 </Box>
                 <Box className={classes.crack}>
-                  <IconButton onClick={addIconClick}>
+                  <IconButton
+                    style={{ color: '#EF4646' }}
+                    onClick={addIconClick}
+                  >
                     <HelpIcon className={classes.fabButtonIcon1} />
                   </IconButton>
                 </Box>
