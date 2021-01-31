@@ -372,15 +372,6 @@ const AdminDashboard = () => {
       })
     ).json();
     const { approved, denied, yellowflagged } = data;
-    if(greenFlag == green){
-      setf(approved.reverse());
-    }
-    if(yellowFlag == yellow){
-      setf(yellowflagged.reverse());
-    }
-    if(redFlag == red){
-      setf(denied.reverse());
-    }
     setRedFlaggedMsgs(denied.reverse());
     setYellowFlaggedMsgs(yellowflagged.reverse());
     setGreenFlaggedMsgs(approved.reverse());
@@ -422,15 +413,10 @@ const AdminDashboard = () => {
       setSpinner(true);
       setTimeout(() => setSpinner(false), 500);
     }
-    for (let i = j; i < 25+j; i++) {
-      if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
-    }
+    setMessageId([]);
     setValue(null);
     setChecked25(!checked25);
     if (!checked25) {
-      for (let i = j; i < 25+j; i++) {
-        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
-      }
       if (redFlag === red) {
         for (let i = j; i < 25+j; i++) {
           if (redFlaggedMsgs[i])
@@ -453,17 +439,13 @@ const AdminDashboard = () => {
             ]);
         }
       } else {
-        for (let i = j; i < 25+j; i++) {
-          if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
-        }
+        setMessageId([]);
         for (let i = j; i < 25+j; i++) {
           if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }
     } else {
-      for (let i = j; i < 25+j; i++) {
-        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
-      }
+      setMessageId([]);
     }
   };
 
@@ -475,15 +457,10 @@ const AdminDashboard = () => {
       setSpinner(true);
       setTimeout(() => setSpinner(false), 500);
     }
-    for (let i = j; i < 50+j; i++) {
-      if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
-    }
+    setMessageId([]);
     setValue(null);
     setChecked50(!checked50);
     if (!checked50) {
-      for (let i = j; i < 50+j; i++) {
-        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
-      }
       if (redFlag === red) {
         for (let i = j; i < 50+j; i++) {
           if (redFlaggedMsgs[i])
@@ -498,7 +475,7 @@ const AdminDashboard = () => {
             ]);
         }
       } else if (greenFlag === green) {
-        for (let i = j; i < 50+j; i++) {
+        for (let i = j; i < 50+J; i++) {
           if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
@@ -511,9 +488,7 @@ const AdminDashboard = () => {
         }
       }
     } else {
-      for (let i = j; i < 50+j; i++) {
-        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
-      }
+      setMessageId([]);
     }
   };
 
@@ -910,10 +885,9 @@ const AdminDashboard = () => {
                     )
                     .map((message, index) => (
                       <MessageCard
-                        messageId={messageId}  
+                        j={j}
                         fetchMessages={fetchMessages}
                         body={message.body}
-                        j={j}
                         date={dateFormatter(message.date)}
                         key={redFlaggedMsgs.indexOf(message)}
                         index={redFlaggedMsgs.indexOf(message)}
@@ -938,9 +912,8 @@ const AdminDashboard = () => {
                     )
                     .map((message) => (
                       <MessageCard
-                        messageId={messageId}  
-                        body={message.body}
                         j={j}
+                        body={message.body}
                         date={dateFormatter(message.date)}
                         key={greenFlaggedMsgs.indexOf(message)}
                         index={greenFlaggedMsgs.indexOf(message)}
@@ -965,9 +938,8 @@ const AdminDashboard = () => {
                     )
                     .map((message) => (
                       <MessageCard
-                        messageId={messageId}  
-                        body={message.body}
                         j={j}
+                        body={message.body}
                         date={dateFormatter(message.date)}
                         key={yellowFlaggedMsgs.indexOf(message)}
                         index={yellowFlaggedMsgs.indexOf(message)}
@@ -984,7 +956,7 @@ const AdminDashboard = () => {
               ) : msgs.length !== 0 ? (
                 msgs.map((message) => (
                   <MessageCard
-                    messageId={messageId}  
+                    j={j}
                     body={message.body}
                     date={dateFormatter(message.date)}
                     key={msgs.indexOf(message)}

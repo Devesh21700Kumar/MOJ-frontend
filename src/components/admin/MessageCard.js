@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 const red = '#EF4646';
 const grey = '#9D9D9D';
 
-const MessageCard = ({ body, date, index, _id, setMessageId, n, j, messageId }) => {
+const MessageCard = ({ body, date, index, _id, setMessageId, n, j }) => {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -89,11 +89,7 @@ const MessageCard = ({ body, date, index, _id, setMessageId, n, j, messageId }) 
   };
 
   const handleClick = () => {
-    console.log(messageId);
     if (!checked) {
-      if(messageId[index]!=[]){  
-        messageId[index]=[];
-      }
       setMessageId((messageId) => [...messageId, _id]);
     } else {
       setMessageId((messageId) => messageId.filter((id) => id !== _id));
@@ -136,7 +132,7 @@ const MessageCard = ({ body, date, index, _id, setMessageId, n, j, messageId }) 
             <IconButton classes={{ root: classes.iconButton }}>
               <CheckCircleOutlineIcon
                 style={{
-                  color: messageId[index]!=[] &&( index-j < changeToInt(n)) || checked ? red : grey,
+                  color: index-j < changeToInt(n) || checked ? red : grey,
                   fontSize: '45px',
                 }}
               />
