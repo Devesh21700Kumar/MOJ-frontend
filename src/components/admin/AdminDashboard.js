@@ -418,12 +418,12 @@ const AdminDashboard = () => {
     setChecked25(!checked25);
     if (!checked25) {
       if (redFlag === red) {
-        for (let i = j; i < 25+j; i++) {
+        for (let i = j; i < 25 + j; i++) {
           if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
         }
       } else if (yellowFlag === yellow) {
-        for (let i = j; i < 25+j; i++) {
+        for (let i = j; i < 25 + j; i++) {
           if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
@@ -431,7 +431,7 @@ const AdminDashboard = () => {
             ]);
         }
       } else if (greenFlag === green) {
-        for (let i = j; i < 25+j; i++) {
+        for (let i = j; i < 25 + j; i++) {
           if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
@@ -440,7 +440,7 @@ const AdminDashboard = () => {
         }
       } else {
         setMessageId([]);
-        for (let i = j; i < 25+j; i++) {
+        for (let i = j; i < 25 + j; i++) {
           if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }
@@ -462,12 +462,12 @@ const AdminDashboard = () => {
     setChecked50(!checked50);
     if (!checked50) {
       if (redFlag === red) {
-        for (let i = j; i < 50+j; i++) {
+        for (let i = j; i < 50 + j; i++) {
           if (redFlaggedMsgs[i])
             setMessageId((messageId) => [...messageId, redFlaggedMsgs[i]._id]);
         }
       } else if (yellowFlag === yellow) {
-        for (let i = j; i < 50+j; i++) {
+        for (let i = j; i < 50 + j; i++) {
           if (yellowFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
@@ -475,7 +475,7 @@ const AdminDashboard = () => {
             ]);
         }
       } else if (greenFlag === green) {
-        for (let i = j; i < 50+J; i++) {
+        for (let i = j; i < 50 + J; i++) {
           if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
@@ -483,7 +483,7 @@ const AdminDashboard = () => {
             ]);
         }
       } else {
-        for (let i = j; i < 50+j; i++) {
+        for (let i = j; i < 50 + j; i++) {
           if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }

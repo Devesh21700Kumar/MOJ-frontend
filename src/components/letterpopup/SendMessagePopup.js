@@ -461,7 +461,8 @@ export default function SendMessagePopup({
             onClose={handleCloseSiteDisabled}
           >
             <Alert onClose={handleCloseSiteDisabled} severity="error">
-              Nirmaan has disabled sending messages now, messages can be sent only between 9:00 PM to 12:00 AM
+              Nirmaan has disabled sending messages now, messages can be sent
+              only between 9:00 PM to 12:00 AM
             </Alert>
           </Snackbar>
           <Snackbar
@@ -638,7 +639,8 @@ export default function SendMessagePopup({
             onClose={handleCloseSiteDisabled}
           >
             <Alert onClose={handleCloseSiteDisabled} severity="error">
-              Nirmaan has disabled sending messages now, messages can be sent only between 9:00 PM to 12:00 AM
+              Nirmaan has disabled sending messages now, messages can be sent
+              only between 9:00 PM to 12:00 AM
             </Alert>
           </Snackbar>
           <Snackbar

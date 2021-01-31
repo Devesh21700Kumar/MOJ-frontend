@@ -132,7 +132,7 @@ const MessageCard = ({ body, date, index, _id, setMessageId, n, j }) => {
             <IconButton classes={{ root: classes.iconButton }}>
               <CheckCircleOutlineIcon
                 style={{
-                  color: index-j < changeToInt(n) || checked ? red : grey,
+                  color: index - j < changeToInt(n) || checked ? red : grey,
                   fontSize: '45px',
                 }}
               />
