@@ -422,10 +422,15 @@ const AdminDashboard = () => {
       setSpinner(true);
       setTimeout(() => setSpinner(false), 500);
     }
-    setMessageId([]);
+    for (let i = j; i < 25+j; i++) {
+      if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
+    }
     setValue(null);
     setChecked25(!checked25);
     if (!checked25) {
+      for (let i = j; i < 25+j; i++) {
+        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
+      }
       if (redFlag === red) {
         for (let i = j; i < 25+j; i++) {
           if (redFlaggedMsgs[i])
@@ -448,13 +453,17 @@ const AdminDashboard = () => {
             ]);
         }
       } else {
-        setMessageId([]);
+        for (let i = j; i < 25+j; i++) {
+          if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
+        }
         for (let i = j; i < 25+j; i++) {
           if (msgs[i]) setMessageId((messageId) => [...messageId, msgs[i]._id]);
         }
       }
     } else {
-      setMessageId([]);
+      for (let i = j; i < 25+j; i++) {
+        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
+      }
     }
   };
 
@@ -466,10 +475,15 @@ const AdminDashboard = () => {
       setSpinner(true);
       setTimeout(() => setSpinner(false), 500);
     }
-    setMessageId([]);
+    for (let i = j; i < 50+j; i++) {
+      if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
+    }
     setValue(null);
     setChecked50(!checked50);
     if (!checked50) {
+      for (let i = j; i < 50+j; i++) {
+        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
+      }
       if (redFlag === red) {
         for (let i = j; i < 50+j; i++) {
           if (redFlaggedMsgs[i])
@@ -497,7 +511,9 @@ const AdminDashboard = () => {
         }
       }
     } else {
-      setMessageId([]);
+      for (let i = j; i < 50+j; i++) {
+        if (msgs[i]) setMessageId((messageId) => [...messageId, []]);
+      }
     }
   };
 
@@ -894,6 +910,7 @@ const AdminDashboard = () => {
                     )
                     .map((message, index) => (
                       <MessageCard
+                        messageId={messageId}  
                         fetchMessages={fetchMessages}
                         body={message.body}
                         j={j}
@@ -921,6 +938,7 @@ const AdminDashboard = () => {
                     )
                     .map((message) => (
                       <MessageCard
+                        messageId={messageId}  
                         body={message.body}
                         j={j}
                         date={dateFormatter(message.date)}
@@ -947,6 +965,7 @@ const AdminDashboard = () => {
                     )
                     .map((message) => (
                       <MessageCard
+                        messageId={messageId}  
                         body={message.body}
                         j={j}
                         date={dateFormatter(message.date)}
@@ -965,6 +984,7 @@ const AdminDashboard = () => {
               ) : msgs.length !== 0 ? (
                 msgs.map((message) => (
                   <MessageCard
+                    messageId={messageId}  
                     body={message.body}
                     date={dateFormatter(message.date)}
                     key={msgs.indexOf(message)}
