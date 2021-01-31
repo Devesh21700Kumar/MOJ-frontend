@@ -475,7 +475,7 @@ const AdminDashboard = () => {
             ]);
         }
       } else if (greenFlag === green) {
-        for (let i = j; i < 50 + J; i++) {
+        for (let i = j; i < 50 + j; i++) {
           if (greenFlaggedMsgs[i])
             setMessageId((messageId) => [
               ...messageId,
