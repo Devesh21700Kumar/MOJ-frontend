@@ -471,7 +471,7 @@ export default function SendMessagePopup({
             onClose={handleClose1}
           >
             <Alert onClose={handleClose1} severity="error">
-              Daily message limit of 60 exhausted
+              Daily message limit of 40 exhausted
             </Alert>
           </Snackbar>
         </div>
@@ -649,7 +649,7 @@ export default function SendMessagePopup({
             onClose={handleClose1}
           >
             <Alert onClose={handleClose1} severity="error">
-              Daily message limit of 60 exhausted
+              Daily message limit of 40 exhausted
             </Alert>
           </Snackbar>
         </div>
