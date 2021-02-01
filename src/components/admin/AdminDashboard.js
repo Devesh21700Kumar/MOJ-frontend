@@ -846,6 +846,7 @@ const AdminDashboard = () => {
                       if (redFlag === red) {
                         await setf(red);
                       }
+                      await setMessageId([]);
                       await setTimeout(() => setSpinner(false), 500);
                     }}
                   >
@@ -1022,6 +1023,7 @@ const AdminDashboard = () => {
                   if (redFlag === red) {
                     await setf(red);
                   }
+                  await setMessageId([]);
                   await setTimeout(() => setSpinner(false), 500);
                 }}
               >
@@ -1062,6 +1064,7 @@ const AdminDashboard = () => {
                   if (redFlag === red) {
                     await setf(red);
                   }
+                  await setMessageId([]);
                   await setTimeout(() => setSpinner(false), 500);
                 }}
               >
