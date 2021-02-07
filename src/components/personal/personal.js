@@ -151,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
       width: 'max-content',
       textAlign: 'center',
+      flexDirection: 'column-reverse',
     },
     c2: {
       padding: 0,
@@ -201,6 +202,8 @@ const useStyles = makeStyles((theme) => ({
     c1: {
       width: '92vw',
       textAlign: 'left',
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     c2: {
       width: '92vw',
@@ -314,6 +317,20 @@ export default function Personal() {
       type: 'text/plain;charset=utf-8\n\n',
     });
     FileSaver.saveAs(blob, 'mojs.txt');
+  };
+
+  const exportasHTML = () => {
+    const content = get.map(
+      (post, index) => `${index + 1}. ${post.body}<br/><br/><br/><br/>`
+    );
+    const element = document.createElement('a');
+    const file = new Blob([content], {
+      type: 'text/plain;charset=utf-8',
+    });
+    element.href = window.URL.createObjectURL(file);
+    element.download = `MOJ.html`;
+    document.body.appendChild(element);
+    element.click();
   };
 
   const [color, setColor] = useState('#FFFDE8');
@@ -456,6 +473,15 @@ export default function Personal() {
                   Download your Mojs!
                 </Button>
               </Box>
+              <Button
+                variant="contained"
+                className={classes.button}
+                size="large"
+                onClick={exportasHTML}
+                startIcon={<GetAppIcon />}
+              >
+                Download your Mojs as HTML
+              </Button>
               <Box style={{ textAlign: 'center' }} className={classes.c2}>
                 <Typography className={classes.hot1}>Messages</Typography>
               </Box>
