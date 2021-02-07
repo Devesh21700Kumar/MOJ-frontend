@@ -432,13 +432,6 @@ export default function ReadMessagePopup({
     element.download = `MOJ${currentPosition + 1}.html`;
     document.body.appendChild(element);
     element.click();
-
-    /*const content = `${currentPosition+1}. ${messageArray[currentPosition][0]}\n\n`
-    var blob = new Blob(content, {
-      type: 'text/plain;charset=utf-8\n\n',
-    });
-    FileSaver.saveAs(blob, `MOJ${currentPosition+1}.html`);
-    */
   };
 
   if (componentEnabled)
