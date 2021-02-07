@@ -7,6 +7,10 @@ import axios from 'axios';
 import img from './../../imageassets/letter-coloured.svg';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { set } from 'lodash';
+import { Fragment } from 'react';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import IconButton from '@material-ui/core/IconButton';
+var FileSaver = require('file-saver');
 
 const useStyles = makeStyles((theme) => ({
   noMessages: {
@@ -418,6 +422,25 @@ export default function ReadMessagePopup({
     await toggleVisibility(false);
   };
 
+  const downloadtxt = (messageArray, currentPosition) => {
+    console.log(messageArray, currentPosition);
+    const element = document.createElement('a');
+    const file = new Blob([messageArray[currentPosition][0]], {
+      type: 'text/plain;charset=utf-8',
+    });
+    element.href = window.URL.createObjectURL(file);
+    element.download = `MOJ${currentPosition + 1}.html`;
+    document.body.appendChild(element);
+    element.click();
+
+    /*const content = `${currentPosition+1}. ${messageArray[currentPosition][0]}\n\n`
+    var blob = new Blob(content, {
+      type: 'text/plain;charset=utf-8\n\n',
+    });
+    FileSaver.saveAs(blob, `MOJ${currentPosition+1}.html`);
+    */
+  };
+
   if (componentEnabled)
     return (
       <SendMessage
@@ -428,6 +451,7 @@ export default function ReadMessagePopup({
         next={nextMessage}
         prev={prevMessage}
         hideMe={hideMe}
+        downloadtxt={downloadtxt}
       />
     );
   else return <></>;
@@ -441,6 +465,7 @@ function SendMessage({
   hideMe,
   spinner,
   setload,
+  downloadtxt,
 }) {
   const classes = useStyles();
   return (
@@ -452,9 +477,25 @@ function SendMessage({
             style={{ color: '#fffbeb' }}
           />
         ) : (
-          <div className="letterpopup-classes-cross" onClick={hideMe} />
+          <Fragment>
+            <div className="letterpopup-classes-cross" onClick={hideMe} />
+            <div className="letterpopup-classes-icon1" style={{}}>
+              <Paper>
+                <div>
+                  <IconButton
+                    onClick={() => {
+                      downloadtxt(messageArray, currentPosition);
+                    }}
+                    style={{ color: '#EF4646' }}
+                  >
+                    <GetAppIcon />
+                  </IconButton>
+                </div>
+                {/*<Divider/>*/}
+              </Paper>
+            </div>
+          </Fragment>
         )}
-
         <Paper
           elevation={0}
           className="letterpopup-classes-message"
